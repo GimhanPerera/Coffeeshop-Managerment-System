@@ -26,6 +26,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
@@ -34,20 +35,32 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jButton6 = new javax.swing.JButton();
         lbl_background = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(173, 85, 2));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 30));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setText("Customer/Stuff Details");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 220, -1));
+        jLabel1.setText("Food Details");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, -1, -1));
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 190, 220, -1));
 
         jButton4.setText("Search");
-        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 170, 100, -1));
+        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, 100, -1));
 
         jButton1.setText("View All");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 240, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 290, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -64,16 +77,46 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 810, 320));
 
-        jButton3.setText("Add");
+        jButton3.setText("Edit");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 510, 100, -1));
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 470, 100, -1));
 
         jButton2.setText("Delete");
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 550, 100, -1));
+
+        jLabel2.setText("Food Type");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Food Type1", "Food Type2", "Food Type3", "Food Type4" }));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 240, -1));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Food ID", "Food Name" }));
+        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 150, -1));
+
+        jLabel3.setText("Search by");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, -1, -1));
+
+        jButton5.setText("Search");
+        add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 190, 100, -1));
+
+        jRadioButton1.setText("Filter Food");
+        add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+
+        jRadioButton2.setSelected(true);
+        jRadioButton2.setText("Search Food");
+        add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
+
+        jButton6.setText("Add");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 510, 100, -1));
         add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 980, 620));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -83,13 +126,26 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
         obj.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;

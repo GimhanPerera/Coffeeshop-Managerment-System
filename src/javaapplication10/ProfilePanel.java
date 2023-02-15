@@ -26,6 +26,7 @@ public class ProfilePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -40,18 +41,24 @@ public class ProfilePanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        txt_newpwd_c = new javax.swing.JPasswordField();
+        checkbox_pwd_change = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        txt_oldpwd = new javax.swing.JPasswordField();
+        txt_newpwd = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         lbl_background = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel2.setBackground(new java.awt.Color(173, 85, 2));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 30));
+
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel2.setText("My Profile");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Last Name");
@@ -92,28 +99,43 @@ public class ProfilePanel extends javax.swing.JPanel {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel8.setText("Password");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
+        jLabel8.setText("New Password");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel9.setText("Confirm Password");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        jLabel9.setText("Confirm New Password");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
-        jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 130, -1));
+        txt_newpwd_c.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_newpwd_c.setEnabled(false);
+        jPanel1.add(txt_newpwd_c, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 130, -1));
 
-        jPasswordField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel1.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 130, -1));
-
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jCheckBox1.setText("Change Password");
-        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        checkbox_pwd_change.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        checkbox_pwd_change.setText("Change Password");
+        checkbox_pwd_change.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkbox_pwd_changeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(checkbox_pwd_change, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton2.setText("Change");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 110, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 120, 40));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 170, 360, 200));
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel11.setText("Old Password");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        txt_oldpwd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_oldpwd.setEnabled(false);
+        jPanel1.add(txt_oldpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 130, -1));
+
+        txt_newpwd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_newpwd.setEnabled(false);
+        jPanel1.add(txt_newpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 130, -1));
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, 380, 280));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton1.setText("Save Changes");
@@ -121,12 +143,22 @@ public class ProfilePanel extends javax.swing.JPanel {
         add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 620));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void checkbox_pwd_changeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkbox_pwd_changeActionPerformed
+        // TODO add your handling code here:
+        boolean check = checkbox_pwd_change.getModel().isSelected();
+        txt_oldpwd.setEnabled(check);
+        txt_newpwd_c.setEnabled(check);
+        txt_newpwd.setEnabled(check);
+        
+    }//GEN-LAST:event_checkbox_pwd_changeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox checkbox_pwd_change;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -135,13 +167,15 @@ public class ProfilePanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel lbl_background;
+    private javax.swing.JPasswordField txt_newpwd;
+    private javax.swing.JPasswordField txt_newpwd_c;
+    private javax.swing.JPasswordField txt_oldpwd;
     // End of variables declaration//GEN-END:variables
 }

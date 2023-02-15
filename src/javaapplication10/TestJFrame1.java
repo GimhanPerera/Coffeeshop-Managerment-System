@@ -46,6 +46,7 @@ public class TestJFrame1 extends javax.swing.JFrame {
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane.addTab("tab2", dashboardPanel1);

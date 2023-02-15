@@ -26,6 +26,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -36,24 +37,30 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         lbl_background = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(173, 85, 2));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 30));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Customer/Stuff Details");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         jRadioButton1.setText("Stuff Details");
-        add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+        add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
 
+        jRadioButton2.setSelected(true);
         jRadioButton2.setText("Customer Details");
-        add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
+        add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
 
         jButton1.setText("View All");
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 240, -1, -1));
 
-        jButton2.setText("Delete");
+        jButton2.setText("Remove");
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 550, 100, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -78,10 +85,13 @@ public class SDDetailsPanel extends javax.swing.JPanel {
             }
         });
         add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 510, 100, -1));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 220, -1));
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, 220, -1));
 
         jButton4.setText("Search");
-        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 170, 100, -1));
+        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, 100, -1));
+
+        jLabel2.setText("Search by Customer Telephone Number");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 300, -1));
         add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 0, 990, 620));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -98,6 +108,8 @@ public class SDDetailsPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
