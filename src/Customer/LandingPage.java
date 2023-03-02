@@ -13,10 +13,29 @@ public class LandingPage extends javax.swing.JFrame {
     /**
      * Creates new form LandingPage
      */
-    public LandingPage() {
-        initComponents();
+    public void setComponents(){
+        btn_back.setText("");
+        btn_back.setOpaque(false);
+        btn_back.setContentAreaFilled(false);
+        btn_back.setBorderPainted(false);
+        btn_next.setText("");
+        btn_next.setOpaque(false);
+        btn_next.setContentAreaFilled(false);
+        btn_next.setBorderPainted(false);
         txt_pax.setVisible(false);
         lbl_text.setVisible(false);
+        lbl_error.setVisible(false);
+    }
+    String cid="0";int tp=0;
+    public LandingPage() {
+        initComponents();
+        setComponents();
+    }
+    public LandingPage(String cid,int tp) {
+        initComponents();
+        setComponents();
+        this.cid=cid;
+        this.tp=tp;
     }
 
     /**
@@ -29,70 +48,95 @@ public class LandingPage extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel2 = new javax.swing.JLabel();
         rdo_dinein = new javax.swing.JRadioButton();
         rdo_takeaway = new javax.swing.JRadioButton();
         lbl_text = new javax.swing.JLabel();
         txt_pax = new javax.swing.JTextField();
         btn_next = new javax.swing.JButton();
         btn_back = new javax.swing.JButton();
+        lbl_error = new javax.swing.JLabel();
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        jLabel2.setText("Select your order type");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, -1));
-
         buttonGroup1.add(rdo_dinein);
-        rdo_dinein.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        rdo_dinein.setText("Dine in");
+        rdo_dinein.setFont(new java.awt.Font("Segoe UI", 1, 39)); // NOI18N
+        rdo_dinein.setForeground(new java.awt.Color(255, 255, 255));
+        rdo_dinein.setText("   Dine in");
+        rdo_dinein.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         rdo_dinein.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdo_dineinActionPerformed(evt);
             }
         });
-        getContentPane().add(rdo_dinein, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 330, -1, -1));
+        getContentPane().add(rdo_dinein, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 310, -1, -1));
 
         buttonGroup1.add(rdo_takeaway);
-        rdo_takeaway.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        rdo_takeaway.setFont(new java.awt.Font("Segoe UI", 1, 39)); // NOI18N
+        rdo_takeaway.setForeground(new java.awt.Color(255, 255, 255));
         rdo_takeaway.setSelected(true);
-        rdo_takeaway.setText("Take away");
+        rdo_takeaway.setText("   Take away");
+        rdo_takeaway.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         rdo_takeaway.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdo_takeawayActionPerformed(evt);
             }
         });
-        getContentPane().add(rdo_takeaway, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 270, -1, -1));
+        getContentPane().add(rdo_takeaway, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 210, -1, -1));
 
-        lbl_text.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lbl_text.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lbl_text.setForeground(new java.awt.Color(255, 255, 255));
         lbl_text.setText("Number of People");
-        getContentPane().add(lbl_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, 300, -1));
+        getContentPane().add(lbl_text, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, 320, -1));
 
         txt_pax.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         txt_pax.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_pax.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_paxMouseClicked(evt);
+            }
+        });
         getContentPane().add(txt_pax, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 410, 120, -1));
 
         btn_next.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btn_next.setText("Next");
+        btn_next.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_next.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_nextMouseClicked(evt);
+            }
+        });
         btn_next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_nextActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 570, 210, 70));
+        getContentPane().add(btn_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 610, 210, 70));
 
         btn_back.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btn_back.setText("Back");
+        btn_back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_backActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 580, 210, 70));
+        getContentPane().add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 610, 210, 70));
+
+        lbl_error.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbl_error.setForeground(new java.awt.Color(255, 0, 0));
+        lbl_error.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_error.setText("Please enter Number of people");
+        lbl_error.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_errorMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lbl_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 490, 710, -1));
 
         lbl_background.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lbl_background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Take away or dine in 7.png"))); // NOI18N
         getContentPane().add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1390, 750));
 
         pack();
@@ -107,10 +151,30 @@ public class LandingPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_backActionPerformed
 
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
-        // TODO add your handling code here:
-        MainPage obj =new MainPage();
-        obj.show();
-        dispose();
+        if(rdo_takeaway.isSelected()){
+            MainPage obj =new MainPage(cid,"Takeaway",tp);
+            obj.show();
+            dispose();
+        }
+        else{
+            if(txt_pax.getText().length()==0){
+                lbl_error.setText("Please enter Number of people");
+                lbl_error.setVisible(true);
+            }
+            else if(txt_pax.getText().matches("[0-9]+")==false){
+                lbl_error.setText("Please enter valid number");
+                lbl_error.setVisible(true);
+            }
+            else if(false){
+                //check availability
+                //display dialog box, if no space
+            }
+            else{
+                MainPage obj =new MainPage(cid,"Dinein",tp);
+                obj.show();
+                dispose();
+            }
+        }
     }//GEN-LAST:event_btn_nextActionPerformed
 
     private void rdo_dineinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_dineinActionPerformed
@@ -123,7 +187,22 @@ public class LandingPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         txt_pax.setVisible(false);
         lbl_text.setVisible(false);
+        lbl_error.setVisible(false);
     }//GEN-LAST:event_rdo_takeawayActionPerformed
+
+    private void txt_paxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_paxMouseClicked
+        txt_pax.setText("");
+        lbl_error.setVisible(false);
+    }//GEN-LAST:event_txt_paxMouseClicked
+
+    private void lbl_errorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_errorMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_lbl_errorMouseClicked
+
+    private void btn_nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_nextMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_nextMouseClicked
 
     /**
      * @param args the command line arguments
@@ -164,8 +243,8 @@ public class LandingPage extends javax.swing.JFrame {
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_next;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lbl_background;
+    private javax.swing.JLabel lbl_error;
     private javax.swing.JLabel lbl_text;
     private javax.swing.JRadioButton rdo_dinein;
     private javax.swing.JRadioButton rdo_takeaway;

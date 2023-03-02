@@ -89,7 +89,7 @@ public class FoodAddEdit extends javax.swing.JFrame {
         jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         getContentPane().add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, 170, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COFFEE", "CAKE", "BUN" }));
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 170, -1));
 
         btn_cancel.setText("Cancel");

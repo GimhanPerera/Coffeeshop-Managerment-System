@@ -1,0 +1,102 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package DBconnection;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+/**
+ *
+ * @author Gimhan
+ */
+public class mgrDashboard  extends Connect{
+    public int orderCount() throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        int count=0;
+        getDate obj =new getDate();
+        String date=obj.dateOnly();
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select CUSTOMER_ID from ORDER_T where ORDER_DATETIME BETWEEN '"+date+" 00:00' AND '"+date+" 23:59'"); //SQL stetment
+            while(rs.next()){
+                count++;
+            }                
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return count;//Return First name    
+    }
+    public int todayIncome() throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        int total=0;
+        getDate obj =new getDate();
+        String date=obj.dateOnly();
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select (sum(AMOUNT)-sum(DISCOUNT))as tot from INVOICE where ORDERID IN (select ORDER_NUMBER from ORDER_T where ORDER_DATETIME > '"+date+" 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59')"); //SQL stetment
+            while(rs.next()){
+                total=rs.getInt("tot");
+            }                
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return total;//Return First name    
+    }
+    
+    public int monthlyIncome() throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        int total=0;
+        getDate obj =new getDate();
+        String yearMonth=obj.yearMonthOnly();
+        try{ 
+            //System.out.println(obj.lastdayofmonth());System.out.println(yearMonth);
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select (sum(AMOUNT)-sum(DISCOUNT)) as tot from INVOICE where ORDERID IN (select ORDER_NUMBER from ORDER_T where ORDER_DATETIME > '"+yearMonth+"-01 00:00:00' AND ORDER_DATETIME <'"+obj.lastdayofmonth().toString()+" 23:59:59')"); //SQL stetment
+            while(rs.next()){
+                total=rs.getInt("tot");
+            }                
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return total;//Return First name    
+    }
+    public int getActiveLoyaltycardCount() throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        int count=0;
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select count(CARD_ID) as Count from LOYALTY_CARD where STATUS='ACTIVE'"); //SQL stetment
+            while(rs.next()){
+                count=rs.getInt("Count");//get the value to variable "fname"
+            } 
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return count;  
+    }
+}

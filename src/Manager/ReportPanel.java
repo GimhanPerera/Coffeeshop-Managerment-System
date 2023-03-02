@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Manager;
-
+import DBconnection.getDate;
 /**
  *
  * @author Gimhan
@@ -15,7 +15,14 @@ public class ReportPanel extends javax.swing.JPanel {
      */
     public ReportPanel() {
         initComponents();
+        jComboBox_years.setVisible(true);
+        jComboBox_months.setVisible(false);
+        jComboBox_date.setVisible(false);
+        getDate obj=new getDate();
+        //int lastday=obj.lastdayofmonth(2023,02);
         
+        jComboBox_years.addItem("2022");
+        //jComboBox_years.removeAllItems();
     }
 
     /**
@@ -38,8 +45,10 @@ public class ReportPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         lbl_time1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jComboBox_months = new javax.swing.JComboBox<>();
+        jComboBox_years = new javax.swing.JComboBox<>();
+        jComboBox_date = new javax.swing.JComboBox<>();
         lbl_background = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -52,17 +61,26 @@ public class ReportPanel extends javax.swing.JPanel {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 30));
 
+        lbl_time.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         lbl_time.setText("Time frame");
-        add(lbl_time, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, -1, 20));
+        add(lbl_time, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, -1, 20));
 
+        lbl_report.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         lbl_report.setText("Report Type");
-        add(lbl_report, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, -1, 20));
+        add(lbl_report, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, -1, 20));
 
-        combox_reportType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Income Report", "Food Report" }));
-        add(combox_reportType, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 230, 30));
+        combox_reportType.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        combox_reportType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Income Report", "Sales Report" }));
+        add(combox_reportType, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 170, 230, 30));
 
-        combox_timeFrame.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Daily", "Monthly", "Yearly" }));
-        add(combox_timeFrame, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, 230, 30));
+        combox_timeFrame.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        combox_timeFrame.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yearly", "Monthly", "Daily" }));
+        combox_timeFrame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combox_timeFrameActionPerformed(evt);
+            }
+        });
+        add(combox_timeFrame, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, 230, 30));
 
         btn_generate.setBackground(new java.awt.Color(173, 85, 2));
         btn_generate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -71,7 +89,7 @@ public class ReportPanel extends javax.swing.JPanel {
         btn_generate.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btn_generate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_generate.setFocusPainted(false);
-        add(btn_generate, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 240, 100, 40));
+        add(btn_generate, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 240, 100, 40));
 
         btn_print.setText("Print");
         add(btn_print, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 300, 120, 30));
@@ -91,19 +109,49 @@ public class ReportPanel extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 910, 330));
 
+        lbl_time1.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         lbl_time1.setText("Time frame");
-        add(lbl_time1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, -1, 20));
-
-        jButton1.setText("...");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 250, 50, -1));
+        add(lbl_time1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, -1, 20));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Reports");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, -1, -1));
 
+        jComboBox_months.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        jComboBox_months.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        add(jComboBox_months, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 250, -1, -1));
+
+        jComboBox_years.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        jComboBox_years.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022", "2023" }));
+        add(jComboBox_years, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, -1, -1));
+
+        jComboBox_date.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        jComboBox_date.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27" }));
+        add(jComboBox_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 250, -1, -1));
+
         lbl_background.setBackground(new java.awt.Color(173, 85, 2));
         add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 770));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void combox_timeFrameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combox_timeFrameActionPerformed
+        switch(combox_timeFrame.getSelectedIndex()){
+            case 0:
+                jComboBox_years.setVisible(true);
+                jComboBox_months.setVisible(false);
+                jComboBox_date.setVisible(false);
+                break;
+            case 1:
+                jComboBox_years.setVisible(true);
+                jComboBox_months.setVisible(true);
+                jComboBox_date.setVisible(false);
+                break;
+            case 2:
+                jComboBox_years.setVisible(true);
+                jComboBox_months.setVisible(true);
+                jComboBox_date.setVisible(true);
+                break;    
+        }
+    }//GEN-LAST:event_combox_timeFrameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -111,7 +159,9 @@ public class ReportPanel extends javax.swing.JPanel {
     private javax.swing.JButton btn_print;
     private javax.swing.JComboBox<String> combox_reportType;
     private javax.swing.JComboBox<String> combox_timeFrame;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox_date;
+    private javax.swing.JComboBox<String> jComboBox_months;
+    private javax.swing.JComboBox<String> jComboBox_years;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

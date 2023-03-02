@@ -26,25 +26,25 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        txt_search = new javax.swing.JTextField();
+        btn_searchBytype = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btn_edit = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        lbl_foodtype = new javax.swing.JLabel();
+        jComboBox_foodtype = new javax.swing.JComboBox<>();
+        jComboBox_searchby = new javax.swing.JComboBox<>();
+        lbl_searchby = new javax.swing.JLabel();
+        btn_search = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         btn_add = new javax.swing.JButton();
-        lbl_background = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -59,10 +59,11 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Food Details");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 90, -1, -1));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, 220, -1));
+        add(txt_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, 220, -1));
 
-        jButton4.setText("Search");
-        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 180, 100, -1));
+        btn_searchBytype.setText("Search");
+        btn_searchBytype.setEnabled(false);
+        add(btn_searchBytype, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 180, 100, -1));
 
         jButton1.setText("View All");
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 340, 110, 40));
@@ -93,27 +94,41 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
         jButton2.setText("Delete");
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 600, 100, -1));
 
-        jLabel2.setText("Food Type");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, -1, -1));
+        lbl_foodtype.setText("Food Type");
+        lbl_foodtype.setEnabled(false);
+        add(lbl_foodtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Food Type1", "Food Type2", "Food Type3", "Food Type4" }));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 240, -1));
+        jComboBox_foodtype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "COFFEE", "CAKE", "BUN" }));
+        jComboBox_foodtype.setEnabled(false);
+        add(jComboBox_foodtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 240, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Food ID", "Food Name" }));
-        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 150, -1));
+        jComboBox_searchby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Food ID", "Food Name" }));
+        add(jComboBox_searchby, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 150, -1));
 
-        jLabel3.setText("Search by");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
+        lbl_searchby.setText("Search by");
+        add(lbl_searchby, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
 
-        jButton5.setText("Search");
-        add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 230, 100, -1));
+        btn_search.setText("Search");
+        add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 230, 100, -1));
 
+        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Filter Food");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
         add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, -1, -1));
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setSelected(true);
         jRadioButton2.setText("Search Food");
-        add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+        add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, -1, -1));
 
         btn_add.setText("Add");
         btn_add.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +137,6 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
             }
         });
         add(btn_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 480, 100, 40));
-        add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 770));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
@@ -137,26 +151,46 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
         obj.show();
     }//GEN-LAST:event_btn_addActionPerformed
 
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        btn_searchBytype.setEnabled(true);
+        jComboBox_foodtype.setEnabled(true);
+        lbl_foodtype.setEnabled(true);
+        lbl_searchby.setEnabled(false);
+        jComboBox_searchby.setEnabled(false);
+        txt_search.setEnabled(false);
+        btn_search.setEnabled(false);
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        btn_searchBytype.setEnabled(false);
+        jComboBox_foodtype.setEnabled(false);
+        lbl_foodtype.setEnabled(false);
+        lbl_searchby.setEnabled(true);
+        jComboBox_searchby.setEnabled(true);
+        txt_search.setEnabled(true);
+        btn_search.setEnabled(true);
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_edit;
+    private javax.swing.JButton btn_search;
+    private javax.swing.JButton btn_searchBytype;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox_foodtype;
+    private javax.swing.JComboBox<String> jComboBox_searchby;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel lbl_background;
+    private javax.swing.JLabel lbl_foodtype;
+    private javax.swing.JLabel lbl_searchby;
+    private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
 }

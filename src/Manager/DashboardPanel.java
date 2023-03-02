@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Manager;
-
+import DBconnection.mgrDashboard;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Gimhan
@@ -14,7 +16,16 @@ public class DashboardPanel extends javax.swing.JPanel {
      * Creates new form DashboardPanel
      */
     public DashboardPanel() {
-        initComponents();
+        try {
+            initComponents();
+            mgrDashboard obj=new mgrDashboard();
+            lbl_ocount.setText(Integer.toString(obj.orderCount()));
+            lbl_monthlyincome.setText(Integer.toString(obj.monthlyIncome()));
+            lbl_actCardCount.setText(Integer.toString(obj.getActiveLoyaltycardCount()));
+            lbl_todayIncome.setText(Integer.toString(obj.todayIncome()));
+        } catch (Exception ex) {
+            Logger.getLogger(DashboardPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -30,19 +41,19 @@ public class DashboardPanel extends javax.swing.JPanel {
         jPanel_Down = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbl_todayIncome = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        lbl_monthlyincome = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        lbl_actCardCount = new javax.swing.JLabel();
+        lbl_ocount = new javax.swing.JLabel();
         lbl_background1 = new javax.swing.JLabel();
         lbl_background3 = new javax.swing.JLabel();
         lbl_background2 = new javax.swing.JLabel();
@@ -70,10 +81,10 @@ public class DashboardPanel extends javax.swing.JPanel {
         jLabel1.setText("Active Loyalty Cards");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 480, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 40)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("6380");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 250, 120, 60));
+        lbl_todayIncome.setFont(new java.awt.Font("Segoe UI Semibold", 1, 40)); // NOI18N
+        lbl_todayIncome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_todayIncome.setText("6380");
+        add(lbl_todayIncome, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 250, 120, 60));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
         jLabel3.setText("Today Income");
@@ -99,10 +110,10 @@ public class DashboardPanel extends javax.swing.JPanel {
         jLabel8.setText("Best Beverage");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 470, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI Semibold", 1, 40)); // NOI18N
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("45380");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 250, 120, 60));
+        lbl_monthlyincome.setFont(new java.awt.Font("Segoe UI Semibold", 1, 40)); // NOI18N
+        lbl_monthlyincome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_monthlyincome.setText("45380");
+        add(lbl_monthlyincome, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 250, 120, 60));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -119,16 +130,16 @@ public class DashboardPanel extends javax.swing.JPanel {
         jLabel12.setText("Espresso");
         add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 410, 240, 60));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI Semibold", 1, 40)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("4");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 420, 120, 60));
+        lbl_actCardCount.setFont(new java.awt.Font("Segoe UI Semibold", 1, 40)); // NOI18N
+        lbl_actCardCount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_actCardCount.setText("4");
+        add(lbl_actCardCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 420, 120, 60));
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI Semibold", 1, 48)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("4");
-        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 120, 60));
+        lbl_ocount.setFont(new java.awt.Font("Segoe UI Semibold", 1, 48)); // NOI18N
+        lbl_ocount.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_ocount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_ocount.setText("4");
+        add(lbl_ocount, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 120, 60));
 
         lbl_background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bashboard.jpg"))); // NOI18N
         add(lbl_background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, 290, 120));
@@ -157,13 +168,9 @@ public class DashboardPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -173,6 +180,7 @@ public class DashboardPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel_Down;
     private javax.swing.JPanel jPanel_up;
+    private javax.swing.JLabel lbl_actCardCount;
     private javax.swing.JLabel lbl_background;
     private javax.swing.JLabel lbl_background1;
     private javax.swing.JLabel lbl_background2;
@@ -180,5 +188,8 @@ public class DashboardPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_background4;
     private javax.swing.JLabel lbl_background5;
     private javax.swing.JLabel lbl_background6;
+    private javax.swing.JLabel lbl_monthlyincome;
+    private javax.swing.JLabel lbl_ocount;
+    private javax.swing.JLabel lbl_todayIncome;
     // End of variables declaration//GEN-END:variables
 }
