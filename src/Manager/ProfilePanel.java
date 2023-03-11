@@ -6,6 +6,8 @@ package Manager;
 import DBconnection.manager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Gimhan
@@ -16,17 +18,23 @@ public class ProfilePanel extends javax.swing.JPanel {
      * Creates new form ProfilePanel
      */
     public ProfilePanel() {
-        try {
-            initComponents();
+        initComponents();
+        setdata();
+    }
+    public void setdata(){
+       try {
+            
             manager obj=new manager();
-            lbl_fname.setText(obj.getfname());
-            lbl_lname.setText(obj.getlname());
-            lbl_email.setText(obj.getEmail());
-            lbl_nic.setText(obj.getNIC());
-            lbl_tp.setText(obj.getTp());           
+            txt_fname.setText(obj.getfname());
+            txt_lname.setText(obj.getlname());
+            txt_email.setText(obj.getEmail());
+            txt_nic.setText(obj.getNIC());
+            txt_tp.setText(obj.getTp()); 
+            lbl_errorpwd.setText(""); 
+            lbl_error.setText(""); 
         } catch (Exception ex) {
             Logger.getLogger(ProfilePanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
 
     /**
@@ -42,15 +50,15 @@ public class ProfilePanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        lbl_lname = new javax.swing.JTextField();
+        txt_lname = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        lbl_fname = new javax.swing.JTextField();
+        txt_fname = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        lbl_email = new javax.swing.JTextField();
+        txt_email = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        lbl_nic = new javax.swing.JTextField();
+        txt_nic = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        lbl_tp = new javax.swing.JTextField();
+        txt_tp = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -60,7 +68,10 @@ public class ProfilePanel extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         txt_oldpwd = new javax.swing.JPasswordField();
         txt_newpwd = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        btn_changeprofiledata = new javax.swing.JButton();
+        btn_reset = new javax.swing.JButton();
+        lbl_error = new javax.swing.JLabel();
+        lbl_errorpwd = new javax.swing.JLabel();
         lbl_background = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -75,42 +86,42 @@ public class ProfilePanel extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel2.setText("My Profile");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Last Name");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, -1, -1));
 
-        lbl_lname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        add(lbl_lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 170, -1));
+        txt_lname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        add(txt_lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 170, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel10.setText("First Name");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, -1, -1));
 
-        lbl_fname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        add(lbl_fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 170, -1));
+        txt_fname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        add(txt_fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 170, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Email");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
 
-        lbl_email.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        add(lbl_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 260, -1));
+        txt_email.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 260, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("NIC");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, -1, -1));
 
-        lbl_nic.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        add(lbl_nic, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 170, -1));
+        txt_nic.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        add(txt_nic, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, 170, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Mobile Number");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, -1, -1));
 
-        lbl_tp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        add(lbl_tp, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 420, 170, -1));
+        txt_tp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        add(txt_tp, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, 170, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -125,6 +136,11 @@ public class ProfilePanel extends javax.swing.JPanel {
 
         txt_newpwd_c.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txt_newpwd_c.setEnabled(false);
+        txt_newpwd_c.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_newpwd_cMouseClicked(evt);
+            }
+        });
         jPanel1.add(txt_newpwd_c, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 130, -1));
 
         checkbox_pwd_change.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -152,17 +168,58 @@ public class ProfilePanel extends javax.swing.JPanel {
 
         txt_oldpwd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txt_oldpwd.setEnabled(false);
+        txt_oldpwd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_oldpwdMouseClicked(evt);
+            }
+        });
+        txt_oldpwd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_oldpwdActionPerformed(evt);
+            }
+        });
         jPanel1.add(txt_oldpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 130, -1));
 
         txt_newpwd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txt_newpwd.setEnabled(false);
+        txt_newpwd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_newpwdMouseClicked(evt);
+            }
+        });
         jPanel1.add(txt_newpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 130, -1));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, 380, 280));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 220, 380, 280));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Save Changes");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 530, 230, -1));
+        btn_changeprofiledata.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_changeprofiledata.setText("Save Changes");
+        btn_changeprofiledata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_changeprofiledataActionPerformed(evt);
+            }
+        });
+        add(btn_changeprofiledata, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 580, 230, -1));
+
+        btn_reset.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_reset.setText("Reset");
+        btn_reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_resetActionPerformed(evt);
+            }
+        });
+        add(btn_reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 580, 110, -1));
+
+        lbl_error.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbl_error.setForeground(new java.awt.Color(255, 51, 51));
+        lbl_error.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_error.setText("lbl_error");
+        add(lbl_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 520, 460, -1));
+
+        lbl_errorpwd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbl_errorpwd.setForeground(new java.awt.Color(255, 51, 51));
+        lbl_errorpwd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_errorpwd.setText("lbl_errorpwd");
+        add(lbl_errorpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 510, 460, -1));
         add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 770));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -176,19 +233,96 @@ public class ProfilePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_checkbox_pwd_changeActionPerformed
 
     private void btn_change_pwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_change_pwdActionPerformed
-       checkbox_pwd_change.setSelected(false);
-       boolean check = checkbox_pwd_change.getModel().isSelected();
-        txt_oldpwd.setEnabled(check);
-        txt_newpwd_c.setEnabled(check);
-        txt_newpwd.setEnabled(check);
-        btn_change_pwd.setEnabled(check);
+        try {
+            manager obj1=new manager();
+            if(txt_oldpwd.getText().equals("")){
+                lbl_errorpwd.setText("Please enter the old password");
+                txt_oldpwd.requestFocus();
+            }
+            else if(txt_newpwd.getText().equals("")){
+                lbl_errorpwd.setText("Please enter the new password");
+                txt_newpwd.requestFocus();
+            }
+            else if(txt_newpwd_c.getText().equals("")){
+                lbl_errorpwd.setText("Please Confirm your password");
+                txt_newpwd_c.requestFocus();
+            }
+            else if(txt_newpwd.getText().length()<6){
+                lbl_errorpwd.setText("Use 6 characters or more for your password");
+                txt_newpwd.requestFocus();
+            }
+            else if(!txt_newpwd_c.getText().equals(txt_newpwd.getText())){
+                lbl_errorpwd.setText("Those passwords didn’t match. Try again.");
+                txt_newpwd_c.requestFocus();
+                txt_newpwd_c.setText("");
+            }
+            else if(!obj1.checkOldPwd(txt_oldpwd.getText())){
+                lbl_errorpwd.setText("Old passward is incorrect");
+                txt_oldpwd.requestFocus();
+            }
+            else{
+                obj1.setPwd(txt_newpwd.getText());
+                checkbox_pwd_change.setSelected(false);
+                boolean check = checkbox_pwd_change.getModel().isSelected();
+                txt_oldpwd.setEnabled(check);
+                txt_newpwd_c.setEnabled(check);
+                txt_newpwd.setEnabled(check);
+                btn_change_pwd.setEnabled(check);
+                txt_oldpwd.setText("");
+                txt_newpwd.setText("");
+                txt_newpwd_c.setText("");
+                JOptionPane.showMessageDialog(new JFrame(), "Passward changed",
+                    "Imformation", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ProfilePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }//GEN-LAST:event_btn_change_pwdActionPerformed
+
+    private void txt_oldpwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_oldpwdActionPerformed
+
+    }//GEN-LAST:event_txt_oldpwdActionPerformed
+
+    private void txt_oldpwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_oldpwdMouseClicked
+        lbl_errorpwd.setText("");
+    }//GEN-LAST:event_txt_oldpwdMouseClicked
+
+    private void txt_newpwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_newpwdMouseClicked
+        lbl_errorpwd.setText("");
+    }//GEN-LAST:event_txt_newpwdMouseClicked
+
+    private void txt_newpwd_cMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_newpwd_cMouseClicked
+        lbl_errorpwd.setText("");
+    }//GEN-LAST:event_txt_newpwd_cMouseClicked
+
+    private void btn_changeprofiledataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changeprofiledataActionPerformed
+        if(false){//need to do validations
+            
+        }
+        else{
+            try {
+                manager obj2=new manager();
+                obj2.setManagerDetails(txt_fname.getText(),txt_lname.getText(),txt_email.getText(),txt_tp.getText(),txt_nic.getText());
+                JOptionPane.showMessageDialog(new JFrame(), "Details successfully changed",
+                    "Imformation", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                Logger.getLogger(ProfilePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btn_changeprofiledataActionPerformed
+
+    private void btn_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetActionPerformed
+        setdata();
+    }//GEN-LAST:event_btn_resetActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_change_pwd;
+    private javax.swing.JButton btn_changeprofiledata;
+    private javax.swing.JButton btn_reset;
     private javax.swing.JCheckBox checkbox_pwd_change;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -202,13 +336,15 @@ public class ProfilePanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lbl_background;
-    private javax.swing.JTextField lbl_email;
-    private javax.swing.JTextField lbl_fname;
-    private javax.swing.JTextField lbl_lname;
-    private javax.swing.JTextField lbl_nic;
-    private javax.swing.JTextField lbl_tp;
+    private javax.swing.JLabel lbl_error;
+    private javax.swing.JLabel lbl_errorpwd;
+    private javax.swing.JTextField txt_email;
+    private javax.swing.JTextField txt_fname;
+    private javax.swing.JTextField txt_lname;
     private javax.swing.JPasswordField txt_newpwd;
     private javax.swing.JPasswordField txt_newpwd_c;
+    private javax.swing.JTextField txt_nic;
     private javax.swing.JPasswordField txt_oldpwd;
+    private javax.swing.JTextField txt_tp;
     // End of variables declaration//GEN-END:variables
 }

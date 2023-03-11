@@ -157,8 +157,18 @@ public class Customer extends Connect{
             while(rs.next()){
                 cID=rs.getString("CUSTOMER_ID");//get the value to variable "fname"
             }
+            //cID=cID.substring(2);
+            //String temp="OR";
+            //
             cID=cID.substring(2);
-            cID="OR"+Integer.toString((Integer.parseInt(cID))+1);
+            String id="CS";
+            String temp=Integer.toString((Integer.parseInt(cID))+1);
+            int n=temp.length();
+            System.out.println(temp.length());
+            for(int i=3;i>n;i--){
+                id=id+"0";
+            }
+            cID=id+Integer.toString((Integer.parseInt(cID))+1);
         }
         catch(SQLException ex)//Is database has a problem, this catch stetment catch it
         {

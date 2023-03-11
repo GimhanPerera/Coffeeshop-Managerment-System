@@ -14,15 +14,24 @@ import java.util.logging.Logger;
  * @author Gimhan
  */
 public class manager extends Connect{
+    private String fname="";
+    private String lname="";
+    private int tp=0;
+    private String email="";
+    private String nic="";
     
-    public String getfname() throws Exception{   
+    public manager() throws Exception{
+        
         Connection c= getConnection();//get the connection using inheritance
-        String fname="";
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("select F_NAME from EMPLOYEE where EMP_TYPE='MANAGER'"); //SQL stetment
+            ResultSet rs = stmt.executeQuery("select * from EMPLOYEE where EMP_TYPE='MANAGER'"); //SQL stetment
             while(rs.next()){
-                fname=rs.getString("F_NAME");//get the value to variable "fname"
+                fname=rs.getString("F_NAME");
+                lname=rs.getString("L_NAME");
+                tp=rs.getInt("MOBILE_NUMBER");
+                email=rs.getString("EMAIL");
+                nic=rs.getString("NIC");
             } 
         }
         catch(SQLException ex)//Is database has a problem, this catch stetment catch it
@@ -32,17 +41,36 @@ public class manager extends Connect{
         finally{
             c.close(); 
         }
+    }
+    
+    public String getfname(){   
         return fname;  
     }
     
-    public String getlname() throws Exception{   
+    public String getlname(){   
+        return lname;  
+    }
+    
+    public String getTp(){   
+        return Integer.toString(tp);  
+    }
+    
+    public String getEmail(){   
+        return email;  
+    }
+    
+    public String getNIC(){   
+        return nic;  
+    }
+    
+    public boolean checkOldPwd(String opwd) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
-        String fname="";
+        String real_pwd="";
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("select L_NAME from EMPLOYEE where EMP_TYPE='MANAGER'"); //SQL stetment
+            ResultSet rs = stmt.executeQuery("select PWD from EMPLOYEE where EMP_TYPE='MANAGER'"); //SQL stetment
             while(rs.next()){
-                fname=rs.getString("L_NAME");//get the value to variable "fname"
+                real_pwd=rs.getString("PWD");//get the value to variable "fname"
             } 
         }
         catch(SQLException ex)//Is database has a problem, this catch stetment catch it
@@ -52,18 +80,26 @@ public class manager extends Connect{
         finally{
             c.close(); 
         }
-        return fname;  
+        if(real_pwd.equals(opwd))
+            return true;
+        else
+            return false;
     }
     
-    public String getTp() throws Exception{   
+    public void setManagerDetails(String fname,String lname,String email,String tp,String nic) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
-        String fname="";
+        
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("select MOBILE_NUMBER from EMPLOYEE where EMP_TYPE='MANAGER'"); //SQL stetment
-            while(rs.next()){
-                fname=rs.getString("MOBILE_NUMBER");//get the value to variable "fname"
-            } 
+                String sql="UPDATE EMPLOYEE " +
+                            "SET F_NAME = '"+fname+"', L_NAME= '"+lname+"', MOBILE_NUMBER = '"+tp+"', EMAIL = '"+email+"', NIC = '"+nic+"' " +
+                            " where EMP_TYPE='MANAGER'";
+                stmt.executeUpdate(sql);
+                this.fname=fname;
+                this.lname=lname;
+                this.email=email;
+                this.tp=Integer.parseInt(tp);
+                this.nic=nic;
         }
         catch(SQLException ex)//Is database has a problem, this catch stetment catch it
         {
@@ -72,18 +108,17 @@ public class manager extends Connect{
         finally{
             c.close(); 
         }
-        return fname;  
     }
     
-    public String getEmail() throws Exception{   
+    public void setPwd(String newpwd) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
-        String fname="";
+        
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("select EMAIL from EMPLOYEE where EMP_TYPE='MANAGER'"); //SQL stetment
-            while(rs.next()){
-                fname=rs.getString("EMAIL");//get the value to variable "fname"
-            } 
+                String sql="UPDATE EMPLOYEE " +
+                            "SET PWD = '"+newpwd+"' " +
+                            " where EMP_TYPE='MANAGER'";
+                stmt.executeUpdate(sql);
         }
         catch(SQLException ex)//Is database has a problem, this catch stetment catch it
         {
@@ -92,27 +127,6 @@ public class manager extends Connect{
         finally{
             c.close(); 
         }
-        return fname;  
-    }
     
-    public String getNIC() throws Exception{   
-        Connection c= getConnection();//get the connection using inheritance
-        String fname="";
-        try{ 
-            Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("select NIC from EMPLOYEE where EMP_TYPE='MANAGER'"); //SQL stetment
-            while(rs.next()){
-                fname=rs.getString("NIC");//get the value to variable "fname"
-            } 
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
-            c.close(); 
-        }
-        return fname;  
     }
-    
 }
