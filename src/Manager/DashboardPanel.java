@@ -6,10 +6,7 @@ package Manager;
 import DBconnection.mgrDashboard;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-/**
- *
- * @author Gimhan
- */
+
 public class DashboardPanel extends javax.swing.JPanel {
 
     /**
@@ -23,6 +20,8 @@ public class DashboardPanel extends javax.swing.JPanel {
             lbl_monthlyincome.setText(Integer.toString(obj.monthlyIncome()));
             lbl_actCardCount.setText(Integer.toString(obj.getActiveLoyaltycardCount()));
             lbl_todayIncome.setText(Integer.toString(obj.todayIncome()));
+            lbl_best_beverage.setText(obj.bestBevLastMonth());
+            lbl_best_nonbeverage.setText(obj.bestNonBevLastMonth());
         } catch (Exception ex) {
             Logger.getLogger(DashboardPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -50,8 +49,8 @@ public class DashboardPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         lbl_monthlyincome = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        lbl_best_nonbeverage = new javax.swing.JLabel();
+        lbl_best_beverage = new javax.swing.JLabel();
         lbl_actCardCount = new javax.swing.JLabel();
         lbl_ocount = new javax.swing.JLabel();
         lbl_background1 = new javax.swing.JLabel();
@@ -99,16 +98,16 @@ public class DashboardPanel extends javax.swing.JPanel {
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 500, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
-        jLabel7.setText("Best Food"); // NOI18N
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 470, -1, -1));
+        jLabel7.setText("Best non-Beverage item"); // NOI18N
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 470, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
         jLabel6.setText(" of This Month");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 500, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
-        jLabel8.setText("Best Beverage");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 470, -1, -1));
+        jLabel8.setText("Best Beverage item");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 470, -1, -1));
 
         lbl_monthlyincome.setFont(new java.awt.Font("Segoe UI Semibold", 1, 40)); // NOI18N
         lbl_monthlyincome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -120,15 +119,15 @@ public class DashboardPanel extends javax.swing.JPanel {
         jLabel9.setText("Today Order Count");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Chicken Sandwith");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, 290, 60));
+        lbl_best_nonbeverage.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
+        lbl_best_nonbeverage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_best_nonbeverage.setText("Chicken Sandwith");
+        add(lbl_best_nonbeverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, 290, 60));
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Espresso");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 410, 240, 60));
+        lbl_best_beverage.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
+        lbl_best_beverage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_best_beverage.setText("Espresso");
+        add(lbl_best_beverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 410, 240, 60));
 
         lbl_actCardCount.setFont(new java.awt.Font("Segoe UI Semibold", 1, 40)); // NOI18N
         lbl_actCardCount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -168,8 +167,6 @@ public class DashboardPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -188,6 +185,8 @@ public class DashboardPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_background4;
     private javax.swing.JLabel lbl_background5;
     private javax.swing.JLabel lbl_background6;
+    private javax.swing.JLabel lbl_best_beverage;
+    private javax.swing.JLabel lbl_best_nonbeverage;
     private javax.swing.JLabel lbl_monthlyincome;
     private javax.swing.JLabel lbl_ocount;
     private javax.swing.JLabel lbl_todayIncome;

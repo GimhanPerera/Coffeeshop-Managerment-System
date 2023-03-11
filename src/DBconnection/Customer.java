@@ -36,7 +36,7 @@ public class Customer extends Connect{
         finally{
             c.close(); 
         }
-        return cid;//Return First name    
+        return cid;  
     }
     
     public String getFname(String c_ID) throws Exception{   

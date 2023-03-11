@@ -13,113 +13,96 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.fazecast.jSerialComm.*;
+import javax.swing.SwingUtilities;
 /**
  *
  * @author Gimhan
  */
 
 
-public class ConfirmOrderPage extends javax.swing.JFrame {
+public class ConfirmOrderPage extends javax.swing.JFrame implements Runnable{
 String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuffer sb1;int total=0;int discount=0;
     int lines=0;int tp;
-    private Thread read;
-    MyReader obj5;
-    class MyReader implements Runnable{
-        @Override
-        public void run() {
-            try {
-                this.read();
-            } catch (Exception ex) {
-                Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        private String correctCardid="";
-        public void read() throws Exception{
-            LoyaltyCard obj=new LoyaltyCard();
-        this.correctCardid=obj.getLoyaltycardNumber(cid);//need get from database
-        SerialPort [] AvailablePorts = SerialPort.getCommPorts();
+
+    //Thread testing - Card read. but can't link to process
+    private static boolean exit=false;private static String pin=""; 
+@Override
+    public void run() {
+        reading();
+    }
+    
+    public void reading(){
+        String S="";
+char[] c = new char[8];
+        
+        SerialPort [] AvailablePorts = SerialPort.getCommPorts();   
         //Open the first Available port
-        SerialPort MySerialPort = AvailablePorts[0];
+        SerialPort MySerialPort = AvailablePorts[0];//problem happen here if not connected the Aduino correctly
         int BaudRate = 9600;
         int DataBits = 8;
         int StopBits = SerialPort.ONE_STOP_BIT;
         int Parity   = SerialPort.NO_PARITY;
         //Sets all serial port parameters at one time
         MySerialPort.setComPortParameters(BaudRate,DataBits,StopBits,Parity);
+
         //Set Read Time outs
-        MySerialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_BLOCKING,1000,0);
+        MySerialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_BLOCKING, 1000, 0);
         MySerialPort.openPort(); //open the port
                                  //Arduino May get reset 
         //Thread.sleep(2000);
         if (MySerialPort.isOpen())//Check whether port open/not
               System.out.println("is Open ");
-        else
+        else{
            System.out.println(" Port not open ");
-        String S = "00";char[] c = new char[8];
-        try 
-         {
-             int time=0;
-            while (true)//set time here
-            {
-                System.out.println(time);time++;
-                byte[] readBuffer = new byte[100];
-                int numRead = MySerialPort.readBytes(readBuffer,readBuffer.length);
-                System.out.print("Read " + numRead + " bytes -");
-                    //Convert bytes to String
-                S = new String(readBuffer, "UTF-8"); 
-                System.out.println("Received -> "+ S);     
-                for(int i=0;i<8;i++)
-                        c[i]=S.charAt(i);
-                System.out.println("Length: "+ S.length());  
-                //for(int i=0;i<8;i++)
-                //   System.out.println("Re -> "+ c[i]);  
-                if(numRead==10){//Didn't read
-                    if(correctCardid.equals(S)){
-                        System.out.println("CORRECT CARD");
-                        lbl_ok.setVisible(true);
-                        lbl_notOk.setVisible(false);
-                        lbl_waiting.setVisible(false);
-                        lbl_scaninfo.setVisible(false);
-                    }else{
-                    System.out.println("INCORRECT CARD");
-                    lbl_ok.setVisible(false);
-                    lbl_notOk.setVisible(true);
-                    lbl_waiting.setVisible(false);
-                    lbl_scaninfo.setVisible(false);
-                    btn_scanmanage.setText("Scan again");
-                    }
-                    break;
-                }
-                if(time==10){//Didn't read
-                    System.out.println("TIMEOUT: Didn't read"); 
-                    btn_scanmanage.setText("Scan again");
-                    lbl_ok.setVisible(false);
-                    lbl_notOk.setVisible(false);
-                    lbl_waiting.setVisible(true);
-                    lbl_scaninfo.setVisible(false);
-                    break;
-                }
+           exit=true;
+        }
+        try {
+                int numRead=0;
+                int time=0;String q="9B4D7422";
+                while (time<=5){//set time here
                     
-      
-                Thread.sleep(1000);
-            }
-    
-        } 
-        catch (Exception e) {
-            e.printStackTrace(); 
-        }
-        MySerialPort.closePort(); //Close the port
-        String a = new String(c);
-        System.out.println(S.length());
-        System.out.println(a.length());
-        }
-    }
-    Thread thread;
+                    byte[] readBuffer = new byte[100];
 
-    /**
-     * Creates new form ConfirmOrderPage
-     */
-    
+                    numRead = MySerialPort.readBytes(readBuffer, readBuffer.length);
+                    System.out.print("Time: "+time);
+                    System.out.print(" ,Read " + numRead + " bytes -");
+      
+                    //Convert bytes to String
+                    S = new String(readBuffer, "UTF-8"); 
+                    System.out.println("Received -> "+ S);
+                    time++;  
+                    Thread.sleep(800);
+                    if(exit){
+                        btn_next.setEnabled(true);
+            btn_back.setEnabled(true);
+                        exit=false;
+                        break;
+                    }else if(numRead==10){System.out.println(" TEST 1 ");System.out.println(S.equals(q));
+                        //check the card
+                        if("2456322B".equals(S)){//correct card
+                            lbl_waiting.setVisible(false);System.out.println(" TEST 2 ");
+                            lbl_notOk.setVisible(false);
+                            lbl_ok.setVisible(true);
+                        }else{//wrong card
+                            lbl_waiting.setVisible(false);System.out.println(" TEST 3 ");
+                            lbl_notOk.setVisible(true);
+                            lbl_ok.setVisible(false);
+                        }
+                        exit=false;
+                        break;
+                    }
+                }    
+        }        
+        catch (Exception e){
+            e.printStackTrace(); 
+        }finally{
+            MySerialPort.closePort(); //Close the port
+        }      
+        pin = S;
+        System.out.println("PIN : "+pin);
+    }
+    //Thread testing
+
     public ConfirmOrderPage(StringBuffer sb, int tot,String[] foodID,int[] Qyt,int lines,String cid,String o_type,int points,int tp) {
         initComponents();
         jPanel_loyaltycard.setVisible(false);
@@ -380,6 +363,11 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                 btn_scanmanageMouseClicked(evt);
             }
         });
+        btn_scanmanage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_scanmanageActionPerformed(evt);
+            }
+        });
         jPanel_loyaltycard.add(btn_scanmanage, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 150, 60));
 
         lbl_notOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/not ok.jpg"))); // NOI18N
@@ -469,17 +457,29 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
 
     private void btn_scanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_scanMouseClicked
         try {
-            //Start scannig
-            obj5 =new MyReader();
-            this.read = new Thread(obj5);
-            read.start();
+            pin=""; 
             jPanel_loyaltycard.setVisible(true);
             jPanel_customerInfo.setVisible(false);
+            btn_next.setEnabled(false);
+            btn_back.setEnabled(false);Thread.sleep(2000);
+            //Start scannig
+            Conn t1=new Conn();
+            t1.start();
+            while(t1.isAlive()) {}
+            System.out.println("THE PIN IS::"+t1.getPin());
+        //Thread.sleep(5000);
+
             
+            //reading();
+            //ConfirmOrderPage d=new ConfirmOrderPage();
+            //Thread t1=new Thread(d);
+            //t1.start();
+          
             //setbill(sb1,total,200);
         } catch (Exception ex) {
             Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         
     }//GEN-LAST:event_btn_scanMouseClicked
 
@@ -506,18 +506,25 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
     }//GEN-LAST:event_btn_backActionPerformed
 
     private void btn_scanmanageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_scanmanageMouseClicked
-
+        if(btn_scanmanage.getText().equals("Cancel")){
+            this.exit=true;
+            lbl_waiting.setVisible(true);
+            lbl_notOk.setVisible(false);
+            lbl_ok.setVisible(false);
+            jPanel_loyaltycard.setVisible(false);
+            jPanel_customerInfo.setVisible(true);
+        }System.out.println(btn_scanmanage.getText());
         if(btn_scanmanage.getText().equals("Scan again")){
-            while(thread.isAlive()) {
-                System.out.println("Waiting...");
-            }
-            obj5 =new MyReader();
-            this.read = new Thread(obj5);
-            this.read.start();
+            lbl_notOk.setVisible(false);
+            lbl_ok.setVisible(false);
             lbl_scaninfo.setVisible(true);
             btn_scanmanage.setText("Cancel");
         }
     }//GEN-LAST:event_btn_scanmanageMouseClicked
+
+    private void btn_scanmanageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_scanmanageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_scanmanageActionPerformed
 
     /**
      * @param args the command line arguments
@@ -589,4 +596,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
     private javax.swing.JTextField txt_loyaltycard;
     private javax.swing.JTextField txt_tp;
     // End of variables declaration//GEN-END:variables
+    
+
+
 }

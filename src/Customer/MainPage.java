@@ -498,7 +498,7 @@ public class MainPage extends javax.swing.JFrame {
         int lines= (jTextArea_bill.getLineCount())-1;
         if(lines>0){
             String foodid[]=new String[lines];
-        int qty[]=new int[lines];
+            int qty[]=new int[lines];
         int count=0;
         for(int j=0;j<jTable_menu3.getRowCount();j++){//check coffee table
             if(Integer.parseInt((String) jTable_menu3.getValueAt(j, 2))!=0){

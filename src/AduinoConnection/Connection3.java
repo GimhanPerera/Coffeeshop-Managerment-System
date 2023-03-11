@@ -68,7 +68,7 @@ public class Connection3 {
         if(numRead==10)
              break;
       
-        Thread.sleep(1000);
+        Thread.sleep(500);
     }
     
 } 

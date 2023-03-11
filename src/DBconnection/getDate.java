@@ -10,11 +10,12 @@ import java.time.format.DateTimeFormatter;
  * @author Gimhan
  */
 public class getDate {
-    /*public static void main(String[]args){
+    public static void main(String[]args){
         //System.out.println(yearMonthOnly());
         //System.out.println(dateAndTime());
-        //System.out.println(timeOnly());
-    }*/
+        //System.out.println(lastdayofmonth(2023,2));
+        //test();
+    }
     public String dateOnly(){
         LocalDate date=java.time.LocalDate.now();
         return date.toString();
@@ -62,16 +63,14 @@ public class getDate {
         //System.out.println("Last date of the month: "+lastDayOfMonthDate);
         return lastDayOfMonthDate.toString();
     }
-    public int lastdayofmonth(int y, int m){//yyyy-MM-dd
-        String date="01/"+Integer.toString(m)+"/"+Integer.toString(y);
-        LocalDate currentDate = LocalDate.now();
-        LocalDate givenDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        LocalDate lastDayOfMonthDateGivenDate  = givenDate.withDayOfMonth(
-                                                 givenDate.getMonth().length(givenDate.isLeapYear()));
- 
-        System.out.println("Last date of the month for date 13/01/2022: "+lastDayOfMonthDateGivenDate);
-        //System.out.println("Last date of the month: "+lastDayOfMonthDate);
-        String day=lastDayOfMonthDateGivenDate.toString();
+    public int lastdayofmonth(int y, int m){//Get last day of given moth in given year
+        //String date="1/"+Integer.toString(m)+"/"+Integer.toString(y);
+        //LocalDate currentDate = LocalDate.now();
+        String date = Integer.toString(m)+"/13/"+Integer.toString(y);
+        LocalDate convertedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("M/d/yyyy"));
+        convertedDate = convertedDate.withDayOfMonth(
+                                convertedDate.getMonth().length(convertedDate.isLeapYear()));
+        String day=convertedDate.toString();
         day=day.substring(8);
         return Integer.parseInt(day);
     }

@@ -99,4 +99,44 @@ public class mgrDashboard  extends Connect{
         }
         return count;  
     }
+    
+    public String bestBevLastMonth() throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        String food="";
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("SELECT FOOD_NAME FROM FOOD WHERE FOOD_ID = (SELECT FOOD_ID AS SUM FROM ORDER_FOOD WHERE FOOD_ID LIKE 'CF%' AND ORDER_NUMBER IN (SELECT ORDER_NUMBER FROM ORDER_T WHERE DATE(ORDER_DATETIME)>DATE(NOW() - INTERVAL 14 DAY)) GROUP BY FOOD_ID order by SUM DESC LIMIT 1);"); //SQL stetment
+            while(rs.next()){
+            food=rs.getString("FOOD_NAME");    
+            }
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return food;//Return First name    
+    }
+    
+    public String bestNonBevLastMonth() throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        String food="";
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("SELECT FOOD_NAME FROM FOOD WHERE FOOD_ID = (SELECT FOOD_ID AS SUM FROM ORDER_FOOD WHERE FOOD_ID NOT LIKE 'CF%' AND ORDER_NUMBER IN (SELECT ORDER_NUMBER FROM ORDER_T WHERE DATE(ORDER_DATETIME)>DATE(NOW() - INTERVAL 14 DAY)) GROUP BY FOOD_ID order by SUM DESC LIMIT 1);"); //SQL stetment
+            while(rs.next()){
+            food=rs.getString("FOOD_NAME");    
+            }              
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return food;//Return First name    
+    }
 }

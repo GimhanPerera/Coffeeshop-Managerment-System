@@ -20,7 +20,7 @@ public class ThankyouPage extends javax.swing.JFrame {
 
         public void runTimer(){
             int i = 10;
-            while (i>0){
+            while (i>=0){
             System.out.println("Remaining: "+i+" seconds");
             lbl_time.setText(Integer.toString(i));
             try {
@@ -31,6 +31,9 @@ public class ThankyouPage extends javax.swing.JFrame {
                //I don't think you need to do anything for your particular problem
                 }
             }
+            LoginPage obj =new LoginPage();
+            obj.show();
+            dispose();
         }
     }
     Thread thread;

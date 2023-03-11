@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Manager;
-
+import DBconnection.manager;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Gimhan
@@ -14,7 +16,17 @@ public class ProfilePanel extends javax.swing.JPanel {
      * Creates new form ProfilePanel
      */
     public ProfilePanel() {
-        initComponents();
+        try {
+            initComponents();
+            manager obj=new manager();
+            lbl_fname.setText(obj.getfname());
+            lbl_lname.setText(obj.getlname());
+            lbl_email.setText(obj.getEmail());
+            lbl_nic.setText(obj.getNIC());
+            lbl_tp.setText(obj.getTp());           
+        } catch (Exception ex) {
+            Logger.getLogger(ProfilePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -30,15 +42,15 @@ public class ProfilePanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        lbl_lname = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        lbl_fname = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        lbl_email = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        lbl_nic = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        lbl_tp = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -69,36 +81,36 @@ public class ProfilePanel extends javax.swing.JPanel {
         jLabel3.setText("Last Name");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 170, -1));
+        lbl_lname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        add(lbl_lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 170, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel10.setText("First Name");
         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
 
-        jTextField8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 170, -1));
+        lbl_fname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        add(lbl_fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 170, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Email");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, -1, -1));
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 260, -1));
+        lbl_email.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        add(lbl_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 260, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("NIC");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, -1, -1));
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 170, -1));
+        lbl_nic.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        add(lbl_nic, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 170, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Mobile Number");
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, -1, -1));
 
-        jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 420, 170, -1));
+        lbl_tp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        add(lbl_tp, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 420, 170, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -164,7 +176,12 @@ public class ProfilePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_checkbox_pwd_changeActionPerformed
 
     private void btn_change_pwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_change_pwdActionPerformed
-        // TODO add your handling code here:
+       checkbox_pwd_change.setSelected(false);
+       boolean check = checkbox_pwd_change.getModel().isSelected();
+        txt_oldpwd.setEnabled(check);
+        txt_newpwd_c.setEnabled(check);
+        txt_newpwd.setEnabled(check);
+        btn_change_pwd.setEnabled(check);
     }//GEN-LAST:event_btn_change_pwdActionPerformed
 
 
@@ -184,12 +201,12 @@ public class ProfilePanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel lbl_background;
+    private javax.swing.JTextField lbl_email;
+    private javax.swing.JTextField lbl_fname;
+    private javax.swing.JTextField lbl_lname;
+    private javax.swing.JTextField lbl_nic;
+    private javax.swing.JTextField lbl_tp;
     private javax.swing.JPasswordField txt_newpwd;
     private javax.swing.JPasswordField txt_newpwd_c;
     private javax.swing.JPasswordField txt_oldpwd;

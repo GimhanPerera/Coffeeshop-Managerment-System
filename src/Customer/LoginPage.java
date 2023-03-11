@@ -222,6 +222,8 @@ public class LoginPage extends javax.swing.JFrame {
                 Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
             }
             catch (Exception ex) {
+                lbl_error.setText("Please enter a correct moblie number");
+                lbl_error.setVisible(true);
                 System.out.println("Can't Open Landing page");
                 Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
             }
