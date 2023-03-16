@@ -4,12 +4,14 @@
  */
 package Manager;
 import DBconnection.Connect;
+import DBconnection.Food;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +26,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
      */
     public FoodDetailsPanel() {
         initComponents();
+        lbl_Error.setVisible(false);
     }
     
     public void getFood() throws Exception{
@@ -187,6 +190,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
         btn_edit = new javax.swing.JButton();
         btn_clear = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
+        lbl_Error = new javax.swing.JLabel();
         lbl_foodtype = new javax.swing.JLabel();
         jComboBox_foodtype = new javax.swing.JComboBox<>();
         jComboBox_searchby = new javax.swing.JComboBox<>();
@@ -261,7 +265,16 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
         add(btn_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 400, 100, -1));
 
         btn_delete.setText("Delete");
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
         add(btn_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 600, 100, -1));
+
+        lbl_Error.setForeground(new java.awt.Color(255, 0, 0));
+        lbl_Error.setText("Error msg");
+        add(lbl_Error, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 250, 330, -1));
 
         lbl_foodtype.setText("Food Type");
         add(lbl_foodtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, -1, -1));
@@ -276,6 +289,11 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
 
         jComboBox_searchby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Food ID", "Food Name" }));
         jComboBox_searchby.setEnabled(false);
+        jComboBox_searchby.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_searchbyActionPerformed(evt);
+            }
+        });
         add(jComboBox_searchby, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 150, -1));
 
         lbl_searchby.setText("Search by");
@@ -328,6 +346,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        lbl_Error.setVisible(false);
         if(jTable_food.getRowCount()==0){//validations
             JOptionPane.showMessageDialog(new JFrame(), "Please select a item",
                "Imformation", JOptionPane.ERROR_MESSAGE);
@@ -340,11 +359,13 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+        lbl_Error.setVisible(false);
         FoodAddEdit obj = new FoodAddEdit();
         obj.show();
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        lbl_Error.setVisible(false);
         jComboBox_foodtype.setEnabled(true);
         lbl_foodtype.setEnabled(true);
         lbl_searchby.setEnabled(false);
@@ -366,6 +387,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
 
     private void btn_viewallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_viewallActionPerformed
         try {
+            lbl_Error.setVisible(false);
             clearTable();
             getFood();
         } catch (Exception ex) {
@@ -374,6 +396,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_viewallActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
+        lbl_Error.setVisible(false);
         clearTable();
         jComboBox_foodtype.setSelectedIndex(0);
     }//GEN-LAST:event_btn_clearActionPerformed
@@ -385,11 +408,13 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
             jTable_food.setRowSelectionInterval(0, 0);
         } catch (Exception ex) {
             Logger.getLogger(FoodDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            lbl_Error.setVisible(true);
+            lbl_Error.setText("No result. Please check entered "+jComboBox_searchby.getSelectedItem());
         }
     }//GEN-LAST:event_btn_searchActionPerformed
 
     private void jComboBox_foodtypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_foodtypeActionPerformed
-        
+
     }//GEN-LAST:event_jComboBox_foodtypeActionPerformed
 
     private void btn_searchByTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchByTypeActionPerformed
@@ -401,6 +426,31 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
             Logger.getLogger(FoodDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_searchByTypeActionPerformed
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+        lbl_Error.setVisible(false);
+        ((DefaultTableModel)jTable_food.getModel()).removeRow(2);
+        /*
+        if(jTable_food.getRowCount()==0){//validations
+            JOptionPane.showMessageDialog(new JFrame(), "Please select a item",
+               "Imformation", JOptionPane.ERROR_MESSAGE);
+        }else{
+            try {
+                int row=jTable_food.getSelectedRow();
+                String a=(String) jTable_food.getValueAt(row, 0);
+                Food obj=new Food();
+                obj.deleteFood(a);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(new JFrame(), "Can't delete the food item",
+               "Imformation", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        */
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void jComboBox_searchbyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_searchbyActionPerformed
+
+    }//GEN-LAST:event_jComboBox_searchbyActionPerformed
     public void clearTable(){
         DefaultTableModel tblModel =(DefaultTableModel)jTable_food.getModel(); 
         int rowCount = tblModel.getRowCount();
@@ -428,6 +478,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_food;
+    private javax.swing.JLabel lbl_Error;
     private javax.swing.JLabel lbl_foodtype;
     private javax.swing.JLabel lbl_searchby;
     private javax.swing.JTextField txt_search;

@@ -50,6 +50,21 @@ public class LoyaltyCard extends Connect{
             c.close(); 
         }
     }
+    public void blockUnblockCard(String CID,String status) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            String sql="update LOYALTY_CARD set STATUS='"+status+"' where CARD_ID='"+CID+"'"; //SQL stetment
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+    }
     public int checkRequseted(String CID) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         int req=0;

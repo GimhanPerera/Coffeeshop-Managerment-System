@@ -149,4 +149,21 @@ public class Food extends Connect{
         }
         return FID;    
     }
+    
+    public void deleteFood(String fID) throws Exception{//NOT COMPLETE
+        //Need to check order table and order_food table
+        Connection c= getConnection();//get the connection using inheritance
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+                String sql="DELETE FROM FOOD WHERE FOOD_ID='"+fID+"';";
+                stmt.executeUpdate(sql);
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+    }
 }
