@@ -74,20 +74,12 @@ char[] c = new char[8];
                     Thread.sleep(800);
                     if(exit){
                         btn_next.setEnabled(true);
-            btn_back.setEnabled(true);
+                        btn_back.setEnabled(true);
                         exit=false;
                         break;
                     }else if(numRead==10){System.out.println(" TEST 1 ");System.out.println(S.equals(q));
                         //check the card
-                        if("2456322B".equals(S)){//correct card
-                            lbl_waiting.setVisible(false);System.out.println(" TEST 2 ");
-                            lbl_notOk.setVisible(false);
-                            lbl_ok.setVisible(true);
-                        }else{//wrong card
-                            lbl_waiting.setVisible(false);System.out.println(" TEST 3 ");
-                            lbl_notOk.setVisible(true);
-                            lbl_ok.setVisible(false);
-                        }
+                        
                         exit=false;
                         break;
                     }
@@ -216,7 +208,6 @@ char[] c = new char[8];
         lbl_notOk = new javax.swing.JLabel();
         lbl_waiting = new javax.swing.JLabel();
         lbl_ok = new javax.swing.JLabel();
-        lbl_scaninfo = new javax.swing.JLabel();
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -357,7 +348,7 @@ char[] c = new char[8];
         jPanel_loyaltycard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_scanmanage.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_scanmanage.setText("Cancel");
+        btn_scanmanage.setText("Scan");
         btn_scanmanage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_scanmanageMouseClicked(evt);
@@ -370,18 +361,14 @@ char[] c = new char[8];
         });
         jPanel_loyaltycard.add(btn_scanmanage, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 150, 60));
 
-        lbl_notOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/not ok.jpg"))); // NOI18N
-        jPanel_loyaltycard.add(lbl_notOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, -1, -1));
+        lbl_notOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Not_final.png"))); // NOI18N
+        jPanel_loyaltycard.add(lbl_notOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, -1, -1));
 
         lbl_waiting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/tapping image.png"))); // NOI18N
         jPanel_loyaltycard.add(lbl_waiting, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 330, 320));
 
-        lbl_ok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ok.jpg"))); // NOI18N
-        jPanel_loyaltycard.add(lbl_ok, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 230, 240));
-
-        lbl_scaninfo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbl_scaninfo.setText("Scanning...");
-        jPanel_loyaltycard.add(lbl_scaninfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
+        lbl_ok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ok_final.png"))); // NOI18N
+        jPanel_loyaltycard.add(lbl_ok, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 340, 330));
 
         getContentPane().add(jPanel_loyaltycard, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 750, 570));
         getContentPane().add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 730));
@@ -461,12 +448,13 @@ char[] c = new char[8];
             jPanel_loyaltycard.setVisible(true);
             jPanel_customerInfo.setVisible(false);
             btn_next.setEnabled(false);
-            btn_back.setEnabled(false);Thread.sleep(2000);
+            btn_back.setEnabled(false);
             //Start scannig
-            Conn t1=new Conn();
-            t1.start();
-            while(t1.isAlive()) {}
-            System.out.println("THE PIN IS::"+t1.getPin());
+           // while(jPanel_customerInfo.isVisible()==true){}
+            //Conn t1=new Conn();
+            ////t1.start();
+            //while(t1.isAlive()) {}
+            //System.out.println("THE PIN IS::"+t1.getPin());
         //Thread.sleep(5000);
 
             
@@ -506,18 +494,63 @@ char[] c = new char[8];
     }//GEN-LAST:event_btn_backActionPerformed
 
     private void btn_scanmanageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_scanmanageMouseClicked
-        if(btn_scanmanage.getText().equals("Cancel")){
-            this.exit=true;
+        if(btn_scanmanage.getText().equals("Scan")){
+            try {
+            pin=""; 
+            //Start scannig
+            while(jPanel_customerInfo.isVisible()==true){}
+            Conn t1=new Conn();
+            t1.start();
+            while(t1.isAlive()) {}
+            System.out.println("THE PIN IS::"+t1.getPin());
+            if("9B4D7422".equals(t1.getPin())){//correct card
+                lbl_waiting.setVisible(false);System.out.println(" TEST 2 ");
+                lbl_notOk.setVisible(false);
+                lbl_ok.setVisible(true);
+                btn_scanmanage.setText("Done");
+                txt_loyaltycard.setText(t1.getPin());
+            }else{//wrong card
+                lbl_waiting.setVisible(false);System.out.println(" TEST 3 ");
+                lbl_notOk.setVisible(true);
+                lbl_ok.setVisible(false);
+                btn_scanmanage.setText("Cancel");
+                txt_loyaltycard.setText(t1.getPin());
+            }
+            //Thread.sleep(2000);
+            //lbl_waiting.setVisible(true);
+            //lbl_ok.setVisible(false);
+            //lbl_notOk.setVisible(false);
+            //jPanel_loyaltycard.setVisible(false);
+            //jPanel_customerInfo.setVisible(true);
+            } catch (Exception ex) {
+                Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else if(btn_scanmanage.getText().equals("Done")){
+            //this.exit=true;
             lbl_waiting.setVisible(true);
             lbl_notOk.setVisible(false);
             lbl_ok.setVisible(false);
             jPanel_loyaltycard.setVisible(false);
             jPanel_customerInfo.setVisible(true);
-        }System.out.println(btn_scanmanage.getText());
-        if(btn_scanmanage.getText().equals("Scan again")){
+            btn_next.setEnabled(true);
+            btn_back.setEnabled(true);
+            btn_scanmanage.setText("Scan");
+        }
+        else if(btn_scanmanage.getText().equals("Cancel")){
+            this.exit=false;
+            lbl_waiting.setVisible(true);
             lbl_notOk.setVisible(false);
             lbl_ok.setVisible(false);
-            lbl_scaninfo.setVisible(true);
+            jPanel_loyaltycard.setVisible(false);
+            jPanel_customerInfo.setVisible(true);
+            btn_next.setEnabled(true);
+            btn_back.setEnabled(true);
+            btn_scanmanage.setText("Scan");
+        }
+        if(btn_scanmanage.getText().equals("Scan again")){//NOT USEFUL
+            lbl_notOk.setVisible(false);
+            lbl_ok.setVisible(false);
             btn_scanmanage.setText("Cancel");
         }
     }//GEN-LAST:event_btn_scanmanageMouseClicked
@@ -586,7 +619,6 @@ char[] c = new char[8];
     private javax.swing.JLabel lbl_notOk;
     private javax.swing.JLabel lbl_ok;
     private javax.swing.JLabel lbl_payment;
-    private javax.swing.JLabel lbl_scaninfo;
     private javax.swing.JLabel lbl_waiting;
     private javax.swing.JRadioButton rdo_Card;
     private javax.swing.JRadioButton rdo_cash;

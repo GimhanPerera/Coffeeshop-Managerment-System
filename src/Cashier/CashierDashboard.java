@@ -50,6 +50,22 @@ public class CashierDashboard extends javax.swing.JFrame {
         btn_logout = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        dashboard2 = new Cashier.Dashboard();
+        jPanel2 = new javax.swing.JPanel();
+        issueLoyaltyCard1 = new Cashier.IssueLoyaltyCard();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        jButton9 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_dBoard = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -62,33 +78,6 @@ public class CashierDashboard extends javax.swing.JFrame {
         lbl_income = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable_card = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jLabel15 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jButton7 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        jButton9 = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jButton10 = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -348,137 +337,16 @@ public class CashierDashboard extends javax.swing.JFrame {
         getContentPane().add(Nav_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 740));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(dashboard2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jTable_dBoard.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Order ID", "Customer name", "Order type", "Status", "Ordered Time"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable_dBoard);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 1050, -1));
-
-        jButton1.setText("Cancel the order");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 620, 160, 40));
-
-        jButton2.setText("Refresh");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 30, -1, -1));
-
-        jButton3.setText("View Order");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 610, 150, 50));
-
-        jButton4.setText("Complete the order");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(878, 609, 180, 50));
-
-        jLabel1.setText("Today Imcome");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
-
-        jLabel2.setText("Pending Order count");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, -1, -1));
-
-        jLabel3.setText("jLabel1");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, -1, -1));
-
-        lbl_income.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbl_income.setText("0.00");
-        jPanel1.add(lbl_income, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
-
-        jLabel5.setText("Delivered orders");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 50, -1, -1));
-
-        jButton11.setText("Hold");
-        jPanel1.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 620, 110, 40));
-
-        jTabbedPane1.addTab("Dashboard", jPanel1);
+        jTabbedPane1.addTab("tab2", jPanel1);
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jTabbedPane1.addTab("tab2", jPanel2);
+        jPanel2.add(issueLoyaltyCard1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTable_card.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Customer ID", "Full Name", "Loyalty points"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(jTable_card);
-
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 1050, -1));
-
-        jButton5.setText("Issue card");
-        jPanel3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 610, 150, 40));
-
-        jLabel6.setText("Loyalty card requests");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, -1, -1));
-
-        jButton6.setText("Reject");
-        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 610, 110, 40));
-
-        jLabel15.setText("Available card count");
-        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 40, -1, -1));
-
-        jTabbedPane1.addTab("Loyalty card", jPanel3);
+        jTabbedPane1.addTab("Loyalty card", jPanel2);
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane3.setViewportView(jTable3);
-
-        jPanel4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 1050, -1));
-
-        jButton7.setText("Cancel the order");
-        jPanel4.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(697, 609, 150, 50));
-
-        jLabel9.setText("jLabel1");
-        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, -1, -1));
-
-        jLabel10.setText("jLabel1");
-        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 40, -1, -1));
-
-        jLabel11.setText("jLabel1");
-        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 40, -1, -1));
-
-        jButton8.setText("Hold");
-        jPanel4.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 619, 110, 40));
-
         jTabbedPane1.addTab("tab4", jPanel4);
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
@@ -530,7 +398,7 @@ public class CashierDashboard extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 701, Short.MAX_VALUE)
+            .addGap(0, 740, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -596,7 +464,7 @@ public class CashierDashboard extends javax.swing.JFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 701, Short.MAX_VALUE)
+            .addGap(0, 740, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -606,7 +474,65 @@ public class CashierDashboard extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("tab6", jPanel6);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 1100, 740));
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable_dBoard.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Order ID", "Customer name", "Order type", "Status", "Ordered Time"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable_dBoard);
+
+        jPanel12.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 1050, -1));
+
+        jButton1.setText("Cancel the order");
+        jPanel12.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 620, 160, 40));
+
+        jButton2.setText("Refresh");
+        jPanel12.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 30, -1, -1));
+
+        jButton3.setText("View Order");
+        jPanel12.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 610, 150, 50));
+
+        jButton4.setText("Complete the order");
+        jPanel12.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(878, 609, 180, 50));
+
+        jLabel1.setText("Today Imcome");
+        jPanel12.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+
+        jLabel2.setText("Pending Order count");
+        jPanel12.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, -1, -1));
+
+        jLabel3.setText("jLabel1");
+        jPanel12.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, -1, -1));
+
+        lbl_income.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbl_income.setText("0.00");
+        jPanel12.add(lbl_income, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
+
+        jLabel5.setText("Delivered orders");
+        jPanel12.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 50, -1, -1));
+
+        jButton11.setText("Hold");
+        jPanel12.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 620, 110, 40));
+
+        jTabbedPane1.addTab("Dashboard", jPanel12);
+
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, -39, 1100, -1));
 
         lbl_background.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         getContentPane().add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 740));
@@ -624,7 +550,7 @@ public class CashierDashboard extends javax.swing.JFrame {
         btn_loyaltyCards.setBackground(new java.awt.Color(173,85,2));
         btn_profile.setBackground(new java.awt.Color(173,85,2));
         btn_logout.setBackground(new java.awt.Color(173,85,2));
-        //jTabbedPane.setSelectedIndex(0);
+        jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_btn_DashboardMouseClicked
 
     private void btn_DashboardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DashboardMouseEntered
@@ -733,6 +659,7 @@ public class CashierDashboard extends javax.swing.JFrame {
         btn_loyaltyCards.setBackground(new java.awt.Color(252, 152, 3));
         btn_profile.setBackground(new java.awt.Color(173,85,2));
         btn_logout.setBackground(new java.awt.Color(173,85,2));
+        jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_btn_loyaltyCardsMouseClicked
 
     private void btn_loyaltyCardsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_loyaltyCardsMouseEntered
@@ -850,45 +777,34 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JButton btn_profile;
     private javax.swing.JButton btn_reports;
     private javax.swing.JButton btn_sd_details;
+    private Cashier.Dashboard dashboard2;
+    private Cashier.IssueLoyaltyCard issueLoyaltyCard1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable_card;
     private javax.swing.JTable jTable_dBoard;
     private javax.swing.JLabel lbl_background;
     private javax.swing.JLabel lbl_heading;
