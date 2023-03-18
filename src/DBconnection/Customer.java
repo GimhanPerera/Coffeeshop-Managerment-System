@@ -118,6 +118,7 @@ public class Customer extends Connect{
         return tp;   
     }
     
+    
     public String getCardID(String c_ID) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         String id="";

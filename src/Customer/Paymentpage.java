@@ -26,37 +26,32 @@ public class Paymentpage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btn_cancel = new javax.swing.JButton();
-        btn_next = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        btn_back = new javax.swing.JLabel();
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_cancel.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        btn_cancel.setText("Cancel");
-        getContentPane().add(btn_cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 620, -1, -1));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.setOpaque(false);
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 530, 450, 60));
 
-        btn_next.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        btn_next.setText("Place Order");
-        btn_next.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_nextActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btn_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 620, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/payment final 2.png"))); // NOI18N
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 90, 480, 520));
+
+        btn_back.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
+        btn_back.setText("Back");
+        getContentPane().add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 630, -1, -1));
+
+        lbl_background.setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 730));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
-        // TODO add your handling code here:
-        ThankyouPage obj =new ThankyouPage();
-        obj.show();
-        dispose();
-    }//GEN-LAST:event_btn_nextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -94,8 +89,9 @@ public class Paymentpage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_cancel;
-    private javax.swing.JButton btn_next;
+    private javax.swing.JLabel btn_back;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_background;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,10 +4,11 @@
  */
 package Manager;
 
-import Customer.Conn;
+import AduinoConnection.Conn;
 import DBconnection.Connect;
 import DBconnection.LoyaltyCard;
 import com.fazecast.jSerialComm.SerialPort;
+import java.awt.Component;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Gimhan
  */
-public class LoyaltyCardPanel extends javax.swing.JPanel  implements Runnable{
+public class LoyaltyCardPanel extends javax.swing.JPanel{
 
     /**
      * Creates new form LoyaltyCardPanel
@@ -31,6 +32,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel  implements Runnable{
         try {
             initComponents();
             lbl_Error.setVisible(false);
+            lbl_scanstatus.setVisible(false);
             clearTable();
             getAllCards();
             jTable.setRowSelectionInterval(0, 0);
@@ -38,84 +40,16 @@ public class LoyaltyCardPanel extends javax.swing.JPanel  implements Runnable{
             lbl_notOk.setVisible(false);
             lbl_ok.setVisible(false);
             jPanel_loyaltycard.setVisible(false);
+            setBlockbtn();
         } catch (Exception ex) {
             Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    //Thread testing - Card read.
-    private static boolean exit=false;private static String pin=""; 
-    @Override
-    public void run() {
-        reading();
-    }
-    
-    public void reading(){
-        String S="";
-char[] c = new char[8];
-        
-        SerialPort [] AvailablePorts = SerialPort.getCommPorts();   
-        //Open the first Available port
-        SerialPort MySerialPort = AvailablePorts[0];//problem happen here if not connected the Aduino correctly
-        int BaudRate = 9600;
-        int DataBits = 8;
-        int StopBits = SerialPort.ONE_STOP_BIT;
-        int Parity   = SerialPort.NO_PARITY;
-        //Sets all serial port parameters at one time
-        MySerialPort.setComPortParameters(BaudRate,DataBits,StopBits,Parity);
-
-        //Set Read Time outs
-        MySerialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_BLOCKING, 1000, 0);
-        MySerialPort.openPort(); //open the port
-                                 //Arduino May get reset 
-        //Thread.sleep(2000);
-        if (MySerialPort.isOpen())//Check whether port open/not
-              System.out.println("is Open ");
-        else{
-           System.out.println(" Port not open ");
-           exit=true;
-        }
-        try {
-                int numRead=0;
-                int time=0;String q="9B4D7422";
-                while (time<=5){//set time here
-                    
-                    byte[] readBuffer = new byte[100];
-
-                    numRead = MySerialPort.readBytes(readBuffer, readBuffer.length);
-                    System.out.print("Time: "+time);
-                    System.out.print(" ,Read " + numRead + " bytes -");
-      
-                    //Convert bytes to String
-                    S = new String(readBuffer, "UTF-8"); 
-                    System.out.println("Received -> "+ S);
-                    time++;  
-                    Thread.sleep(800);
-                    if(exit){
-                        exit=false;
-                        break;
-                    }else if(numRead==10){System.out.println(" TEST 1 ");System.out.println(S.equals(q));
-                        //check the card
-                        
-                        exit=false;
-                        break;
-                    }
-                }    
-        }        
-        catch (Exception e){
-            e.printStackTrace(); 
-        }finally{
-            MySerialPort.closePort(); //Close the port
-        }      
-        pin = S;
-        System.out.println("PIN : "+pin);
-    }
-    //Thread testing
-    
     public void getAllCards() throws Exception{//NOT CORRECT
         Connect obj = new Connect();
         Connection c = obj.getConnection();  //getConnection();//Establish the connection
-        
+        clearTable();
         try{ //int q=1;System.out.println(q++); <- tester
                 String cardID=""; 
                 String tp="";
@@ -133,7 +67,7 @@ char[] c = new char[8];
                     String tbData[]={cardID,tp,status,issuedBy};
                     DefaultTableModel tblModel =(DefaultTableModel)jTable.getModel(); 
                     tblModel.addRow(tbData);
-                }        
+                }
         }
         catch(SQLException ex)//Is database has a problem, this catch stetment catch it
         {
@@ -178,6 +112,7 @@ char[] c = new char[8];
         lbl_waiting = new javax.swing.JLabel();
         lbl_ok = new javax.swing.JLabel();
         lbl_loyaltycardTitle = new javax.swing.JLabel();
+        lbl_scanstatus = new javax.swing.JLabel();
         lbl_background = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -208,7 +143,15 @@ char[] c = new char[8];
             new String [] {
                 "Card ID", "Customer Mobile Number", "Status", "Issued by"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable.setRowHeight(28);
         jTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -343,29 +286,52 @@ char[] c = new char[8];
         lbl_loyaltycardTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_loyaltycardTitle.setText("Loyalty Card Details");
         add(lbl_loyaltycardTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 460, -1));
+
+        lbl_scanstatus.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        lbl_scanstatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_scanstatus.setText("Scan New Loyalty Card");
+        add(lbl_scanstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 730, -1));
         add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 770));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         lbl_Error.setVisible(false);
-        lbl_loyaltycardTitle.setText("Scan Loyalty Card");
-        jPanel3.setVisible(false);jPanel_loyaltycard.setVisible(true);
+        lbl_loyaltycardTitle.setVisible(false);
+        lbl_scanstatus.setText("Scan New Loyalty Card");
+        lbl_scanstatus.setVisible(true);
+        jPanel3.setVisible(false);
+        jPanel_loyaltycard.setVisible(true);
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void btn_removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removeActionPerformed
         lbl_Error.setVisible(false);
+        int result = JOptionPane.showConfirmDialog((Component) null, "Your order will cancel and you need to order again",
+        "alert", JOptionPane.YES_NO_OPTION);
+        System.out.println(result);
+        if(result==0){
+            try {
+                int row=jTable.getSelectedRow();
+                String a=(String) jTable.getValueAt(row, 0);
+                LoyaltyCard obj=new LoyaltyCard();
+                int check=obj.removeCard(a);
+                getAllCards();
+            } catch (Exception ex) {
+                Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_btn_removeActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         lbl_Error.setVisible(false);
         clearTable();
+        setBlockbtn();
         //jComboBox_foodtype.setSelectedIndex(0);
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void btn_viewAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_viewAllActionPerformed
         try {
             lbl_Error.setVisible(false);
-            clearTable();
+            
             getAllCards();
             jTable.setRowSelectionInterval(0, 0);
         } catch (Exception ex) {
@@ -404,7 +370,6 @@ char[] c = new char[8];
                     obj.blockUnblockCard(a, "Active");
                 else if("Active".equals(status))
                     obj.blockUnblockCard(a, "Blocked");
-                clearTable();
                 getAllCards();
                 jTable.setRowSelectionInterval(row, row);//set selection
             } catch (Exception ex) {
@@ -414,8 +379,13 @@ char[] c = new char[8];
     }//GEN-LAST:event_btn_blockActionPerformed
 
     private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
-        if(jTable.getRowCount()!=0){//validations
+        setBlockbtn();
+    }//GEN-LAST:event_jTableMouseClicked
+ 
+    private void setBlockbtn(){
+     if(jTable.getRowCount()!=0){//validations
             try {
+                btn_remove.setEnabled(true);
                 int row=jTable.getSelectedRow();
                 String a=(String) jTable.getValueAt(row, 2);
                 switch (a) {
@@ -436,8 +406,12 @@ char[] c = new char[8];
                 Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_jTableMouseClicked
-
+     else{
+         btn_block.setEnabled(false);
+         btn_remove.setEnabled(false);
+         btn_block.setText("Block");
+     }
+ }
     private void btn_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_filterActionPerformed
         try {   
             searchByFilter();
@@ -471,41 +445,49 @@ char[] c = new char[8];
     private void btn_scanmanageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_scanmanageMouseClicked
         if(btn_scanmanage.getText().equals("Scan")){
             try {
-                pin="";
                 //Start scannig
-                while(jPanel3.isVisible()==true){}
-                Conn t1=new Conn();
-                t1.start();
-                while(t1.isAlive()) {}
-                System.out.println("THE PIN IS::"+t1.getPin());
-                if("9B4D7422".equals(t1.getPin())){//correct card
-                    lbl_waiting.setVisible(false);System.out.println(" TEST 2 ");
-                    lbl_notOk.setVisible(false);
-                    lbl_ok.setVisible(true);
-                    btn_scanmanage.setText("Done");
-                }else{//wrong card
-                    lbl_waiting.setVisible(false);System.out.println(" TEST 3 ");
-                    lbl_notOk.setVisible(true);
-                    lbl_ok.setVisible(false);
-                    btn_scanmanage.setText("Cancel");
-                }
-                //Thread.sleep(2000);
-                //lbl_waiting.setVisible(true);
-                //lbl_ok.setVisible(false);
-                //lbl_notOk.setVisible(false);
-                //jPanel_loyaltycard.setVisible(false);
-                //jPanel_customerInfo.setVisible(true);
+            Conn t1=new Conn();
+            LoyaltyCard obj1=new LoyaltyCard();
+            t1.start();
+            t1.setReadsuccess();
+            while(t1.isAlive()) {}
+            System.out.println("THE PIN IS::"+t1.getPin());
+            if(!t1.getReadsuccess()){//not read
+                lbl_waiting.setVisible(false);
+                lbl_notOk.setVisible(true);
+                lbl_ok.setVisible(false);
+                lbl_scanstatus.setVisible(true);
+                lbl_scanstatus.setText("Scanning unsuccessful!!");
+                btn_scanmanage.setText("Cancel");
+            }
+            else if(obj1.checkExistence(t1.getPin())==1){//check is it a existing
+                lbl_waiting.setVisible(false);System.out.println(" TEST 2 ");
+                lbl_notOk.setVisible(true);
+                lbl_ok.setVisible(false);
+                btn_scanmanage.setText("Cancel");
+                lbl_scanstatus.setVisible(true);
+                lbl_scanstatus.setText("This card alrready exist in the system");
+            }else{//Add card to the sustem
+                lbl_waiting.setVisible(false);
+                lbl_notOk.setVisible(false);
+                lbl_ok.setVisible(true);
+                btn_scanmanage.setText("Done");
+                lbl_scanstatus.setVisible(true);
+                lbl_scanstatus.setText("New loyalty card added");
+                int i=obj1.addNewCard(t1.getPin());
+                System.out.println("RETURN : "+i);
+            }
             } catch (Exception ex) {
                 Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else if(btn_scanmanage.getText().equals("Done")){
-            //this.exit=true;
             lbl_waiting.setVisible(true);
             lbl_notOk.setVisible(false);
             lbl_ok.setVisible(false);
             jPanel_loyaltycard.setVisible(false);
             btn_scanmanage.setText("Scan");
+            lbl_scanstatus.setVisible(false);
             lbl_loyaltycardTitle.setText("Loyalty Card Details");
             jPanel3.setVisible(true);
             try {
@@ -517,12 +499,12 @@ char[] c = new char[8];
             }
         }
         else if(btn_scanmanage.getText().equals("Cancel")){
-            this.exit=false;
             lbl_waiting.setVisible(true);
             lbl_notOk.setVisible(false);
             lbl_ok.setVisible(false);
             jPanel_loyaltycard.setVisible(false);
             btn_scanmanage.setText("Scan");
+            lbl_scanstatus.setVisible(false);
             lbl_loyaltycardTitle.setText("Loyalty Card Details");
             jPanel3.setVisible(true);
             try {
@@ -537,6 +519,7 @@ char[] c = new char[8];
             lbl_notOk.setVisible(false);
             lbl_ok.setVisible(false);
             btn_scanmanage.setText("Cancel");
+            lbl_scanstatus.setVisible(false);
             lbl_loyaltycardTitle.setText("Loyalty Card Details");
             jPanel3.setVisible(true);
         }
@@ -652,6 +635,7 @@ char[] c = new char[8];
     private javax.swing.JLabel lbl_loyaltycardTitle;
     private javax.swing.JLabel lbl_notOk;
     private javax.swing.JLabel lbl_ok;
+    private javax.swing.JLabel lbl_scanstatus;
     private javax.swing.JLabel lbl_waiting;
     private javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables

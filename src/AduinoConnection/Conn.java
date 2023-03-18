@@ -2,15 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Customer;
+package AduinoConnection;
 import com.fazecast.jSerialComm.*;
-
-import com.fazecast.jSerialComm.SerialPort;
-
 
 public class Conn extends Thread{
     private static boolean exit=false; 
     private String pin="";
+    private static boolean readsuccess=false;
     
     public static void main(String[] args) {
         //System.out.println(s);
@@ -24,6 +22,12 @@ public class Conn extends Thread{
     public String getPin(){
         System.out.println(this.pin);
         return this.pin;
+    }
+    public void setReadsuccess(){
+        this.readsuccess=false;
+    }
+    public boolean getReadsuccess(){
+        return this.readsuccess;
     }
     
     @SuppressWarnings("empty-statement")
@@ -82,6 +86,8 @@ try
       
       if(exit || numRead==10){
             exit=false;
+            if(numRead==10)
+                readsuccess=true;
             break;
         }
 Thread.sleep(1000);

@@ -68,6 +68,7 @@ public class Order extends Connect{
                stmt.executeUpdate(sql);
             }System.out.println("food_order table updated");
             //Generate invoice table
+            //invoice ID autogenerate bt sql
             sql="INSERT INTO INVOICE(PAYMENT_METHOD,AMOUNT,DISCOUNT,STATUS,ORDERID) " +
                     "VALUES('"+pay_method+"','"+amount+"','"+discount+"','"+paymentstatus+"','"+newOID+"')";
                stmt.executeUpdate(sql);

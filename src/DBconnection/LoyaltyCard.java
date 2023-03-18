@@ -65,6 +65,32 @@ public class LoyaltyCard extends Connect{
             c.close(); 
         }
     }
+    
+    public void issueCard(String cardID,String customerTp,String empID) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        String cusID="";
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select CUSTOMER_ID from CUSTOMER where MOBILE_NUMBER='"+customerTp+"'"); //SQL stetment
+            while(rs.next()){
+                cusID=rs.getString("CUSTOMER_ID");//get the value to variable "fname"
+            }
+            getDate obj =new getDate();
+            String sql="update LOYALTY_CARD set STATUS='Active', CUSTOMER_ID='"+cusID+"', ISSUE_DATE='"+obj.dateOnly()+"', "
+            + " EMP_ID='"+empID+"'  where CARD_ID='"+cardID+"';"; //SQL stetment
+            stmt.executeUpdate(sql);
+            sql="update CUSTOMER set REQUEST='2' where CUSTOMER_ID='"+cusID+"';"; //SQL stetment
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+    }
+    
     public int checkRequseted(String CID) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         int req=0;
@@ -84,6 +110,112 @@ public class LoyaltyCard extends Connect{
         }
         return req;  
     }
+    
+    public int checkExistence(String CID) throws Exception{ //check the card is existing(return 1) or not(return 0)  
+        Connection c= getConnection();//get the connection using inheritance
+        int exist=0;
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select STATUS from LOYALTY_CARD where CARD_ID='"+CID+"'"); //SQL stetment
+            while(rs.next()){
+                String temp=rs.getString("STATUS");
+                if(!("".equals(temp))){
+                    exist=1;
+                }
+            } 
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return exist;  
+    }
+    
+    public int checkIssued(String CID) throws Exception{ //check it is a free card.if free(return 1) or not free(return 0)  
+        Connection c= getConnection();//get the connection using inheritance
+        int status=0;
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select STATUS from LOYALTY_CARD where CARD_ID='"+CID+"'"); //SQL stetment
+            while(rs.next()){
+                String temp=rs.getString("STATUS");//System.out.println(temp);
+                if("FREE".equals(temp)){
+                    status=1;
+                }
+            } 
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return status;  
+    }
+    
+    public int addNewCard(String cardid) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        int i=0;
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+
+            String sql;
+            sql="INSERT INTO LOYALTY_CARD (CARD_ID, STATUS) " +
+                    "VALUES ('"+cardid+"','FREE')";
+            i=stmt.executeUpdate(sql);      
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return i;
+    }
+    
+    public int removeCard(String cardid) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        int i=0;
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            String sql;
+            sql="UPDATE CUSTOMER SET request = '0' WHERE CUSTOMER_ID =( SELECT CUSTOMER_ID FROM LOYALTY_CARD WHERE card_id = '"+cardid+"');";
+            i=stmt.executeUpdate(sql);
+            sql="delete from LOYALTY_CARD WHERE CARD_ID= '"+cardid+"';";
+            i=stmt.executeUpdate(sql);
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return i;
+    }
+    
+    public void rejectRequest(String tp) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            String sql;
+            sql="UPDATE CUSTOMER SET request = '0' WHERE MOBILE_NUMBER='"+tp+"'";
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+    }
+    
     public String getLoyaltycardNumber(String CID) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         String id="";

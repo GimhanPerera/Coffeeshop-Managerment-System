@@ -34,23 +34,7 @@ public class MainPage extends javax.swing.JFrame {
     String cid="0";String o_type="Dinein";int points=0;int tp;
     public MainPage() {
         initComponents();
-        firstDataGet();
-            /*Not sure
-            TableActionEvent event = new TableActionEvent() {
-            @Override
-            public void onPlus(int row) {
-            System.out.println("Plus"+row);
-            }
-
-            @Override
-            public void onMins(int row) {
-            System.out.println("Mins"+row);
-            }
-            };
-            jTable_menu.getColumnModel().getColumn(2).setCellRenderer(new TableActionCellRender());
-            jTable_menu.getColumnModel().getColumn(2).setCellEditor(new TableActionCellEditor(event));
-            */
-        
+        firstDataGet();       
     }
     public MainPage(String cid,String o_type,int tp) {
         initComponents();
@@ -73,6 +57,7 @@ public class MainPage extends javax.swing.JFrame {
             System.out.println("Database error: Cant get loyalty point");
         }
     }
+    
     public void firstDataGet(){
         jTabbedPane1.setSelectedIndex(3);
         try {
@@ -87,12 +72,6 @@ public class MainPage extends javax.swing.JFrame {
         jTable_menu1.setRowSelectionInterval(0, 0);//set selection
         jTable_menu2.setRowSelectionInterval(0, 0);//set selection
         jTable_menu3.setRowSelectionInterval(0, 0);//set selection
-    }
-    public Connection getConnection() throws Exception{//Connect with DB
-        Class.forName("com.mysql.cj.jdbc.Driver");//Load and register the JDBC driver
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/COFFESHOP","root","root");//Establish the connection
-        System.out.println("Database connection is success");
-        return con;
     }
     
     public void getFood() throws Exception{

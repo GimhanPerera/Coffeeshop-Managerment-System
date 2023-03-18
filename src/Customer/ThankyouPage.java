@@ -31,7 +31,7 @@ public class ThankyouPage extends javax.swing.JFrame {
                //I don't think you need to do anything for your particular problem
                 }
             }
-            LoginPage obj =new LoginPage();
+            WelcomePage obj =new WelcomePage();
             obj.show();
             dispose();
         }
@@ -96,7 +96,7 @@ public class ThankyouPage extends javax.swing.JFrame {
     private void btn_mainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mainActionPerformed
         // TODO add your handling code here:
         thread.stop();
-       LoginPage obj =new LoginPage();
+       WelcomePage obj =new WelcomePage();
         obj.show();
         dispose();
     }//GEN-LAST:event_btn_mainActionPerformed
