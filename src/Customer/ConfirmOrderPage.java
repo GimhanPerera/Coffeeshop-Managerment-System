@@ -24,9 +24,9 @@ public class ConfirmOrderPage extends javax.swing.JFrame implements Runnable{
 String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuffer sb1;int total=0;int discount=0;
     int lines=0;int tp;
 
-    //Thread testing - Card read. but can't link to process
+    //Thread testing - Card read.
     private static boolean exit=false;private static String pin=""; 
-@Override
+    @Override
     public void run() {
         reading();
     }
@@ -97,6 +97,7 @@ char[] c = new char[8];
 
     public ConfirmOrderPage(StringBuffer sb, int tot,String[] foodID,int[] Qyt,int lines,String cid,String o_type,int points,int tp) {
         initComponents();
+        lbl_discount.setVisible(false);
         jPanel_loyaltycard.setVisible(false);
         lbl_ok.setVisible(false);
         lbl_notOk.setVisible(false);
@@ -137,6 +138,7 @@ char[] c = new char[8];
     
     public ConfirmOrderPage() {
         initComponents();
+        lbl_discount.setVisible(false);
         lbl_ok.setVisible(false);
         lbl_notOk.setVisible(false);
         jPanel_loyaltycard.setVisible(false);
@@ -208,6 +210,7 @@ char[] c = new char[8];
         lbl_notOk = new javax.swing.JLabel();
         lbl_waiting = new javax.swing.JLabel();
         lbl_ok = new javax.swing.JLabel();
+        lbl_discount = new javax.swing.JLabel();
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -370,6 +373,11 @@ char[] c = new char[8];
         lbl_ok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ok_final.png"))); // NOI18N
         jPanel_loyaltycard.add(lbl_ok, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 340, 330));
 
+        lbl_discount.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        lbl_discount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_discount.setText("You got Rs 100/= discount");
+        jPanel_loyaltycard.add(lbl_discount, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 20, 480, -1));
+
         getContentPane().add(jPanel_loyaltycard, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 750, 570));
         getContentPane().add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 730));
 
@@ -495,6 +503,7 @@ char[] c = new char[8];
 
     private void btn_scanmanageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_scanmanageMouseClicked
         if(btn_scanmanage.getText().equals("Scan")){
+            Customer obj =new Customer();
             try {
             pin=""; 
             //Start scannig
@@ -503,25 +512,30 @@ char[] c = new char[8];
             t1.start();
             while(t1.isAlive()) {}
             System.out.println("THE PIN IS::"+t1.getPin());
-            if("9B4D7422".equals(t1.getPin())){//correct card
-                lbl_waiting.setVisible(false);System.out.println(" TEST 2 ");
+            if(obj.getCardID(cid).equals(t1.getPin())){//correct card
+                lbl_waiting.setVisible(false);
                 lbl_notOk.setVisible(false);
                 lbl_ok.setVisible(true);
                 btn_scanmanage.setText("Done");
                 txt_loyaltycard.setText(t1.getPin());
+                //calculate and set the discount
+                this.discount=obj.getMaxDiscount(cid);
+                if(this.discount>this.total)
+                {
+                    this.discount=this.total;
+                }
+                setbill(this.sb1,this.total,this.discount);
+                lbl_discount.setVisible(true);
+                lbl_discount.setText("You got Rs "+this.discount+"/= discount");
             }else{//wrong card
-                lbl_waiting.setVisible(false);System.out.println(" TEST 3 ");
+                lbl_waiting.setVisible(false);System.out.println("Carrect ID "+obj.getCardID(cid));
                 lbl_notOk.setVisible(true);
                 lbl_ok.setVisible(false);
                 btn_scanmanage.setText("Cancel");
-                txt_loyaltycard.setText(t1.getPin());
+                txt_loyaltycard.setText("");
+                lbl_discount.setVisible(true);
+                lbl_discount.setText("Wrong card or not scaned your card correctly");
             }
-            //Thread.sleep(2000);
-            //lbl_waiting.setVisible(true);
-            //lbl_ok.setVisible(false);
-            //lbl_notOk.setVisible(false);
-            //jPanel_loyaltycard.setVisible(false);
-            //jPanel_customerInfo.setVisible(true);
             } catch (Exception ex) {
                 Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -536,6 +550,7 @@ char[] c = new char[8];
             btn_next.setEnabled(true);
             btn_back.setEnabled(true);
             btn_scanmanage.setText("Scan");
+            lbl_discount.setVisible(false);
         }
         else if(btn_scanmanage.getText().equals("Cancel")){
             this.exit=false;
@@ -547,6 +562,7 @@ char[] c = new char[8];
             btn_next.setEnabled(true);
             btn_back.setEnabled(true);
             btn_scanmanage.setText("Scan");
+            lbl_discount.setVisible(false);
         }
         if(btn_scanmanage.getText().equals("Scan again")){//NOT USEFUL
             lbl_notOk.setVisible(false);
@@ -554,7 +570,7 @@ char[] c = new char[8];
             btn_scanmanage.setText("Cancel");
         }
     }//GEN-LAST:event_btn_scanmanageMouseClicked
-
+    
     private void btn_scanmanageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_scanmanageActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_scanmanageActionPerformed
@@ -613,6 +629,7 @@ char[] c = new char[8];
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextArea jTextArea_bill;
     private javax.swing.JLabel lbl_background;
+    private javax.swing.JLabel lbl_discount;
     private javax.swing.JLabel lbl_emailerror;
     private javax.swing.JLabel lbl_fnameerror;
     private javax.swing.JLabel lbl_lnameerror;

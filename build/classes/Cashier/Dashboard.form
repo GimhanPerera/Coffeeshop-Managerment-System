@@ -133,7 +133,7 @@
                 <Column editable="false" title="Order type" type="java.lang.Object"/>
                 <Column editable="false" title="Status" type="java.lang.Object"/>
                 <Column editable="false" title="Ordered Time" type="java.lang.Object"/>
-                <Column editable="false" title="Tables" type="java.lang.Object"/>
+                <Column editable="false" title="Table number" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="rowHeight" type="int" value="28"/>

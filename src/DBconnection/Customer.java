@@ -76,7 +76,7 @@ public class Customer extends Connect{
         finally{
             c.close(); 
         }
-        return lname;//Return First name    
+        return lname;  
     }
     public String getEmail(String c_ID) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
@@ -95,7 +95,7 @@ public class Customer extends Connect{
         finally{
             c.close(); 
         }
-        return email;//Return First name    
+        return email;  
     }
     
     public String getTp(String c_ID) throws Exception{   
@@ -115,7 +115,46 @@ public class Customer extends Connect{
         finally{
             c.close(); 
         }
-        return tp;//Return First name    
+        return tp;   
+    }
+    
+    public String getCardID(String c_ID) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        String id="";
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select CARD_ID from LOYALTY_CARD where customer_ID='"+c_ID+"'"); //SQL stetment
+            while(rs.next()){
+                id=rs.getString("CARD_ID");//get the value to variable "fname"
+            } 
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return id; 
+    }
+    public int getMaxDiscount(String c_ID) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        int points=0;
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select POINTS from CUSTOMER where customer_ID='"+c_ID+"'"); //SQL stetment
+            while(rs.next()){
+                points=rs.getInt("POINTS");//get the value to variable "fname"
+            } 
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return points-100;  
     }
     
     public String saveCustomerDetails(String cid,String fname,String lname,String email,String tp,int points) throws Exception{   

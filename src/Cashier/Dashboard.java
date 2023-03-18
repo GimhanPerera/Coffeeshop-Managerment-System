@@ -79,7 +79,7 @@ public class Dashboard extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Order ID", "Customer name", "Order type", "Status", "Ordered Time", "Tables"
+                "Order ID", "Customer name", "Order type", "Status", "Ordered Time", "Table number"
             }
         ) {
             boolean[] canEdit = new boolean [] {

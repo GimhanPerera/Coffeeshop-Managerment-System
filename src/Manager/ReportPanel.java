@@ -75,7 +75,7 @@ public class ReportPanel extends javax.swing.JPanel {
         add(combox_reportType, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 150, 230, 30));
 
         combox_timeFrame.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        combox_timeFrame.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Yearly", "Monthly", "Daily" }));
+        combox_timeFrame.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Annually", "Monthly", "Daily" }));
         combox_timeFrame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 combox_timeFrameActionPerformed(evt);
