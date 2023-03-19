@@ -99,7 +99,8 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         jTextArea_bill.append("========================\n");
         jTextArea_bill.append("Items\t   Qty\tPrice\n\n");
         jTextArea_bill.append(sb.toString());
-        jTextArea_bill.append("\n\nDiscount\t\t"+discount+"\n");
+        if(discount!=0)
+            jTextArea_bill.append("\n\nDiscount\t\t"+discount+"\n");
         jTextArea_bill.append("========================\nTotal\t\t"+(tot-discount)+"\n========================\n\n\tThank You");
     }
     /**
@@ -433,14 +434,14 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
     }//GEN-LAST:event_txt_emailMouseClicked
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
-        int result = JOptionPane.showConfirmDialog((Component) null, "Your order will cancel and you need to order again",
+        int result = JOptionPane.showConfirmDialog((Component) null, "Your discount will remove",
         "alert", JOptionPane.OK_CANCEL_OPTION);
         System.out.println(result);
         if(result==0){
-            MainPage obj =new MainPage(cid,o_type,tp);
+            MainPage obj =new MainPage(cid,"",o_type,tp,total,foodID,Qyt);
             obj.show();
             dispose();
-        }
+        }//String cid,String o_type,int tp,//int tot,String[] foodID,int[] Qyt,int lines
     }//GEN-LAST:event_btn_backActionPerformed
 
     private void btn_scanmanageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_scanmanageMouseClicked
@@ -468,7 +469,10 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                 }
                 setbill(this.sb1,this.total,this.discount);
                 lbl_discount.setVisible(true);
-                lbl_discount.setText("You got Rs "+this.discount+"/= discount");
+                if(this.discount!=0)
+                    lbl_discount.setText("You got Rs "+this.discount+"/= discount");
+                else
+                    lbl_discount.setText("Sorry, your loyalty points are not enough to get a discount");
             }else{//wrong card
                 lbl_waiting.setVisible(false);System.out.println("Carrect ID "+obj.getCardID(cid));
                 lbl_notOk.setVisible(true);

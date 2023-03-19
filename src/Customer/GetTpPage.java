@@ -18,6 +18,7 @@ public class GetTpPage extends javax.swing.JFrame {
      */
     public GetTpPage() {
         initComponents();
+        lbl_error.setVisible(false);
     }
 
     /**

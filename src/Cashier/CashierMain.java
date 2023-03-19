@@ -11,10 +11,9 @@ import java.util.logging.Logger;
  *
  * @author Gimhan
  */
-public class CashierDashboard extends javax.swing.JFrame {
-
+public class CashierMain extends javax.swing.JFrame {
     /** Creates new form CashierDashboard */
-    public CashierDashboard() {
+    public CashierMain() {
         initComponents();
         getData();
     }
@@ -24,7 +23,7 @@ public class CashierDashboard extends javax.swing.JFrame {
             lbl_income.setText(Integer.toString(obj1.todayIncome())+".00");
             
         } catch (Exception ex) {
-            Logger.getLogger(CashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CashierMain.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -50,7 +49,7 @@ public class CashierDashboard extends javax.swing.JFrame {
         btn_logout = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        dashboard2 = new Cashier.Dashboard();
+        dashboard2 = new Cashier.cashierDashboard();
         jPanel2 = new javax.swing.JPanel();
         issueLoyaltyCard1 = new Cashier.IssueLoyaltyCard();
         jPanel4 = new javax.swing.JPanel();
@@ -749,20 +748,21 @@ public class CashierDashboard extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CashierDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CashierMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CashierDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CashierMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CashierDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CashierMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CashierDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CashierMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CashierDashboard().setVisible(true);
+                new CashierMain().setVisible(true);
             }
         });
     }
@@ -777,7 +777,7 @@ public class CashierDashboard extends javax.swing.JFrame {
     private javax.swing.JButton btn_profile;
     private javax.swing.JButton btn_reports;
     private javax.swing.JButton btn_sd_details;
-    private Cashier.Dashboard dashboard2;
+    private Cashier.cashierDashboard dashboard2;
     private Cashier.IssueLoyaltyCard issueLoyaltyCard1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;

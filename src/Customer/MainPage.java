@@ -17,9 +17,11 @@ import javax.swing.table.DefaultTableModel;
 import raven.cell.TableActionCellEditor;
 import raven.cell.TableActionCellRender;
 import raven.cell.TableActionEvent;
+import Cashier.CashierMain;
 import DBconnection.Food;
 import DBconnection.LoyaltyCard;
 import DBconnection.Connect;
+import DBconnection.Order;
 /**
  *
  * @author Gimhan
@@ -31,7 +33,8 @@ public class MainPage extends javax.swing.JFrame {
     /**
      * Creates new form MainPage
      */
-    String cid="0";String o_type="Dinein";int points=0;int tp;
+    String cid="0";String o_type="Dinein";int points=0;int tp;int discount=0;
+    String orderID="";//orderID use only updating a order
     public MainPage() {
         initComponents();
         firstDataGet();       
@@ -52,6 +55,32 @@ public class MainPage extends javax.swing.JFrame {
             int points=obj1.getLoyaltyPoints(cid);
             this.points=points;
             lbl_loyaltyPoints.setText(Integer.toString(points));
+        } catch (Exception ex) {
+            //Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Database error: Cant get loyalty point");
+        }
+    }
+    public MainPage(String cid,String orderID,String o_type,int tp,int tot,String[] foodID,int[] Qyt) {
+        initComponents();
+        this.cid=cid;
+        this.o_type=o_type;
+        this.tp=tp;
+        this.tp=tp;
+        this.orderID=orderID;
+        LoyaltyCard obj1=new LoyaltyCard();
+        try {
+            int req = obj1.checkRequseted(cid);
+            if(req==1){
+                btn_request.setVisible(false);
+                lbl_request.setVisible(false);
+            }
+            int points=obj1.getLoyaltyPoints(cid);
+            this.points=points;
+            lbl_loyaltyPoints.setText(Integer.toString(points));
+            getFood(foodID,Qyt);
+            lbl_total.setText(Integer.toString(tot));
+            if("EM".equals(cid.substring(0,2)))//check this is a cashier
+                btn_next.setText("Update Order");
         } catch (Exception ex) {
             //Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Database error: Cant get loyalty point");
@@ -118,7 +147,7 @@ public class MainPage extends javax.swing.JFrame {
                     String tbData[]={foodName,qty,"0",price};
                     DefaultTableModel tblModel =(DefaultTableModel)jTable_menu2.getModel();
                     tblModel.addRow(tbData);
-                }
+                }               
         }
         catch(SQLException ex)//Is database has a problem, this catch stetment catch it
         {
@@ -127,7 +156,87 @@ public class MainPage extends javax.swing.JFrame {
         finally{
             c.close(); 
         }
-        
+    }
+    
+    public void getFood(String[] foodID,int[] Qyt) throws Exception{
+        Connect obj = new Connect();
+        Food obj2=new Food();
+        Connection c = obj.getConnection();  //getConnection();//Establish the connection
+        jTabbedPane1.setSelectedIndex(3);
+        try{ //int q=1;System.out.println(q++); <- tester
+            
+                Statement stmt = c.createStatement();//Prepare statement
+                ResultSet rs = stmt.executeQuery("select FOOD_NAME,QUANTITY_TYPE,UNIT_PRICE from FOOD WHERE CATEGORY='COFFEE'"); //SQL stetment
+                while(rs.next()){
+                    String foodName=rs.getString("FOOD_NAME");
+                    String qty=rs.getString("QUANTITY_TYPE");//get the value to variable "fname"
+                    String price=rs.getString("UNIT_PRICE");
+                    int x=0;
+                    for(int i=0;i<foodID.length;i++){
+                        if(foodName.equals(obj2.getFoodName(foodID[i])))
+                            x=Qyt[i];
+                    }
+                    String tbData[]={foodName,qty,Integer.toString(x),price};
+                    DefaultTableModel tblModel =(DefaultTableModel)jTable_menu0.getModel(); 
+                    tblModel.addRow(tbData);
+                }
+                rs = stmt.executeQuery("select FOOD_NAME,QUANTITY_TYPE,UNIT_PRICE from FOOD WHERE CATEGORY='COFFEE'"); //SQL stetment
+                while(rs.next()){
+                    String foodName=rs.getString("FOOD_NAME");
+                    String qty=rs.getString("QUANTITY_TYPE");//get the value to variable "fname"
+                    String price=rs.getString("UNIT_PRICE");
+                    int x=0;
+                    for(int i=0;i<foodID.length;i++){
+                        if(foodName.equals(obj2.getFoodName(foodID[i])))
+                            x=Qyt[i];
+                    }
+                    String tbData[]={foodName,qty,Integer.toString(x),price};
+                    DefaultTableModel tblModel =(DefaultTableModel)jTable_menu3.getModel();
+                    tblModel.addRow(tbData);
+                }
+            //2nd table
+                rs = stmt.executeQuery("select FOOD_NAME,QUANTITY_TYPE,UNIT_PRICE from FOOD WHERE CATEGORY='CAKE'"); //SQL stetment
+                while(rs.next()){
+                    String foodName=rs.getString("FOOD_NAME");
+                    String qty=rs.getString("QUANTITY_TYPE");//get the value to variable "fname"
+                    String price=rs.getString("UNIT_PRICE");
+                    int x=0;
+                    for(int i=0;i<foodID.length;i++){
+                        if(foodName.equals(obj2.getFoodName(foodID[i])))
+                            x=Qyt[i];
+                    }
+                    String tbData[]={foodName,qty,Integer.toString(x),price};
+                    DefaultTableModel tblModel =(DefaultTableModel)jTable_menu1.getModel(); 
+                    tblModel.addRow(tbData);
+                }
+            //3rd table
+                rs = stmt.executeQuery("select FOOD_NAME,QUANTITY_TYPE,UNIT_PRICE from FOOD WHERE CATEGORY='BUN'"); //SQL stetment
+                while(rs.next()){
+                    String foodName=rs.getString("FOOD_NAME");
+                    String qty=rs.getString("QUANTITY_TYPE");//get the value to variable "fname"
+                    String price=rs.getString("UNIT_PRICE");
+                    int x=0;
+                    for(int i=0;i<foodID.length;i++){
+                        if(foodName.equals(obj2.getFoodName(foodID[i])))
+                            x=Qyt[i];
+                    }
+                    String tbData[]={foodName,qty,Integer.toString(x),price};
+                    DefaultTableModel tblModel =(DefaultTableModel)jTable_menu2.getModel();
+                    tblModel.addRow(tbData);
+                }
+                billUpdate();
+                jTable_menu0.setRowSelectionInterval(0, 0);//set selection
+                jTable_menu1.setRowSelectionInterval(0, 0);//set selection
+                jTable_menu2.setRowSelectionInterval(0, 0);//set selection
+                jTable_menu3.setRowSelectionInterval(0, 0);//set selection
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            System.out.println(ex);
+        }
+        finally{
+            c.close(); 
+        }        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -467,9 +576,17 @@ public class MainPage extends javax.swing.JFrame {
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
         // TODO add your handling code here:
-        LandingPage obj =new LandingPage(cid,tp);
-        obj.show();
-        dispose();
+        if(!"0".equals(cid)&&"EM".equals(cid.substring(0,2))){//if this is a update of a order
+            //Because of can't close cashier table...
+            //CashierMain obj4=new CashierMain();//need to pass cashier id
+            //obj4.show();
+            dispose();
+        }
+        else{
+            LandingPage obj =new LandingPage(cid,tp);
+            obj.show();
+            dispose();
+        }
     }//GEN-LAST:event_btn_backActionPerformed
 
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
@@ -500,23 +617,53 @@ public class MainPage extends javax.swing.JFrame {
                 count++;
             }  
         }
-        //copy the bill
-        StringBuffer sb = new StringBuffer(jTextArea_bill.getText());
-        for(int q=0;q<lines;q++){//convert food names to food ids
-            Food obj1=new Food();
-            try {
-                foodid[q]=obj1.getFoodID(foodid[q]);
-            } catch (Exception ex) {
-                Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+        if(!"0".equals(cid)&&"EM".equals(cid.substring(0,2))){//if this is a update of a order
+            //convert food names to food ids
+            for(int q=0;q<lines;q++){
+                Food obj1=new Food();
+                try {
+                    foodid[q]=obj1.getFoodID(foodid[q]);
+                } catch (Exception ex) {
+                    Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+            for(int q=0;q<lines;q++)//to test
+            {
+                System.out.println(foodid[q]+" "+qty[q]);
+            }
+            //update the order
+            Order obj=new Order();
+                try {
+                    obj.updateOrder(orderID,foodid,qty,Integer.parseInt(lbl_total.getText()));
+                } catch (Exception ex) {
+                    Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(new JFrame(), "Can't update the order",
+               "Imformation", JOptionPane.ERROR_MESSAGE);
+                }
+            //Because of can't close cashier table...
+            //CashierMain obj4=new CashierMain();//need to pass cashier id
+            //obj4.show();
+            dispose();
         }
-        for(int q=0;q<lines;q++)//to test
-        {
-            System.out.println(foodid[q]+" "+qty[q]);
-        }
-        ConfirmOrderPage obj =new ConfirmOrderPage(sb,Integer.parseInt(lbl_total.getText()),foodid, qty,lines,cid,o_type,Integer.parseInt(lbl_loyaltyPoints.getText()),tp);
-        obj.show();
-        dispose();
+        else{//If this is a new order
+            //copy the bill
+            StringBuffer sb = new StringBuffer(jTextArea_bill.getText());
+            for(int q=0;q<lines;q++){//convert food names to food ids
+                Food obj1=new Food();
+                try {
+                    foodid[q]=obj1.getFoodID(foodid[q]);
+                } catch (Exception ex) {
+                    Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            for(int q=0;q<lines;q++)//to test
+            {
+                System.out.println(foodid[q]+" "+qty[q]);
+            }
+            ConfirmOrderPage obj2 =new ConfirmOrderPage(sb,Integer.parseInt(lbl_total.getText()),foodid, qty,lines,cid,o_type,Integer.parseInt(lbl_loyaltyPoints.getText()),tp);
+            obj2.show();
+            dispose();
+            } 
         }
         else{
             JOptionPane.showMessageDialog(new JFrame(), "Please select your foods",

@@ -123,6 +123,26 @@ public class Food extends Connect{
         return fid;  
     } 
     
+    public String getFoodName(String fid) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        String fname="";
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select FOOD_NAME from FOOD where FOOD_ID='"+fid+"'"); //SQL stetment
+            while(rs.next()){
+                fname=rs.getString("FOOD_NAME");//get the value to variable "fname"
+            } 
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return fname;  
+    }
+    
     public String newFID(String id) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         String FID="";

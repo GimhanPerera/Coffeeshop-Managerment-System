@@ -240,6 +240,7 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
 
     private void btn_issueCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_issueCardActionPerformed
         /*if("Issue Card".equals(btn_issueCard.getText())){*/
+        
             if(jTable.getRowCount()==0){//validation
             
             }

@@ -84,4 +84,59 @@ public class Order extends Connect{
         return 1;    
     }
     
+    public void cancelOrder(String OID) throws Exception{//NOT COMPLETE
+        //Need to check order table and order_food table
+        Connection c= getConnection();//get the connection using inheritance
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+                String sql="DELETE FROM ORDER_FOOD WHERE ORDER_NUMBER='"+OID+"';";
+                stmt.executeUpdate(sql);
+                sql="DELETE FROM INVOICE WHERE ORDERID='"+OID+"';";
+                stmt.executeUpdate(sql);
+                sql="DELETE FROM ORDER_T WHERE ORDER_NUMBER='"+OID+"';";
+                stmt.executeUpdate(sql);
+        }
+        finally{
+            c.close(); 
+        }
+    }
+    
+    public void completeOdr(String OID) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            String sql="update ORDER_T set STATUS='Completed' where ORDER_NUMBER='"+OID+"'"; //SQL stetment
+            stmt.executeUpdate(sql);
+            sql="update INVOICE set STATUS='Paid' where ORDERID='"+OID+"'"; //SQL stetment
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+    }
+    
+    public void updateOrder(String OID,String fid[],int qty[],int total) throws Exception{//NOT COMPLETE
+        //Need to check order table and order_food table
+        Connection c= getConnection();//get the connection using inheritance
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+                String sql="DELETE FROM ORDER_FOOD WHERE ORDER_NUMBER='"+OID+"';";
+                stmt.executeUpdate(sql);
+                sql="update INVOICE set AMOUNT='"+total+"' where ORDERID='"+OID+"'";
+                stmt.executeUpdate(sql);
+                for(int i=0;i<fid.length;i++){
+                    sql="INSERT INTO ORDER_FOOD(ORDER_NUMBER,FOOD_ID,QUANTITY) VALUES('"+OID+"','"+fid[i]+"','"+qty[i]+"')";
+                    stmt.executeUpdate(sql);
+                }
+                
+        }
+        finally{
+            c.close(); 
+        }
+    }
+    
 }

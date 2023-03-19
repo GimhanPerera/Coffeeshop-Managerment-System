@@ -22,7 +22,7 @@ public class mgrDashboard  extends Connect{
         String date=obj.dateOnly();
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("select CUSTOMER_ID from ORDER_T where ORDER_DATETIME BETWEEN '"+date+" 00:00' AND '"+date+" 23:59'"); //SQL stetment
+            ResultSet rs = stmt.executeQuery("select CUSTOMER_ID from ORDER_T where ORDER_DATETIME BETWEEN '"+date+" 00:00' AND '"+date+" 23:59' AND STATUS='Completed'"); //SQL stetment
             while(rs.next()){
                 count++;
             }                
@@ -105,7 +105,7 @@ public class mgrDashboard  extends Connect{
         String food="";
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("SELECT FOOD_NAME FROM FOOD WHERE FOOD_ID = (SELECT FOOD_ID AS SUM FROM ORDER_FOOD WHERE FOOD_ID LIKE 'CF%' AND ORDER_NUMBER IN (SELECT ORDER_NUMBER FROM ORDER_T WHERE DATE(ORDER_DATETIME)>DATE(NOW() - INTERVAL 14 DAY)) GROUP BY FOOD_ID order by SUM DESC LIMIT 1);"); //SQL stetment
+            ResultSet rs = stmt.executeQuery("SELECT FOOD_NAME FROM FOOD WHERE FOOD_ID = (SELECT FOOD_ID AS SUM FROM ORDER_FOOD WHERE FOOD_ID LIKE 'CF%' AND ORDER_NUMBER IN (SELECT ORDER_NUMBER FROM ORDER_T WHERE DATE(ORDER_DATETIME)>DATE(NOW() - INTERVAL 30 DAY)) GROUP BY FOOD_ID order by SUM DESC LIMIT 1);"); //SQL stetment
             while(rs.next()){
             food=rs.getString("FOOD_NAME");    
             }
@@ -125,7 +125,7 @@ public class mgrDashboard  extends Connect{
         String food="";
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("SELECT FOOD_NAME FROM FOOD WHERE FOOD_ID = (SELECT FOOD_ID AS SUM FROM ORDER_FOOD WHERE FOOD_ID NOT LIKE 'CF%' AND ORDER_NUMBER IN (SELECT ORDER_NUMBER FROM ORDER_T WHERE DATE(ORDER_DATETIME)>DATE(NOW() - INTERVAL 14 DAY)) GROUP BY FOOD_ID order by SUM DESC LIMIT 1);"); //SQL stetment
+            ResultSet rs = stmt.executeQuery("SELECT FOOD_NAME FROM FOOD WHERE FOOD_ID = (SELECT FOOD_ID AS SUM FROM ORDER_FOOD WHERE FOOD_ID NOT LIKE 'CF%' AND ORDER_NUMBER IN (SELECT ORDER_NUMBER FROM ORDER_T WHERE DATE(ORDER_DATETIME)>DATE(NOW() - INTERVAL 30 DAY)) GROUP BY FOOD_ID order by SUM DESC LIMIT 1);"); //SQL stetment
             while(rs.next()){
             food=rs.getString("FOOD_NAME");    
             }              

@@ -34,4 +34,184 @@ public class cashier extends Connect{
         }
         return status;  
     }
+    
+    public int getPendingOrderCount()throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        int count=0;
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select COUNT(ORDER_NUMBER) as count from ORDER_T where STATUS='Pending'"); //SQL stetment
+            while(rs.next()){
+                count=rs.getInt("count");//get the value to variable "fname"
+            } 
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return count;  
+    }
+    
+    public int competedOdrCount() throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        int total=0;
+        getDate obj =new getDate();
+        String date=obj.dateOnly();
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select ORDER_NUMBER from ORDER_T where ORDER_DATETIME > '"+date+" 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59' AND STATUS='Completed'"); //SQL stetment
+            while(rs.next()){
+                total=rs.getInt("tot");
+            }                
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return total;//Return First name    
+    }
+    
+    public void setHoldUnhold(String oid,String status) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            String sql="update ORDER_T set STATUS='"+status+"' where ORDER_NUMBER='"+oid+"'"; //SQL stetment
+            stmt.executeUpdate(sql);
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+    }
+    
+    public int getCustomerTp(String oid) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        int tp=0;
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("SELECT MOBILE_NUMBER FROM CUSTOMER WHERE CUSTOMER_ID IN (select CUSTOMER_ID from ORDER_T where ORDER_NUMBER='"+oid+"')"); //SQL stetment
+            while(rs.next()){
+                tp=rs.getInt("MOBILE_NUMBER");
+            } 
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return tp;  
+    }
+    public int getorderTotal(String oid) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        int tot=0;
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("SELECT AMOUNT FROM INVOICE WHERE ORDERID ='"+oid+"'"); //SQL stetment
+            while(rs.next()){
+                tot=rs.getInt("AMOUNT");
+            } 
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return tot;  
+    }
+    
+    public String[] getfooditemsOfOrder(String oid) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        int lines=0;
+        //String foodid[];
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(ORDER_NUMBER) as coun FROM ORDER_FOOD WHERE ORDER_NUMBER ='"+oid+"'"); //SQL stetment
+            while(rs.next()){
+                lines=rs.getInt("coun");
+            }
+            
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        c= getConnection();
+        String foodid[]=new String[lines];
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            int qty[]=new int[lines];
+            ResultSet rs = stmt.executeQuery("SELECT FOOD_ID FROM ORDER_FOOD WHERE ORDER_NUMBER ='"+oid+"'"); //SQL stetment
+            int y=0;
+            while(rs.next()){
+                foodid[y]=rs.getString("FOOD_ID");
+                y++;
+            }
+            
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return foodid;  
+    }
+    
+    public int[] getQtysOfOrder(String oid) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        int lines=0;
+        //String foodid[];
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(ORDER_NUMBER) as coun FROM ORDER_FOOD WHERE ORDER_NUMBER ='"+oid+"'"); //SQL stetment
+            while(rs.next()){
+                lines=rs.getInt("coun");
+            }
+            
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        c= getConnection();
+        int qty[]=new int[lines];
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement            
+            ResultSet rs = stmt.executeQuery("SELECT QUANTITY FROM ORDER_FOOD WHERE ORDER_NUMBER ='"+oid+"'"); //SQL stetment
+            int y=0;
+            while(rs.next()){
+                qty[y]=rs.getInt("QUANTITY");
+                y++;
+            }
+            
+        }
+        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            c.close(); 
+        }
+        return qty;  
+    }
 }
