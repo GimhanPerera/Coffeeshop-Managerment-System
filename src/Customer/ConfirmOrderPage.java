@@ -27,8 +27,9 @@ public class ConfirmOrderPage extends javax.swing.JFrame{
 String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuffer sb1;int total=0;int discount=0;
     int lines=0;int tp;
 
-    public ConfirmOrderPage(StringBuffer sb, int tot,String[] foodID,int[] Qyt,int lines,String cid,String o_type,int points,int tp) {
+    public ConfirmOrderPage(StringBuffer sb, int tot,String[] foodID,int[] Qyt,int lines,String cid,String o_type,int points,int tp,int discount) {
         initComponents();
+        jPanel_payment.setVisible(false);
         lbl_discount.setVisible(false);
         jPanel_loyaltycard.setVisible(false);
         lbl_ok.setVisible(false);
@@ -41,6 +42,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         this.foodID=new String[lines];
         this.Qyt=new int[lines];
         this.tp=tp;
+        this.discount=discount;
         for(int i=0;i<foodID.length;i++){
             this.foodID[i]=foodID[i];
         }
@@ -65,11 +67,12 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         lbl_emailerror.setVisible(false);
         lbl_fnameerror.setVisible(false);
         lbl_lnameerror.setVisible(false);
-        setbill(sb,tot);
+        setbill(sb,tot,discount);
     }
     
     public ConfirmOrderPage() {
         initComponents();
+        jPanel_payment.setVisible(false);
         lbl_discount.setVisible(false);
         lbl_ok.setVisible(false);
         lbl_notOk.setVisible(false);
@@ -144,6 +147,10 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         lbl_waiting = new javax.swing.JLabel();
         lbl_notOk = new javax.swing.JLabel();
         lbl_discount = new javax.swing.JLabel();
+        jPanel_payment = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        btn_back1 = new javax.swing.JLabel();
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -322,6 +329,32 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         jPanel_loyaltycard.add(lbl_discount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 730, -1));
 
         getContentPane().add(jPanel_loyaltycard, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 750, 570));
+
+        jPanel_payment.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel2.setOpaque(false);
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel2MouseClicked(evt);
+            }
+        });
+        jPanel_payment.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 530, 450, 60));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/payment final 2.png"))); // NOI18N
+        jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel_payment.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 90, 480, 520));
+
+        btn_back1.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
+        btn_back1.setText("Back");
+        btn_back1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_back1MouseClicked(evt);
+            }
+        });
+        jPanel_payment.add(btn_back1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 630, -1, -1));
+
+        getContentPane().add(jPanel_payment, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 730));
         getContentPane().add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 730));
 
         pack();
@@ -366,7 +399,12 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         }
         else{
             if("Pay".equals(btn_next.getText())){
-                
+                jPanel_payment.setVisible(true);
+                jPanel_customerInfo.setVisible(false);
+                jPanel1.setVisible(false);
+                jPanel_loyaltycard.setVisible(false);
+                btn_back.setVisible(false);
+                btn_next.setVisible(false);
             }
             else
             {
@@ -396,6 +434,9 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                 dispose();
             } catch (Exception ex) {
                 Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showConfirmDialog((Component) null, "Database error",
+        "alert", JOptionPane.PLAIN_MESSAGE);
+                jPanel_loyaltycard.setVisible(false);
             }
         }
         }
@@ -532,6 +573,49 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         }
     }//GEN-LAST:event_rdo_CardActionPerformed
 
+    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
+        try {
+                String paymetn_method="";
+                if(rdo_Card.isSelected())
+                    paymetn_method="Card";
+                else if(rdo_cash.isSelected())
+                    paymetn_method="Cash";
+                System.out.println("Validated");
+                Customer obj1=new Customer();
+                if(discount==0)
+                    points=(int) (points+total*0.01);//WORNING: we got total as int. not double
+                cid=obj1.saveCustomerDetails(cid, txt_fname.getText(), txt_lname.getText(),txt_email.getText(), txt_tp.getText(), points);
+                System.out.println("Customer details saved");
+                Order obj2 = new Order();
+                obj2.placeOrder(o_type, cid, foodID, Qyt, paymetn_method, total, discount, "Pending");
+                //foodID,qty,paymentstatus
+                System.out.println("Done");
+                try {
+                    jTextArea_bill.print();
+                } catch (PrinterException ex) {
+                    Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ThankyouPage obj =new ThankyouPage();
+                obj.show();
+                dispose();
+            } catch (Exception ex) {
+                Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showConfirmDialog((Component) null, "Database error",
+        "alert", JOptionPane.PLAIN_MESSAGE);
+                jPanel_loyaltycard.setVisible(false);
+            }
+        
+    }//GEN-LAST:event_jPanel2MouseClicked
+
+    private void btn_back1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_back1MouseClicked
+        jPanel_payment.setVisible(false);
+        jPanel_customerInfo.setVisible(true);
+        jPanel1.setVisible(true);
+        jPanel_loyaltycard.setVisible(true);
+        btn_back.setVisible(true);
+        btn_next.setVisible(true);
+    }//GEN-LAST:event_btn_back1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -569,6 +653,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_back;
+    private javax.swing.JLabel btn_back1;
     private javax.swing.JButton btn_next;
     private javax.swing.JLabel btn_scan;
     private javax.swing.JButton btn_scanmanage;
@@ -580,9 +665,12 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel_customerInfo;
     private javax.swing.JPanel jPanel_loyaltycard;
+    private javax.swing.JPanel jPanel_payment;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextArea jTextArea_bill;
     private javax.swing.JLabel lbl_background;

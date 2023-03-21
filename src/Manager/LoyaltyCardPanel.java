@@ -333,7 +333,8 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
             lbl_Error.setVisible(false);
             
             getAllCards();
-            jTable.setRowSelectionInterval(0, 0);
+            if(jTable.getRowCount()!=0)
+                jTable.setRowSelectionInterval(0, 0);
         } catch (Exception ex) {
             Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
         }

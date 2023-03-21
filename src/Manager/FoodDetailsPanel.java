@@ -419,9 +419,12 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
 
     private void btn_searchByTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchByTypeActionPerformed
         try {
-            clearTable();
-            getFoodFromCatogorywise(jComboBox_foodtype.getSelectedIndex());
-            jTable_food.setRowSelectionInterval(0, 0);
+            if(jComboBox_foodtype.getSelectedIndex()!=0){
+                clearTable();
+                getFoodFromCatogorywise(jComboBox_foodtype.getSelectedIndex());
+                if(jTable_food.getRowCount()!=0)
+                    jTable_food.setRowSelectionInterval(0, 0);
+            }          
         } catch (Exception ex) {
             Logger.getLogger(FoodDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }

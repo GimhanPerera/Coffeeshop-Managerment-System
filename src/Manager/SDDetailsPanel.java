@@ -4,9 +4,23 @@
  */
 package Manager;
 
+import DBconnection.Connect;
+import DBconnection.Customer;
+import DBconnection.Emp;
+import DBconnection.LoyaltyCard;
+import DBconnection.cashier;
+import DBconnection.getDate;
+import java.awt.Component;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -20,6 +34,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
     public SDDetailsPanel() {
         initComponents();
         lbl_Error.setVisible(false);
+        viewALL();
     }
 
     /**
@@ -37,16 +52,16 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         rdo_stuff = new javax.swing.JRadioButton();
         rdo_customer = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
+        btn_clear = new javax.swing.JButton();
+        btn_remove = new javax.swing.JButton();
+        btn_add = new javax.swing.JButton();
         txt_search = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        btn_search = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         lbl_searchtitle = new javax.swing.JLabel();
         lbl_Error = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -81,44 +96,29 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         });
         add(rdo_customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, -1, -1));
 
-        jButton1.setText("Clear");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_clear.setText("Clear");
+        btn_clear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_clearActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 350, 100, 40));
+        add(btn_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 350, 100, 40));
 
-        jButton2.setText("Remove");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_remove.setText("Remove");
+        btn_remove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_removeActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 620, 110, 40));
+        add(btn_remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 620, 110, 40));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 910, 420));
-
-        jButton3.setText("Add");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btn_add.setText("Add");
+        btn_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btn_addActionPerformed(evt);
             }
         });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 569, 110, 40));
+        add(btn_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 569, 110, 40));
 
         txt_search.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txt_search.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -128,13 +128,13 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         });
         add(txt_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 220, 40));
 
-        jButton4.setText("Search");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btn_search.setText("Search");
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btn_searchActionPerformed(evt);
             }
         });
-        add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 200, 110, 40));
+        add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 200, 110, 40));
 
         jButton5.setText("View All");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -150,13 +150,151 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         lbl_Error.setForeground(new java.awt.Color(255, 0, 0));
         lbl_Error.setText("Error msg");
         add(lbl_Error, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, 330, -1));
+
+        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setRowHeight(29);
+        jScrollPane1.setViewportView(jTable1);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 960, 420));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        lbl_Error.setVisible(false);
-        AddStuffMember obj=new AddStuffMember();
-        obj.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void viewALL(){
+        try{
+            clearTable();
+            Connect obj = new Connect();
+            Connection c = obj.getConnection();//Establish the connection
+            cashier obj2=new cashier();
+             //int q=1;System.out.println(q++); <- tester
+                getDate obj1 =new getDate();
+                String date=obj1.dateOnly();
+                Statement stmt = c.createStatement();//Prepare statement
+                ResultSet rs;
+                //customer data
+                if(rdo_customer.isSelected()){
+                    //Change table header
+                    JTableHeader th = jTable1.getTableHeader();
+                    TableColumnModel tcm = th.getColumnModel();
+                    TableColumn tc = tcm.getColumn(0);
+                    tc.setHeaderValue( "Customer ID" );
+                    th.repaint();
+                    tc = tcm.getColumn(1);
+                    tc.setHeaderValue( "Customer Name" );
+                    th.repaint();
+                    tc = tcm.getColumn(2);
+                    tc.setHeaderValue( "Mobile number" );
+                    th.repaint();
+                    tc = tcm.getColumn(3);
+                    tc.setHeaderValue( "Loyalty points");
+                    th.repaint();
+                    tc = tcm.getColumn(4);
+                    tc.setHeaderValue( "Loyalty card" );
+                    th.repaint();
+                    //tc = tcm.getColumn(5);
+                    //tc.setHeaderValue( "Email" );
+                    //th.repaint();
+                    //
+                    rs = stmt.executeQuery("select * FROM CUSTOMER");
+                    while(rs.next()){
+                        String cID=rs.getString("CUSTOMER_ID");
+                        String fname=rs.getString("F_NAME");
+                        String lname=rs.getString("L_NAME");
+                        String tp=rs.getString("MOBILE_NUMBER");
+                        String email=rs.getString("Email");
+                        String points=rs.getString("POINTS");
+                        String request="No";
+                        if(rs.getInt("REQUEST")==1)
+                            request="Requested";
+                        else if(rs.getInt("REQUEST")==2)
+                            request="Have";
+                        String tbData[]={cID,fname+" "+lname,tp,points,request,email};
+                        DefaultTableModel tblModel =(DefaultTableModel)jTable1.getModel(); 
+                        tblModel.addRow(tbData);
+                    }
+                    btn_add.setEnabled(false); 
+                }
+                else{
+                    //Change table header
+                    JTableHeader th = jTable1.getTableHeader();
+                    TableColumnModel tcm = th.getColumnModel();
+                    TableColumn tc = tcm.getColumn(0);
+                    tc.setHeaderValue( "Employee ID" );
+                    th.repaint();
+                    tc = tcm.getColumn(1);
+                    tc.setHeaderValue( "Employee Name" );
+                    th.repaint();
+                    tc = tcm.getColumn(2);
+                    tc.setHeaderValue( "Employee type" );
+                    th.repaint();
+                    tc = tcm.getColumn(3);
+                    tc.setHeaderValue( "Mobile number");
+                    th.repaint();
+                    tc = tcm.getColumn(4);
+                    tc.setHeaderValue( "NIC" );
+                    th.repaint();
+                    //tc = tcm.getColumn(5);
+                    //tc.setHeaderValue( "Email" );
+                    //th.repaint();
+                    //
+                    rs = stmt.executeQuery("select * FROM EMPLOYEE WHERE EMP_ID != 'EM001'");
+                    while(rs.next()){
+                        String cID=rs.getString("EMP_ID");
+                        String name=rs.getString("F_NAME")+" "+rs.getString("L_NAME");
+                        String tp=rs.getString("MOBILE_NUMBER");
+                        String email=rs.getString("Email");
+                        String nic=rs.getString("NIC");
+                        String emptype=rs.getString("EMP_TYPE");
+                    
+                        String tbData[]={cID,name,emptype,tp,nic,email};
+                        DefaultTableModel tblModel =(DefaultTableModel)jTable1.getModel(); 
+                        tblModel.addRow(tbData);
+                    }
+                    btn_add.setEnabled(true);                    
+                }
+                if(jTable1.getRowCount()!=0)//check row count
+                {
+                    jTable1.setRowSelectionInterval(0, 0);
+                    btn_remove.setEnabled(true);
+                }
+                else{
+                    btn_remove.setEnabled(false);
+                }
+        }
+        catch(Exception ex)//Is database has a problem, this catch stetment catch it
+        {
+            Logger.getLogger(FoodDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+        if(false){//validation
+            
+        }
+        else{
+            clearTable();
+            lbl_Error.setVisible(false);
+            AddStuffMember obj=new AddStuffMember();
+            obj.setVisible(true);
+        }
+    }//GEN-LAST:event_btn_addActionPerformed
 
     private void rdo_stuffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_stuffActionPerformed
         lbl_searchtitle.setText("Search by ctuff ID");
@@ -164,35 +302,160 @@ public class SDDetailsPanel extends javax.swing.JPanel {
 
     private void rdo_customerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_customerActionPerformed
         lbl_searchtitle.setText("Search by Customer Telephone Number");
+        
     }//GEN-LAST:event_rdo_customerActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        try {
-            lbl_Error.setVisible(false);
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+        lbl_Error.setVisible(false);
+        if(false){//validation need to handle
+            
+        }
+        else{
+            try{
             clearTable();
-            //getFoodFromSearch(jComboBox_searchby.getSelectedIndex(),txt_search.getText());
-            //jTable_food.setRowSelectionInterval(0, 0);
-        } catch (Exception ex) {
+            Connect obj = new Connect();
+            Connection c = obj.getConnection();//Establish the connection
+            cashier obj2=new cashier();
+             //int q=1;System.out.println(q++); <- tester
+                getDate obj1 =new getDate();
+                String date=obj1.dateOnly();
+                Statement stmt = c.createStatement();//Prepare statement
+                ResultSet rs;
+                //customer data
+                if(rdo_customer.isSelected()){
+                    //Change table header
+                    JTableHeader th = jTable1.getTableHeader();
+                    TableColumnModel tcm = th.getColumnModel();
+                    TableColumn tc = tcm.getColumn(0);
+                    tc.setHeaderValue( "Customer ID" );
+                    th.repaint();
+                    tc = tcm.getColumn(1);
+                    tc.setHeaderValue( "Customer Name" );
+                    th.repaint();
+                    tc = tcm.getColumn(2);
+                    tc.setHeaderValue( "Mobile number" );
+                    th.repaint();
+                    tc = tcm.getColumn(3);
+                    tc.setHeaderValue( "Loyalty points");
+                    th.repaint();
+                    tc = tcm.getColumn(4);
+                    tc.setHeaderValue( "Loyalty card" );
+                    th.repaint();
+                    //tc = tcm.getColumn(5);
+                    //tc.setHeaderValue( "Email" );
+                    //th.repaint();
+                    //
+                    rs = stmt.executeQuery("select * FROM CUSTOMER WHERE MOBILE_NUMBER='"+txt_search.getText()+"'");
+                    while(rs.next()){
+                        String cID=rs.getString("CUSTOMER_ID");
+                        String fname=rs.getString("F_NAME");
+                        String lname=rs.getString("L_NAME");
+                        String tp=rs.getString("MOBILE_NUMBER");
+                        String email=rs.getString("Email");
+                        String points=rs.getString("POINTS");
+                        String request="No";
+                        if(rs.getInt("REQUEST")==1)
+                            request="Requested";
+                        else if(rs.getInt("REQUEST")==2)
+                            request="Have";
+                        String tbData[]={cID,fname+" "+lname,tp,points,request,email};
+                        DefaultTableModel tblModel =(DefaultTableModel)jTable1.getModel(); 
+                        tblModel.addRow(tbData);
+                    }
+                    btn_add.setEnabled(false); 
+                }
+                else{
+                    //Change table header
+                    JTableHeader th = jTable1.getTableHeader();
+                    TableColumnModel tcm = th.getColumnModel();
+                    TableColumn tc = tcm.getColumn(0);
+                    tc.setHeaderValue( "Employee ID" );
+                    th.repaint();
+                    tc = tcm.getColumn(1);
+                    tc.setHeaderValue( "Employee Name" );
+                    th.repaint();
+                    tc = tcm.getColumn(2);
+                    tc.setHeaderValue( "Employee type" );
+                    th.repaint();
+                    tc = tcm.getColumn(3);
+                    tc.setHeaderValue( "Mobile number");
+                    th.repaint();
+                    tc = tcm.getColumn(4);
+                    tc.setHeaderValue( "NIC" );
+                    th.repaint();
+                    //tc = tcm.getColumn(5);
+                    //tc.setHeaderValue( "Email" );
+                    //th.repaint();
+                    //
+                    rs = stmt.executeQuery("select * FROM EMPLOYEE WHERE EMP_ID != 'EM001' AND EMP_ID='"+txt_search.getText()+"'");
+                    while(rs.next()){
+                        String cID=rs.getString("EMP_ID");
+                        String name=rs.getString("F_NAME")+" "+rs.getString("L_NAME");
+                        String tp=rs.getString("MOBILE_NUMBER");
+                        String email=rs.getString("Email");
+                        String nic=rs.getString("NIC");
+                        String emptype=rs.getString("EMP_TYPE");
+                    
+                        String tbData[]={cID,name,emptype,tp,nic,email};
+                        DefaultTableModel tblModel =(DefaultTableModel)jTable1.getModel(); 
+                        tblModel.addRow(tbData);
+                    }
+                    btn_add.setEnabled(true);
+                }  
+            if(jTable1.getRowCount()!=0)//check row count
+            {
+                jTable1.setRowSelectionInterval(0, 0);
+                btn_remove.setEnabled(true);               
+            }
+            else{
+                btn_remove.setEnabled(false);
+            }
+        }
+        catch(Exception ex)//Is database has a problem, this catch stetment catch it
+        {
             Logger.getLogger(FoodDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
             lbl_Error.setVisible(true);
             lbl_Error.setText("No result. Please check entered value");
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+        }
+    }//GEN-LAST:event_btn_searchActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         lbl_Error.setVisible(false);
-        clearTable();
-        //need to code
+        viewALL();
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         lbl_Error.setVisible(false);
         clearTable();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        btn_remove.setEnabled(false);
+    }//GEN-LAST:event_btn_clearActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removeActionPerformed
         lbl_Error.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        int result = JOptionPane.showConfirmDialog((Component) null, "Your order will cancel and you need to order again",
+        "alert", JOptionPane.YES_NO_OPTION);
+        System.out.println(result);
+        if(result==0){
+            try {
+                int row=jTable1.getSelectedRow();
+                String a=(String) jTable1.getValueAt(row, 0);
+                if(rdo_customer.isSelected()){
+                    Customer obj=new Customer();
+                    //NEED TO CODE
+                    //int check=obj.removeCastomer(a);
+                }
+                else{
+                    Emp obj=new Emp();
+                    //NEED TO CODE
+                    //int check=obj.removeEmp(a);
+                }
+                viewALL();
+            } catch (Exception ex) {
+                Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btn_removeActionPerformed
 
     private void txt_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_searchMouseClicked
         txt_search.setText("");
@@ -208,11 +471,11 @@ public class SDDetailsPanel extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_add;
+    private javax.swing.JButton btn_clear;
+    private javax.swing.JButton btn_remove;
+    private javax.swing.JButton btn_search;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

@@ -4,6 +4,7 @@
  */
 
 package Cashier;
+import Customer.LoginPage;
 import DBconnection.mgrDashboard;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -701,7 +702,8 @@ public class CashierMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_logoutMousePressed
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
-        // TODO add your handling code here:
+        LoginPage obj=new LoginPage();
+        obj.show();
         dispose();
     }//GEN-LAST:event_btn_logoutActionPerformed
 

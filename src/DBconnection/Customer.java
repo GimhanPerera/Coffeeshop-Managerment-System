@@ -29,10 +29,6 @@ public class Customer extends Connect{
                 cid="0";
             }                
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -48,10 +44,6 @@ public class Customer extends Connect{
             while(rs.next()){
                 fname=rs.getString("F_name");//get the value to variable "fname"
             } 
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -69,10 +61,6 @@ public class Customer extends Connect{
                 lname=rs.getString("L_name");//get the value to variable "fname"
             } 
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -87,10 +75,6 @@ public class Customer extends Connect{
             while(rs.next()){
                 email=rs.getString("EMAIL");//get the value to variable "fname"
             } 
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -107,10 +91,6 @@ public class Customer extends Connect{
             while(rs.next()){
                 tp=rs.getString("MOBILE_NUMBER");//get the value to variable "fname"
             } 
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -129,10 +109,6 @@ public class Customer extends Connect{
                 id=rs.getString("CARD_ID");//get the value to variable "fname"
             } 
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -147,10 +123,6 @@ public class Customer extends Connect{
             while(rs.next()){
                 points=rs.getInt("POINTS");//get the value to variable "fname"
             } 
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -169,18 +141,13 @@ public class Customer extends Connect{
             if("0".equals(cid)){
                 cid=newCID();
                 String sql="INSERT INTO CUSTOMER (CUSTOMER_ID, F_NAME, L_NAME, EMAIL, MOBILE_NUMBER,POINTS,REQUEST) " +
-                    "VALUES ('"+cid+"', '"+fname+"', '"+lname+"','NULL','"+email+"','"+tp+"','"+points+"','0')";
+                    "VALUES ('"+cid+"', '"+fname+"', '"+lname+"','"+email+"','"+tp+"','"+points+"','0')";
                 stmt.executeUpdate(sql);
             }else{
                 String sql="UPDATE CUSTOMER SET F_NAME='"+fname+"', L_NAME='"+lname+"', EMAIL='"+email+"', MOBILE_NUMBER='"+tp+"',POINTS='"+points+"'" +
                     "where CUSTOMER_ID='"+cid+"'";
                 stmt.executeUpdate(sql);
             }
-           
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -197,22 +164,12 @@ public class Customer extends Connect{
             while(rs.next()){
                 cID=rs.getString("CUSTOMER_ID");//get the value to variable "fname"
             }
-            //cID=cID.substring(2);
-            //String temp="OR";
-            //
             cID=cID.substring(2);
-            String id="CS";
-            String temp=Integer.toString((Integer.parseInt(cID))+1);
-            int n=temp.length();
-            System.out.println(temp.length());
-            for(int i=3;i>n;i--){
-                id=id+"0";
-            }
-            cID=id+Integer.toString((Integer.parseInt(cID))+1);
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+            String zeros="";
+            for(int i=(Integer.toString((Integer.parseInt(cID))+1)).length();i<5;i++){
+                zeros=zeros+"0";
+            }                    
+            cID="CS"+zeros+Integer.toString((Integer.parseInt(cID))+1);
         }
         finally{
             c.close(); 

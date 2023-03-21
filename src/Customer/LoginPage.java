@@ -7,6 +7,7 @@ package Customer;
 import java.awt.Color;
 import DBconnection.Customer;
 import DBconnection.Emp;
+import Cashier.CashierMain;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Manager.TestJFrame1;
@@ -199,10 +200,6 @@ public class LoginPage extends javax.swing.JFrame {
         
     }//GEN-LAST:event_lbl_errorMouseClicked
 
-    private void jLabel_stuffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_stuffMouseClicked
-        jTabbedPane1.setSelectedIndex(1);
-    }//GEN-LAST:event_jLabel_stuffMouseClicked
-
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
         if(txt_tp.getText().length()==0)
         {
@@ -240,11 +237,6 @@ public class LoginPage extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btn_nextActionPerformed
-
-    private void jLabel_customerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_customerMouseClicked
-        // TODO add your handling code here:
-        jTabbedPane1.setSelectedIndex(0);
-    }//GEN-LAST:event_jLabel_customerMouseClicked
 
     private void txt_tpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_tpActionPerformed
         // TODO add your handling code here:
@@ -285,8 +277,11 @@ public class LoginPage extends javax.swing.JFrame {
                         dispose();
                     }else if(ch.equals("CHEF")){
                         System.out.println("CHEF");
-                    }else{
-                        System.out.println(ch);
+                    }else{//cashier
+                        System.out.println(ch+" cashier");
+                        CashierMain obj3 = new CashierMain();
+                        obj3.show();
+                        dispose();
                     }
                 }
             } catch (Exception ex) {
@@ -308,6 +303,15 @@ public class LoginPage extends javax.swing.JFrame {
         obj.show();
         dispose();
     }//GEN-LAST:event_lbl_welcomepageMouseClicked
+
+    private void jLabel_stuffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_stuffMouseClicked
+        jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_jLabel_stuffMouseClicked
+
+    private void jLabel_customerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_customerMouseClicked
+        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(0);
+    }//GEN-LAST:event_jLabel_customerMouseClicked
 
     /**
      * @param args the command line arguments

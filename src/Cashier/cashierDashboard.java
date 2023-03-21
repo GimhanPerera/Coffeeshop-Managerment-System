@@ -310,7 +310,25 @@ public class cashierDashboard extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
+        int row=jTable_dBoard.getSelectedRow();
+        String a1=(String) jTable_dBoard.getValueAt(row, 0);
         refresh();
+        if(jTable_dBoard.isEnabled()==false)
+        {           
+            DefaultTableModel tblModel =(DefaultTableModel)jTable_dBoard.getModel(); 
+            int rowCount = tblModel.getRowCount();
+            //check rows
+            String a2="";
+            for (int i = 0; i < rowCount; i++) {
+                a2=(String) jTable_dBoard.getValueAt(i, 0);
+                if(a1.equals(a2)){
+                    jTable_dBoard.setRowSelectionInterval(i, i);
+                    break;
+                }
+            }
+            cancelVieewCompleteBtn();
+            jTable_dBoard.setEnabled(true);
+        }
     }//GEN-LAST:event_btn_refreshActionPerformed
 
     private void btn_holdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_holdActionPerformed
@@ -327,7 +345,7 @@ public class cashierDashboard extends javax.swing.JPanel {
             getData();
             DefaultTableModel tblModel =(DefaultTableModel)jTable_dBoard.getModel(); 
             int rowCount = tblModel.getRowCount();
-        //Remove rows one by one from the end of the table
+            //check rows
             for (int i = 0; i < rowCount; i++) {
                 a2=(String) jTable_dBoard.getValueAt(i, 0);
                 if(a1.equals(a2)){
@@ -342,7 +360,8 @@ public class cashierDashboard extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_holdActionPerformed
 
     private void jTable_dBoardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_dBoardMouseClicked
-        if(jTable_dBoard.getRowCount()!=0){
+        if(jTable_dBoard.isEnabled()==true){
+            if(jTable_dBoard.getRowCount()!=0){
             btn_hold.setEnabled(false);
             int row=jTable_dBoard.getSelectedRow();
             String a=(String) jTable_dBoard.getValueAt(row, 3);
@@ -359,6 +378,9 @@ public class cashierDashboard extends javax.swing.JPanel {
             btn_hold.setEnabled(false);
         }
         cancelVieewCompleteBtn();
+        }
+        
+        
     }//GEN-LAST:event_jTable_dBoardMouseClicked
 
     private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed
@@ -406,8 +428,8 @@ public class cashierDashboard extends javax.swing.JPanel {
 
     private void btn_viewtheOdrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_viewtheOdrActionPerformed
         try {
-            //All btns and jScrollPane1 set unenabled
-            jScrollPane1.setEnabled(false);
+            //All btns and jSTable set unenabled
+            jTable_dBoard.setEnabled(false);
             btn_viewtheOdr.setEnabled(false);
             btn_cancel.setEnabled(false);
             btn_completeOdr.setEnabled(false);

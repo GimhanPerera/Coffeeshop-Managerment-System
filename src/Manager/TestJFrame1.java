@@ -4,6 +4,8 @@
  */
 package Manager;
 
+import Customer.LoginPage;
+
 /**
  *
  * @author Gimhan
@@ -499,6 +501,7 @@ public class TestJFrame1 extends javax.swing.JFrame {
         btn_loyaltyCards.setBackground(new java.awt.Color(173,85,2));
         btn_profile.setBackground(new java.awt.Color(173,85,2));
         btn_logout.setBackground(new java.awt.Color(252, 152, 3));
+        
     }//GEN-LAST:event_btn_logoutMouseClicked
 
     private void btn_logoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseEntered
@@ -514,7 +517,8 @@ public class TestJFrame1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_logoutMousePressed
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
-        // TODO add your handling code here:
+        LoginPage obj=new LoginPage();
+        obj.show();
         dispose();
     }//GEN-LAST:event_btn_logoutActionPerformed
 

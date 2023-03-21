@@ -144,8 +144,7 @@ public class LandingPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
-        // TODO add your handling code here:
-        LoginPage obj =new LoginPage();
+        GetTpPage obj =new GetTpPage();
         obj.show();
         dispose();
     }//GEN-LAST:event_btn_backActionPerformed

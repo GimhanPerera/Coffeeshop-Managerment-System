@@ -25,10 +25,6 @@ public class cashier extends Connect{
                 status=rs.getString("STATUS");//get the value to variable "fname"
             } 
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -40,14 +36,10 @@ public class cashier extends Connect{
         int count=0;
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("select COUNT(ORDER_NUMBER) as count from ORDER_T where STATUS='Pending'"); //SQL stetment
+            ResultSet rs = stmt.executeQuery("select COUNT(ORDER_NUMBER) as count from ORDER_T where STATUS='Pending' OR STATUS='Hold'"); //SQL stetment
             while(rs.next()){
                 count=rs.getInt("count");//get the value to variable "fname"
             } 
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -67,10 +59,6 @@ public class cashier extends Connect{
                 total=rs.getInt("tot");
             }                
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -83,10 +71,6 @@ public class cashier extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             String sql="update ORDER_T set STATUS='"+status+"' where ORDER_NUMBER='"+oid+"'"; //SQL stetment
             stmt.executeUpdate(sql);
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -103,10 +87,6 @@ public class cashier extends Connect{
                 tp=rs.getInt("MOBILE_NUMBER");
             } 
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -117,14 +97,11 @@ public class cashier extends Connect{
         int tot=0;
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("SELECT AMOUNT FROM INVOICE WHERE ORDERID ='"+oid+"'"); //SQL stetment
+            ResultSet rs = stmt.executeQuery("SELECT AMOUNT,DISCOUNT FROM INVOICE WHERE ORDERID ='"+oid+"'"); //SQL stetment
             while(rs.next()){
                 tot=rs.getInt("AMOUNT");
+                tot=tot-rs.getInt("DISCOUNT");
             } 
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -141,12 +118,7 @@ public class cashier extends Connect{
             ResultSet rs = stmt.executeQuery("SELECT COUNT(ORDER_NUMBER) as coun FROM ORDER_FOOD WHERE ORDER_NUMBER ='"+oid+"'"); //SQL stetment
             while(rs.next()){
                 lines=rs.getInt("coun");
-            }
-            
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+            }           
         }
         finally{
             c.close(); 
@@ -163,10 +135,6 @@ public class cashier extends Connect{
                 y++;
             }
             
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -186,10 +154,6 @@ public class cashier extends Connect{
             }
             
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -202,12 +166,7 @@ public class cashier extends Connect{
             while(rs.next()){
                 qty[y]=rs.getInt("QUANTITY");
                 y++;
-            }
-            
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+            }            
         }
         finally{
             c.close(); 

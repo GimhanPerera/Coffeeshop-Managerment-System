@@ -34,10 +34,6 @@ public class manager extends Connect{
                 nic=rs.getString("NIC");
             } 
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -73,10 +69,6 @@ public class manager extends Connect{
                 real_pwd=rs.getString("PWD");//get the value to variable "fname"
             } 
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -101,10 +93,6 @@ public class manager extends Connect{
                 this.tp=Integer.parseInt(tp);
                 this.nic=nic;
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -119,10 +107,6 @@ public class manager extends Connect{
                             "SET PWD = '"+newpwd+"' " +
                             " where EMP_TYPE='MANAGER'";
                 stmt.executeUpdate(sql);
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 

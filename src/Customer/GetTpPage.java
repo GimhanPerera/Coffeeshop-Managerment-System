@@ -4,9 +4,11 @@
  */
 package Customer;
 import DBconnection.Customer;
+import java.awt.Component;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Gimhan
@@ -85,6 +87,11 @@ public class GetTpPage extends javax.swing.JFrame {
         lbl_changetp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_changetp.setText("Change your mobile number");
         lbl_changetp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_changetp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_changetpMouseClicked(evt);
+            }
+        });
         jPanel_customer.add(lbl_changetp, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 460, -1, -1));
 
         lbl_welcomepage.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -105,7 +112,6 @@ public class GetTpPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_tpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_tpMouseClicked
-        // TODO add your handling code here:
         txt_tp.setText("");
         lbl_error.setVisible(false);
     }//GEN-LAST:event_txt_tpMouseClicked
@@ -163,6 +169,11 @@ public class GetTpPage extends javax.swing.JFrame {
         obj.show();
         dispose();
     }//GEN-LAST:event_lbl_welcomepageMouseClicked
+
+    private void lbl_changetpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_changetpMouseClicked
+        JOptionPane.showConfirmDialog((Component) null, "To change your passward, Please need the manager",
+        "alert", JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_lbl_changetpMouseClicked
 
     /**
      * @param args the command line arguments

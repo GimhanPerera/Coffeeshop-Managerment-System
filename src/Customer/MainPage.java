@@ -660,7 +660,7 @@ public class MainPage extends javax.swing.JFrame {
             {
                 System.out.println(foodid[q]+" "+qty[q]);
             }
-            ConfirmOrderPage obj2 =new ConfirmOrderPage(sb,Integer.parseInt(lbl_total.getText()),foodid, qty,lines,cid,o_type,Integer.parseInt(lbl_loyaltyPoints.getText()),tp);
+            ConfirmOrderPage obj2 =new ConfirmOrderPage(sb,Integer.parseInt(lbl_total.getText()),foodid, qty,lines,cid,o_type,Integer.parseInt(lbl_loyaltyPoints.getText()),tp,0);
             obj2.show();
             dispose();
             } 
@@ -779,7 +779,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox_categoryActionPerformed
 
     private void btn_requestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_requestActionPerformed
-        if(points>=1000){
+        if(points>=100){
             try {
                 LoyaltyCard obj=new LoyaltyCard();
                 obj.sendRequest(cid);
@@ -790,7 +790,7 @@ public class MainPage extends javax.swing.JFrame {
                 System.out.println("Request Failed");
             }
         }else{
-            JOptionPane.showMessageDialog(new JFrame(), "You need more than 1000 loyalty points to request loyalty card",
+            JOptionPane.showMessageDialog(new JFrame(), "You need more than 100 loyalty points to request loyalty card",
                "Imformation", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_requestActionPerformed

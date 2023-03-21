@@ -33,10 +33,6 @@ public class Order extends Connect{
             }
             lID="OR"+zeros+Integer.toString((Integer.parseInt(lID))+1);
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -74,10 +70,6 @@ public class Order extends Connect{
                stmt.executeUpdate(sql);
             System.out.println("Invoice table updated");
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -104,15 +96,12 @@ public class Order extends Connect{
     public void completeOdr(String OID) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         try{ 
+            getDate obj=new getDate();
             Statement stmt = c.createStatement();//Prepare statement
-            String sql="update ORDER_T set STATUS='Completed' where ORDER_NUMBER='"+OID+"'"; //SQL stetment
+            String sql="update ORDER_T set STATUS='Completed',END_TIME='"+obj.timeOnly()+"' where ORDER_NUMBER='"+OID+"'"; //SQL stetment
             stmt.executeUpdate(sql);
             sql="update INVOICE set STATUS='Paid' where ORDERID='"+OID+"'"; //SQL stetment
             stmt.executeUpdate(sql);
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -131,8 +120,7 @@ public class Order extends Connect{
                 for(int i=0;i<fid.length;i++){
                     sql="INSERT INTO ORDER_FOOD(ORDER_NUMBER,FOOD_ID,QUANTITY) VALUES('"+OID+"','"+fid[i]+"','"+qty[i]+"')";
                     stmt.executeUpdate(sql);
-                }
-                
+                }     
         }
         finally{
             c.close(); 

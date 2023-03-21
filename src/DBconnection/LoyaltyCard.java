@@ -26,10 +26,6 @@ public class LoyaltyCard extends Connect{
                 Points=rs.getInt("POINTS");//get the value to variable "fname"
             } 
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -42,10 +38,6 @@ public class LoyaltyCard extends Connect{
             String sql="update CUSTOMER set REQUEST='1' where sid='"+CID+"'"; //SQL stetment
             stmt.executeUpdate(sql);
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -56,10 +48,6 @@ public class LoyaltyCard extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             String sql="update LOYALTY_CARD set STATUS='"+status+"' where CARD_ID='"+CID+"'"; //SQL stetment
             stmt.executeUpdate(sql);
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -82,10 +70,6 @@ public class LoyaltyCard extends Connect{
             sql="update CUSTOMER set REQUEST='2' where CUSTOMER_ID='"+cusID+"';"; //SQL stetment
             stmt.executeUpdate(sql);
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -100,10 +84,6 @@ public class LoyaltyCard extends Connect{
             while(rs.next()){
                 req=rs.getInt("REQUEST");//get the value to variable "fname"
             } 
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -124,10 +104,6 @@ public class LoyaltyCard extends Connect{
                 }
             } 
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -147,10 +123,6 @@ public class LoyaltyCard extends Connect{
                 }
             } 
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -167,10 +139,6 @@ public class LoyaltyCard extends Connect{
             sql="INSERT INTO LOYALTY_CARD (CARD_ID, STATUS) " +
                     "VALUES ('"+cardid+"','FREE')";
             i=stmt.executeUpdate(sql);      
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -189,10 +157,6 @@ public class LoyaltyCard extends Connect{
             sql="delete from LOYALTY_CARD WHERE CARD_ID= '"+cardid+"';";
             i=stmt.executeUpdate(sql);
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -206,10 +170,6 @@ public class LoyaltyCard extends Connect{
             String sql;
             sql="UPDATE CUSTOMER SET request = '0' WHERE MOBILE_NUMBER='"+tp+"'";
             stmt.executeUpdate(sql);
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -225,10 +185,6 @@ public class LoyaltyCard extends Connect{
             while(rs.next()){
                 id=rs.getString("CARD_ID");//get the value to variable "fname"
             } 
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 

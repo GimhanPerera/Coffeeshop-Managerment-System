@@ -39,10 +39,6 @@ public class Food extends Connect{
                 qtyType=rs.getString("QUANTITY_TYPE");
             } 
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -77,10 +73,6 @@ public class Food extends Connect{
                             " where FOOD_ID='"+foodID+"'";
                 stmt.executeUpdate(sql);
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -93,10 +85,6 @@ public class Food extends Connect{
                 String sql="insert into FOOD VALUES " +
                             "('"+foodID+"','"+foodname+"','"+category+"','"+qtyType+"','"+price+"','"+dailyQty+"'); ";
                 stmt.executeUpdate(sql);
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -113,10 +101,6 @@ public class Food extends Connect{
                 fid=rs.getString("FOOD_ID");//get the value to variable "fname"
             } 
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -132,10 +116,6 @@ public class Food extends Connect{
             while(rs.next()){
                 fname=rs.getString("FOOD_NAME");//get the value to variable "fname"
             } 
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -160,10 +140,6 @@ public class Food extends Connect{
             }
             FID=id+Integer.toString((Integer.parseInt(FID))+1);
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -177,10 +153,6 @@ public class Food extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
                 String sql="DELETE FROM FOOD WHERE FOOD_ID='"+fID+"';";
                 stmt.executeUpdate(sql);
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 

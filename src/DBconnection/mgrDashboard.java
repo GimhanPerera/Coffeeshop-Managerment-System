@@ -27,10 +27,6 @@ public class mgrDashboard  extends Connect{
                 count++;
             }                
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -43,14 +39,10 @@ public class mgrDashboard  extends Connect{
         String date=obj.dateOnly();
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("select (sum(AMOUNT)-sum(DISCOUNT))as tot from INVOICE where ORDERID IN (select ORDER_NUMBER from ORDER_T where ORDER_DATETIME > '"+date+" 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59')"); //SQL stetment
+            ResultSet rs = stmt.executeQuery("select (sum(AMOUNT)-sum(DISCOUNT))as tot from INVOICE where ORDERID IN (select ORDER_NUMBER from ORDER_T Inner Join INVOICE ON INVOICE.ORDERID=ORDER_T.ORDER_NUMBER where (ORDER_DATETIME > '"+date+" 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND INVOICE.STATUS='Paid')"); //SQL stetment
             while(rs.next()){
                 total=rs.getInt("tot");
             }                
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -66,14 +58,10 @@ public class mgrDashboard  extends Connect{
         try{ 
             //System.out.println(obj.lastdayofmonth());System.out.println(yearMonth);
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("select (sum(AMOUNT)-sum(DISCOUNT)) as tot from INVOICE where ORDERID IN (select ORDER_NUMBER from ORDER_T where ORDER_DATETIME > '"+yearMonth+"-01 00:00:00' AND ORDER_DATETIME <'"+obj.lastdayofmonth().toString()+" 23:59:59')"); //SQL stetment
+            ResultSet rs = stmt.executeQuery("select (sum(AMOUNT)-sum(DISCOUNT)) as tot from INVOICE where ORDERID IN (select ORDER_NUMBER from ORDER_T where (ORDER_DATETIME > '"+yearMonth+"-01 00:00:00' AND ORDER_DATETIME <'"+obj.lastdayofmonth().toString()+" 23:59:59')AND INVOICE.STATUS='Paid')"); //SQL stetment
             while(rs.next()){
                 total=rs.getInt("tot");
             }                
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -89,10 +77,6 @@ public class mgrDashboard  extends Connect{
             while(rs.next()){
                 count=rs.getInt("Count");//get the value to variable "fname"
             } 
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
@@ -110,10 +94,6 @@ public class mgrDashboard  extends Connect{
             food=rs.getString("FOOD_NAME");    
             }
         }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
-        }
         finally{
             c.close(); 
         }
@@ -129,10 +109,6 @@ public class mgrDashboard  extends Connect{
             while(rs.next()){
             food=rs.getString("FOOD_NAME");    
             }              
-        }
-        catch(SQLException ex)//Is database has a problem, this catch stetment catch it
-        {
-            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             c.close(); 
