@@ -298,9 +298,25 @@ public class ProfilePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_newpwd_cMouseClicked
 
     private void btn_changeprofiledataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changeprofiledataActionPerformed
-        if(false){//need to do validations
-            
+        if(txt_fname.getText().length()==0){
+            lbl_error.setText("Please enter the first name");
         }
+        else if(txt_fname.getText().length()<2){
+            lbl_error.setText("Please enter a valid first name");
+        }
+        else if(txt_fname.getText().matches("[a-zA-Z]+")){//need to do validations
+            lbl_error.setText("First name can have only english letters");
+        }
+        else if(txt_lname.getText().length()==0){
+            lbl_error.setText("Please enter the last name");
+        }
+        else if(txt_lname.getText().length()<2){
+            lbl_error.setText("Please enter a valid last name");
+        }
+        else if(txt_lname.getText().matches("[a-zA-Z]+")){
+            lbl_error.setText("Last name can have only english letters");
+        }
+        //need to do validations
         else{
             try {
                 manager obj2=new manager();
