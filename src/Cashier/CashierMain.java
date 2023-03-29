@@ -14,7 +14,13 @@ import java.util.logging.Logger;
  */
 public class CashierMain extends javax.swing.JFrame {
     /** Creates new form CashierDashboard */
+    String cashierID="EM002";
     public CashierMain() {
+        initComponents();
+        getData();
+    }
+    public CashierMain(String cashierID) {
+        this.cashierID=cashierID;
         initComponents();
         getData();
     }
@@ -50,9 +56,9 @@ public class CashierMain extends javax.swing.JFrame {
         btn_logout = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        dashboard2 = new Cashier.cashierDashboard();
+        dashboard2 = new Cashier.cashierDashboard(cashierID);
         jPanel2 = new javax.swing.JPanel();
-        issueLoyaltyCard1 = new Cashier.IssueLoyaltyCard();
+        issueLoyaltyCard1 = new Cashier.IssueLoyaltyCard(this.cashierID);
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -706,7 +712,10 @@ public class CashierMain extends javax.swing.JFrame {
         obj.show();
         dispose();
     }//GEN-LAST:event_btn_logoutActionPerformed
-
+    
+    public void closeCashier(){
+        dispose();
+    }
     private void btn_profileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_profileActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_profileActionPerformed

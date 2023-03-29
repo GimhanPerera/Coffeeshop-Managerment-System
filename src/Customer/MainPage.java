@@ -575,10 +575,9 @@ public class MainPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
-        // TODO add your handling code here:
         if(!"0".equals(cid)&&"EM".equals(cid.substring(0,2))){//if this is a update of a order
-            //Because of can't close cashier table...
-            //CashierMain obj4=new CashierMain();//need to pass cashier id
+            //Because of can't close cashier window...
+            //CashierMain obj4=new CashierMain(cid);//need to pass cashier id
             //obj4.show();
             dispose();
         }
@@ -617,7 +616,8 @@ public class MainPage extends javax.swing.JFrame {
                 count++;
             }  
         }
-        if(!"0".equals(cid)&&"EM".equals(cid.substring(0,2))){//if this is a update of a order
+        if(!"0".equals(cid)&&"EM".equals(cid.substring(0,2))){
+            //if this is a update of a order
             //convert food names to food ids
             for(int q=0;q<lines;q++){
                 Food obj1=new Food();
@@ -640,8 +640,8 @@ public class MainPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(new JFrame(), "Can't update the order",
                "Imformation", JOptionPane.ERROR_MESSAGE);
                 }
-            //Because of can't close cashier table...
-            //CashierMain obj4=new CashierMain();//need to pass cashier id
+            //Because of can't close cashier window...
+            //CashierMain obj4=new CashierMain(cid);//need to pass cashier id
             //obj4.show();
             dispose();
         }

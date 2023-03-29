@@ -27,11 +27,11 @@ public class cashierDashboard extends javax.swing.JPanel {
     /**
      * Creates new form Dashboard
      */
-    public cashierDashboard() {
-        
-            initComponents();
-            refresh();
-            
+    String cashierID="";
+    public cashierDashboard(String cashierID) {   
+        this.cashierID=cashierID;
+        initComponents();
+        refresh();       
     }
     
     private void refresh(){
@@ -388,7 +388,7 @@ public class cashierDashboard extends javax.swing.JPanel {
         String a=(String) jTable_dBoard.getValueAt(row, 4);
         if("Paid".equals(a)){
             JOptionPane.showConfirmDialog((Component) null, "Sorry! Paid orders can't cancel",
-        "alert", JOptionPane.OK_OPTION);
+        "alert", JOptionPane.ERROR_MESSAGE);
         }else{ 
             int result = JOptionPane.showConfirmDialog((Component) null, "Are you sure?",
         "alert", JOptionPane.YES_NO_OPTION);
@@ -402,7 +402,7 @@ public class cashierDashboard extends javax.swing.JPanel {
             } catch (Exception ex) {
                 Logger.getLogger(cashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showConfirmDialog((Component) null, "Database Error",
-        "alert", JOptionPane.OK_OPTION);
+        "alert", JOptionPane.ERROR_MESSAGE);
             }
         }
         }
@@ -427,26 +427,34 @@ public class cashierDashboard extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_completeOdrActionPerformed
 
     private void btn_viewtheOdrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_viewtheOdrActionPerformed
-        try {
-            //All btns and jSTable set unenabled
-            jTable_dBoard.setEnabled(false);
-            btn_viewtheOdr.setEnabled(false);
-            btn_cancel.setEnabled(false);
-            btn_completeOdr.setEnabled(false);
-            btn_hold.setEnabled(false);
+        int row=jTable_dBoard.getSelectedRow();
+        String a=(String) jTable_dBoard.getValueAt(row, 4);
+        if("Paid".equals(a)){
+            JOptionPane.showConfirmDialog((Component) null, "Sorry! Paid orders can't cancel",
+        "alert", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            try {
+                //All btns and jSTable set unenabled
+                jTable_dBoard.setEnabled(false);
+                btn_viewtheOdr.setEnabled(false);
+                btn_cancel.setEnabled(false);
+                btn_completeOdr.setEnabled(false);
+                btn_hold.setEnabled(false);
+
+                String OID=(String) jTable_dBoard.getValueAt(row, 0);
+                String Otype=(String) jTable_dBoard.getValueAt(row, 1);
+                cashier obj2=new cashier();
+                int tp=obj2.getCustomerTp(OID);
             
-            int row=jTable_dBoard.getSelectedRow();
-            String OID=(String) jTable_dBoard.getValueAt(row, 0);
-            String Otype=(String) jTable_dBoard.getValueAt(row, 1);
-            cashier obj2=new cashier();
-            int tp=obj2.getCustomerTp(OID);
+                MainPage obj =new MainPage(cashierID,OID,Otype,tp,obj2.getorderTotal(OID),obj2.getfooditemsOfOrder(OID),obj2.getQtysOfOrder(OID));
+                obj.show();
+                //Can't close cashier fframe
+                //CashierMain obj8 =new CashierMain();
             
-            MainPage obj =new MainPage("EM002",OID,Otype,tp,obj2.getorderTotal(OID),obj2.getfooditemsOfOrder(OID),obj2.getQtysOfOrder(OID));
-            obj.show();
-            CashierMain obj8 =new CashierMain();
-            //JFrame.dispose();
-        } catch (Exception ex) {
-            Logger.getLogger(cashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(cashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btn_viewtheOdrActionPerformed
 

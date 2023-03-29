@@ -111,6 +111,5 @@ public class manager extends Connect{
         finally{
             c.close(); 
         }
-    
     }
 }

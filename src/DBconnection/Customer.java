@@ -162,11 +162,11 @@ public class Customer extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select CUSTOMER_ID from CUSTOMER ORDER BY CUSTOMER_ID DESC LIMIT 1"); //SQL stetment
             while(rs.next()){
-                cID=rs.getString("CUSTOMER_ID");//get the value to variable "fname"
+                cID=rs.getString("CUSTOMER_ID");
             }
             cID=cID.substring(2);
             String zeros="";
-            for(int i=(Integer.toString((Integer.parseInt(cID))+1)).length();i<5;i++){
+            for(int i=(Integer.toString((Integer.parseInt(cID))+1)).length();i<3;i++){
                 zeros=zeros+"0";
             }                    
             cID="CS"+zeros+Integer.toString((Integer.parseInt(cID))+1);
@@ -175,5 +175,35 @@ public class Customer extends Connect{
             c.close(); 
         }
         return cID;    
+    }
+    
+    public boolean removeCastomer(String cid) throws Exception{ //Remove a customer from a database  
+        Connection c= getConnection();//get the connection using inheritance
+        int count=0;
+        try{ 
+            Statement stmt = c.createStatement();
+            //First check active orders of the castomer
+            ResultSet rs = stmt.executeQuery("select COUNT(*) AS num from ORDER_T WHERE CUSTOMER_ID='"+cid+"' AND STATUS!='Completed'"); //SQL stetment
+            while(rs.next()){
+                count=rs.getInt("num");
+            }
+            if(count!=0)//if there are active orders, We can't delete the customer
+            {
+                c.close();
+                return false;
+            }
+            //set cus_id of his orders to CS000
+            String sql="UPDATE ORDER_T SET CUSTOMER_ID='CS000' where CUSTOMER_ID='"+cid+"'";
+            stmt.executeUpdate(sql);
+            sql="DELETE FROM LOYALTY_CARD WHERE CUSTOMER_ID='"+cid+"';";
+            stmt.executeUpdate(sql);
+            sql="DELETE FROM CUSTOMER WHERE CUSTOMER_ID='"+cid+"';";
+            stmt.executeUpdate(sql);
+            
+        }
+        finally{
+            c.close(); 
+        }
+        return true;    
     }
 }

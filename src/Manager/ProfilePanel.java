@@ -304,7 +304,7 @@ public class ProfilePanel extends javax.swing.JPanel {
         else if(txt_fname.getText().length()<2){
             lbl_error.setText("Please enter a valid first name");
         }
-        else if(txt_fname.getText().matches("[a-zA-Z]+")){//need to do validations
+        else if(!txt_fname.getText().matches("[a-zA-Z]+")){//need to do validations
             lbl_error.setText("First name can have only english letters");
         }
         else if(txt_lname.getText().length()==0){
@@ -313,7 +313,7 @@ public class ProfilePanel extends javax.swing.JPanel {
         else if(txt_lname.getText().length()<2){
             lbl_error.setText("Please enter a valid last name");
         }
-        else if(txt_lname.getText().matches("[a-zA-Z]+")){
+        else if(!txt_lname.getText().matches("[a-zA-Z]+")){
             lbl_error.setText("Last name can have only english letters");
         }
         //need to do validations

@@ -29,9 +29,10 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
     /**
      * Creates new form IssueLoyaltyCard
      */
-    
-    public IssueLoyaltyCard() {
+    String cashierID="";
+    public IssueLoyaltyCard(String cashierID) {
         try {
+            this.cashierID=cashierID;
             initComponents();        
             getAllRequest();
             lbl_ok.setVisible(false);
@@ -396,7 +397,7 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
                     lbl_scanstatus.setText(t1.getPin()+" card issued");
                     int row=jTable.getSelectedRow();
                     String a=(String) jTable.getValueAt(row, 0);
-                    obj1.issueCard(t1.getPin(),a,"EM002");
+                    obj1.issueCard(t1.getPin(),a,cashierID);
                 }
             } catch (Exception ex) {
                 Logger.getLogger(IssueLoyaltyCard.class.getName()).log(Level.SEVERE, null, ex);

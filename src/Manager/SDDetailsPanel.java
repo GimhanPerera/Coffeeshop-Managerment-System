@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -33,7 +34,12 @@ public class SDDetailsPanel extends javax.swing.JPanel {
      */
     public SDDetailsPanel() {
         initComponents();
+        Panel_AddEditStuff.setVisible(false);
+        panel_main.setVisible(true);
         lbl_Error.setVisible(false);
+        btn_edit.setEnabled(false);
+        lbl_error.setVisible(false);
+        lbl_errorpwd.setVisible(false);
         viewALL();
     }
 
@@ -49,19 +55,49 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        panel_main = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        rdo_stuff = new javax.swing.JRadioButton();
-        rdo_customer = new javax.swing.JRadioButton();
-        btn_clear = new javax.swing.JButton();
-        btn_remove = new javax.swing.JButton();
-        btn_add = new javax.swing.JButton();
-        txt_search = new javax.swing.JTextField();
-        btn_search = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         lbl_searchtitle = new javax.swing.JLabel();
+        btn_search = new javax.swing.JButton();
+        txt_search = new javax.swing.JTextField();
         lbl_Error = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        rdo_stuff = new javax.swing.JRadioButton();
+        rdo_customer = new javax.swing.JRadioButton();
+        jButton5 = new javax.swing.JButton();
+        btn_clear = new javax.swing.JButton();
+        btn_add = new javax.swing.JButton();
+        btn_edit = new javax.swing.JButton();
+        btn_remove = new javax.swing.JButton();
+        Panel_AddEditStuff = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txt_tp = new javax.swing.JTextField();
+        txt_nic = new javax.swing.JTextField();
+        txt_email = new javax.swing.JTextField();
+        txt_lname = new javax.swing.JTextField();
+        txt_fname = new javax.swing.JTextField();
+        lbl_error = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txt_newpwd_c = new javax.swing.JPasswordField();
+        checkbox_pwd_change = new javax.swing.JCheckBox();
+        btn_change_pwd = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        txt_oldpwd = new javax.swing.JPasswordField();
+        txt_newpwd = new javax.swing.JPasswordField();
+        lbl_errorpwd = new javax.swing.JLabel();
+        btn_reset = new javax.swing.JButton();
+        btn_changeSave = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txt_empID = new javax.swing.JTextField();
+        btn_close = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -73,60 +109,14 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 30));
 
+        panel_main.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Customer/Stuff Details");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, -1, -1));
+        panel_main.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
 
-        buttonGroup1.add(rdo_stuff);
-        rdo_stuff.setText("Stuff Details");
-        rdo_stuff.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdo_stuffActionPerformed(evt);
-            }
-        });
-        add(rdo_stuff, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, -1, -1));
-
-        buttonGroup1.add(rdo_customer);
-        rdo_customer.setSelected(true);
-        rdo_customer.setText("Customer Details");
-        rdo_customer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdo_customerActionPerformed(evt);
-            }
-        });
-        add(rdo_customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, -1, -1));
-
-        btn_clear.setText("Clear");
-        btn_clear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_clearActionPerformed(evt);
-            }
-        });
-        add(btn_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 350, 100, 40));
-
-        btn_remove.setText("Remove");
-        btn_remove.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_removeActionPerformed(evt);
-            }
-        });
-        add(btn_remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 620, 110, 40));
-
-        btn_add.setText("Add");
-        btn_add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_addActionPerformed(evt);
-            }
-        });
-        add(btn_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 569, 110, 40));
-
-        txt_search.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txt_search.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txt_searchMouseClicked(evt);
-            }
-        });
-        add(txt_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 220, 40));
+        lbl_searchtitle.setText("Search by Customer Telephone Number");
+        panel_main.add(lbl_searchtitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 300, -1));
 
         btn_search.setText("Search");
         btn_search.addActionListener(new java.awt.event.ActionListener() {
@@ -134,22 +124,19 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                 btn_searchActionPerformed(evt);
             }
         });
-        add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 200, 110, 40));
+        panel_main.add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 130, 110, 40));
 
-        jButton5.setText("View All");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+        txt_search.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_search.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_searchMouseClicked(evt);
             }
         });
-        add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 290, 100, 40));
-
-        lbl_searchtitle.setText("Search by Customer Telephone Number");
-        add(lbl_searchtitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 300, -1));
+        panel_main.add(txt_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 220, 40));
 
         lbl_Error.setForeground(new java.awt.Color(255, 0, 0));
         lbl_Error.setText("Error msg");
-        add(lbl_Error, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, 330, -1));
+        panel_main.add(lbl_Error, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, 330, -1));
 
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -163,9 +150,16 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -174,11 +168,232 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         jTable1.setRowHeight(29);
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 960, 420));
+        panel_main.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 960, 420));
+
+        buttonGroup1.add(rdo_stuff);
+        rdo_stuff.setText("Stuff Details");
+        rdo_stuff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdo_stuffActionPerformed(evt);
+            }
+        });
+        panel_main.add(rdo_stuff, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, -1, -1));
+
+        buttonGroup1.add(rdo_customer);
+        rdo_customer.setSelected(true);
+        rdo_customer.setText("Customer Details");
+        rdo_customer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdo_customerActionPerformed(evt);
+            }
+        });
+        panel_main.add(rdo_customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, -1, -1));
+
+        jButton5.setText("View All");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        panel_main.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 240, 100, 40));
+
+        btn_clear.setText("Clear");
+        btn_clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clearActionPerformed(evt);
+            }
+        });
+        panel_main.add(btn_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 300, 100, 40));
+
+        btn_add.setText("Add");
+        btn_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addActionPerformed(evt);
+            }
+        });
+        panel_main.add(btn_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 470, 110, 40));
+
+        btn_edit.setText("Edit");
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editActionPerformed(evt);
+            }
+        });
+        panel_main.add(btn_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 520, 110, 40));
+
+        btn_remove.setText("Remove");
+        btn_remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_removeActionPerformed(evt);
+            }
+        });
+        panel_main.add(btn_remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 570, 110, 40));
+
+        add(panel_main, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1140, 640));
+
+        Panel_AddEditStuff.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setText("First Name");
+        Panel_AddEditStuff.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("Last Name");
+        Panel_AddEditStuff.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setText("Email");
+        Panel_AddEditStuff.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setText("NIC");
+        Panel_AddEditStuff.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setText("Mobile Number");
+        Panel_AddEditStuff.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 440, -1, -1));
+
+        txt_tp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Panel_AddEditStuff.add(txt_tp, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 170, -1));
+
+        txt_nic.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Panel_AddEditStuff.add(txt_nic, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 170, -1));
+
+        txt_email.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Panel_AddEditStuff.add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, 290, -1));
+
+        txt_lname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Panel_AddEditStuff.add(txt_lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 170, -1));
+
+        txt_fname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Panel_AddEditStuff.add(txt_fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 170, -1));
+
+        lbl_error.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbl_error.setForeground(new java.awt.Color(255, 51, 51));
+        lbl_error.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_error.setText("lbl_error");
+        Panel_AddEditStuff.add(lbl_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, 460, -1));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setText("New Password");
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel9.setText("Confirm New Password");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+
+        txt_newpwd_c.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_newpwd_c.setEnabled(false);
+        txt_newpwd_c.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_newpwd_cMouseClicked(evt);
+            }
+        });
+        jPanel3.add(txt_newpwd_c, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 130, -1));
+
+        checkbox_pwd_change.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        checkbox_pwd_change.setText("Change Password");
+        checkbox_pwd_change.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkbox_pwd_changeActionPerformed(evt);
+            }
+        });
+        jPanel3.add(checkbox_pwd_change, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+
+        btn_change_pwd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_change_pwd.setText("Change");
+        btn_change_pwd.setEnabled(false);
+        btn_change_pwd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_change_pwdActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btn_change_pwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 130, 40));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel11.setText("Old Password");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        txt_oldpwd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_oldpwd.setEnabled(false);
+        txt_oldpwd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_oldpwdMouseClicked(evt);
+            }
+        });
+        txt_oldpwd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_oldpwdActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txt_oldpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 130, -1));
+
+        txt_newpwd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_newpwd.setEnabled(false);
+        txt_newpwd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_newpwdMouseClicked(evt);
+            }
+        });
+        jPanel3.add(txt_newpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 130, -1));
+
+        Panel_AddEditStuff.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, 380, 280));
+
+        lbl_errorpwd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbl_errorpwd.setForeground(new java.awt.Color(255, 51, 51));
+        lbl_errorpwd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_errorpwd.setText("lbl_errorpwd");
+        Panel_AddEditStuff.add(lbl_errorpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 460, 460, -1));
+
+        btn_reset.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_reset.setText("Reset");
+        btn_reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_resetActionPerformed(evt);
+            }
+        });
+        Panel_AddEditStuff.add(btn_reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 580, 110, 40));
+
+        btn_changeSave.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_changeSave.setText("Save Changes");
+        btn_changeSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_changeSaveActionPerformed(evt);
+            }
+        });
+        Panel_AddEditStuff.add(btn_changeSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 530, 150, 40));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Add New Stuff Member");
+        Panel_AddEditStuff.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 480, -1));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel12.setText("Employee ID");
+        Panel_AddEditStuff.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, -1, -1));
+
+        txt_empID.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_empID.setEnabled(false);
+        Panel_AddEditStuff.add(txt_empID, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 170, -1));
+
+        btn_close.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_close.setText("Close");
+        btn_close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_closeActionPerformed(evt);
+            }
+        });
+        Panel_AddEditStuff.add(btn_close, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 580, 150, 40));
+
+        add(Panel_AddEditStuff, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1130, 680));
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewALL(){
         try{
+            lbl_Error.setVisible(false);
             clearTable();
             Connect obj = new Connect();
             Connection c = obj.getConnection();//Establish the connection
@@ -212,7 +427,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                     //tc.setHeaderValue( "Email" );
                     //th.repaint();
                     //
-                    rs = stmt.executeQuery("select * FROM CUSTOMER");
+                    rs = stmt.executeQuery("select * FROM CUSTOMER WHERE CUSTOMER_ID !='CS000'");
                     while(rs.next()){
                         String cID=rs.getString("CUSTOMER_ID");
                         String fname=rs.getString("F_NAME");
@@ -267,7 +482,9 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                         DefaultTableModel tblModel =(DefaultTableModel)jTable1.getModel(); 
                         tblModel.addRow(tbData);
                     }
-                    btn_add.setEnabled(true);                    
+                    btn_add.setEnabled(true); 
+                    if(jTable1.getRowCount()!=0)
+                            btn_edit.setEnabled(true);
                 }
                 if(jTable1.getRowCount()!=0)//check row count
                 {
@@ -289,25 +506,51 @@ public class SDDetailsPanel extends javax.swing.JPanel {
             
         }
         else{
-            clearTable();
-            lbl_Error.setVisible(false);
-            AddStuffMember obj=new AddStuffMember();
-            obj.setVisible(true);
+            try {
+                jLabel2.setText("Add New Stuff Member");
+                btn_changeSave.setText("Add");
+                clearform();
+                panel_main.setVisible(false);
+                Panel_AddEditStuff.setVisible(true);
+                lbl_Error.setVisible(false);
+                Emp obj=new Emp();
+                txt_empID.setText(obj.newCID());
+                checkbox_pwd_change.setSelected(true);
+                jLabel11.setVisible(false);
+                txt_oldpwd.setVisible(false);
+                btn_change_pwd.setVisible(false);
+                checkbox_pwd_change.setVisible(false);
+                btn_reset.setVisible(false);
+                changePwdsection();
+            } catch (Exception ex) {
+                Logger.getLogger(SDDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(new JFrame(), "Database error",
+                            "Imformation", JOptionPane.ERROR_MESSAGE);
+                panel_main.setVisible(true);
+                Panel_AddEditStuff.setVisible(false);
+            }
         }
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void rdo_stuffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_stuffActionPerformed
         lbl_searchtitle.setText("Search by ctuff ID");
+        btn_edit.setEnabled(true);
+        viewALL();
     }//GEN-LAST:event_rdo_stuffActionPerformed
 
     private void rdo_customerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_customerActionPerformed
         lbl_searchtitle.setText("Search by Customer Telephone Number");
-        
+        btn_edit.setEnabled(false);
+        viewALL();
     }//GEN-LAST:event_rdo_customerActionPerformed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         lbl_Error.setVisible(false);
-        if(false){//validation need to handle
+        if("0100000001".equals(txt_search.getText())){//validation need to handle 
+            clearTable();
+            lbl_Error.setVisible(true);
+            lbl_Error.setText("No results");
+            btn_remove.setEnabled(false);
             
         }
         else{
@@ -399,16 +642,22 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                         String tbData[]={cID,name,emptype,tp,nic,email};
                         DefaultTableModel tblModel =(DefaultTableModel)jTable1.getModel(); 
                         tblModel.addRow(tbData);
+                        if(jTable1.getRowCount()!=0)
+                            btn_edit.setEnabled(true);
                     }
                     btn_add.setEnabled(true);
                 }  
             if(jTable1.getRowCount()!=0)//check row count
             {
                 jTable1.setRowSelectionInterval(0, 0);
-                btn_remove.setEnabled(true);               
+                btn_remove.setEnabled(true); 
+                
             }
-            else{
+            else{//if noone
+                lbl_Error.setVisible(true);
+                lbl_Error.setText("No results");
                 btn_remove.setEnabled(false);
+                btn_edit.setEnabled(false);
             }
         }
         catch(Exception ex)//Is database has a problem, this catch stetment catch it
@@ -429,11 +678,12 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         lbl_Error.setVisible(false);
         clearTable();
         btn_remove.setEnabled(false);
+        btn_edit.setEnabled(false);
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void btn_removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removeActionPerformed
         lbl_Error.setVisible(false);
-        int result = JOptionPane.showConfirmDialog((Component) null, "Your order will cancel and you need to order again",
+        int result = JOptionPane.showConfirmDialog((Component) null, "Are you sure?",
         "alert", JOptionPane.YES_NO_OPTION);
         System.out.println(result);
         if(result==0){
@@ -442,17 +692,29 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                 String a=(String) jTable1.getValueAt(row, 0);
                 if(rdo_customer.isSelected()){
                     Customer obj=new Customer();
-                    //NEED TO CODE
-                    //int check=obj.removeCastomer(a);
+                    boolean check=obj.removeCastomer(a);
+                    if(!check){//unsuccessfully
+                        JOptionPane.showMessageDialog(new JFrame(), "Customer has pending order! Unable to delete the customer",
+                            "Imformation", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else{//successfully deleted
+                        JOptionPane.showMessageDialog(new JFrame(), "Delete successfull",
+                            "Imformation", JOptionPane.INFORMATION_MESSAGE);
+                        viewALL();
+                    }
                 }
                 else{
                     Emp obj=new Emp();
-                    //NEED TO CODE
-                    //int check=obj.removeEmp(a);
+                    obj.removeEmp(a);
+                    viewALL();
+                    JOptionPane.showMessageDialog(new JFrame(), "Delete successfull",
+                            "Imformation", JOptionPane.INFORMATION_MESSAGE);
                 }
-                viewALL();
+                
             } catch (Exception ex) {
                 Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(new JFrame(), "Database error",
+               "Imformation", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btn_removeActionPerformed
@@ -460,6 +722,186 @@ public class SDDetailsPanel extends javax.swing.JPanel {
     private void txt_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_searchMouseClicked
         txt_search.setText("");
     }//GEN-LAST:event_txt_searchMouseClicked
+
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        try {
+            jLabel2.setText("Edit Stuff details");
+            btn_changeSave.setText("Save Changes");
+            panel_main.setVisible(false);
+            Panel_AddEditStuff.setVisible(true);
+            lbl_Error.setVisible(false);
+            int row=jTable1.getSelectedRow();
+            String a=(String) jTable1.getValueAt(row, 0);
+            setForm(a);
+            checkbox_pwd_change.setSelected(false);
+            changePwdsection();
+            jLabel11.setVisible(true);
+            txt_oldpwd.setVisible(true);
+            btn_change_pwd.setVisible(true);
+            checkbox_pwd_change.setVisible(true);
+            btn_reset.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(SDDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(new JFrame(), "Database error",
+                        "Imformation", JOptionPane.ERROR_MESSAGE);
+           panel_main.setVisible(true);
+            Panel_AddEditStuff.setVisible(false);
+        }
+
+    }//GEN-LAST:event_btn_editActionPerformed
+    private void clearform(){
+        txt_empID.setText("");
+            txt_fname.setText("");
+            txt_lname.setText("");
+            txt_nic.setText("");
+            txt_email.setText("");
+            txt_tp.setText("");
+            txt_oldpwd.setText("");
+            txt_newpwd.setText("");
+            txt_newpwd_c.setText("");
+    }
+    private void setForm(String eid) throws Exception{
+        Emp obj=new Emp(eid);
+        txt_empID.setText(obj.getEid());
+        txt_fname.setText(obj.getFname());
+        txt_lname.setText(obj.getLname());
+        txt_nic.setText(obj.getNIC());
+        txt_email.setText(obj.getEmail());
+        txt_tp.setText(Integer.toString(obj.getTp()));
+    }
+    private void txt_newpwd_cMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_newpwd_cMouseClicked
+        lbl_errorpwd.setText("");
+    }//GEN-LAST:event_txt_newpwd_cMouseClicked
+
+    private void checkbox_pwd_changeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkbox_pwd_changeActionPerformed
+        boolean check = checkbox_pwd_change.getModel().isSelected();
+        txt_oldpwd.setEnabled(check);
+        txt_newpwd_c.setEnabled(check);
+        txt_newpwd.setEnabled(check);
+        btn_change_pwd.setEnabled(check);
+    }//GEN-LAST:event_checkbox_pwd_changeActionPerformed
+    private void changePwdsection(){
+        boolean check = checkbox_pwd_change.getModel().isSelected();
+        txt_oldpwd.setEnabled(check);
+        txt_newpwd_c.setEnabled(check);
+        txt_newpwd.setEnabled(check);
+        btn_change_pwd.setEnabled(check);
+    }
+    private void btn_change_pwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_change_pwdActionPerformed
+        try {
+            Emp obj1=new Emp();
+            if(txt_oldpwd.getText().equals("")){
+                lbl_errorpwd.setText("Please enter the old password");
+                txt_oldpwd.requestFocus();
+            }
+            else if(txt_newpwd.getText().equals("")){
+                lbl_errorpwd.setText("Please enter the new password");
+                txt_newpwd.requestFocus();
+            }
+            else if(txt_newpwd_c.getText().equals("")){
+                lbl_errorpwd.setText("Please Confirm your password");
+                txt_newpwd_c.requestFocus();
+            }
+            else if(txt_newpwd.getText().length()<6){
+                lbl_errorpwd.setText("Use 6 characters or more for your password");
+                txt_newpwd.requestFocus();
+            }
+            else if(!txt_newpwd_c.getText().equals(txt_newpwd.getText())){
+                lbl_errorpwd.setText("Those passwords didn’t match. Try again.");
+                txt_newpwd_c.requestFocus();
+                txt_newpwd_c.setText("");
+            }
+            else if(!obj1.checkOldPwd(txt_empID.getText(),txt_oldpwd.getText())){
+                lbl_errorpwd.setText("Old passward is incorrect");
+                txt_oldpwd.requestFocus();
+            }
+            else{
+                obj1.setPwd(txt_empID.getText(),txt_newpwd.getText());
+                checkbox_pwd_change.setSelected(false);
+                boolean check = checkbox_pwd_change.getModel().isSelected();
+                txt_oldpwd.setEnabled(check);
+                txt_newpwd_c.setEnabled(check);
+                txt_newpwd.setEnabled(check);
+                btn_change_pwd.setEnabled(check);
+                txt_oldpwd.setText("");
+                txt_newpwd.setText("");
+                txt_newpwd_c.setText("");
+                JOptionPane.showMessageDialog(new JFrame(), "Passward changed",
+                    "Imformation", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ProfilePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btn_change_pwdActionPerformed
+    
+    private void txt_oldpwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_oldpwdMouseClicked
+        lbl_errorpwd.setText("");
+    }//GEN-LAST:event_txt_oldpwdMouseClicked
+
+    private void txt_oldpwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_oldpwdActionPerformed
+
+    }//GEN-LAST:event_txt_oldpwdActionPerformed
+
+    private void txt_newpwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_newpwdMouseClicked
+        lbl_errorpwd.setText("");
+    }//GEN-LAST:event_txt_newpwdMouseClicked
+
+    private void btn_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetActionPerformed
+        try {
+            setForm(txt_empID.getText());
+        } catch (Exception ex) {
+            Logger.getLogger(SDDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(new JFrame(), "Database error",
+                        "Imformation", JOptionPane.ERROR_MESSAGE);
+           panel_main.setVisible(true);
+            Panel_AddEditStuff.setVisible(false);
+        }
+    }//GEN-LAST:event_btn_resetActionPerformed
+
+    private void btn_changeSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changeSaveActionPerformed
+        if(txt_fname.getText().length()==0){
+            lbl_error.setText("Please enter the first name");
+        }
+        else if(txt_fname.getText().length()<2){
+            lbl_error.setText("Please enter a valid first name");
+        }
+        else if(!txt_fname.getText().matches("[a-zA-Z]+")){//need to do validations
+            lbl_error.setText("First name can have only english letters");
+        }
+        else if(txt_lname.getText().length()==0){
+            lbl_error.setText("Please enter the last name");
+        }
+        else if(txt_lname.getText().length()<2){
+            lbl_error.setText("Please enter a valid last name");
+        }
+        else if(!txt_lname.getText().matches("[a-zA-Z]+")){
+            lbl_error.setText("Last name can have only english letters");
+        }
+        //need to do validations
+        else{
+            if("Save Changes".equals(btn_changeSave.getText())){
+                try {
+                Emp obj2=new Emp();
+                obj2.setEmpDetails(txt_empID.getText(),txt_fname.getText(),txt_lname.getText(),txt_email.getText(),txt_tp.getText(),txt_nic.getText());
+                JOptionPane.showMessageDialog(new JFrame(), "Details successfully changed",
+                    "Imformation", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    Logger.getLogger(ProfilePanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else if("Add".equals(btn_changeSave.getText())){
+                //ADD employee need to code
+            }
+            
+        }
+    }//GEN-LAST:event_btn_changeSaveActionPerformed
+
+    private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
+        clearform();
+        panel_main.setVisible(true);
+        Panel_AddEditStuff.setVisible(false);
+    }//GEN-LAST:event_btn_closeActionPerformed
     
     public void clearTable(){
         DefaultTableModel tblModel =(DefaultTableModel)jTable1.getModel(); 
@@ -471,21 +913,51 @@ public class SDDetailsPanel extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Panel_AddEditStuff;
     private javax.swing.JButton btn_add;
+    private javax.swing.JButton btn_changeSave;
+    private javax.swing.JButton btn_change_pwd;
     private javax.swing.JButton btn_clear;
+    private javax.swing.JButton btn_close;
+    private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_remove;
+    private javax.swing.JButton btn_reset;
     private javax.swing.JButton btn_search;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JCheckBox checkbox_pwd_change;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_Error;
+    private javax.swing.JLabel lbl_error;
+    private javax.swing.JLabel lbl_errorpwd;
     private javax.swing.JLabel lbl_searchtitle;
+    private javax.swing.JPanel panel_main;
     private javax.swing.JRadioButton rdo_customer;
     private javax.swing.JRadioButton rdo_stuff;
+    private javax.swing.JTextField txt_email;
+    private javax.swing.JTextField txt_empID;
+    private javax.swing.JTextField txt_fname;
+    private javax.swing.JTextField txt_lname;
+    private javax.swing.JPasswordField txt_newpwd;
+    private javax.swing.JPasswordField txt_newpwd_c;
+    private javax.swing.JTextField txt_nic;
+    private javax.swing.JPasswordField txt_oldpwd;
     private javax.swing.JTextField txt_search;
+    private javax.swing.JTextField txt_tp;
     // End of variables declaration//GEN-END:variables
 }
