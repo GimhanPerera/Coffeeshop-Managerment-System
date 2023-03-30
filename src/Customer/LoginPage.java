@@ -221,7 +221,7 @@ public class LoginPage extends javax.swing.JFrame {
                 Customer obj1 = new Customer();
                 System.out.println("CID: "+obj1.getCID(txt_tp.getText()));
                 System.out.println("tp: "+Integer.parseInt(txt_tp.getText()));
-                LandingPage obj =new LandingPage(obj1.getCID(txt_tp.getText()),Integer.parseInt(txt_tp.getText()));
+                LandingPage obj =new LandingPage("0",obj1.getCID(txt_tp.getText()),Integer.parseInt(txt_tp.getText()));
                 obj.show();
                 dispose();
             } catch (SQLException ex) {

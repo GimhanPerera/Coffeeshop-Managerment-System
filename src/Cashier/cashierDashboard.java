@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -27,7 +28,12 @@ public class cashierDashboard extends javax.swing.JPanel {
     /**
      * Creates new form Dashboard
      */
-    String cashierID="";
+    String cashierID="EM002";
+    public cashierDashboard() {   
+        
+        initComponents();
+        refresh();       
+    }
     public cashierDashboard(String cashierID) {   
         this.cashierID=cashierID;
         initComponents();
@@ -310,25 +316,43 @@ public class cashierDashboard extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
-        int row=jTable_dBoard.getSelectedRow();
-        String a1=(String) jTable_dBoard.getValueAt(row, 0);
-        refresh();
-        if(jTable_dBoard.isEnabled()==false)
-        {           
-            DefaultTableModel tblModel =(DefaultTableModel)jTable_dBoard.getModel(); 
-            int rowCount = tblModel.getRowCount();
-            //check rows
-            String a2="";
-            for (int i = 0; i < rowCount; i++) {
-                a2=(String) jTable_dBoard.getValueAt(i, 0);
+        int row=jTable_dBoard.getSelectedRow();System.out.println("AAAAAAA "+row);       
+        if(row>=0){//If there are records in the table
+            String a1=(String) jTable_dBoard.getValueAt(row, 0);
+            refresh();
+            if(jTable_dBoard.isEnabled()==false)
+            {           
+                DefaultTableModel tblModel =(DefaultTableModel)jTable_dBoard.getModel(); 
+                int rowCount = tblModel.getRowCount();
+                //check rows
+                String a2="";
+                for (int i = 0; i < rowCount; i++) {
+                    a2=(String) jTable_dBoard.getValueAt(i, 0);
                 if(a1.equals(a2)){
-                    jTable_dBoard.setRowSelectionInterval(i, i);
-                    break;
+                        jTable_dBoard.setRowSelectionInterval(i, i);
+                        break;
+                    }
                 }
+                cancelVieewCompleteBtn();
+                jTable_dBoard.setEnabled(true);
             }
-            cancelVieewCompleteBtn();
-            jTable_dBoard.setEnabled(true);
         }
+        else{
+            refresh();
+            if(jTable_dBoard.isEnabled()==false)
+            {           
+                DefaultTableModel tblModel =(DefaultTableModel)jTable_dBoard.getModel(); 
+                int rowCount = tblModel.getRowCount();
+                if(rowCount!=0){
+                    jTable_dBoard.setRowSelectionInterval(0, 0);
+                cancelVieewCompleteBtn();
+                jTable_dBoard.setEnabled(true);
+                }               
+            }
+        }
+            
+        
+        
     }//GEN-LAST:event_btn_refreshActionPerformed
 
     private void btn_holdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_holdActionPerformed
@@ -338,10 +362,12 @@ public class cashierDashboard extends javax.swing.JPanel {
             String a2=(String) jTable_dBoard.getValueAt(row, 3);
             
             cashier obj=new cashier();
-            if("Hold".equals(a2))
+            if("Hold".equals(a2)){
                 obj.setHoldUnhold(a1,"Pending");
-            else if("Pending".equals(a2))
+            }  
+            else if("Pending".equals(a2)){
                 obj.setHoldUnhold(a1,"Hold");
+            }
             getData();
             DefaultTableModel tblModel =(DefaultTableModel)jTable_dBoard.getModel(); 
             int rowCount = tblModel.getRowCount();
@@ -425,13 +451,13 @@ public class cashierDashboard extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btn_completeOdrActionPerformed
-
+    
     private void btn_viewtheOdrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_viewtheOdrActionPerformed
         int row=jTable_dBoard.getSelectedRow();
         String a=(String) jTable_dBoard.getValueAt(row, 4);
         if("Paid".equals(a)){
-            JOptionPane.showConfirmDialog((Component) null, "Sorry! Paid orders can't cancel",
-        "alert", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), "Sorry! Paid orders can't cancel",
+                    "Imformation", JOptionPane.INFORMATION_MESSAGE);
         }
         else{
             try {
@@ -441,14 +467,15 @@ public class cashierDashboard extends javax.swing.JPanel {
                 btn_cancel.setEnabled(false);
                 btn_completeOdr.setEnabled(false);
                 btn_hold.setEnabled(false);
-
+                
                 String OID=(String) jTable_dBoard.getValueAt(row, 0);
                 String Otype=(String) jTable_dBoard.getValueAt(row, 1);
                 cashier obj2=new cashier();
                 int tp=obj2.getCustomerTp(OID);
             
-                MainPage obj =new MainPage(cashierID,OID,Otype,tp,obj2.getorderTotal(OID),obj2.getfooditemsOfOrder(OID),obj2.getQtysOfOrder(OID));
+                MainPage obj =new MainPage(true,cashierID,OID,Otype,tp,obj2.getorderTotal(OID),obj2.getfooditemsOfOrder(OID),obj2.getQtysOfOrder(OID));
                 obj.show();
+                clearTable();
                 //Can't close cashier fframe
                 //CashierMain obj8 =new CashierMain();
             

@@ -4,6 +4,7 @@
  */
 package Customer;
 import AduinoConnection.Conn;
+import Cashier.CashierMain;
 import DBconnection.getDate;
 import DBconnection.Customer;
 import DBconnection.LoyaltyCard;
@@ -15,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.fazecast.jSerialComm.*;
 import java.awt.Component;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 /**
@@ -26,9 +28,11 @@ import javax.swing.SwingUtilities;
 public class ConfirmOrderPage extends javax.swing.JFrame{
 String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuffer sb1;int total=0;int discount=0;
     int lines=0;int tp;
+    String empmode="0";
 
-    public ConfirmOrderPage(StringBuffer sb, int tot,String[] foodID,int[] Qyt,int lines,String cid,String o_type,int points,int tp,int discount) {
+    public ConfirmOrderPage(String empmode,StringBuffer sb, int tot,String[] foodID,int[] Qyt,int lines,String cid,String o_type,int points,int tp,int discount) {
         initComponents();
+        this.empmode=empmode;
         jPanel_payment.setVisible(false);
         lbl_discount.setVisible(false);
         jPanel_loyaltycard.setVisible(false);
@@ -429,9 +433,19 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                 } catch (PrinterException ex) {
                     Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                ThankyouPage obj =new ThankyouPage();
-                obj.show();
-                dispose();
+                if("0".equals(empmode)){
+                    ThankyouPage obj =new ThankyouPage();
+                    obj.show();
+                    dispose();
+                }
+                else{
+                    JOptionPane.showMessageDialog(new JFrame(), "Order placed",
+                    "Imformation", JOptionPane.INFORMATION_MESSAGE);
+                    CashierMain obj =new CashierMain(empmode);
+                    obj.show();
+                    dispose();
+                }
+                
             } catch (Exception ex) {
                 Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showConfirmDialog((Component) null, "Database error",
@@ -479,7 +493,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         "alert", JOptionPane.OK_CANCEL_OPTION);
         System.out.println(result);
         if(result==0){
-            MainPage obj =new MainPage(cid,"",o_type,tp,total,foodID,Qyt);
+            MainPage obj =new MainPage(empmode,"",o_type,tp,total,foodID,Qyt);
             obj.show();
             dispose();
         }//String cid,String o_type,int tp,//int tot,String[] foodID,int[] Qyt,int lines

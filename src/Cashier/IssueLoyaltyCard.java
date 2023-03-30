@@ -30,6 +30,26 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
      * Creates new form IssueLoyaltyCard
      */
     String cashierID="";
+    public IssueLoyaltyCard() {
+        try {
+            initComponents();        
+            getAllRequest();
+            lbl_ok.setVisible(false);
+            lbl_notOk.setVisible(false);
+            lbl_waiting.setVisible(false);
+            lbl_scanstatus.setVisible(false);
+            int row=jTable.getSelectedRow();
+            if(row==0){
+                btn_reject.setEnabled(false);
+            btn_issueCard.setEnabled(false);
+            }
+            else{
+               jTable.setRowSelectionInterval(0, 0); 
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(IssueLoyaltyCard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public IssueLoyaltyCard(String cashierID) {
         try {
             this.cashierID=cashierID;
@@ -51,6 +71,7 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
             Logger.getLogger(IssueLoyaltyCard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     
     public void getAllRequest() throws Exception{
         Connect obj = new Connect();

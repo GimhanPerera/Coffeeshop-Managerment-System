@@ -903,7 +903,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         Panel_AddEditStuff.setVisible(false);
     }//GEN-LAST:event_btn_closeActionPerformed
     
-    public void clearTable(){
+    private void clearTable(){
         DefaultTableModel tblModel =(DefaultTableModel)jTable1.getModel(); 
         int rowCount = tblModel.getRowCount();
         //Remove rows one by one from the end of the table

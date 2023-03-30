@@ -13,6 +13,20 @@ public class LandingPage extends javax.swing.JFrame {
     /**
      * Creates new form LandingPage
      */
+    private String empmode="0";
+    String cid="0";int tp=0;
+    public LandingPage() {
+        initComponents();
+        setComponents();
+    }
+    public LandingPage(String empmode,String cid,int tp) {
+        initComponents();
+        setComponents();
+        this.empmode=empmode;
+        this.cid=cid;
+        this.tp=tp;
+    }
+    
     public void setComponents(){
         btn_back.setText("");
         btn_back.setOpaque(false);
@@ -26,18 +40,7 @@ public class LandingPage extends javax.swing.JFrame {
         lbl_text.setVisible(false);
         lbl_error.setVisible(false);
     }
-    String cid="0";int tp=0;
-    public LandingPage() {
-        initComponents();
-        setComponents();
-    }
-    public LandingPage(String cid,int tp) {
-        initComponents();
-        setComponents();
-        this.cid=cid;
-        this.tp=tp;
-    }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,14 +147,14 @@ public class LandingPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
-        GetTpPage obj =new GetTpPage();
+        GetTpPage obj =new GetTpPage(empmode);
         obj.show();
         dispose();
     }//GEN-LAST:event_btn_backActionPerformed
 
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
         if(rdo_takeaway.isSelected()){
-            MainPage obj =new MainPage(cid,"Takeaway",tp);
+            MainPage obj =new MainPage(empmode,cid,"Takeaway",tp);
             obj.show();
             dispose();
         }
@@ -166,10 +169,11 @@ public class LandingPage extends javax.swing.JFrame {
             }
             else if(false){
                 //check availability
-                //display dialog box, if no space
+                //display Massage box, if no space
+                //create a table number array
             }
             else{
-                MainPage obj =new MainPage(cid,"Dinein",tp);
+                MainPage obj =new MainPage(empmode,cid,"Dinein",tp);
                 obj.show();
                 dispose();
             }

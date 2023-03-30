@@ -4,6 +4,7 @@
  */
 
 package Cashier;
+import Customer.GetTpPage;
 import Customer.LoginPage;
 import DBconnection.mgrDashboard;
 import java.util.logging.Level;
@@ -17,17 +18,18 @@ public class CashierMain extends javax.swing.JFrame {
     String cashierID="EM002";
     public CashierMain() {
         initComponents();
-        getData();
+        //getData();
     }
     public CashierMain(String cashierID) {
         this.cashierID=cashierID;
         initComponents();
-        getData();
+        //getData();
     }
+    
     public void getData(){
         try {
             mgrDashboard obj1= new mgrDashboard();
-            lbl_income.setText(Integer.toString(obj1.todayIncome())+".00");
+            //lbl_income.setText(Integer.toString(obj1.todayIncome())+".00");
             
         } catch (Exception ex) {
             Logger.getLogger(CashierMain.class.getName()).log(Level.SEVERE, null, ex);
@@ -55,35 +57,9 @@ public class CashierMain extends javax.swing.JFrame {
         btn_profile = new javax.swing.JButton();
         btn_logout = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        cashierDashboard1 = new Cashier.cashierDashboard();
+        issueLoyaltyCard1 = new Cashier.IssueLoyaltyCard();
         jPanel1 = new javax.swing.JPanel();
-        dashboard2 = new Cashier.cashierDashboard(cashierID);
-        jPanel2 = new javax.swing.JPanel();
-        issueLoyaltyCard1 = new Cashier.IssueLoyaltyCard(this.cashierID);
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        jButton9 = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jButton10 = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable_dBoard = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        lbl_income = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jButton11 = new javax.swing.JButton();
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -342,206 +318,16 @@ public class CashierMain extends javax.swing.JFrame {
 
         getContentPane().add(Nav_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 740));
 
+        jTabbedPane1.addTab("tab2", cashierDashboard1);
+        jTabbedPane1.addTab("tab2", issueLoyaltyCard1);
+
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(dashboard2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jTabbedPane1.addTab("tab1", jPanel1);
 
-        jTabbedPane1.addTab("tab2", jPanel1);
-
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(issueLoyaltyCard1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        jTabbedPane1.addTab("Loyalty card", jPanel2);
-
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jTabbedPane1.addTab("tab4", jPanel4);
-
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane4.setViewportView(jTable4);
-
-        jButton9.setText("Cancel the order");
-
-        jLabel12.setText("jLabel1");
-
-        jLabel13.setText("jLabel1");
-
-        jLabel14.setText("jLabel1");
-
-        jButton10.setText("Hold");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1100, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addGap(620, 620, 620)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(43, 43, 43)
-                            .addComponent(jLabel13)
-                            .addGap(82, 82, 82)
-                            .addComponent(jLabel14))
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addGap(510, 510, 510)
-                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(57, 57, 57)
-                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel12)
-                        .addComponent(jLabel13)
-                        .addComponent(jLabel14))
-                    .addGap(89, 89, 89)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(26, 26, 26)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
-        jTabbedPane1.addTab("tab5", jPanel5);
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1100, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 737, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1100, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel6Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel6Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
-        jTabbedPane1.addTab("tab6", jPanel6);
-
-        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTable_dBoard.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Order ID", "Customer name", "Order type", "Status", "Ordered Time"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable_dBoard);
-
-        jPanel12.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 1050, -1));
-
-        jButton1.setText("Cancel the order");
-        jPanel12.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 620, 160, 40));
-
-        jButton2.setText("Refresh");
-        jPanel12.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 30, -1, -1));
-
-        jButton3.setText("View Order");
-        jPanel12.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 610, 150, 50));
-
-        jButton4.setText("Complete the order");
-        jPanel12.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(878, 609, 180, 50));
-
-        jLabel1.setText("Today Imcome");
-        jPanel12.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
-
-        jLabel2.setText("Pending Order count");
-        jPanel12.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, -1, -1));
-
-        jLabel3.setText("jLabel1");
-        jPanel12.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, -1, -1));
-
-        lbl_income.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbl_income.setText("0.00");
-        jPanel12.add(lbl_income, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
-
-        jLabel5.setText("Delivered orders");
-        jPanel12.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 50, -1, -1));
-
-        jButton11.setText("Hold");
-        jPanel12.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 620, 110, 40));
-
-        jTabbedPane1.addTab("Dashboard", jPanel12);
-
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, -39, 1100, -1));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, -40, 1090, 760));
 
         lbl_background.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        getContentPane().add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 740));
+        getContentPane().add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1390, 720));
 
         pack();
         setLocationRelativeTo(null);
@@ -576,7 +362,10 @@ public class CashierMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_DashboardActionPerformed
 
     private void btn_reportsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_reportsMouseClicked
-        // TODO add your handling code here:
+        GetTpPage obj=new GetTpPage(cashierID);
+        obj.show();
+        dispose();
+        /*
         btn_Dashboard.setBackground(new java.awt.Color(173,85,2));
         btn_reports.setBackground(new java.awt.Color(252, 152, 3));
         btn_sd_details.setBackground(new java.awt.Color(173,85,2));
@@ -584,7 +373,8 @@ public class CashierMain extends javax.swing.JFrame {
         btn_loyaltyCards.setBackground(new java.awt.Color(173,85,2));
         btn_profile.setBackground(new java.awt.Color(173,85,2));
         btn_logout.setBackground(new java.awt.Color(173,85,2));
-        //jTabbedPane.setSelectedIndex(1);
+        jTabbedPane.setSelectedIndex(1);
+        */
     }//GEN-LAST:event_btn_reportsMouseClicked
 
     private void btn_reportsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_reportsMouseEntered
@@ -788,38 +578,12 @@ public class CashierMain extends javax.swing.JFrame {
     private javax.swing.JButton btn_profile;
     private javax.swing.JButton btn_reports;
     private javax.swing.JButton btn_sd_details;
-    private Cashier.cashierDashboard dashboard2;
+    private Cashier.cashierDashboard cashierDashboard1;
     private Cashier.IssueLoyaltyCard issueLoyaltyCard1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable_dBoard;
     private javax.swing.JLabel lbl_background;
     private javax.swing.JLabel lbl_heading;
-    private javax.swing.JLabel lbl_income;
     // End of variables declaration//GEN-END:variables
 
 }

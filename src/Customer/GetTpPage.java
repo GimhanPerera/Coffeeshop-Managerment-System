@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Customer;
+import Cashier.CashierMain;
 import DBconnection.Customer;
 import java.awt.Component;
 import java.sql.SQLException;
@@ -18,9 +19,15 @@ public class GetTpPage extends javax.swing.JFrame {
     /**
      * Creates new form GetTpPage
      */
+    private String empmode="0";
     public GetTpPage() {
         initComponents();
         lbl_error.setVisible(false);
+    }
+    public GetTpPage(String empmode) {
+        initComponents();
+        lbl_error.setVisible(false);
+        this.empmode=empmode;
     }
 
     /**
@@ -142,7 +149,7 @@ public class GetTpPage extends javax.swing.JFrame {
                 Customer obj1 = new Customer();
                 System.out.println("CID: "+obj1.getCID(txt_tp.getText()));
                 System.out.println("tp: "+Integer.parseInt(txt_tp.getText()));
-                LandingPage obj =new LandingPage(obj1.getCID(txt_tp.getText()),Integer.parseInt(txt_tp.getText()));
+                LandingPage obj =new LandingPage(empmode,obj1.getCID(txt_tp.getText()),Integer.parseInt(txt_tp.getText()));
                 obj.show();
                 dispose();
             } catch (SQLException ex) {
@@ -165,8 +172,14 @@ public class GetTpPage extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl_errorMouseClicked
 
     private void lbl_welcomepageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_welcomepageMouseClicked
-        WelcomePage obj=new WelcomePage();
-        obj.show();
+        if("0".equals(empmode)){
+            WelcomePage obj=new WelcomePage();
+            obj.show();
+        }
+        else{
+            CashierMain obj=new CashierMain(empmode);
+            obj.show();
+        }
         dispose();
     }//GEN-LAST:event_lbl_welcomepageMouseClicked
 

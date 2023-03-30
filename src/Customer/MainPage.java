@@ -34,13 +34,17 @@ public class MainPage extends javax.swing.JFrame {
      * Creates new form MainPage
      */
     String cid="0";String o_type="Dinein";int points=0;int tp;int discount=0;
+    String empmode="0";
     String orderID="";//orderID use only updating a order
+    boolean editmode=false;
     public MainPage() {
         initComponents();
-        firstDataGet();       
+        firstDataGet();
+        btn_request.setVisible(false);
     }
-    public MainPage(String cid,String o_type,int tp) {
+    public MainPage(String empmode,String cid,String o_type,int tp) {
         initComponents();
+        this.empmode=empmode;
         this.cid=cid;
         this.o_type=o_type;
         this.tp=tp;
@@ -58,10 +62,45 @@ public class MainPage extends javax.swing.JFrame {
         } catch (Exception ex) {
             //Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Database error: Cant get loyalty point");
+            btn_request.setVisible(false);
         }
     }
-    public MainPage(String cid,String orderID,String o_type,int tp,int tot,String[] foodID,int[] Qyt) {
+    
+    //If come from ConfirmOrderPage
+    public MainPage(String empmode,String orderID,String o_type,int tp,int tot,String[] foodID,int[] Qyt) {
         initComponents();
+                this.empmode=empmode;
+        this.o_type=o_type;
+        this.tp=tp;
+        this.tp=tp;
+        this.orderID=orderID;
+        LoyaltyCard obj1=new LoyaltyCard();
+        try {
+            int req = obj1.checkRequseted(cid);
+            if(req==1){
+                btn_request.setVisible(false);
+                lbl_request.setVisible(false);
+            }
+            int points=obj1.getLoyaltyPoints(cid);
+            this.points=points;
+            lbl_loyaltyPoints.setText(Integer.toString(points));
+            getFood(foodID,Qyt);
+            lbl_total.setText(Integer.toString(tot));
+            if("EM".equals(cid.substring(0,2)))//check this is a cashier
+                btn_next.setText("Update Order");
+        } catch (Exception ex) {
+            //Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Database error: Cant get loyalty point");
+            btn_request.setVisible(false);
+        }
+    }
+    
+    //If this is update of an existing order
+    public MainPage(boolean editmode,String empmode,String orderID,String o_type,int tp,int tot,String[] foodID,int[] Qyt) {
+        initComponents();
+        btn_next.setText("Place order");
+        this.editmode=editmode;
+        this.empmode=empmode;
         this.cid=cid;
         this.o_type=o_type;
         this.tp=tp;
@@ -84,6 +123,7 @@ public class MainPage extends javax.swing.JFrame {
         } catch (Exception ex) {
             //Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Database error: Cant get loyalty point");
+            btn_request.setVisible(false);
         }
     }
     
@@ -575,21 +615,20 @@ public class MainPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
-        if(!"0".equals(cid)&&"EM".equals(cid.substring(0,2))){//if this is a update of a order
+        if(!"0".equals(empmode)){//if this is a update of a order
             //Because of can't close cashier window...
-            //CashierMain obj4=new CashierMain(cid);//need to pass cashier id
+            //CashierMain obj4=new CashierMain(empmode);//need to pass cashier id
             //obj4.show();
-            dispose();
+            this.dispose();
         }
         else{
-            LandingPage obj =new LandingPage(cid,tp);
+            LandingPage obj =new LandingPage(empmode,cid,tp);
             obj.show();
             dispose();
         }
     }//GEN-LAST:event_btn_backActionPerformed
 
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
-        // TODO add your handling code here:
         int lines= (jTextArea_bill.getLineCount())-1;
         if(lines>0){
             String foodid[]=new String[lines];
@@ -616,7 +655,7 @@ public class MainPage extends javax.swing.JFrame {
                 count++;
             }  
         }
-        if(!"0".equals(cid)&&"EM".equals(cid.substring(0,2))){
+        if(editmode){
             //if this is a update of a order
             //convert food names to food ids
             for(int q=0;q<lines;q++){
@@ -640,9 +679,9 @@ public class MainPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(new JFrame(), "Can't update the order",
                "Imformation", JOptionPane.ERROR_MESSAGE);
                 }
-            //Because of can't close cashier window...
-            //CashierMain obj4=new CashierMain(cid);//need to pass cashier id
-            //obj4.show();
+            
+            CashierMain obj4=new CashierMain(empmode);//need to pass cashier id
+            obj4.show();
             dispose();
         }
         else{//If this is a new order
@@ -660,7 +699,7 @@ public class MainPage extends javax.swing.JFrame {
             {
                 System.out.println(foodid[q]+" "+qty[q]);
             }
-            ConfirmOrderPage obj2 =new ConfirmOrderPage(sb,Integer.parseInt(lbl_total.getText()),foodid, qty,lines,cid,o_type,Integer.parseInt(lbl_loyaltyPoints.getText()),tp,0);
+            ConfirmOrderPage obj2 =new ConfirmOrderPage(empmode,sb,Integer.parseInt(lbl_total.getText()),foodid, qty,lines,cid,o_type,Integer.parseInt(lbl_loyaltyPoints.getText()),tp,0);
             obj2.show();
             dispose();
             } 
