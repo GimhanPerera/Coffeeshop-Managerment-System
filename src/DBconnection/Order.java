@@ -108,6 +108,22 @@ public class Order extends Connect{
         }
     }
     
+    //make true means change to making
+    //make true means change to finish
+    public void setMakingFinishStatus(String oID,boolean make) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            String sql="update ORDER_T set STATUS='Finish' where ORDER_NUMBER='"+oID+"'"; //SQL stetment
+            if(make)
+                sql="update ORDER_T set STATUS='Making' where ORDER_NUMBER='"+oID+"'";
+            stmt.executeUpdate(sql);
+        }
+        finally{
+            c.close(); 
+        }
+    }
+    
     public void updateOrder(String OID,String fid[],int qty[],int total) throws Exception{//NOT COMPLETE
         //Need to check order table and order_food table
         Connection c= getConnection();//get the connection using inheritance

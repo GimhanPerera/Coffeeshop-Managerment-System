@@ -64,9 +64,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                 txt_tp.setText(obj1.getTp(cid));
             } catch (Exception ex) {
                 Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-                    
+            }         
         }
         lbl_emailerror.setVisible(false);
         lbl_fnameerror.setVisible(false);

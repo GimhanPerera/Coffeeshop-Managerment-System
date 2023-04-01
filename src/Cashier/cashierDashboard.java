@@ -328,7 +328,7 @@ public class cashierDashboard extends javax.swing.JPanel {
                 String a2="";
                 for (int i = 0; i < rowCount; i++) {
                     a2=(String) jTable_dBoard.getValueAt(i, 0);
-                if(a1.equals(a2)){
+                    if(a1.equals(a2)){
                         jTable_dBoard.setRowSelectionInterval(i, i);
                         break;
                     }
