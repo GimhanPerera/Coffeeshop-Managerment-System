@@ -93,14 +93,17 @@ public class Order extends Connect{
         }
     }
     
-    public void completeOdr(String OID) throws Exception{   
+    public void completeOdr(String OID,boolean cashPayemt) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         try{ 
             getDate obj=new getDate();
             Statement stmt = c.createStatement();//Prepare statement
             String sql="update ORDER_T set STATUS='Completed',END_TIME='"+obj.timeOnly()+"' where ORDER_NUMBER='"+OID+"'"; //SQL stetment
             stmt.executeUpdate(sql);
-            sql="update INVOICE set STATUS='Paid' where ORDERID='"+OID+"'"; //SQL stetment
+            if(cashPayemt)
+                sql="update INVOICE set STATUS='Paid',PAYMENT_METHOD='CASH' where ORDERID='"+OID+"'"; //SQL stetment
+            else
+                sql="update INVOICE set STATUS='Paid',PAYMENT_METHOD='CARD' where ORDERID='"+OID+"'";
             stmt.executeUpdate(sql);
         }
         finally{

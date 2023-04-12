@@ -27,7 +27,7 @@ public class Emp extends Connect{
     }
     
     public Emp(String eid) throws Exception{
-        this.eid=eid;System.out.println("EEAAAA1 ");
+        this.eid=eid;//System.out.println("EEAAAA1 ");
         getDetails(eid);
     }
     
@@ -55,10 +55,10 @@ public class Emp extends Connect{
         return this.eid;
     }
     public String getFname(){
-        return this.lname;
+        return this.fname;
     }
     public String getLname(){
-        return this.fname;
+        return this.lname;
     }
     public int getTp(){
         return this.tp;
@@ -132,6 +132,20 @@ public class Emp extends Connect{
         }
     }
     
+    public void addStaff(String empID,String fname,String lname,String tp,String email, String nic, String emp_type, String pwd) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        
+        try{ 
+            Statement stmt = c.createStatement();
+                String sql="INSERT INTO EMPLOYEE Values " +
+                            "('"+empID+"','"+fname+"','"+lname+"','"+tp+"','"+email+"','"+nic+"','"+emp_type+"','"+pwd+"')";
+                stmt.executeUpdate(sql);
+        }
+        finally{
+            c.close(); 
+        }
+    }
+    
     public String checkStuff(String email,String pwd) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         String eid="";
@@ -177,14 +191,14 @@ public class Emp extends Connect{
         }
     }
     
-    public void setEmpDetails(String eid,String fname,String lname,String email,String tp,String nic) throws Exception{   
+    public void setEmpDetails(String eid,String fname,String lname,String email,String tp,String nic,String emp_type) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
                 String sql="UPDATE EMPLOYEE " +
-                            "SET F_NAME = '"+fname+"', L_NAME= '"+lname+"', MOBILE_NUMBER = '"+tp+"', EMAIL = '"+email+"', NIC = '"+nic+"' " +
-                            " where EMP_TYPE='"+eid+"'";
+                            "SET F_NAME = '"+fname+"', L_NAME= '"+lname+"', MOBILE_NUMBER = '"+tp+"', EMAIL = '"+email+"', NIC = '"+nic+"',EMP_TYPE='"+emp_type+"' " +
+                            " where EMP_ID='"+eid+"'";
                 stmt.executeUpdate(sql);
                 this.fname=fname;
                 this.lname=lname;

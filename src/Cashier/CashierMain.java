@@ -51,7 +51,6 @@ public class CashierMain extends javax.swing.JFrame {
         Logo = new javax.swing.JLabel();
         btn_Dashboard = new javax.swing.JButton();
         btn_reports = new javax.swing.JButton();
-        btn_sd_details = new javax.swing.JButton();
         btn_foodDetails = new javax.swing.JButton();
         btn_loyaltyCards = new javax.swing.JButton();
         btn_profile = new javax.swing.JButton();
@@ -60,6 +59,7 @@ public class CashierMain extends javax.swing.JFrame {
         cashierDashboard1 = new Cashier.cashierDashboard();
         issueLoyaltyCard1 = new Cashier.IssueLoyaltyCard();
         jPanel1 = new javax.swing.JPanel();
+        menu1 = new Cashier.Menu();
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -131,39 +131,10 @@ public class CashierMain extends javax.swing.JFrame {
             }
         });
 
-        btn_sd_details.setBackground(new java.awt.Color(173, 85, 2));
-        btn_sd_details.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btn_sd_details.setForeground(new java.awt.Color(255, 255, 255));
-        btn_sd_details.setText("View Customer Details");
-        btn_sd_details.setBorderPainted(false);
-        btn_sd_details.setContentAreaFilled(false);
-        btn_sd_details.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_sd_details.setMargin(new java.awt.Insets(0, 14, 2, 14));
-        btn_sd_details.setOpaque(true);
-        btn_sd_details.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_sd_detailsMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btn_sd_detailsMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btn_sd_detailsMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btn_sd_detailsMousePressed(evt);
-            }
-        });
-        btn_sd_details.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_sd_detailsActionPerformed(evt);
-            }
-        });
-
         btn_foodDetails.setBackground(new java.awt.Color(173, 85, 2));
         btn_foodDetails.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_foodDetails.setForeground(new java.awt.Color(255, 255, 255));
-        btn_foodDetails.setText("Food Details");
+        btn_foodDetails.setText("Menu");
         btn_foodDetails.setBorderPainted(false);
         btn_foodDetails.setContentAreaFilled(false);
         btn_foodDetails.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -278,7 +249,6 @@ public class CashierMain extends javax.swing.JFrame {
             Nav_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btn_Dashboard, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_reports, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_sd_details, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
             .addComponent(btn_profile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_foodDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -288,7 +258,7 @@ public class CashierMain extends javax.swing.JFrame {
                 .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_heading)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         Nav_panelLayout.setVerticalGroup(
             Nav_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,16 +274,14 @@ public class CashierMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_reports, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_sd_details, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_foodDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_loyaltyCards, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_profile, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addGap(131, 131, 131)
+                .addComponent(btn_profile, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         getContentPane().add(Nav_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 740));
@@ -322,6 +290,8 @@ public class CashierMain extends javax.swing.JFrame {
         jTabbedPane1.addTab("tab2", issueLoyaltyCard1);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(menu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         jTabbedPane1.addTab("tab1", jPanel1);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, -40, 1090, 760));
@@ -337,7 +307,6 @@ public class CashierMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         btn_Dashboard.setBackground(new java.awt.Color(252, 152, 3));
         btn_reports.setBackground(new java.awt.Color(173,85,2));
-        btn_sd_details.setBackground(new java.awt.Color(173,85,2));
         btn_foodDetails.setBackground(new java.awt.Color(173,85,2));
         btn_loyaltyCards.setBackground(new java.awt.Color(173,85,2));
         btn_profile.setBackground(new java.awt.Color(173,85,2));
@@ -393,42 +362,14 @@ public class CashierMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_reportsActionPerformed
 
-    private void btn_sd_detailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_sd_detailsMouseClicked
-        // TODO add your handling code here:
-        //jTabbedPane.setSelectedIndex(2);
-        btn_Dashboard.setBackground(new java.awt.Color(173,85,2));
-        btn_reports.setBackground(new java.awt.Color(173,85,2));
-        btn_sd_details.setBackground(new java.awt.Color(252, 152, 3));
-        btn_foodDetails.setBackground(new java.awt.Color(173,85,2));
-        btn_loyaltyCards.setBackground(new java.awt.Color(173,85,2));
-        btn_profile.setBackground(new java.awt.Color(173,85,2));
-        btn_logout.setBackground(new java.awt.Color(173,85,2));
-    }//GEN-LAST:event_btn_sd_detailsMouseClicked
-
-    private void btn_sd_detailsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_sd_detailsMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_sd_detailsMouseEntered
-
-    private void btn_sd_detailsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_sd_detailsMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_sd_detailsMouseExited
-
-    private void btn_sd_detailsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_sd_detailsMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_sd_detailsMousePressed
-
-    private void btn_sd_detailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sd_detailsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_sd_detailsActionPerformed
-
     private void btn_foodDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_foodDetailsMouseClicked
         btn_Dashboard.setBackground(new java.awt.Color(173,85,2));
         btn_reports.setBackground(new java.awt.Color(173,85,2));
-        btn_sd_details.setBackground(new java.awt.Color(173,85,2));
         btn_foodDetails.setBackground(new java.awt.Color(252, 152, 3));
         btn_loyaltyCards.setBackground(new java.awt.Color(173,85,2));
         btn_profile.setBackground(new java.awt.Color(173,85,2));
         btn_logout.setBackground(new java.awt.Color(173,85,2));
+        jTabbedPane1.setSelectedIndex(2);
     }//GEN-LAST:event_btn_foodDetailsMouseClicked
 
     private void btn_foodDetailsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_foodDetailsMouseEntered
@@ -450,7 +391,6 @@ public class CashierMain extends javax.swing.JFrame {
     private void btn_loyaltyCardsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_loyaltyCardsMouseClicked
         btn_Dashboard.setBackground(new java.awt.Color(173,85,2));
         btn_reports.setBackground(new java.awt.Color(173,85,2));
-        btn_sd_details.setBackground(new java.awt.Color(173,85,2));
         btn_foodDetails.setBackground(new java.awt.Color(173,85,2));
         btn_loyaltyCards.setBackground(new java.awt.Color(252, 152, 3));
         btn_profile.setBackground(new java.awt.Color(173,85,2));
@@ -478,7 +418,6 @@ public class CashierMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         btn_Dashboard.setBackground(new java.awt.Color(173,85,2));
         btn_reports.setBackground(new java.awt.Color(173,85,2));
-        btn_sd_details.setBackground(new java.awt.Color(173,85,2));
         btn_foodDetails.setBackground(new java.awt.Color(173,85,2));
         btn_loyaltyCards.setBackground(new java.awt.Color(173,85,2));
         btn_profile.setBackground(new java.awt.Color(173,85,2));
@@ -525,7 +464,6 @@ public class CashierMain extends javax.swing.JFrame {
     private void btn_profileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_profileMouseClicked
         btn_Dashboard.setBackground(new java.awt.Color(173,85,2));
         btn_reports.setBackground(new java.awt.Color(173,85,2));
-        btn_sd_details.setBackground(new java.awt.Color(173,85,2));
         btn_foodDetails.setBackground(new java.awt.Color(173,85,2));
         btn_loyaltyCards.setBackground(new java.awt.Color(173,85,2));
         btn_profile.setBackground(new java.awt.Color(252, 152, 3));
@@ -577,13 +515,13 @@ public class CashierMain extends javax.swing.JFrame {
     private javax.swing.JButton btn_loyaltyCards;
     private javax.swing.JButton btn_profile;
     private javax.swing.JButton btn_reports;
-    private javax.swing.JButton btn_sd_details;
     private Cashier.cashierDashboard cashierDashboard1;
     private Cashier.IssueLoyaltyCard issueLoyaltyCard1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbl_background;
     private javax.swing.JLabel lbl_heading;
+    private Cashier.Menu menu1;
     // End of variables declaration//GEN-END:variables
 
 }

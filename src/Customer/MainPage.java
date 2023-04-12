@@ -223,7 +223,7 @@ public class MainPage extends javax.swing.JFrame {
                 rs = stmt.executeQuery("select FOOD_NAME,QUANTITY_TYPE,UNIT_PRICE from FOOD WHERE CATEGORY='COFFEE'"); //SQL stetment
                 while(rs.next()){
                     String foodName=rs.getString("FOOD_NAME");
-                    String qty=rs.getString("QUANTITY_TYPE");//get the value to variable "fname"
+                    String qty=rs.getString("QUANTITY_TYPE");
                     String price=rs.getString("UNIT_PRICE");
                     int x=0;
                     for(int i=0;i<foodID.length;i++){
@@ -238,7 +238,7 @@ public class MainPage extends javax.swing.JFrame {
                 rs = stmt.executeQuery("select FOOD_NAME,QUANTITY_TYPE,UNIT_PRICE from FOOD WHERE CATEGORY='CAKE'"); //SQL stetment
                 while(rs.next()){
                     String foodName=rs.getString("FOOD_NAME");
-                    String qty=rs.getString("QUANTITY_TYPE");//get the value to variable "fname"
+                    String qty=rs.getString("QUANTITY_TYPE");
                     String price=rs.getString("UNIT_PRICE");
                     int x=0;
                     for(int i=0;i<foodID.length;i++){
@@ -253,7 +253,7 @@ public class MainPage extends javax.swing.JFrame {
                 rs = stmt.executeQuery("select FOOD_NAME,QUANTITY_TYPE,UNIT_PRICE from FOOD WHERE CATEGORY='BUN'"); //SQL stetment
                 while(rs.next()){
                     String foodName=rs.getString("FOOD_NAME");
-                    String qty=rs.getString("QUANTITY_TYPE");//get the value to variable "fname"
+                    String qty=rs.getString("QUANTITY_TYPE");
                     String price=rs.getString("UNIT_PRICE");
                     int x=0;
                     for(int i=0;i<foodID.length;i++){
@@ -679,9 +679,9 @@ public class MainPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(new JFrame(), "Can't update the order",
                "Imformation", JOptionPane.ERROR_MESSAGE);
                 }
-            
-            CashierMain obj4=new CashierMain(empmode);//need to pass cashier id
-            obj4.show();
+            //Cashier page cant close when update a order
+            //CashierMain obj4=new CashierMain(empmode);//need to pass cashier id
+            //obj4.show();
             dispose();
         }
         else{//If this is a new order
@@ -711,40 +711,32 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_nextActionPerformed
 
     private void btn_back1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back1ActionPerformed
-        btn_plusMin(2);
+        btn_plusMin(false);
     }//GEN-LAST:event_btn_back1ActionPerformed
 
     private void btn_plusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_plusActionPerformed
-        btn_plusMin(1);
+        btn_plusMin(true);
         
     }//GEN-LAST:event_btn_plusActionPerformed
-    public void btn_plusMin(int x){
+    public void btn_plusMin(boolean x){
         int total=Integer.parseInt(lbl_total.getText());
-        int i=jTabbedPane1.getSelectedIndex();
-        if(i==3){
-            int row=jTable_menu3.getSelectedRow();
-            String a=(String) jTable_menu3.getValueAt(row, 2);
-            int b=Integer.parseInt(a);
-            if(x==1){
-                b++;
-                total+=Integer.parseInt((String) jTable_menu3.getValueAt(row, 3));
-            }    
-            else if(x==2&&b>0){
-                b--;
-                total-=Integer.parseInt((String) jTable_menu3.getValueAt(row, 3));
-            }
-            a= Integer. toString(b);
-            jTable_menu3.setValueAt(a, row, 2);
-        }
+        int i=jTabbedPane1.getSelectedIndex();//check selected food type       
         if(i==1){
             int row=jTable_menu1.getSelectedRow();
             String a=(String) jTable_menu1.getValueAt(row, 2);
-            int b=Integer.parseInt(a);
-            if(x==1){
-                b++;
-                total+=Integer.parseInt((String) jTable_menu1.getValueAt(row, 3));
+            int b=Integer.parseInt(a);//get selected amount
+            if(x==true){
+                //CHECK FOOD AVALABILITY
+                //create a method called isAvailable(fID,Selected amount)->if available,return true.if not, return false.
+                if(true){//if food not
+                    b++;
+                    total+=Integer.parseInt((String) jTable_menu1.getValueAt(row, 3));
+                }
+                else{
+                    //if not available
+                }                
             }
-            else if(x==2&&b>0){
+            else if(x==false&&b>0){
                 b--;
                 total-=Integer.parseInt((String) jTable_menu1.getValueAt(row, 3));
             }
@@ -755,16 +747,46 @@ public class MainPage extends javax.swing.JFrame {
             int row=jTable_menu2.getSelectedRow();
             String a=(String) jTable_menu2.getValueAt(row, 2);
             int b=Integer.parseInt(a);
-            if(x==1){
-                b++;
-                total+=Integer.parseInt((String) jTable_menu2.getValueAt(row, 3));
+            if(x==true){
+                //CHECK FOOD AVALABILITY
+                //create a method called isAvailable(fID,Selected amount)->if available,return true.if not, return false.
+                //New order ekakda Updating order ekakda kiyalath balanna
+                if(true){//if food not
+                    b++;
+                    total+=Integer.parseInt((String) jTable_menu2.getValueAt(row, 3));
+                }
+                else{
+                    //if not available
+                } 
             }
-            else if(x==2&&b>0){
+            else if(x==false&&b>0){
                 b--;
                 total-=Integer.parseInt((String) jTable_menu2.getValueAt(row, 3));
             }
             a= Integer. toString(b);
             jTable_menu2.setValueAt(a, row, 2);
+        }
+        if(i==3){
+            int row=jTable_menu3.getSelectedRow();
+            String a=(String) jTable_menu3.getValueAt(row, 2);
+            int b=Integer.parseInt(a);
+            if(x==true){
+                //CHECK FOOD AVALABILITY
+                //create a method called isAvailable(fID,Selected amount)->if available,return true.if not, return false.
+                if(true){//if food not
+                    b++;
+                    total+=Integer.parseInt((String) jTable_menu3.getValueAt(row, 3));
+                }
+                else{
+                    //if not available
+                }
+            }    
+            else if(x==false&&b>0){
+                b--;
+                total-=Integer.parseInt((String) jTable_menu3.getValueAt(row, 3));
+            }
+            a= Integer. toString(b);
+            jTable_menu3.setValueAt(a, row, 2);
         }
         lbl_total.setText(Integer.toString(total));
         billUpdate();

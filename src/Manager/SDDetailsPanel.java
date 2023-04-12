@@ -98,6 +98,8 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         txt_empID = new javax.swing.JTextField();
         btn_close = new javax.swing.JButton();
+        jComboBox_stufftype = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -234,45 +236,45 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         Panel_AddEditStuff.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel10.setText("First Name");
-        Panel_AddEditStuff.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, -1));
+        jLabel10.setText("Employee type");
+        Panel_AddEditStuff.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, -1, 20));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Last Name");
-        Panel_AddEditStuff.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, -1, -1));
+        Panel_AddEditStuff.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, -1, 20));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Email");
-        Panel_AddEditStuff.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, -1, -1));
+        Panel_AddEditStuff.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, -1, 20));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("NIC");
-        Panel_AddEditStuff.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, -1, -1));
+        Panel_AddEditStuff.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, -1, 20));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Mobile Number");
-        Panel_AddEditStuff.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 440, -1, -1));
+        Panel_AddEditStuff.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, -1, 20));
 
         txt_tp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Panel_AddEditStuff.add(txt_tp, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 170, -1));
+        Panel_AddEditStuff.add(txt_tp, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 500, 170, 30));
 
         txt_nic.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Panel_AddEditStuff.add(txt_nic, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 170, -1));
+        Panel_AddEditStuff.add(txt_nic, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 170, 30));
 
         txt_email.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Panel_AddEditStuff.add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, 290, -1));
+        Panel_AddEditStuff.add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 290, 30));
 
         txt_lname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Panel_AddEditStuff.add(txt_lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 170, -1));
+        Panel_AddEditStuff.add(txt_lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 170, 30));
 
         txt_fname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Panel_AddEditStuff.add(txt_fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 170, -1));
+        Panel_AddEditStuff.add(txt_fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 170, 30));
 
         lbl_error.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbl_error.setForeground(new java.awt.Color(255, 51, 51));
         lbl_error.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_error.setText("lbl_error");
-        Panel_AddEditStuff.add(lbl_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, 460, -1));
+        Panel_AddEditStuff.add(lbl_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 560, 460, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -387,6 +389,18 @@ public class SDDetailsPanel extends javax.swing.JPanel {
             }
         });
         Panel_AddEditStuff.add(btn_close, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 580, 150, 40));
+
+        jComboBox_stufftype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cashier", "Chef" }));
+        jComboBox_stufftype.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_stufftypeActionPerformed(evt);
+            }
+        });
+        Panel_AddEditStuff.add(jComboBox_stufftype, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, 170, -1));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel13.setText("First Name");
+        Panel_AddEditStuff.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, -1, 20));
 
         add(Panel_AddEditStuff, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1130, 680));
     }// </editor-fold>//GEN-END:initComponents
@@ -759,6 +773,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
             txt_oldpwd.setText("");
             txt_newpwd.setText("");
             txt_newpwd_c.setText("");
+            lbl_errorpwd.setVisible(false);
     }
     private void setForm(String eid) throws Exception{
         Emp obj=new Emp(eid);
@@ -768,6 +783,12 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         txt_nic.setText(obj.getNIC());
         txt_email.setText(obj.getEmail());
         txt_tp.setText(Integer.toString(obj.getTp()));
+        int item=0;System.out.println("aaaaaa "+obj.getEtype());
+        if("CASHIER".equals(obj.getEtype()))
+        {item=0;System.out.println("aaaaaa");}
+        else
+            item=1;
+        jComboBox_stufftype.setSelectedIndex(item);
     }
     private void txt_newpwd_cMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_newpwd_cMouseClicked
         lbl_errorpwd.setText("");
@@ -789,30 +810,37 @@ public class SDDetailsPanel extends javax.swing.JPanel {
     }
     private void btn_change_pwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_change_pwdActionPerformed
         try {
+            lbl_errorpwd.setVisible(false);
             Emp obj1=new Emp();
             if(txt_oldpwd.getText().equals("")){
                 lbl_errorpwd.setText("Please enter the old password");
+                lbl_errorpwd.setVisible(true);
                 txt_oldpwd.requestFocus();
             }
             else if(txt_newpwd.getText().equals("")){
                 lbl_errorpwd.setText("Please enter the new password");
+                lbl_errorpwd.setVisible(true);
                 txt_newpwd.requestFocus();
             }
             else if(txt_newpwd_c.getText().equals("")){
                 lbl_errorpwd.setText("Please Confirm your password");
+                lbl_errorpwd.setVisible(true);
                 txt_newpwd_c.requestFocus();
             }
             else if(txt_newpwd.getText().length()<6){
                 lbl_errorpwd.setText("Use 6 characters or more for your password");
+                lbl_errorpwd.setVisible(true);
                 txt_newpwd.requestFocus();
             }
             else if(!txt_newpwd_c.getText().equals(txt_newpwd.getText())){
                 lbl_errorpwd.setText("Those passwords didn’t match. Try again.");
+                lbl_errorpwd.setVisible(true);
                 txt_newpwd_c.requestFocus();
                 txt_newpwd_c.setText("");
             }
             else if(!obj1.checkOldPwd(txt_empID.getText(),txt_oldpwd.getText())){
                 lbl_errorpwd.setText("Old passward is incorrect");
+                lbl_errorpwd.setVisible(true);
                 txt_oldpwd.requestFocus();
             }
             else{
@@ -860,48 +888,84 @@ public class SDDetailsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_resetActionPerformed
 
     private void btn_changeSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changeSaveActionPerformed
+        lbl_errorpwd.setVisible(false);
         if(txt_fname.getText().length()==0){
             lbl_error.setText("Please enter the first name");
+            lbl_error.setVisible(true);
         }
         else if(txt_fname.getText().length()<2){
             lbl_error.setText("Please enter a valid first name");
+            lbl_error.setVisible(true);
         }
         else if(!txt_fname.getText().matches("[a-zA-Z]+")){//need to do validations
             lbl_error.setText("First name can have only english letters");
+            lbl_error.setVisible(true);
         }
         else if(txt_lname.getText().length()==0){
             lbl_error.setText("Please enter the last name");
+            lbl_error.setVisible(true);
         }
         else if(txt_lname.getText().length()<2){
             lbl_error.setText("Please enter a valid last name");
+            lbl_error.setVisible(true);
         }
         else if(!txt_lname.getText().matches("[a-zA-Z]+")){
             lbl_error.setText("Last name can have only english letters");
+            lbl_error.setVisible(true);
         }
         //need to do validations
         else{
+            Emp obj2=new Emp();
             if("Save Changes".equals(btn_changeSave.getText())){
                 try {
-                Emp obj2=new Emp();
-                obj2.setEmpDetails(txt_empID.getText(),txt_fname.getText(),txt_lname.getText(),txt_email.getText(),txt_tp.getText(),txt_nic.getText());
+                String emp_type="";
+                if(jComboBox_stufftype.getSelectedIndex()==0)
+                    emp_type="CASHIER";
+                else
+                    emp_type="CHEF";
+                obj2.setEmpDetails(txt_empID.getText(),txt_fname.getText(),txt_lname.getText(),txt_email.getText(),txt_tp.getText(),txt_nic.getText(),emp_type);
                 JOptionPane.showMessageDialog(new JFrame(), "Details successfully changed",
                     "Imformation", JOptionPane.INFORMATION_MESSAGE);
+                clearform();
+                panel_main.setVisible(true);
+                Panel_AddEditStuff.setVisible(false);
+                lbl_Error.setVisible(false);
+                viewALL();
                 } catch (Exception ex) {
                     Logger.getLogger(ProfilePanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             else if("Add".equals(btn_changeSave.getText())){
-                //ADD employee need to code
+                String emp_type="";
+                if(jComboBox_stufftype.getSelectedIndex()==0)
+                    emp_type="CASHIER";
+                else
+                    emp_type="CHEF";
+                try {
+                    obj2.addStaff(txt_empID.getText(),txt_fname.getText(),txt_lname.getText(),txt_tp.getText(),txt_email.getText(),txt_nic.getText(),emp_type,txt_nic.getText());
+                    clearform();
+                    panel_main.setVisible(true);
+                    Panel_AddEditStuff.setVisible(false);
+                    lbl_Error.setVisible(false);
+                    viewALL();
+                } catch (Exception ex) {
+                    Logger.getLogger(SDDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             
         }
     }//GEN-LAST:event_btn_changeSaveActionPerformed
 
     private void btn_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_closeActionPerformed
+        lbl_errorpwd.setVisible(false);
         clearform();
         panel_main.setVisible(true);
         Panel_AddEditStuff.setVisible(false);
     }//GEN-LAST:event_btn_closeActionPerformed
+
+    private void jComboBox_stufftypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_stufftypeActionPerformed
+        
+    }//GEN-LAST:event_jComboBox_stufftypeActionPerformed
     
     private void clearTable(){
         DefaultTableModel tblModel =(DefaultTableModel)jTable1.getModel(); 
@@ -926,10 +990,12 @@ public class SDDetailsPanel extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox checkbox_pwd_change;
     private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox<String> jComboBox_stufftype;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

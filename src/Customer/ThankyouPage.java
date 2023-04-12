@@ -36,12 +36,13 @@ public class ThankyouPage extends javax.swing.JFrame {
             dispose();
         }
     }
-    Thread thread;
+    private Thread thread;
     //TIMEER
 
     public ThankyouPage() {
         
         initComponents();
+        //btn disappered
         btn_main.setOpaque(false);
         btn_main.setContentAreaFilled(false);
         btn_main.setBorderPainted(false);
@@ -50,7 +51,6 @@ public class ThankyouPage extends javax.swing.JFrame {
         //Thread thread = new Thread(obj);
         this.thread = new Thread(obj);
         thread.start();
-
     }
 
 
@@ -94,11 +94,10 @@ public class ThankyouPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_mainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mainActionPerformed
-        // TODO add your handling code here:
-        thread.stop();
+       thread.stop();
        WelcomePage obj =new WelcomePage();
-        obj.show();
-        dispose();
+       obj.show();
+       dispose();
     }//GEN-LAST:event_btn_mainActionPerformed
 
     /**

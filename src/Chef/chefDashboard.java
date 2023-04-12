@@ -11,6 +11,7 @@ import DBconnection.cashier;
 import DBconnection.getDate;
 import DBconnection.mgrDashboard;
 import java.awt.Component;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,6 +34,7 @@ public class chefDashboard extends javax.swing.JPanel {
         initComponents();
         lbl_msg.setVisible(false);
         refresh(); 
+        jTable_dBoard.getTableHeader().setFont(new Font("SansSerif", Font.PLAIN, 15));
     }
 
     /**
