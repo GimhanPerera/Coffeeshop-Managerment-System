@@ -123,6 +123,44 @@ public class Food extends Connect{
         return fname;  
     }
     
+    //NEED TO CODE
+    public boolean isFoodAvailability(String fid,int num) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        int total=0;
+        getDate obj =new getDate();
+        String date=obj.dateOnly();
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select (sum(AMOUNT)-sum(DISCOUNT))as tot from INVOICE where ORDERID IN (select ORDER_NUMBER from ORDER_T Inner Join INVOICE ON INVOICE.ORDERID=ORDER_T.ORDER_NUMBER where (ORDER_DATETIME > '"+date+" 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND INVOICE.STATUS='Paid')"); //SQL stetment
+            while(rs.next()){
+                total=rs.getInt("tot");
+            }                
+        }
+        finally{
+            c.close(); 
+        }
+        return true;  
+    }
+    
+    //NEED TO CODE
+    public int FoodAvailableCount(String fid) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        int num=0;
+        getDate obj =new getDate();
+        String date=obj.dateOnly();
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select (sum(AMOUNT)-sum(DISCOUNT))as tot from ORDER_FOOD where ORDERID IN (select ORDER_NUMBER from ORDER_T Inner Join INVOICE ON INVOICE.ORDERID=ORDER_T.ORDER_NUMBER where (ORDER_DATETIME > '"+date+" 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND INVOICE.STATUS='Paid')"); //SQL stetment
+            while(rs.next()){
+                num=rs.getInt("tot");
+            }                
+        }
+        finally{
+            c.close(); 
+        }
+        return num;  
+    }
+    
     public String newFID(String id) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         String FID="";
