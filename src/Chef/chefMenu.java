@@ -122,7 +122,7 @@ public class chefMenu extends javax.swing.JPanel {
         jTable0.setRowHeight(35);
         jScrollPane1.setViewportView(jTable0);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 15, 880, 475));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 15, 710, 475));
 
         jTabbedPane1.addTab("tab1", jPanel1);
 
@@ -161,9 +161,16 @@ public class chefMenu extends javax.swing.JPanel {
                 "Product", "Today Available Qty", "Price"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -186,9 +193,16 @@ public class chefMenu extends javax.swing.JPanel {
                 "Product", "Today Available Qty", "Price"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -236,17 +250,17 @@ public class chefMenu extends javax.swing.JPanel {
         try{
             Connect obj = new Connect();
         Food obj2=new Food();
+        String qty="";
         Connection c = obj.getConnection();  //getConnection();//Establish the connection
         jTabbedPane1.setSelectedIndex(3);
          //int q=1;System.out.println(q++); <- tester
-            
                 Statement stmt = c.createStatement();//Prepare statement
                 ResultSet rs = stmt.executeQuery("select FOOD_NAME,UNIT_PRICE from FOOD WHERE CATEGORY='COFFEE'"); //SQL stetment
                 while(rs.next()){
                     String foodName=rs.getString("FOOD_NAME");
                     String price=rs.getString("UNIT_PRICE");
-                    
-                    String tbData[]={foodName,"",price};
+                    qty=Integer.toString(obj2.FoodAvailableCount(foodName));
+                    String tbData[]={foodName,qty,price};
                     DefaultTableModel tblModel =(DefaultTableModel)jTable3.getModel();
                     tblModel.addRow(tbData);
                 }
@@ -255,8 +269,8 @@ public class chefMenu extends javax.swing.JPanel {
                 while(rs.next()){
                     String foodName=rs.getString("FOOD_NAME");
                     String price=rs.getString("UNIT_PRICE");
-                    
-                    String tbData[]={foodName,"",price};
+                    qty=Integer.toString(obj2.FoodAvailableCount(foodName));
+                    String tbData[]={foodName,qty,price};
                     DefaultTableModel tblModel =(DefaultTableModel)jTable1.getModel(); 
                     tblModel.addRow(tbData);
                 }
@@ -265,7 +279,8 @@ public class chefMenu extends javax.swing.JPanel {
                 while(rs.next()){
                     String foodName=rs.getString("FOOD_NAME");
                     String price=rs.getString("UNIT_PRICE");
-                    String tbData[]={foodName,"",price};
+                    qty=Integer.toString(obj2.FoodAvailableCount(foodName));
+                    String tbData[]={foodName,qty,price};
                     DefaultTableModel tblModel =(DefaultTableModel)jTable2.getModel();
                     tblModel.addRow(tbData);
                 }

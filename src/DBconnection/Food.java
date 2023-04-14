@@ -123,42 +123,85 @@ public class Food extends Connect{
         return fname;  
     }
     
-    //NEED TO CODE
-    public boolean isFoodAvailability(String fid,int num) throws Exception{   
+    public int foodCountOfTheOrder(String food_name,String orderID) throws Exception{ //qty of food in given order  
         Connection c= getConnection();//get the connection using inheritance
-        int total=0;
-        getDate obj =new getDate();
-        String date=obj.dateOnly();
+        int qty=0;
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("select (sum(AMOUNT)-sum(DISCOUNT))as tot from INVOICE where ORDERID IN (select ORDER_NUMBER from ORDER_T Inner Join INVOICE ON INVOICE.ORDERID=ORDER_T.ORDER_NUMBER where (ORDER_DATETIME > '"+date+" 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND INVOICE.STATUS='Paid')"); //SQL stetment
+            ResultSet rs = stmt.executeQuery("Select QUANTITY FROM ORDER_FOOD t INNER JOIN FOOD f ON t.FOOD_ID=f.FOOD_ID WHERE t.ORDER_NUMBER='"+orderID+"' AND f.FOOD_NAME='"+food_name+"';"); //SQL stetment
             while(rs.next()){
-                total=rs.getInt("tot");
-            }                
+                qty=rs.getInt("QUANTITY");//get the value to variable "fname"
+            } 
         }
         finally{
             c.close(); 
         }
-        return true;  
+        return qty;  
+    }
+    
+     //availabitily of a food
+    public boolean isFoodAvailability(String food_name,int num) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        int avalable=0; System.out.println("Available checking ");
+        getDate obj =new getDate();
+        String date=obj.dateOnly();
+        boolean x=false;
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            //max qty for a day
+            ResultSet rs = stmt.executeQuery("SELECT DAILY_QUANTITY FROM food WHERE FOOD_NAME='"+food_name+"'");
+            while(rs.next()){
+                avalable=rs.getInt("DAILY_QUANTITY");              
+            }
+            System.out.println("Daily Available qty: "+avalable);
+            //Get sold qty today
+            rs = stmt.executeQuery("select  SUM(QUANTITY) AS Availability from FOOD INNER JOIN ORDER_FOOD ON food.FOOD_ID=ORDER_FOOD.FOOD_ID" +
+                            " where ORDER_FOOD.ORDER_NUMBER IN (select ORDER_NUMBER from ORDER_T" +
+                                " where ORDER_DATETIME > '"+date+" 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND FOOD.FOOD_NAME='"+food_name+"'" +
+                                    " GROUP BY ORDER_FOOD.FOOD_ID;"); //SQL stetment
+            while(rs.next()){
+                avalable-=rs.getInt("Availability");              
+            }
+            System.out.println("Today can serve : "+avalable);
+            if((avalable-num)>0)
+                x=true;
+            
+        }
+        finally{
+            c.close(); 
+        }
+        return x;  
     }
     
     //NEED TO CODE
-    public int FoodAvailableCount(String fid) throws Exception{   
+    public int FoodAvailableCount(String food_name) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
-        int num=0;
+        int avalable=0; System.out.println("Available checking ");
         getDate obj =new getDate();
         String date=obj.dateOnly();
+        boolean x=false;
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("select (sum(AMOUNT)-sum(DISCOUNT))as tot from ORDER_FOOD where ORDERID IN (select ORDER_NUMBER from ORDER_T Inner Join INVOICE ON INVOICE.ORDERID=ORDER_T.ORDER_NUMBER where (ORDER_DATETIME > '"+date+" 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND INVOICE.STATUS='Paid')"); //SQL stetment
+            //max qty for a day
+            ResultSet rs = stmt.executeQuery("SELECT DAILY_QUANTITY FROM food WHERE FOOD_NAME='"+food_name+"'");
             while(rs.next()){
-                num=rs.getInt("tot");
-            }                
+                avalable=rs.getInt("DAILY_QUANTITY");              
+            }
+            System.out.println("Daily Available qty: "+avalable);
+            //Get sold qty today
+            rs = stmt.executeQuery("select  SUM(QUANTITY) AS Availability from FOOD INNER JOIN ORDER_FOOD ON food.FOOD_ID=ORDER_FOOD.FOOD_ID" +
+                            " where ORDER_FOOD.ORDER_NUMBER IN (select ORDER_NUMBER from ORDER_T" +
+                                " where ORDER_DATETIME > '"+date+" 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND FOOD.FOOD_NAME='"+food_name+"'" +
+                                    " GROUP BY ORDER_FOOD.FOOD_ID;");
+            while(rs.next()){
+                avalable-=rs.getInt("Availability");              
+            }
+            System.out.println("Today can serve : "+avalable);
         }
         finally{
             c.close(); 
         }
-        return num;  
+        return avalable;  
     }
     
     public String newFID(String id) throws Exception{   

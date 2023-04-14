@@ -719,22 +719,33 @@ public class MainPage extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btn_plusActionPerformed
     public void btn_plusMin(boolean x){
+        Food obj5=new Food();
         int total=Integer.parseInt(lbl_total.getText());
         int i=jTabbedPane1.getSelectedIndex();//check selected food type       
         if(i==1){
             int row=jTable_menu1.getSelectedRow();
+            String food_name=(String) jTable_menu1.getValueAt(row, 0);//get Food name for check availability
             String a=(String) jTable_menu1.getValueAt(row, 2);
             int b=Integer.parseInt(a);//get selected amount
             if(x==true){
-                //CHECK FOOD AVALABILITY
-                //create a method called isAvailable(fID,Selected amount)->if available,return true.if not, return false.
-                if(true){//if food not
-                    b++;
-                    total+=Integer.parseInt((String) jTable_menu1.getValueAt(row, 3));
+                try {
+                    //CHECK FOOD AVALABILITY
+                    //create a method called isAvailable(fID,Selected amount)->if available,return true.if not, return false.
+                    int temp=b;System.out.println("TEST 1");
+                    if(editmode){//If this is a update of placed order
+                        temp=temp-obj5.foodCountOfTheOrder(food_name,orderID);
+                    }
+                    if(obj5.isFoodAvailability(food_name,temp)){//if food available
+                        b++;
+                        total+=Integer.parseInt((String) jTable_menu1.getValueAt(row, 3));
+                    }
+                    else{//if not available
+                        JOptionPane.showMessageDialog(new JFrame(), "Out of stock",
+                                "Imformation", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                else{
-                    //if not available
-                }                
             }
             else if(x==false&&b>0){
                 b--;
@@ -745,19 +756,27 @@ public class MainPage extends javax.swing.JFrame {
         }
         if(i==2){
             int row=jTable_menu2.getSelectedRow();
+            String food_name=(String) jTable_menu2.getValueAt(row, 0);//get Food name for check availability
             String a=(String) jTable_menu2.getValueAt(row, 2);
             int b=Integer.parseInt(a);
             if(x==true){
-                //CHECK FOOD AVALABILITY
-                //create a method called isAvailable(fID,Selected amount)->if available,return true.if not, return false.
-                //New order ekakda Updating order ekakda kiyalath balanna
-                if(true){//if food not
-                    b++;
-                    total+=Integer.parseInt((String) jTable_menu2.getValueAt(row, 3));
+                try {
+                    //CHECK FOOD AVALABILITY
+                    int temp=b;
+                    if(editmode){//If this is a update of placed order
+                        temp=temp-obj5.foodCountOfTheOrder(food_name,orderID);
+                    }
+                    if(obj5.isFoodAvailability(food_name,temp)){//if food available
+                        b++;
+                        total+=Integer.parseInt((String) jTable_menu2.getValueAt(row, 3));
+                    }
+                    else{//if not available
+                        JOptionPane.showMessageDialog(new JFrame(), "Out of stock",
+                                "Imformation", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                else{
-                    //if not available
-                } 
             }
             else if(x==false&&b>0){
                 b--;
@@ -768,17 +787,26 @@ public class MainPage extends javax.swing.JFrame {
         }
         if(i==3){
             int row=jTable_menu3.getSelectedRow();
+            String food_name=(String) jTable_menu3.getValueAt(row, 0);//get Food name for check availability
             String a=(String) jTable_menu3.getValueAt(row, 2);
             int b=Integer.parseInt(a);
             if(x==true){
-                //CHECK FOOD AVALABILITY
-                //create a method called isAvailable(fID,Selected amount)->if available,return true.if not, return false.
-                if(true){//if food not
-                    b++;
-                    total+=Integer.parseInt((String) jTable_menu3.getValueAt(row, 3));
-                }
-                else{
-                    //if not available
+                try {
+                    //CHECK FOOD AVALABILITY
+                    int temp=b;
+                    if(editmode){//If this is a update of placed order
+                        temp=temp-obj5.foodCountOfTheOrder(food_name,orderID);
+                    }
+                    if(obj5.isFoodAvailability(food_name,temp)){//if food available
+                        b++;
+                        total+=Integer.parseInt((String) jTable_menu3.getValueAt(row, 3));
+                    }
+                    else{//if not available
+                        JOptionPane.showMessageDialog(new JFrame(), "Out of stock",
+                                "Imformation", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }    
             else if(x==false&&b>0){

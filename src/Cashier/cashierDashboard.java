@@ -84,7 +84,7 @@ public class cashierDashboard extends javax.swing.JPanel {
                 //pending orders
                 //Statting order date eka wenas karanna ona ada dawasata
                 rs = stmt.executeQuery("select o.ORDER_NUMBER, o.ORDER_TYPE, o.ORDER_DATETIME,o.STATUS as o_sts,i.STATUS as i_sts from CUSTOMER c INNER JOIN ORDER_T o ON o.CUSTOMER_ID=c.CUSTOMER_ID " +
-                    "INNER JOIN INVOICE i ON i.ORDERID=o.ORDER_NUMBER WHERE (ORDER_DATETIME > '2023-02-01 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND o.STATUS='Pending'"); //Tables need to join
+                    "INNER JOIN INVOICE i ON i.ORDERID=o.ORDER_NUMBER WHERE (ORDER_DATETIME > '2023-02-01 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND o.STATUS='Pending' ORDER BY o.ORDER_DATETIME DESC"); //Tables need to join
                 while(rs.next()){
                     String oID=rs.getString("ORDER_NUMBER");
                     String otype=rs.getString("ORDER_TYPE");
@@ -98,7 +98,7 @@ public class cashierDashboard extends javax.swing.JPanel {
                 }
                 //hold orders
                 rs = stmt.executeQuery("select o.ORDER_NUMBER, o.ORDER_TYPE, o.ORDER_DATETIME,o.STATUS as o_sts,i.STATUS as i_sts from CUSTOMER c INNER JOIN ORDER_T o ON o.CUSTOMER_ID=c.CUSTOMER_ID " +
-                    "INNER JOIN INVOICE i ON i.ORDERID=o.ORDER_NUMBER WHERE (ORDER_DATETIME > '2023-02-01 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND o.STATUS='Hold'"); //Tables need to join
+                    "INNER JOIN INVOICE i ON i.ORDERID=o.ORDER_NUMBER WHERE (ORDER_DATETIME > '2023-02-01 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND o.STATUS='Hold' ORDER BY o.ORDER_DATETIME DESC"); //Tables need to join
                 while(rs.next()){
                     String oID=rs.getString("ORDER_NUMBER");
                     String otype=rs.getString("ORDER_TYPE");
@@ -112,7 +112,7 @@ public class cashierDashboard extends javax.swing.JPanel {
                 }
                 //Finish orders
                 rs = stmt.executeQuery("select o.ORDER_NUMBER, o.ORDER_TYPE, o.ORDER_DATETIME,o.STATUS as o_sts,i.STATUS as i_sts from CUSTOMER c INNER JOIN ORDER_T o ON o.CUSTOMER_ID=c.CUSTOMER_ID " +
-                    "INNER JOIN INVOICE i ON i.ORDERID=o.ORDER_NUMBER WHERE (ORDER_DATETIME > '2023-02-01 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND o.STATUS='Finish'"); //Tables need to join
+                    "INNER JOIN INVOICE i ON i.ORDERID=o.ORDER_NUMBER WHERE (ORDER_DATETIME > '2023-02-01 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND o.STATUS='Finish' ORDER BY o.ORDER_DATETIME DESC"); //Tables need to join
                 while(rs.next()){
                     String oID=rs.getString("ORDER_NUMBER");
                     String otype=rs.getString("ORDER_TYPE");
@@ -126,7 +126,7 @@ public class cashierDashboard extends javax.swing.JPanel {
                 }
                 //Completed orders
                 rs = stmt.executeQuery("select o.ORDER_NUMBER, o.ORDER_TYPE, o.ORDER_DATETIME,o.STATUS as o_sts,i.STATUS as i_sts from CUSTOMER c INNER JOIN ORDER_T o ON o.CUSTOMER_ID=c.CUSTOMER_ID " +
-                    "INNER JOIN INVOICE i ON i.ORDERID=o.ORDER_NUMBER WHERE (ORDER_DATETIME > '2023-02-01 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND o.STATUS='Completed'"); //Tables need to join
+                    "INNER JOIN INVOICE i ON i.ORDERID=o.ORDER_NUMBER WHERE (ORDER_DATETIME > '2023-02-01 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND o.STATUS='Completed' ORDER BY o.ORDER_DATETIME DESC"); //Tables need to join
                 while(rs.next()){
                     String oID=rs.getString("ORDER_NUMBER");
                     String otype=rs.getString("ORDER_TYPE");
@@ -275,7 +275,7 @@ public class cashierDashboard extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Order ID", "Order type", "Ordered Time", "Status", "Payment Status", "Total"
+                "Order Number", "Order type", "Ordered Time", "Status", "Payment Status", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {

@@ -236,6 +236,7 @@ public class Menu extends javax.swing.JPanel {
         try{
             Connect obj = new Connect();
         Food obj2=new Food();
+        String qty="";
         Connection c = obj.getConnection();  //getConnection();//Establish the connection
         jTabbedPane1.setSelectedIndex(3);
          //int q=1;System.out.println(q++); <- tester
@@ -245,8 +246,8 @@ public class Menu extends javax.swing.JPanel {
                 while(rs.next()){
                     String foodName=rs.getString("FOOD_NAME");
                     String price=rs.getString("UNIT_PRICE");
-                    
-                    String tbData[]={foodName,"",price};
+                    qty=Integer.toString(obj2.FoodAvailableCount(foodName));
+                    String tbData[]={foodName,qty,price};
                     DefaultTableModel tblModel =(DefaultTableModel)jTable3.getModel();
                     tblModel.addRow(tbData);
                 }
@@ -255,8 +256,8 @@ public class Menu extends javax.swing.JPanel {
                 while(rs.next()){
                     String foodName=rs.getString("FOOD_NAME");
                     String price=rs.getString("UNIT_PRICE");
-                    
-                    String tbData[]={foodName,"",price};
+                    qty=Integer.toString(obj2.FoodAvailableCount(foodName));
+                    String tbData[]={foodName,qty,price};
                     DefaultTableModel tblModel =(DefaultTableModel)jTable1.getModel(); 
                     tblModel.addRow(tbData);
                 }
@@ -265,7 +266,8 @@ public class Menu extends javax.swing.JPanel {
                 while(rs.next()){
                     String foodName=rs.getString("FOOD_NAME");
                     String price=rs.getString("UNIT_PRICE");
-                    String tbData[]={foodName,"",price};
+                    qty=Integer.toString(obj2.FoodAvailableCount(foodName));
+                    String tbData[]={foodName,qty,price};
                     DefaultTableModel tblModel =(DefaultTableModel)jTable2.getModel();
                     tblModel.addRow(tbData);
                 }
