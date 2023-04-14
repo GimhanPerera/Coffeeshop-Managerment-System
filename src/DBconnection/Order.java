@@ -154,4 +154,27 @@ public class Order extends Connect{
         }
     }
     
+    public String getTablelist(String ordID) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        String tables="";
+        try{ 
+            boolean first=true;
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select TABLE_NO from ORDER_TABLE WHERE ORDER_NUMBER='"+ordID+"'"); //SQL stetment
+            while(rs.next()){
+                if(first){
+                    tables=rs.getString("TABLE_NO");
+                    first=false;
+                }
+                else{
+                    tables=tables+", "+rs.getString("TABLE_NO");
+                }   
+            }
+        }
+        finally{
+            c.close(); 
+        }
+        return tables;    
+    }
+    
 }

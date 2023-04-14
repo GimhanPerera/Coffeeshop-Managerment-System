@@ -16,6 +16,47 @@ import java.util.logging.Logger;
  * @author Gimhan
  */
 public class Customer extends Connect{
+    private String cid="";
+    private String fname="";
+    private String lname="";
+    private int tp=0;
+    
+    public Customer(){
+        
+    }
+    
+    public Customer(String order_id) throws Exception{
+        getDetails(order_id);
+    }
+    
+    private void getDetails(String order_id) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        try{ System.out.println("EEAAAA2 ");
+            Statement stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from CUSTOMER c INNER JOIN ORDER_T o ON o.CUSTOMER_ID=c.CUSTOMER_ID WHERE o.ORDER_NUMBER='"+order_id+"'");
+            while(rs.next()){
+                this.cid=rs.getString("CUSTOMER_ID");
+                this.fname=rs.getString("F_NAME");
+                this.lname=rs.getString("L_NAME");
+                this.tp=rs.getInt("MOBILE_NUMBER");
+            }
+        }
+        finally{
+            c.close(); 
+        }   
+    }
+    
+    public String getC_id(){
+        return this.cid;
+    }
+    public String getName(){
+        return this.fname+" "+this.lname;
+    }
+    public int getTp(){
+        return this.tp;
+    }
+    //
+    
     public String getCID(String tp) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         String cid="";

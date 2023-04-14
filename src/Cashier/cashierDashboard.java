@@ -5,6 +5,7 @@
 package Cashier;
 import Customer.MainPage;
 import DBconnection.Connect;
+import DBconnection.Customer;
 import DBconnection.mgrDashboard;
 import DBconnection.Order;
 import DBconnection.cashier;
@@ -228,6 +229,14 @@ public class cashierDashboard extends javax.swing.JPanel {
         jCheckBox_paid = new javax.swing.JCheckBox();
         jRadioButton_cash = new javax.swing.JRadioButton();
         jRadioButton_card = new javax.swing.JRadioButton();
+        lbl_tableheader = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        lbl_c_id = new javax.swing.JLabel();
+        lbl_name = new javax.swing.JLabel();
+        lbl_tp = new javax.swing.JLabel();
+        lbl_tables = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         lbl_background = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -383,6 +392,38 @@ public class cashierDashboard extends javax.swing.JPanel {
         jRadioButton_card.setText("By card");
         jPanel_order.add(jRadioButton_card, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 400, -1, -1));
 
+        lbl_tableheader.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_tableheader.setText("Table(s)");
+        jPanel_order.add(lbl_tableheader, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 240, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setText("Customer ID");
+        jPanel_order.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 120, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setText("Customer Name");
+        jPanel_order.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, -1, -1));
+
+        lbl_c_id.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_c_id.setText("00000");
+        jPanel_order.add(lbl_c_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 120, 230, -1));
+
+        lbl_name.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_name.setText("Name");
+        jPanel_order.add(lbl_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, 230, -1));
+
+        lbl_tp.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_tp.setText("08767677");
+        jPanel_order.add(lbl_tp, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 200, 230, -1));
+
+        lbl_tables.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_tables.setText("No Table");
+        jPanel_order.add(lbl_tables, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 240, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel11.setText("Tel. number");
+        jPanel_order.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 200, -1, -1));
+
         add(jPanel_order, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1080, 710));
         add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 740));
     }// </editor-fold>//GEN-END:initComponents
@@ -513,6 +554,7 @@ public class cashierDashboard extends javax.swing.JPanel {
         jPanel_order.setVisible(true);
         orderCompleteItems(true);  
         setbill(a);
+        getCustomerDetails();
     }//GEN-LAST:event_btn_completeOdrActionPerformed
     
     private void btn_viewtheOdrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_viewtheOdrActionPerformed
@@ -555,7 +597,7 @@ public class cashierDashboard extends javax.swing.JPanel {
         jPanel_order.setVisible(true);
         setbill(a);
         orderCompleteItems(false);
-        
+        getCustomerDetails();
     }//GEN-LAST:event_btn_viewOrdActionPerformed
     
     private void btn_cancel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancel1ActionPerformed
@@ -685,6 +727,30 @@ public class cashierDashboard extends javax.swing.JPanel {
         jRadioButton_card.setEnabled(a);
         jRadioButton_cash.setEnabled(a);
     }
+    
+    private void getCustomerDetails(){
+        try {
+            int row=jTable_dBoard.getSelectedRow();
+            String a=(String) jTable_dBoard.getValueAt(row, 0);
+            Customer obj1=new Customer(a);
+            Order obj2=new Order();
+            lbl_c_id.setText(obj1.getC_id());
+            lbl_name.setText(obj1.getName());
+            lbl_tp.setText(Integer.toString(obj1.getTp()));
+            lbl_tables.setText(obj2.getTablelist(a));
+            if(lbl_tables.getText().equals("")){
+                lbl_tableheader.setVisible(false);
+            }
+            else{
+                lbl_tableheader.setVisible(true);
+            }
+            
+        } catch (Exception ex) {
+            Logger.getLogger(cashierDashboard.class.getName()).log(Level.SEVERE, null, ex);
+            jPanel_dashboard.setVisible(true);
+            jPanel_order.setVisible(false);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cancel;
@@ -698,8 +764,11 @@ public class cashierDashboard extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox jCheckBox_paid;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel_dashboard;
     private javax.swing.JPanel jPanel_order;
@@ -710,8 +779,13 @@ public class cashierDashboard extends javax.swing.JPanel {
     private javax.swing.JTable jTable_dBoard;
     private javax.swing.JTextArea jTextArea_bill;
     private javax.swing.JLabel lbl_background;
+    private javax.swing.JLabel lbl_c_id;
     private javax.swing.JLabel lbl_delivered;
     private javax.swing.JLabel lbl_income;
+    private javax.swing.JLabel lbl_name;
     private javax.swing.JLabel lbl_pendingOdr;
+    private javax.swing.JLabel lbl_tableheader;
+    private javax.swing.JLabel lbl_tables;
+    private javax.swing.JLabel lbl_tp;
     // End of variables declaration//GEN-END:variables
 }

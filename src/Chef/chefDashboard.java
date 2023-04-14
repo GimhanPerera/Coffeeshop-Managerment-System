@@ -6,6 +6,7 @@ package Chef;
 
 import Cashier.cashierDashboard;
 import DBconnection.Connect;
+import DBconnection.Food;
 import DBconnection.Order;
 import DBconnection.cashier;
 import DBconnection.getDate;
@@ -261,6 +262,7 @@ public class chefDashboard extends javax.swing.JPanel {
             Connect obj = new Connect();
             Connection c = obj.getConnection();//Establish the connection
             cashier obj2=new cashier();
+            Order obj3=new Order();
             try{ //int q=1;System.out.println(q++); <- tester
                 getDate obj1 =new getDate();
                 String date=obj1.dateOnly();
@@ -286,7 +288,7 @@ public class chefDashboard extends javax.swing.JPanel {
                     String o_sts=rs.getString("o_sts");
                     //GET ALL TABLE NAMBERS TO SINGLE STRING
                     
-                    String tbData[]={oID,"",otype,o_sts};
+                    String tbData[]={oID,obj3.getTablelist(oID),otype,o_sts};
                     DefaultTableModel tblModel =(DefaultTableModel)jTable_dBoard.getModel(); 
                     tblModel.addRow(tbData);
                 }
