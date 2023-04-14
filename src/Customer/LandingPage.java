@@ -4,6 +4,10 @@
  */
 package Customer;
 
+import DBconnection.Tables;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Gimhan
@@ -167,15 +171,28 @@ public class LandingPage extends javax.swing.JFrame {
                 lbl_error.setText("Please enter valid number");
                 lbl_error.setVisible(true);
             }
-            else if(false){
-                //check availability
-                //display Massage box, if no space
-                //create a table number array
-            }
             else{
-                MainPage obj =new MainPage(empmode,cid,"Dinein",tp);
-                obj.show();
-                dispose();
+                try {
+                    //check availability
+                    //display Massage box, if no space
+                    //create a table number array
+                    Tables obj1=new Tables();System.out.println("TESTING");
+                    String tables[]=obj1.checkAvailability(Integer.parseInt(txt_pax.getText()));
+                    for(String z:tables){
+                        System.out.println(z);
+                    }
+                    if(tables[0].equals("cant")){
+                        lbl_error.setText("Soory looks like there is no enough space for your pax. Please meet a staff member");
+                        lbl_error.setVisible(true);
+                    }
+                    else{
+                        MainPage obj =new MainPage(empmode,cid,"Dinein",tp);
+                        obj.show();
+                        dispose();
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(LandingPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }//GEN-LAST:event_btn_nextActionPerformed
@@ -204,7 +221,7 @@ public class LandingPage extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl_errorMouseClicked
 
     private void btn_nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_nextMouseClicked
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btn_nextMouseClicked
 
     /**

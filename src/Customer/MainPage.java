@@ -36,12 +36,15 @@ public class MainPage extends javax.swing.JFrame {
     String cid="0";String o_type="Dinein";int points=0;int tp;int discount=0;
     String empmode="0";
     String orderID="";//orderID use only updating a order
+    String tables[]={};
     boolean editmode=false;
     public MainPage() {
         initComponents();
         firstDataGet();
         btn_request.setVisible(false);
     }
+    
+    //normal customer order
     public MainPage(String empmode,String cid,String o_type,int tp) {
         initComponents();
         this.empmode=empmode;
