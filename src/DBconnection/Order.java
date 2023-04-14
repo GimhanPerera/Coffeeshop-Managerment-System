@@ -39,7 +39,7 @@ public class Order extends Connect{
         return lID;    
     }
     
-    public int placeOrder(String o_type,String cID,String[] fID,int[] qty,String pay_method,int amount ,int discount,String paymentstatus) throws Exception{   
+    public int placeOrder(String o_type,String cID,String[] fID,int[] qty,String pay_method,int amount ,int discount,String paymentstatus,String tables[]) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         try{ 
             String newOID=newOrderID();
@@ -53,8 +53,12 @@ public class Order extends Connect{
             }else{
                 sql="INSERT INTO ORDER_T (ORDER_NUMBER, ORDER_TYPE, ORDER_DATETIME, CUSTOMER_ID,STATUS) " +
                     "VALUES ('"+newOID+"', '"+o_type+"', '"+obj.dateAndTime()+"','"+cID+"','Pending')";
+                stmt.executeUpdate(sql);
+                for(String q:tables){
+                    sql="INSERT INTO ORDER_TABLE (ORDER_NUMBER, TABLE_NO) " +
+                    "VALUES ('"+newOID+"', '"+q+"')";
+                }
             }
-            
             stmt.executeUpdate(sql);
             System.out.println("Order table updated");
             //Update food_order table
@@ -69,6 +73,10 @@ public class Order extends Connect{
                     "VALUES('"+pay_method+"','"+amount+"','"+discount+"','"+paymentstatus+"','"+newOID+"')";
                stmt.executeUpdate(sql);
             System.out.println("Invoice table updated");
+            if(o_type.equals("Dinein")){
+                sql="INSERT INTO ORDER_T (ORDER_NUMBER, ORDER_TYPE, ORDER_DATETIME, END_TIME, CUSTOMER_ID,STATUS) " +
+                    "VALUES ('"+newOID+"', '"+o_type+"', '"+obj.dateAndTime()+"','"+obj.dateAndTime()+"','"+cID+"','Pending')";
+            }
         }
         finally{
             c.close(); 

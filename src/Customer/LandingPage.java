@@ -158,7 +158,8 @@ public class LandingPage extends javax.swing.JFrame {
 
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
         if(rdo_takeaway.isSelected()){
-            MainPage obj =new MainPage(empmode,cid,"Takeaway",tp);
+            String tables[]={};
+            MainPage obj =new MainPage(empmode,cid,"Takeaway",tp,tables);
             obj.show();
             dispose();
         }
@@ -176,7 +177,7 @@ public class LandingPage extends javax.swing.JFrame {
                     //check availability
                     //display Massage box, if no space
                     //create a table number array
-                    Tables obj1=new Tables();System.out.println("TESTING");
+                    Tables obj1=new Tables();
                     String tables[]=obj1.checkAvailability(Integer.parseInt(txt_pax.getText()));
                     for(String z:tables){
                         System.out.println(z);
@@ -186,7 +187,7 @@ public class LandingPage extends javax.swing.JFrame {
                         lbl_error.setVisible(true);
                     }
                     else{
-                        MainPage obj =new MainPage(empmode,cid,"Dinein",tp);
+                        MainPage obj =new MainPage(empmode,cid,"Dinein",tp,tables);
                         obj.show();
                         dispose();
                     }

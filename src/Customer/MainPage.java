@@ -45,12 +45,18 @@ public class MainPage extends javax.swing.JFrame {
     }
     
     //normal customer order
-    public MainPage(String empmode,String cid,String o_type,int tp) {
+    public MainPage(String empmode,String cid,String o_type,int tp,String tables[]) {
         initComponents();
         this.empmode=empmode;
         this.cid=cid;
         this.o_type=o_type;
         this.tp=tp;
+        //
+        this.tables=new String[tables.length];
+        for(int i=0;i<tables.length;i++){
+            this.tables[i]=tables[i];
+        } 
+        //
         firstDataGet();
         LoyaltyCard obj1=new LoyaltyCard();
         try {
@@ -70,13 +76,19 @@ public class MainPage extends javax.swing.JFrame {
     }
     
     //If come from ConfirmOrderPage
-    public MainPage(String empmode,String orderID,String o_type,int tp,int tot,String[] foodID,int[] Qyt) {
+    public MainPage(String empmode,String orderID,String o_type,int tp,int tot,String[] foodID,int[] Qyt,String tables[]) {
         initComponents();
                 this.empmode=empmode;
         this.o_type=o_type;
         this.tp=tp;
         this.tp=tp;
         this.orderID=orderID;
+        //
+        this.tables=new String[tables.length];
+        for(int i=0;i<tables.length;i++){
+            this.tables[i]=tables[i];
+        } 
+        //
         LoyaltyCard obj1=new LoyaltyCard();
         try {
             int req = obj1.checkRequseted(cid);
@@ -702,7 +714,7 @@ public class MainPage extends javax.swing.JFrame {
             {
                 System.out.println(foodid[q]+" "+qty[q]);
             }
-            ConfirmOrderPage obj2 =new ConfirmOrderPage(empmode,sb,Integer.parseInt(lbl_total.getText()),foodid, qty,lines,cid,o_type,Integer.parseInt(lbl_loyaltyPoints.getText()),tp,0);
+            ConfirmOrderPage obj2 =new ConfirmOrderPage(empmode,sb,Integer.parseInt(lbl_total.getText()),foodid, qty,lines,cid,o_type,Integer.parseInt(lbl_loyaltyPoints.getText()),tp,0,tables);
             obj2.show();
             dispose();
             } 

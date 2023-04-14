@@ -29,8 +29,9 @@ public class ConfirmOrderPage extends javax.swing.JFrame{
 String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuffer sb1;int total=0;int discount=0;
     int lines=0;int tp;
     String empmode="0";
+    String tables[];
 
-    public ConfirmOrderPage(String empmode,StringBuffer sb, int tot,String[] foodID,int[] Qyt,int lines,String cid,String o_type,int points,int tp,int discount) {
+    public ConfirmOrderPage(String empmode,StringBuffer sb, int tot,String[] foodID,int[] Qyt,int lines,String cid,String o_type,int points,int tp,int discount,String tables[]) {
         initComponents();
         this.empmode=empmode;
         jPanel_payment.setVisible(false);
@@ -47,6 +48,15 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         this.Qyt=new int[lines];
         this.tp=tp;
         this.discount=discount;
+        //
+        this.tables=new String[tables.length];
+        for(int i=0;i<tables.length;i++){
+            this.tables[i]=tables[i];
+        }
+        for(int i=0;i<tables.length;i++){
+            System.out.println("Table "+tables[i]);
+        }
+        //
         for(int i=0;i<foodID.length;i++){
             this.foodID[i]=foodID[i];
         }
@@ -364,7 +374,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
-        
+      
         if(txt_fname.getText().length()==0){
             lbl_fnameerror.setText("Please enter your first name");
             lbl_fnameerror.setVisible(true);
@@ -423,7 +433,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                 cid=obj1.saveCustomerDetails(cid, txt_fname.getText(), txt_lname.getText(),txt_email.getText(), txt_tp.getText(), points);
                 System.out.println("Customer details saved");
                 Order obj2 = new Order();
-                obj2.placeOrder(o_type, cid, foodID, Qyt, paymetn_method, total, discount, "Pending");
+                obj2.placeOrder(o_type, cid, foodID, Qyt, paymetn_method, total, discount, "Pending",tables);
                 //foodID,qty,paymentstatus
                 System.out.println("Done");
                 try {
@@ -491,7 +501,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         "alert", JOptionPane.OK_CANCEL_OPTION);
         System.out.println(result);
         if(result==0){
-            MainPage obj =new MainPage(empmode,"",o_type,tp,total,foodID,Qyt);
+            MainPage obj =new MainPage(empmode,"",o_type,tp,total,foodID,Qyt,tables);
             obj.show();
             dispose();
         }//String cid,String o_type,int tp,//int tot,String[] foodID,int[] Qyt,int lines
@@ -599,7 +609,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                 cid=obj1.saveCustomerDetails(cid, txt_fname.getText(), txt_lname.getText(),txt_email.getText(), txt_tp.getText(), points);
                 System.out.println("Customer details saved");
                 Order obj2 = new Order();
-                obj2.placeOrder(o_type, cid, foodID, Qyt, paymetn_method, total, discount, "Pending");
+                obj2.placeOrder(o_type, cid, foodID, Qyt, paymetn_method, total, discount, "Pending",tables);
                 //foodID,qty,paymentstatus
                 System.out.println("Done");
                 try {
