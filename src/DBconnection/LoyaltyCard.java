@@ -35,7 +35,7 @@ public class LoyaltyCard extends Connect{
         Connection c= getConnection();//get the connection using inheritance
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            String sql="update CUSTOMER set REQUEST='1' where sid='"+CID+"'"; //SQL stetment
+            String sql="update CUSTOMER set REQUEST='1' where CUSTOMER_ID='"+CID+"'"; //SQL stetment
             stmt.executeUpdate(sql);
         }
         finally{

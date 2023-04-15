@@ -184,7 +184,7 @@ public class GetTpPage extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl_welcomepageMouseClicked
 
     private void lbl_changetpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_changetpMouseClicked
-        JOptionPane.showConfirmDialog((Component) null, "To change your passward, Please need the manager",
+        JOptionPane.showConfirmDialog((Component) null, "Please meet the manager, To change your telephone number",
         "alert", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_lbl_changetpMouseClicked
 

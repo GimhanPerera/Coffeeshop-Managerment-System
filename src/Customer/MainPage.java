@@ -21,6 +21,7 @@ import Cashier.CashierMain;
 import DBconnection.Food;
 import DBconnection.LoyaltyCard;
 import DBconnection.Connect;
+import DBconnection.Customer;
 import DBconnection.Order;
 /**
  *
@@ -63,6 +64,10 @@ public class MainPage extends javax.swing.JFrame {
             int req = obj1.checkRequseted(cid);
             if(req==1){
                 btn_request.setVisible(false);
+                lbl_request.setVisible(true);
+            }
+            else if(req==2){
+                btn_request.setVisible(false);
                 lbl_request.setVisible(false);
             }
             int points=obj1.getLoyaltyPoints(cid);
@@ -76,13 +81,14 @@ public class MainPage extends javax.swing.JFrame {
     }
     
     //If come from ConfirmOrderPage
-    public MainPage(String empmode,String orderID,String o_type,int tp,int tot,String[] foodID,int[] Qyt,String tables[]) {
+    public MainPage(String empmode,String orderID,String o_type,int tp,int tot,String[] foodID,int[] Qyt,String tables[],String cid) {
         initComponents();
                 this.empmode=empmode;
         this.o_type=o_type;
         this.tp=tp;
         this.tp=tp;
         this.orderID=orderID;
+        this.cid=cid;
         //
         this.tables=new String[tables.length];
         for(int i=0;i<tables.length;i++){
@@ -94,6 +100,10 @@ public class MainPage extends javax.swing.JFrame {
             int req = obj1.checkRequseted(cid);
             if(req==1){
                 btn_request.setVisible(false);
+                lbl_request.setVisible(true);
+            }
+            else if(req==2){
+                btn_request.setVisible(false);
                 lbl_request.setVisible(false);
             }
             int points=obj1.getLoyaltyPoints(cid);
@@ -101,12 +111,13 @@ public class MainPage extends javax.swing.JFrame {
             lbl_loyaltyPoints.setText(Integer.toString(points));
             getFood(foodID,Qyt);
             lbl_total.setText(Integer.toString(tot));
-            if("EM".equals(cid.substring(0,2)))//check this is a cashier
+            if(!empmode.equals("0") && "EM".equals(empmode.substring(0,2)))//check this is a cashier
                 btn_next.setText("Update Order");
         } catch (Exception ex) {
-            //Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Database error: Cant get loyalty point");
             btn_request.setVisible(false);
+            lbl_request.setVisible(false);
         }
     }
     
@@ -116,7 +127,13 @@ public class MainPage extends javax.swing.JFrame {
         btn_next.setText("Place order");
         this.editmode=editmode;
         this.empmode=empmode;
-        this.cid=cid;
+        try {
+            Customer obj2=new Customer(orderID);
+            this.cid=obj2.getC_id();
+        } catch (Exception ex) {
+            Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         this.o_type=o_type;
         this.tp=tp;
         this.tp=tp;
@@ -125,6 +142,10 @@ public class MainPage extends javax.swing.JFrame {
         try {
             int req = obj1.checkRequseted(cid);
             if(req==1){
+                btn_request.setVisible(false);
+                lbl_request.setVisible(true);
+            }
+            else if(req==2){
                 btn_request.setVisible(false);
                 lbl_request.setVisible(false);
             }
@@ -481,7 +502,7 @@ public class MainPage extends javax.swing.JFrame {
 
         lbl_loyaltyPoints.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbl_loyaltyPoints.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lbl_loyaltyPoints.setText("320");
+        lbl_loyaltyPoints.setText("0");
         title.add(lbl_loyaltyPoints, new org.netbeans.lib.awtextra.AbsoluteConstraints(1209, 20, 90, -1));
 
         jButton3.setText("jButton1");
@@ -536,7 +557,7 @@ public class MainPage extends javax.swing.JFrame {
 
         lbl_BILL3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbl_BILL3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_BILL3.setText("Irems");
+        lbl_BILL3.setText("Items");
 
         javax.swing.GroupLayout billLayout = new javax.swing.GroupLayout(bill);
         bill.setLayout(billLayout);
@@ -549,18 +570,18 @@ public class MainPage extends javax.swing.JFrame {
             .addGroup(billLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(billLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, billLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(23, 23, 23)
                         .addComponent(lbl_tottxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbl_total, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_00, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8))
                     .addGroup(billLayout.createSequentialGroup()
                         .addComponent(lbl_BILL3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70)
+                        .addGap(62, 62, 62)
                         .addComponent(lbl_BILL2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbl_BILL1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -578,8 +599,8 @@ public class MainPage extends javax.swing.JFrame {
                     .addGroup(billLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lbl_BILL1)
                         .addComponent(lbl_BILL2)))
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(billLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_total, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -588,7 +609,7 @@ public class MainPage extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
-        getContentPane().add(bill, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 100, 370, 520));
+        getContentPane().add(bill, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 100, 380, 520));
 
         btn_back.setText("Back");
         btn_back.addActionListener(new java.awt.event.ActionListener() {
@@ -634,7 +655,13 @@ public class MainPage extends javax.swing.JFrame {
             //Because of can't close cashier window...
             //CashierMain obj4=new CashierMain(empmode);//need to pass cashier id
             //obj4.show();
-            this.dispose();
+            if(editmode)
+                this.dispose();
+            else{
+                LandingPage obj =new LandingPage(empmode,cid,tp);
+                obj.show();
+                dispose();
+            }            
         }
         else{
             LandingPage obj =new LandingPage(empmode,cid,tp);
@@ -845,7 +872,7 @@ public class MainPage extends javax.swing.JFrame {
                     a=(String) jTable_menu3.getValueAt(j, 0);
                     count=(String) jTable_menu3.getValueAt(j, 2);
                     price=(String) jTable_menu3.getValueAt(j, 3);
-                    jTextArea_bill.append(a+"\t   "+count+"\t"+(Integer.parseInt(price))*(Integer.parseInt(count))+"\n");
+                    jTextArea_bill.append(" "+a+"\t   "+count+"\t"+(Integer.parseInt(price))*(Integer.parseInt(count))+".00\n");
                 }  
             }      
             for(int j=0;j<jTable_menu1.getRowCount();j++){//check cake table
@@ -853,7 +880,7 @@ public class MainPage extends javax.swing.JFrame {
                     a=(String) jTable_menu1.getValueAt(j, 0);
                     count=(String) jTable_menu1.getValueAt(j, 2);
                     price=(String) jTable_menu1.getValueAt(j, 3);
-                    jTextArea_bill.append(a+"\t   "+count+"\t"+(Integer.parseInt(price))*(Integer.parseInt(count))+"\n");
+                    jTextArea_bill.append(" "+a+"\t   "+count+"\t"+(Integer.parseInt(price))*(Integer.parseInt(count))+".00\n");
                 }  
             }
             for(int j=0;j<jTable_menu2.getRowCount();j++){//check bun table
@@ -861,7 +888,7 @@ public class MainPage extends javax.swing.JFrame {
                     a=(String) jTable_menu2.getValueAt(j, 0);
                     count=(String) jTable_menu2.getValueAt(j, 2);
                     price=(String) jTable_menu2.getValueAt(j, 3);
-                    jTextArea_bill.append(a+"\t   "+count+"\t"+(Integer.parseInt(price))*(Integer.parseInt(count))+"\n");
+                    jTextArea_bill.append(" "+a+"\t   "+count+"\t"+(Integer.parseInt(price))*(Integer.parseInt(count))+".00\n");
                 }  
             }
             

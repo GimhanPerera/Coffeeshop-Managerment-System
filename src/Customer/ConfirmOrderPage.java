@@ -64,7 +64,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
             this.Qyt[i]=Qyt[i];
         }
         total=tot;
-        txt_tp.setText(Integer.toString(tp));
+        txt_tp.setText("0"+Integer.toString(tp));
         if(!"0".equals(cid)){
             try {
                 Customer obj1=new Customer();
@@ -105,18 +105,23 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         jTextArea_bill.append("\n\n\n========================\nTotal\t\t"+tot+"\n========================\n\n\tThank You");
     }
     public void setbill(StringBuffer sb,int tot,int discount){
+    try {
         getDate obj = new getDate();
+        Order obj1=new Order();
         String date =obj.toString();
         jTextArea_bill.setText("");
-        jTextArea_bill.append("========================\n\nCOFFEE CAFE\n");
-        jTextArea_bill.append(obj.dateAndTime()+"\n");
-        jTextArea_bill.append("Order Type: "+o_type+"\n");
+        jTextArea_bill.append("========================\n\n    COFFEE CAFE\n");
+        jTextArea_bill.append("    "+obj.dateAndTime()+"\n");
+        jTextArea_bill.append("Order Type: "+o_type+"\n Order ID : "+obj1.newOrderID()+"\n");
         jTextArea_bill.append("========================\n");
-        jTextArea_bill.append("Items\t   Qty\tPrice\n\n");
+        jTextArea_bill.append("  Items\t   Qty\tPrice\n\n");
         jTextArea_bill.append(sb.toString());
         if(discount!=0)
             jTextArea_bill.append("\n\nDiscount\t\t"+discount+"\n");
         jTextArea_bill.append("========================\nTotal\t\t"+(tot-discount)+"\n========================\n\n\tThank You");
+    } catch (Exception ex) {
+        Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -374,42 +379,45 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
-      
-        if(txt_fname.getText().length()==0){
-            lbl_fnameerror.setText("Please enter your first name");
+        lbl_fnameerror.setVisible(false);
+        lbl_lnameerror.setVisible(false);
+        lbl_emailerror.setVisible(false);
+        if(txt_fname.getText().isEmpty()){//check is it empty
+            lbl_fnameerror.setText("First name cannot be empty");
             lbl_fnameerror.setVisible(true);
         }
-        else if(!txt_fname.getText().matches( "[A-Z]*[a-z]*" )){
-            lbl_fnameerror.setText("Please a enter correct name");
+        else if(!txt_fname.getText().matches( "[A-Z]*[a-z]*" )){//check is any alphabetic character
+            lbl_fnameerror.setText("Invalid name format");
             lbl_fnameerror.setVisible(true);
         }
-        else if(txt_fname.getText().length()<=2 || txt_fname.getText().length()>=15){
-            lbl_fnameerror.setText("Name length should between 2 to 15");
+        else if(txt_fname.getText().length()<=2 || txt_fname.getText().length()>=15){//not allow 2>=length>=15
+            lbl_fnameerror.setText("First name length should between 2 to 15");
             lbl_fnameerror.setVisible(true);
         }
-        if(txt_lname.getText().length()==0){
-            lbl_fnameerror.setText("Please enter your first name");
+        if(txt_lname.getText().isEmpty()){
+            lbl_lnameerror.setText("Last name cannot be empty");
             lbl_lnameerror.setVisible(true);
         }
         else if(!txt_lname.getText().matches( "[A-Z]*[a-z]*" )){
-            lbl_lnameerror.setText("Please a enter correct name");
+            lbl_lnameerror.setText("Invalid name format");
             lbl_lnameerror.setVisible(true);
         }
         else if(txt_lname.getText().length()<=2 || txt_lname.getText().length()>=15){
-            lbl_lnameerror.setText("Name length should between 2 to 15");
+            lbl_lnameerror.setText("Last name length should between 2 to 15");
             lbl_lnameerror.setVisible(true);
         }
-        if(txt_email.getText().length()==0){
-        }
-        else if(false){//Need to complete
-            lbl_emailerror.setText("Please a enter correct email");
-            lbl_emailerror.setVisible(true);
-        }
-        else if(txt_email.getText().length()<=2 || txt_email.getText().length()>=40){
-            lbl_emailerror.setText("Please a enter correct email");
-            lbl_emailerror.setVisible(true);
-        }
-        else{
+        if(!txt_email.getText().isEmpty()){
+            if(!txt_email.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
+                lbl_emailerror.setText("Invalid email format");
+                lbl_emailerror.setVisible(true);
+            }
+            else if(txt_email.getText().length()<=2 || txt_email.getText().length() > 50){
+                lbl_emailerror.setText("Invalid email length Please enter a valid email address.");
+                lbl_emailerror.setVisible(true);
+            }
+        }System.out.println("NICE"+lbl_fnameerror.isVisible());
+        if(!(lbl_fnameerror.isVisible() || lbl_lnameerror.isVisible() || lbl_emailerror.isVisible())){
+            System.out.println("NICE");
             if("Pay".equals(btn_next.getText())){
                 jPanel_payment.setVisible(true);
                 jPanel_customerInfo.setVisible(false);
@@ -457,10 +465,10 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
             } catch (Exception ex) {
                 Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showConfirmDialog((Component) null, "Database error",
-        "alert", JOptionPane.PLAIN_MESSAGE);
+                            "alert", JOptionPane.PLAIN_MESSAGE);
                 jPanel_loyaltycard.setVisible(false);
+                }
             }
-        }
         }
     }//GEN-LAST:event_btn_nextActionPerformed
 
@@ -482,29 +490,33 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
     }//GEN-LAST:event_btn_scanMouseClicked
 
     private void txt_fnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_fnameMouseClicked
-        // TODO add your handling code here:
         lbl_fnameerror.setVisible(false);
     }//GEN-LAST:event_txt_fnameMouseClicked
 
     private void txt_lnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_lnameMouseClicked
-
         lbl_lnameerror.setVisible(false);
     }//GEN-LAST:event_txt_lnameMouseClicked
 
     private void txt_emailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_emailMouseClicked
-        // TODO add your handling code here:
         lbl_emailerror.setVisible(false);
     }//GEN-LAST:event_txt_emailMouseClicked
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
-        int result = JOptionPane.showConfirmDialog((Component) null, "Your discount will remove",
+        if(txt_loyaltycard.getText().equals("")){
+            MainPage obj =new MainPage(empmode,"",o_type,tp,total,foodID,Qyt,tables,cid);
+            obj.show();
+            dispose();
+        }
+        else{
+            int result = JOptionPane.showConfirmDialog((Component) null, "Your discount will remove",
         "alert", JOptionPane.OK_CANCEL_OPTION);
         System.out.println(result);
         if(result==0){
-            MainPage obj =new MainPage(empmode,"",o_type,tp,total,foodID,Qyt,tables);
+            MainPage obj =new MainPage(empmode,"",o_type,tp,total,foodID,Qyt,tables,cid);
             obj.show();
             dispose();
-        }//String cid,String o_type,int tp,//int tot,String[] foodID,int[] Qyt,int lines
+            }//String cid,String o_type,int tp,//int tot,String[] foodID,int[] Qyt,int lines
+        }
     }//GEN-LAST:event_btn_backActionPerformed
 
     private void btn_scanmanageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_scanmanageMouseClicked

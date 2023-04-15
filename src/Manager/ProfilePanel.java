@@ -93,6 +93,11 @@ public class ProfilePanel extends javax.swing.JPanel {
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, -1, -1));
 
         txt_lname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_lname.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_lnameMouseClicked(evt);
+            }
+        });
         add(txt_lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 170, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -100,6 +105,11 @@ public class ProfilePanel extends javax.swing.JPanel {
         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, -1, -1));
 
         txt_fname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_fname.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_fnameMouseClicked(evt);
+            }
+        });
         add(txt_fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 170, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -107,6 +117,11 @@ public class ProfilePanel extends javax.swing.JPanel {
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
 
         txt_email.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_email.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_emailMouseClicked(evt);
+            }
+        });
         add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 260, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -114,6 +129,11 @@ public class ProfilePanel extends javax.swing.JPanel {
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, -1, -1));
 
         txt_nic.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_nic.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_nicMouseClicked(evt);
+            }
+        });
         add(txt_nic, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, 170, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -121,6 +141,11 @@ public class ProfilePanel extends javax.swing.JPanel {
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, -1, -1));
 
         txt_tp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txt_tp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_tpMouseClicked(evt);
+            }
+        });
         add(txt_tp, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, 170, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -298,23 +323,43 @@ public class ProfilePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_newpwd_cMouseClicked
 
     private void btn_changeprofiledataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changeprofiledataActionPerformed
-        if(txt_fname.getText().length()==0){
+        lbl_error.setVisible(false);
+        if(txt_fname.getText().isEmpty()){
             lbl_error.setText("Please enter the first name");
         }
-        else if(txt_fname.getText().length()<2){
-            lbl_error.setText("Please enter a valid first name");
+        else if(txt_fname.getText().length()<=2 || txt_fname.getText().length()>=15){
+            lbl_error.setText("First name length should between 2 to 15");
         }
         else if(!txt_fname.getText().matches("[a-zA-Z]+")){//need to do validations
             lbl_error.setText("First name can have only english letters");
         }
-        else if(txt_lname.getText().length()==0){
+        else if(txt_lname.getText().isEmpty()){
             lbl_error.setText("Please enter the last name");
         }
-        else if(txt_lname.getText().length()<2){
+        else if(txt_lname.getText().length()<=2 || txt_fname.getText().length()>=15){
             lbl_error.setText("Please enter a valid last name");
         }
         else if(!txt_lname.getText().matches("[a-zA-Z]+")){
             lbl_error.setText("Last name can have only english letters");
+        }
+        else if(!txt_email.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
+            lbl_error.setText("Invalid email format");
+            lbl_error.setVisible(true);
+        }
+        else if(txt_email.getText().length()<=2 || txt_email.getText().length() > 50){
+            lbl_error.setText("Invalid email length Please enter a valid email address.");
+            lbl_error.setVisible(true);
+        }
+        else if (txt_nic.getText().length() != 10 && txt_nic.getText().length() != 12) {
+            lbl_error.setText("Invalid NIC length Please enter a valid email address.");
+            lbl_error.setVisible(true);
+        }
+        else if (!txt_nic.getText().matches("^\\d{9}[vVxX]|[12]\\d{11}$")) {
+            lbl_error.setText("Sri Lankan NIC numbers should follow ...");
+            lbl_error.setVisible(true);
+        }
+        else if(true){
+            
         }
         //need to do validations
         else{
@@ -332,6 +377,26 @@ public class ProfilePanel extends javax.swing.JPanel {
     private void btn_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetActionPerformed
         setdata();
     }//GEN-LAST:event_btn_resetActionPerformed
+
+    private void txt_nicMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_nicMouseClicked
+        lbl_error.setVisible(false);
+    }//GEN-LAST:event_txt_nicMouseClicked
+
+    private void txt_fnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_fnameMouseClicked
+        lbl_error.setVisible(false);
+    }//GEN-LAST:event_txt_fnameMouseClicked
+
+    private void txt_lnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_lnameMouseClicked
+        lbl_error.setVisible(false);
+    }//GEN-LAST:event_txt_lnameMouseClicked
+
+    private void txt_emailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_emailMouseClicked
+        lbl_error.setVisible(false);
+    }//GEN-LAST:event_txt_emailMouseClicked
+
+    private void txt_tpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_tpMouseClicked
+        lbl_error.setVisible(false);
+    }//GEN-LAST:event_txt_tpMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

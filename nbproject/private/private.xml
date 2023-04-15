@@ -12,16 +12,11 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/Chef/chefMain.java</file>
-            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/DBconnection/Emp.java</file>
-            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/Chef/chefDashboard.java</file>
-            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/DBconnection/Tables.java</file>
-            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/DBconnection/Order.java</file>
-            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/DBconnection/Customer.java</file>
+            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/Manager/ProfilePanel.java</file>
             <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/Customer/ConfirmOrderPage.java</file>
             <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/Customer/MainPage.java</file>
-            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/Customer/LandingPage.java</file>
-            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/Cashier/cashierDashboard.java</file>
+            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/Customer/LoginPage.java</file>
+            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/Customer/GetTpPage.java</file>
         </group>
     </open-files>
 </project-private>
