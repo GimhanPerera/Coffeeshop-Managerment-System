@@ -21,9 +21,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Menu extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Menu
-     */
     public Menu() {
         initComponents();
         jTable1.getTableHeader().setFont(new Font("SansSerif", Font.PLAIN, 15));
@@ -75,15 +72,15 @@ public class Menu extends javax.swing.JPanel {
         add(lbl_topfoods, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         lbl_topfoods1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lbl_topfoods1.setText("1. Food item");
+        lbl_topfoods1.setText("1.   --");
         add(lbl_topfoods1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 190, -1));
 
         lbl_topfoods2.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lbl_topfoods2.setText("2. Food item");
+        lbl_topfoods2.setText("2.   --");
         add(lbl_topfoods2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 190, -1));
 
         lbl_topfoods3.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lbl_topfoods3.setText("3. Food item");
+        lbl_topfoods3.setText("3.   --");
         add(lbl_topfoods3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 190, -1));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -286,6 +283,8 @@ public class Menu extends javax.swing.JPanel {
             ResultSet rs = stmt.executeQuery("select o.FOOD_ID,f.food_name, sum(quantity) from ORDER_FOOD o INNER JOIN food f ON o.food_id=f.food_id where ORDER_NUMBER IN (SELECT ORDER_NUMBER FROM ORDER_T WHERE DATE(ORDER_DATETIME)>DATE(NOW() - INTERVAL 30 DAY)) group by o.food_id Order by sum(quantity) DESC LIMIT 3"); //SQL stetment
             while(rs.next()){
                 food=rs.getString("FOOD_NAME"); 
+                if(food.equals(""))
+                    food="   --";
                 if(z==0)
                     lbl_topfoods1.setText("1. "+food);
                 if(z==1)

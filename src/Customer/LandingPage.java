@@ -131,7 +131,7 @@ public class LandingPage extends javax.swing.JFrame {
         });
         getContentPane().add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 610, 210, 70));
 
-        lbl_error.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbl_error.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lbl_error.setForeground(new java.awt.Color(255, 0, 0));
         lbl_error.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_error.setText("Please enter Number of people");
@@ -140,7 +140,7 @@ public class LandingPage extends javax.swing.JFrame {
                 lbl_errorMouseClicked(evt);
             }
         });
-        getContentPane().add(lbl_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 490, 710, -1));
+        getContentPane().add(lbl_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, 1240, -1));
 
         lbl_background.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         lbl_background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Take away or dine in 7.png"))); // NOI18N
@@ -177,9 +177,10 @@ public class LandingPage extends javax.swing.JFrame {
                     //check availability
                     //display Massage box, if no space
                     //create a table number array
+                    System.out.println("==============================");
                     Tables obj1=new Tables();
                     String tables[]=obj1.checkAvailability(Integer.parseInt(txt_pax.getText()));
-                    for(String z:tables){
+                    for(String z:tables){//For teseting
                         System.out.println(z);
                     }
                     if(tables[0].equals("cant")){

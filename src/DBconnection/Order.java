@@ -43,6 +43,9 @@ public class Order extends Connect{
         Connection c= getConnection();//get the connection using inheritance
         try{ 
             String newOID=newOrderID();
+            System.out.println("==============================");
+            System.out.println("Custmer ID : "+cID);
+            System.out.println("Order Number : "+newOID);
             Statement stmt = c.createStatement();//Prepare statement
             //Update order table
             getDate obj=new getDate();
@@ -57,26 +60,24 @@ public class Order extends Connect{
                 for(String q:tables){
                     sql="INSERT INTO ORDER_TABLE (ORDER_NUMBER, TABLE_NO) " +
                     "VALUES ('"+newOID+"', '"+q+"')";
+                    System.out.println("Table reserved : "+q);
                 }
             }
             stmt.executeUpdate(sql);
-            System.out.println("Order table updated");
+            System.out.println("+ Order table updated");
             //Update food_order table
             for(int i=0;i<fID.length;i++)
             {
                sql="INSERT INTO ORDER_FOOD(ORDER_NUMBER,FOOD_ID,QUANTITY) VALUES('"+newOID+"','"+fID[i]+"','"+qty[i]+"')";
                stmt.executeUpdate(sql);
-            }System.out.println("food_order table updated");
+            }System.out.println("+ food_order table updated");
             //Generate invoice table
             //invoice ID autogenerate bt sql
             sql="INSERT INTO INVOICE(PAYMENT_METHOD,AMOUNT,DISCOUNT,STATUS,ORDERID) " +
                     "VALUES('"+pay_method+"','"+amount+"','"+discount+"','"+paymentstatus+"','"+newOID+"')";
                stmt.executeUpdate(sql);
-            System.out.println("Invoice table updated");
-            if(o_type.equals("Dinein")){
-                sql="INSERT INTO ORDER_T (ORDER_NUMBER, ORDER_TYPE, ORDER_DATETIME, END_TIME, CUSTOMER_ID,STATUS) " +
-                    "VALUES ('"+newOID+"', '"+o_type+"', '"+obj.dateAndTime()+"','"+obj.dateAndTime()+"','"+cID+"','Pending')";
-            }
+            System.out.println("+ Invoice table updated");
+            System.out.println("==============================");
         }
         finally{
             c.close(); 
@@ -84,8 +85,7 @@ public class Order extends Connect{
         return 1;    
     }
     
-    public void cancelOrder(String OID) throws Exception{//NOT COMPLETE
-        //Need to check order table and order_food table
+    public void cancelOrder(String OID) throws Exception{
         Connection c= getConnection();//get the connection using inheritance
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
@@ -94,6 +94,8 @@ public class Order extends Connect{
                 sql="DELETE FROM INVOICE WHERE ORDERID='"+OID+"';";
                 stmt.executeUpdate(sql);
                 sql="DELETE FROM ORDER_T WHERE ORDER_NUMBER='"+OID+"';";
+                stmt.executeUpdate(sql);
+                sql="DELETE FROM ORDER_TABLE WHERE ORDER_NUMBER='"+OID+"';";
                 stmt.executeUpdate(sql);
         }
         finally{

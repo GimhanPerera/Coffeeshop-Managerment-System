@@ -16,7 +16,8 @@ import java.util.logging.Logger;
  */
 public class Tables extends Connect{
     
-    public String[] checkAvailability(int pax) throws Exception{//NOT COMPLETED   
+    public String[] checkAvailability(int pax) throws Exception{
+        System.out.println("Full pax : "+pax);
         Connection c= getConnection();//get the connection using inheritance
         boolean can=true;
         String notcan[]={"cant"};
@@ -35,9 +36,9 @@ public class Tables extends Connect{
             }
             rs = stmt.executeQuery("select COUNT(*) AS coun from TABLE_T"); //SQL stetment
             while(rs.next()){
-                ava_count=rs.getInt("coun")-ava_count;
+                ava_count=rs.getInt("coun")+ava_count;
             }   
-            System.out.println("TESTING1"+ava_count);
+            System.out.println("Available table count: "+ava_count);
             if(ava_count==0){
                 c.close(); 
                 return notcan;
@@ -50,13 +51,15 @@ public class Tables extends Connect{
             }
             
             //Available tables and thier chair count
-            rs = stmt.executeQuery("select table_no,chairs from TABLE_T WHERE table_no NOT IN (select DISTINCT t.table_no from  ORDER_T o INNER JOIN ORDER_TABLE ot ON o.ORDER_NUMBER=ot.ORDER_NUMBER INNER JOIN TABLE_T t ON ot.TABLE_NO=t.TABLE_NO " +
-                            "where o.ORDER_NUMBER NOT IN (select ORDER_NUMBER from ORDER_T " +
-                                        "where ORDER_DATETIME > '"+date+" 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59' AND o.status != 'Completed'))"); //SQL stetment
+            rs = stmt.executeQuery("select table_no,chairs from TABLE_T WHERE table_no NOT IN(select DISTINCT ot.table_no from  ORDER_TABLE ot " +
+                        "where ot.ORDER_NUMBER IN (select ORDER_NUMBER from ORDER_T " +
+                            "where ORDER_DATETIME > '"+date+" 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59' AND status != 'Completed'))"); //SQL stetment
+            System.out.println("Available Tables");
             while(rs.next()){
-                    table[x]=rs.getString("TABLE_NO");
-                    chairs[x]=rs.getByte("chairs");
-                    x++;
+                table[x]=rs.getString("TABLE_NO");
+                chairs[x]=rs.getByte("chairs");
+                System.out.println(table[x]+"\t"+chairs[x]);
+                x++;
             }
             while(pax>0){//7
                 int check=pax;
@@ -77,11 +80,21 @@ public class Tables extends Connect{
                             break;
                         }
                     }
-                }System.out.println("PAX  "+pax);
-                if(check==pax){
-                    can=false;
+                }System.out.println("-PAX  "+pax);
+                if(check==pax && pax>0){
+                    for (int i = 0; i < table.length; i++) {
+                        if(chairs[i]==2 && reserved[i]==false){
+                            reserved[i]=true;
+                            pax-=2;
+                            if(pax<=0)
+                                break;
+                       }
+                    }
+                    if(pax>0)
+                        can=false;
                     break;
-                }    
+                }
+                
             }
             //prepare reserved table array
             x=0;
@@ -95,7 +108,7 @@ public class Tables extends Connect{
             if(reserved[i]==true){
                 res_tables[x]=table[i];
                 x++;
-                System.out.print("Recieved "+table[i]);
+                System.out.print("Recieved : "+table[i]);
                 System.out.println(" "+chairs[i]);
             }    
         }    
