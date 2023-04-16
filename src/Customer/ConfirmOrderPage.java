@@ -65,6 +65,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         }
         total=tot;
         txt_tp.setText("0"+Integer.toString(tp));
+        btn_scan.setVisible(false);//By default, Hide the scan btn
         if(!"0".equals(cid)){
             try {
                 Customer obj1=new Customer();
@@ -72,6 +73,20 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                 txt_lname.setText(obj1.getLname(cid));
                 txt_email.setText(obj1.getEmail(cid));
                 txt_tp.setText(obj1.getTp(cid));
+                //
+                LoyaltyCard obj2=new LoyaltyCard();
+        try {
+            int req = obj2.checkRequseted(cid);
+            if(req==1){
+                //If customer not request a card
+            }
+            else if(req==2){//customer has a card
+                btn_scan.setVisible(true);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                //
             } catch (Exception ex) {
                 Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
             }         
@@ -96,13 +111,14 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
     public void setbill(StringBuffer sb,int tot){
         getDate obj = new getDate();
         String date =obj.toString();
+        jTextArea_bill.setText("");
         jTextArea_bill.append("========================\n\nCOFFEE CAFE\n");
         jTextArea_bill.append(obj.dateAndTime()+"\n");
         jTextArea_bill.append("Order Type: "+o_type+"\n");
         jTextArea_bill.append("========================\n");
         jTextArea_bill.append("Items\t   Qty\tPrice\n\n");
         jTextArea_bill.append(sb.toString());
-        jTextArea_bill.append("\n\n\n========================\nTotal\t\t"+tot+"\n========================\n\n\tThank You");
+        jTextArea_bill.append("\n\n\n========================\nTotal\t\t"+tot+".00\n========================\n\n\tThank You");
     }
     public void setbill(StringBuffer sb,int tot,int discount){
     try {
@@ -118,7 +134,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         jTextArea_bill.append(sb.toString());
         if(discount!=0)
             jTextArea_bill.append("\n\nDiscount\t\t"+discount+"\n");
-        jTextArea_bill.append("========================\nTotal\t\t"+(tot-discount)+"\n========================\n\n\tThank You");
+        jTextArea_bill.append("========================\nTotal\t\t"+(tot-discount)+".00\n========================\n\n\tThank You");
     } catch (Exception ex) {
         Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -246,7 +262,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
 
         txt_loyaltycard.setEditable(false);
         txt_loyaltycard.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jPanel_customerInfo.add(txt_loyaltycard, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, 190, -1));
+        jPanel_customerInfo.add(txt_loyaltycard, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 350, 190, -1));
 
         btn_scan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_scan.setText("Scan");
@@ -256,7 +272,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                 btn_scanMouseClicked(evt);
             }
         });
-        jPanel_customerInfo.add(btn_scan, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 360, -1, -1));
+        jPanel_customerInfo.add(btn_scan, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 360, -1, -1));
 
         txt_email.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         txt_email.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -290,7 +306,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         jPanel_customerInfo.add(rdo_Card, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, 80, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel4.setText("Add Loyalty Card");
+        jLabel4.setText("Apply Loyalty Card");
         jPanel_customerInfo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, -1, -1));
 
         lbl_lnameerror.setForeground(new java.awt.Color(255, 0, 0));
@@ -364,6 +380,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
 
         btn_back1.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         btn_back1.setText("Back");
+        btn_back1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_back1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_back1MouseClicked(evt);
@@ -417,7 +434,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
             }
         }System.out.println("NICE"+lbl_fnameerror.isVisible());
         if(!(lbl_fnameerror.isVisible() || lbl_lnameerror.isVisible() || lbl_emailerror.isVisible())){
-            System.out.println("NICE");
+            System.out.println("Validations are OK!!");
             if("Pay".equals(btn_next.getText())){
                 jPanel_payment.setVisible(true);
                 jPanel_customerInfo.setVisible(false);
@@ -479,8 +496,9 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                 btn_next.setEnabled(false);
                 btn_back.setEnabled(false);
             }
-            else{
+            else if("cancel".equals(btn_scan.getText())){
                 btn_scan.setText("Scan");
+                txt_loyaltycard.setText("");
                 this.discount=0;
                 setbill(this.sb1,this.total);
             }
@@ -529,36 +547,60 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
             t1.start();
             t1.setReadsuccess();
             while(t1.isAlive()) {}
-            System.out.println("THE PIN IS::"+t1.getPin());
-            if(obj.getCardID(cid).equals(t1.getPin())){//correct card
+            System.out.println("READING END");
+            System.out.println("THE PIN IS(READ):: "+t1.getPin());
+            
+            if(!t1.isadu_connected()){//if arduino not connected 
                 lbl_waiting.setVisible(false);
-                lbl_notOk.setVisible(false);
-                lbl_ok.setVisible(true);
-                btn_scanmanage.setText("Done");
-                txt_loyaltycard.setText(t1.getPin());
-                //calculate and set the discount
-                this.discount=obj.getMaxDiscount(cid);
-                if(this.discount>this.total)
-                {
-                    this.discount=this.total;
-                }
-                setbill(this.sb1,this.total,this.discount);
-                lbl_discount.setVisible(true);
-                if(this.discount!=0)
-                    lbl_discount.setText("You got Rs "+this.discount+"/= discount");
-                else
-                    lbl_discount.setText("Sorry, your loyalty points are not enough to get a discount");
-            }else{//wrong card
-                lbl_waiting.setVisible(false);System.out.println("Carrect ID "+obj.getCardID(cid));
+                System.out.println("Carrect ID "+obj.getCardID(cid));
                 lbl_notOk.setVisible(true);
                 lbl_ok.setVisible(false);
                 btn_scanmanage.setText("Cancel");
                 txt_loyaltycard.setText("");
                 lbl_discount.setVisible(true);
-                lbl_discount.setText("Wrong card or not scaned your card correctly");
+                lbl_discount.setText("Scanner is not connected correctly");
             }
+            else{
+                if(obj.getCardID(cid).equals(t1.getPin())){//correct card
+                    System.out.println("Carrect ID "+obj.getCardID(cid));
+                    lbl_waiting.setVisible(false);
+                    lbl_notOk.setVisible(false);
+                    lbl_ok.setVisible(true);
+                    btn_scanmanage.setText("Done");
+                    btn_scan.setText("cancel");
+                    txt_loyaltycard.setText(t1.getPin());
+                    //calculate and set the discount
+                    this.discount=obj.getMaxDiscount(cid);//points count
+                    if(this.discount>this.total){
+                        this.discount=this.total;
+                    }
+                    
+                    
+                    //
+                    setbill(this.sb1,this.total,this.discount);
+                    lbl_discount.setVisible(true);
+                    if(this.discount!=0)
+                        lbl_discount.setText("You got Rs "+this.discount+"/= discount");
+                    else
+                        lbl_discount.setText("Sorry, your loyalty points are not enough to get a discount");
+                }else{//wrong card
+                    lbl_waiting.setVisible(false);
+                    System.out.println("Carrect ID "+obj.getCardID(cid));
+                    lbl_notOk.setVisible(true);
+                    lbl_ok.setVisible(false);
+                    btn_scanmanage.setText("Cancel");
+                    txt_loyaltycard.setText("");
+                    lbl_discount.setVisible(true);
+                    lbl_discount.setText("Wrong card or Scan unsuccessful");
+                    if("".equals(t1.getPin())){
+                        lbl_discount.setText("Scan unsuccessful");
+                    }
+                }
+            }
+            
             } catch (Exception ex) {
                 Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print("ERROR 2");
             }
         }
         else if(btn_scanmanage.getText().equals("Done")){
