@@ -47,6 +47,7 @@ public class cashierDashboard extends javax.swing.JPanel {
            mgrDashboard obj1=new mgrDashboard();
            cashier obj2=new cashier();
            lbl_income.setText(Integer.toString(obj1.monthlyIncome())+".00");
+           lbl_delivered.setText(Integer.toString(obj1.orderCount()));
            lbl_pendingOdr.setText(Integer.toString(obj2.getPendingOrderCount()));
            getData();
            if(jTable_dBoard.getRowCount()!=0){

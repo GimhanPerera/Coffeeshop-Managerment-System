@@ -123,6 +123,14 @@ public class GetTpPage extends javax.swing.JFrame {
             lbl_error.setText("Please enter your moblie number");
             lbl_error.setVisible(true);
         }
+        else if("0100000001".equals(txt_tp.getText())){
+            lbl_error.setVisible(true);
+            lbl_error.setText("Please enter a correct moblie number");
+        }
+         else if (String.valueOf(txt_tp.getText()).charAt(0) != '0') {//need to start with 0
+            lbl_error.setText("Phone number must 07XXXXXXXX");
+            lbl_error.setVisible(true);
+        }
         else if(txt_tp.getText().matches("[0-9]+")==false)//if not only numbers
         {
             lbl_error.setText("Please enter a correct moblie number");

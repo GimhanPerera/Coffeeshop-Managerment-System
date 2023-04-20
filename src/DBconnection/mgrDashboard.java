@@ -15,6 +15,7 @@ import java.util.logging.Logger;
  * @author Gimhan
  */
 public class mgrDashboard  extends Connect{
+    
     public int orderCount() throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         int count=0;

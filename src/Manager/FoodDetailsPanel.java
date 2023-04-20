@@ -559,10 +559,11 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         try {
-            if("".equals(txt_search.getText())){//empty
+            if(txt_search.getText().isEmpty()){//empty
                 lbl_Error.setVisible(true);
                 lbl_Error.setText("Please enter "+jComboBox_searchby.getSelectedItem());
             }
+            //search by food ID
             else if(jComboBox_searchby.getSelectedIndex()==0 && txt_search.getText().length()!=5){//invalide width
                 lbl_Error.setVisible(true);
                 lbl_Error.setText("Wrong food id");
@@ -574,6 +575,15 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
             else if(jComboBox_searchby.getSelectedIndex()==0 &&  !txt_search.getText().substring(0, 2).matches("^[a-zA-Z]*$")){//
                 lbl_Error.setVisible(true);
                 lbl_Error.setText("Wrong food id format");
+            }
+            //search by food name
+            else if(jComboBox_searchby.getSelectedIndex()==1 && txt_search.getText().matches("^[0-9]*$")){//numbers in name
+                lbl_Error.setVisible(true);
+                lbl_Error.setText("Wrong food name");
+            }
+            else if (jComboBox_searchby.getSelectedIndex()==1 && !txt_search.getText().matches("^[a-zA-Z]+(\\s[a-zA-Z]+)*$")) {//alphabetical letters and single spaces only
+                lbl_Error.setVisible(true);
+                lbl_Error.setText("Wrong food name format");
             }
             else{
                 clearTable();
@@ -680,6 +690,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
 
     private void btn_add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add1ActionPerformed
         Food obj=new Food();
+        lbl_Error1.setVisible(false);
         if(txt_foodname.getText().isEmpty()){//check is it empty
             lbl_Error1.setText("Food name cannot be empty");
             lbl_Error1.setVisible(true);

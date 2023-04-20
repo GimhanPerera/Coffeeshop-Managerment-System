@@ -29,7 +29,7 @@ public class ProfilePanel extends javax.swing.JPanel {
             txt_lname.setText(obj.getlname());
             txt_email.setText(obj.getEmail());
             txt_nic.setText(obj.getNIC());
-            txt_tp.setText(obj.getTp()); 
+            txt_tp.setText("0"+obj.getTp()); 
             lbl_errorpwd.setText(""); 
             lbl_error.setText(""); 
         } catch (Exception ex) {
@@ -372,10 +372,20 @@ public class ProfilePanel extends javax.swing.JPanel {
             lbl_error.setVisible(true);
             txt_nic.requestFocus();
         }
-        else if(false){
-            
+        else if (String.valueOf(txt_tp.getText()).charAt(0) != '0') {//need to start with 0
+            lbl_error.setText("Phone number must 07XXXXXXXX");
+            lbl_error.setVisible(true);
         }
-        //need to do validations
+        else if(txt_tp.getText().matches("[0-9]+")==false)//if not only numbers
+        {
+            lbl_error.setText("Please enter a correct moblie number");
+            lbl_error.setVisible(true);
+        }
+        else if(txt_tp.getText().length()!=10)//if more than 10 digits
+        {
+            lbl_error.setText("Please enter a correct moblie number");
+            lbl_error.setVisible(true);
+        }
         else{
             try {
                 manager obj2=new manager();

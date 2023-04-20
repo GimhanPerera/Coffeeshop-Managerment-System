@@ -204,7 +204,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
         jPanel3.add(btn_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 390, 100, 40));
 
         jComboBox_search.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jComboBox_search.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer Telephone Number", "Loyalty Card ID" }));
+        jComboBox_search.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Telephone Number", "Loyalty Card ID" }));
         jComboBox_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_searchActionPerformed(evt);
@@ -466,10 +466,26 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         lbl_Error.setVisible(false);
         lbl_empty.setVisible(false);
-        if("".equals(txt_search.getText())){
+        if(txt_search.getText().isEmpty()){
             lbl_Error.setText("Please enter "+jComboBox_search.getSelectedItem());
             lbl_Error.setVisible(true);
         }
+        //telephone number
+        else if (jComboBox_search.getSelectedIndex()==0 && String.valueOf(txt_search.getText()).charAt(0) != '0') {//need to start with 0
+            lbl_Error.setText("Phone number must 07XXXXXXXX");
+            lbl_Error.setVisible(true);
+        }
+        else if(jComboBox_search.getSelectedIndex()==0 && txt_search.getText().matches("[0-9]+")==false)//if not only numbers
+        {
+            lbl_Error.setText("Please enter a correct moblie number");
+            lbl_Error.setVisible(true);
+        }
+        else if(jComboBox_search.getSelectedIndex()==0 && txt_search.getText().length()!=10)//if more than 10 digits
+        {
+            lbl_Error.setText("Please enter a correct moblie number");
+            lbl_Error.setVisible(true);
+        }
+        //check loyalty by card id
         else if(jComboBox_search.getSelectedIndex()==1 && txt_search.getText().length()!=8){
             lbl_Error.setText("Wrong Loyalty card format");
             lbl_Error.setVisible(true);
@@ -593,8 +609,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
         clearTable();
         Connect obj = new Connect();
         Connection c = obj.getConnection();  //getConnection();//Establish the connection
-        
-        try{ //int q=1;System.out.println(q++); <- tester
+        try{
                 String cardID=""; 
                 String tp="";
                 String status=""; 

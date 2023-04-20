@@ -545,24 +545,43 @@ public class SDDetailsPanel extends javax.swing.JPanel {
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         lbl_Error.setVisible(false);
-        if("0100000001".equals(txt_search.getText())){
+        //customer telephone number
+        if(rdo_customer.isSelected() && "0100000001".equals(txt_search.getText())){
             clearTable();
             lbl_Error.setVisible(true);
             lbl_Error.setText("No results");
             btn_remove.setEnabled(false);
         }
-//validation need to handle
         else if (rdo_customer.isSelected() && txt_search.getText().isEmpty()) {
                 lbl_Error.setVisible(true);
                 lbl_Error.setText("Please enter a Customer telephone number");
         }
+        else if (rdo_customer.isSelected() && String.valueOf(txt_search.getText()).charAt(0) != '0') {//need to start with 0
+            lbl_error.setText("Phone number must 07XXXXXXXX");
+            lbl_error.setVisible(true);
+        }
+        else if(rdo_customer.isSelected() && txt_search.getText().matches("[0-9]+")==false)//if not only numbers
+        {
+            lbl_error.setText("Please enter a correct moblie number");
+            lbl_error.setVisible(true);
+        }
+        else if(rdo_customer.isSelected() && txt_search.getText().length()!=10)//if more than 10 digits
+        {
+            lbl_error.setText("Please enter a correct moblie number");
+            lbl_error.setVisible(true);
+        }
+        //if stuff member
         else if (rdo_stuff.isSelected() && txt_search.getText().isEmpty()) {
                 lbl_Error.setVisible(true);
                 lbl_Error.setText("Please enter a Employee ID");
         }
-        else if (rdo_stuff.isSelected() && !txt_search.getText().matches("^(?i)EM\\d{3}$")) {
+        else if (rdo_stuff.isSelected() && !txt_search.getText().matches("^(?i)EM\\d{3}$")) {//check the format
                 lbl_Error.setVisible(true);
                 lbl_Error.setText("Wrong Employee ID format");
+        }
+        else if (rdo_stuff.isSelected() && txt_search.getText().length()!=10) {
+                lbl_Error.setVisible(true);
+                lbl_Error.setText("Please enter a Employee ID");
         }
         else{
             try{
@@ -863,6 +882,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
 
     private void btn_changeSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changeSaveActionPerformed
         try {
+            lbl_error.setVisible(false);
             lbl_errorpwd.setVisible(false);
             Emp obj2=new Emp();
             if(txt_fname.getText().length()==0){
