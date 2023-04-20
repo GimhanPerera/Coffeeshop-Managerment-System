@@ -16,6 +16,16 @@ public class Connect{
         //System.out.println("Database connection is success\n");
         return con;
     }
+    
+    public static void main(String[] args) {
+        Connect obj=new Connect();
+        try {
+            obj.getConnection();
+            System.out.println("Database connection is success\n");
+        } catch (Exception ex) {
+            Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
 
 
