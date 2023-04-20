@@ -15,21 +15,6 @@ import java.util.logging.Logger;
  * @author Gimhan
  */
 public class cashier extends Connect{
-    public String checkCardStatus(String cardID)throws Exception{   
-        Connection c= getConnection();//get the connection using inheritance
-        String status="";
-        try{ 
-            Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("select POINTS from STATUS where CARD_ID='"+cardID+"'"); //SQL stetment
-            while(rs.next()){
-                status=rs.getString("STATUS");//get the value to variable "fname"
-            } 
-        }
-        finally{
-            c.close(); 
-        }
-        return status;  
-    }
     
     public int getPendingOrderCount()throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
@@ -38,7 +23,7 @@ public class cashier extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select COUNT(ORDER_NUMBER) as count from ORDER_T where STATUS='Pending' OR STATUS='Hold'"); //SQL stetment
             while(rs.next()){
-                count=rs.getInt("count");//get the value to variable "fname"
+                count=rs.getInt("count");
             } 
         }
         finally{
@@ -152,7 +137,6 @@ public class cashier extends Connect{
             while(rs.next()){
                 lines=rs.getInt("coun");
             }
-            
         }
         finally{
             c.close(); 

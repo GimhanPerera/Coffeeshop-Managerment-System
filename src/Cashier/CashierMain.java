@@ -441,10 +441,7 @@ public class CashierMain extends javax.swing.JFrame {
         obj.show();
         dispose();
     }//GEN-LAST:event_btn_logoutActionPerformed
-    
-    public void closeCashier(){
-        dispose();
-    }
+
     private void btn_profileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_profileActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_profileActionPerformed
@@ -469,7 +466,10 @@ public class CashierMain extends javax.swing.JFrame {
         btn_profile.setBackground(new java.awt.Color(252, 152, 3));
         btn_logout.setBackground(new java.awt.Color(173,85,2));
     }//GEN-LAST:event_btn_profileMouseClicked
-
+    
+    public void closeCashier(){
+        dispose();
+    }
     /**
      * @param args the command line arguments
      */

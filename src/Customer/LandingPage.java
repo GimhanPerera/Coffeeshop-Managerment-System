@@ -23,7 +23,7 @@ public class LandingPage extends javax.swing.JFrame {
         initComponents();
         setComponents();
     }
-    public LandingPage(String empmode,String cid,int tp) {
+    public LandingPage(String empmode,String cid,int tp) {//Come from GetTpPage
         initComponents();
         setComponents();
         this.empmode=empmode;
@@ -32,14 +32,17 @@ public class LandingPage extends javax.swing.JFrame {
     }
     
     public void setComponents(){
+        //Set back btn invisible
         btn_back.setText("");
         btn_back.setOpaque(false);
         btn_back.setContentAreaFilled(false);
         btn_back.setBorderPainted(false);
+        //Set next btn invisible
         btn_next.setText("");
         btn_next.setOpaque(false);
         btn_next.setContentAreaFilled(false);
         btn_next.setBorderPainted(false);
+        //set dinein part invisible
         txt_pax.setVisible(false);
         lbl_text.setVisible(false);
         lbl_error.setVisible(false);
@@ -157,37 +160,36 @@ public class LandingPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_backActionPerformed
 
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
-        if(rdo_takeaway.isSelected()){
-            String tables[]={};
+        if(rdo_takeaway.isSelected()){//if order is takeaway
+            String tables[]={};//tables.(empty bcz tackaway table)
             MainPage obj =new MainPage(empmode,cid,"Takeaway",tp,tables);
             obj.show();
             dispose();
         }
-        else{
-            if(txt_pax.getText().length()==0){
+        else{//if order is dinein
+            if(txt_pax.getText().length()==0){//if pax txtbox empty
                 lbl_error.setText("Please enter Number of people");
                 lbl_error.setVisible(true);
             }
-            else if(txt_pax.getText().matches("[0-9]+")==false){
+            else if(txt_pax.getText().matches("[0-9]+")==false){//if include non-digit
                 lbl_error.setText("Please enter valid number");
                 lbl_error.setVisible(true);
             }
             else{
                 try {
-                    //check availability
-                    //display Massage box, if no space
-                    //create a table number array
                     System.out.println("==============================");
+                    //check availability
                     Tables obj1=new Tables();
+                    //create a table number array to store table numbers
                     String tables[]=obj1.checkAvailability(Integer.parseInt(txt_pax.getText()));
                     for(String z:tables){//For teseting
                         System.out.println(z);
                     }
-                    if(tables[0].equals("cant")){
-                        lbl_error.setText("Soory looks like there is no enough space for your pax. Please meet a staff member");
+                    if(tables[0].equals("cant")){//display Massage box, if no space
+                        lbl_error.setText("Sorry looks like there is no enough space for your pax. Please meet a staff member");
                         lbl_error.setVisible(true);
                     }
-                    else{
+                    else{//if tables available
                         MainPage obj =new MainPage(empmode,cid,"Dinein",tp,tables);
                         obj.show();
                         dispose();
@@ -200,13 +202,11 @@ public class LandingPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_nextActionPerformed
 
     private void rdo_dineinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_dineinActionPerformed
-        // TODO add your handling code here:
         txt_pax.setVisible(true);
         lbl_text.setVisible(true);
     }//GEN-LAST:event_rdo_dineinActionPerformed
 
     private void rdo_takeawayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_takeawayActionPerformed
-        // TODO add your handling code here:
         txt_pax.setVisible(false);
         lbl_text.setVisible(false);
         lbl_error.setVisible(false);
@@ -218,8 +218,7 @@ public class LandingPage extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_paxMouseClicked
 
     private void lbl_errorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_errorMouseClicked
-        // TODO add your handling code here:
-
+        
     }//GEN-LAST:event_lbl_errorMouseClicked
 
     private void btn_nextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_nextMouseClicked

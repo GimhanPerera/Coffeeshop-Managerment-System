@@ -66,7 +66,7 @@ public class chefDashboard extends javax.swing.JPanel {
         lbl_msg.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lbl_msg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_msg.setText("No orders");
-        add(lbl_msg, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 590, -1));
+        add(lbl_msg, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 590, -1));
 
         jScrollPane5.setHorizontalScrollBar(null);
 
@@ -76,7 +76,7 @@ public class chefDashboard extends javax.swing.JPanel {
         jTextArea_bill.setRows(5);
         jScrollPane5.setViewportView(jTextArea_bill);
 
-        add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 140, 310, 430));
+        add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 160, 310, 430));
 
         jTable_dBoard.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jTable_dBoard.setModel(new javax.swing.table.DefaultTableModel(
@@ -110,25 +110,25 @@ public class chefDashboard extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable_dBoard);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 720, -1));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 720, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jLabel2.setText("Pending Order count");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, -1));
 
         lbl_pendingOdr.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         lbl_pendingOdr.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_pendingOdr.setText("0");
-        add(lbl_pendingOdr, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 60, 30, -1));
+        add(lbl_pendingOdr, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 30, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jLabel5.setText("Making orders");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 60, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, -1, -1));
 
         lbl_making.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         lbl_making.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_making.setText("0");
-        add(lbl_making, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 60, 30, -1));
+        add(lbl_making, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 80, 30, -1));
 
         btn_refresh.setText("Refresh");
         btn_refresh.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +136,7 @@ public class chefDashboard extends javax.swing.JPanel {
                 btn_refreshActionPerformed(evt);
             }
         });
-        add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 60, -1, -1));
+        add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 80, -1, -1));
 
         btn_finishOdr.setText("Finish order");
         btn_finishOdr.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +144,7 @@ public class chefDashboard extends javax.swing.JPanel {
                 btn_finishOdrActionPerformed(evt);
             }
         });
-        add(btn_finishOdr, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 610, 180, 50));
+        add(btn_finishOdr, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 630, 180, 50));
 
         btn_accept.setText("Accept");
         btn_accept.addActionListener(new java.awt.event.ActionListener() {
@@ -152,8 +152,8 @@ public class chefDashboard extends javax.swing.JPanel {
                 btn_acceptActionPerformed(evt);
             }
         });
-        add(btn_accept, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 620, 160, 40));
-        add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 740));
+        add(btn_accept, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 640, 160, 40));
+        add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1100, 740));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable_dBoardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_dBoardMouseClicked
@@ -166,7 +166,7 @@ public class chefDashboard extends javax.swing.JPanel {
 
     private void btn_finishOdrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_finishOdrActionPerformed
         int result = JOptionPane.showConfirmDialog((Component) null, "Are you sure?",
-            "alert", JOptionPane.YES_NO_OPTION);
+                        "alert", JOptionPane.YES_NO_OPTION);
         System.out.println("Result : "+result);
         if(result==0){
             try {
@@ -317,7 +317,7 @@ public class chefDashboard extends javax.swing.JPanel {
                 Statement stmt = c.createStatement();//Prepare statement
                 ResultSet rs;
                 int y=0;
-                jTextArea_bill.append("\n====================\n\n\n");
+                jTextArea_bill.append("\n====================\n\n");
                 rs = stmt.executeQuery("select FOOD_NAME,QUANTITY from ORDER_FOOD INNER JOIN FOOD ON ORDER_FOOD.FOOD_ID=FOOD.FOOD_ID \n" +
                                 "WHERE ORDER_NUMBER ='"+oID+"'"); //Tables need to join
                 while(rs.next()){

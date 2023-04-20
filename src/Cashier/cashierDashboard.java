@@ -169,7 +169,7 @@ public class cashierDashboard extends javax.swing.JPanel {
         }
     }
     
-    public void clearTable(){
+    private void clearTable(){
         DefaultTableModel tblModel =(DefaultTableModel)jTable_dBoard.getModel(); 
         int rowCount = tblModel.getRowCount();
         //Remove rows one by one from the end of the table
@@ -473,7 +473,6 @@ public class cashierDashboard extends javax.swing.JPanel {
             int row=jTable_dBoard.getSelectedRow();
             String a1=(String) jTable_dBoard.getValueAt(row, 0);
             String a2=(String) jTable_dBoard.getValueAt(row, 3);
-            
             cashier obj=new cashier();
             if("Hold".equals(a2)){
                 obj.setHoldUnhold(a1,"Pending");
@@ -561,7 +560,7 @@ public class cashierDashboard extends javax.swing.JPanel {
         int row=jTable_dBoard.getSelectedRow();
         String a=(String) jTable_dBoard.getValueAt(row, 4);
         if("Paid".equals(a)){
-            JOptionPane.showMessageDialog(new JFrame(), "Sorry! Paid orders can't cancel",
+            JOptionPane.showMessageDialog(new JFrame(), "Sorry! Paid orders can't edit",
                     "Imformation", JOptionPane.INFORMATION_MESSAGE);
         }
         else{

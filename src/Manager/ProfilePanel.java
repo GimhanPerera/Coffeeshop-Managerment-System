@@ -249,12 +249,15 @@ public class ProfilePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void checkbox_pwd_changeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkbox_pwd_changeActionPerformed
-        // TODO add your handling code here:
         boolean check = checkbox_pwd_change.getModel().isSelected();
         txt_oldpwd.setEnabled(check);
         txt_newpwd_c.setEnabled(check);
         txt_newpwd.setEnabled(check);
         btn_change_pwd.setEnabled(check);
+        txt_oldpwd.setText("");
+        txt_newpwd.setText("");
+        txt_newpwd_c.setText("");
+        lbl_errorpwd.setText("");
     }//GEN-LAST:event_checkbox_pwd_changeActionPerformed
 
     private void btn_change_pwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_change_pwdActionPerformed
@@ -272,14 +275,14 @@ public class ProfilePanel extends javax.swing.JPanel {
                 lbl_errorpwd.setText("Please Confirm your password");
                 txt_newpwd_c.requestFocus();
             }
-            else if(txt_newpwd.getText().length()<6){
-                lbl_errorpwd.setText("Use 6 characters or more for your password");
-                txt_newpwd.requestFocus();
-            }
             else if(!txt_newpwd_c.getText().equals(txt_newpwd.getText())){
                 lbl_errorpwd.setText("Those passwords didn’t match. Try again.");
                 txt_newpwd_c.requestFocus();
                 txt_newpwd_c.setText("");
+            }
+            else if(txt_newpwd.getText().length()<6){
+                lbl_errorpwd.setText("Use 6 characters or more for your password");
+                txt_newpwd.requestFocus();
             }
             else if(!obj1.checkOldPwd(txt_oldpwd.getText())){
                 lbl_errorpwd.setText("Old passward is incorrect");
@@ -296,6 +299,7 @@ public class ProfilePanel extends javax.swing.JPanel {
                 txt_oldpwd.setText("");
                 txt_newpwd.setText("");
                 txt_newpwd_c.setText("");
+                lbl_errorpwd.setText("");
                 JOptionPane.showMessageDialog(new JFrame(), "Passward changed",
                     "Imformation", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -326,39 +330,49 @@ public class ProfilePanel extends javax.swing.JPanel {
         lbl_error.setVisible(false);
         if(txt_fname.getText().isEmpty()){
             lbl_error.setText("Please enter the first name");
+            txt_fname.requestFocus();
         }
         else if(txt_fname.getText().length()<=2 || txt_fname.getText().length()>=15){
             lbl_error.setText("First name length should between 2 to 15");
+            txt_fname.requestFocus();
         }
         else if(!txt_fname.getText().matches("[a-zA-Z]+")){//need to do validations
             lbl_error.setText("First name can have only english letters");
+            txt_fname.requestFocus();
         }
         else if(txt_lname.getText().isEmpty()){
             lbl_error.setText("Please enter the last name");
+            txt_lname.requestFocus();
         }
         else if(txt_lname.getText().length()<=2 || txt_fname.getText().length()>=15){
             lbl_error.setText("Please enter a valid last name");
+            txt_lname.requestFocus();
         }
         else if(!txt_lname.getText().matches("[a-zA-Z]+")){
             lbl_error.setText("Last name can have only english letters");
+            txt_lname.requestFocus();
         }
         else if(!txt_email.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
             lbl_error.setText("Invalid email format");
             lbl_error.setVisible(true);
+            txt_email.requestFocus();
         }
         else if(txt_email.getText().length()<=2 || txt_email.getText().length() > 50){
             lbl_error.setText("Invalid email length Please enter a valid email address.");
             lbl_error.setVisible(true);
+            txt_email.requestFocus();
         }
         else if (txt_nic.getText().length() != 10 && txt_nic.getText().length() != 12) {
             lbl_error.setText("Invalid NIC length Please enter a valid email address.");
             lbl_error.setVisible(true);
+            txt_nic.requestFocus();
         }
         else if (!txt_nic.getText().matches("^\\d{9}[vVxX]|[12]\\d{11}$")) {
             lbl_error.setText("Sri Lankan NIC numbers should follow ...");
             lbl_error.setVisible(true);
+            txt_nic.requestFocus();
         }
-        else if(true){
+        else if(false){
             
         }
         //need to do validations

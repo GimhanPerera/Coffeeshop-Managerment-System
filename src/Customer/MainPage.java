@@ -39,6 +39,8 @@ public class MainPage extends javax.swing.JFrame {
     String orderID="";//orderID use only updating a order
     String tables[]={};
     boolean editmode=false;
+    
+    //for testing
     public MainPage() {
         initComponents();
         firstDataGet();
@@ -52,7 +54,7 @@ public class MainPage extends javax.swing.JFrame {
         this.cid=cid;
         this.o_type=o_type;
         this.tp=tp;
-        //
+        //table array
         this.tables=new String[tables.length];
         for(int i=0;i<tables.length;i++){
             this.tables[i]=tables[i];
@@ -61,20 +63,18 @@ public class MainPage extends javax.swing.JFrame {
         firstDataGet();
         LoyaltyCard obj1=new LoyaltyCard();
         try {
-            int req = obj1.checkRequseted(cid);
-            if(req==1){
+            int req = obj1.checkRequseted(cid);//check customer has loyalty card? requested? not requested?
+            if(req==1){//requested
                 btn_request.setVisible(false);
                 lbl_request.setVisible(true);
             }
-            else if(req==2){
+            else if(req==2){//customer has a card
                 btn_request.setVisible(false);
                 lbl_request.setVisible(false);
             }
-            int points=obj1.getLoyaltyPoints(cid);
-            this.points=points;
-            lbl_loyaltyPoints.setText(Integer.toString(points));
+            points=obj1.getLoyaltyPoints(cid);//get loyalty points
+            lbl_loyaltyPoints.setText(Integer.toString(points));//display loyalty points
         } catch (Exception ex) {
-            //Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Database error: Cant get loyalty point");
             btn_request.setVisible(false);
         }
@@ -83,13 +83,12 @@ public class MainPage extends javax.swing.JFrame {
     //If come from ConfirmOrderPage
     public MainPage(String empmode,String orderID,String o_type,int tp,int tot,String[] foodID,int[] Qyt,String tables[],String cid) {
         initComponents();
-                this.empmode=empmode;
+        this.empmode=empmode;
         this.o_type=o_type;
-        this.tp=tp;
         this.tp=tp;
         this.orderID=orderID;
         this.cid=cid;
-        //
+        //table array
         this.tables=new String[tables.length];
         for(int i=0;i<tables.length;i++){
             this.tables[i]=tables[i];
@@ -106,11 +105,11 @@ public class MainPage extends javax.swing.JFrame {
                 btn_request.setVisible(false);
                 lbl_request.setVisible(false);
             }
-            int points=obj1.getLoyaltyPoints(cid);
+            int points=obj1.getLoyaltyPoints(cid);//get loyalty points
             this.points=points;
             lbl_loyaltyPoints.setText(Integer.toString(points));
-            getFood(foodID,Qyt);
-            lbl_total.setText(Integer.toString(tot));
+            getFood(foodID,Qyt);//set food tables
+            lbl_total.setText(Integer.toString(tot));//set total
             if(!empmode.equals("0") && "EM".equals(empmode.substring(0,2)))//check this is a cashier
                 btn_next.setText("Update Order");
         } catch (Exception ex) {
@@ -167,24 +166,24 @@ public class MainPage extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(3);
         try {
             getFood();
+            jTable_menu0.setRowSelectionInterval(0, 0);//set selection
+            jTable_menu1.setRowSelectionInterval(0, 0);//set selection
+            jTable_menu2.setRowSelectionInterval(0, 0);//set selection
+            jTable_menu3.setRowSelectionInterval(0, 0);//set selection
             } catch (Exception ex) {
             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
             LandingPage obj =new LandingPage();
             obj.show();
             dispose();
         }
-        jTable_menu0.setRowSelectionInterval(0, 0);//set selection
-        jTable_menu1.setRowSelectionInterval(0, 0);//set selection
-        jTable_menu2.setRowSelectionInterval(0, 0);//set selection
-        jTable_menu3.setRowSelectionInterval(0, 0);//set selection
     }
     
+    //normal way of setting food tables
     public void getFood() throws Exception{
         Connect obj = new Connect();
         Connection c = obj.getConnection();  //getConnection();//Establish the connection
         
-        try{ //int q=1;System.out.println(q++); <- tester
-            
+        try{
                 Statement stmt = c.createStatement();//Prepare statement
                 ResultSet rs = stmt.executeQuery("select FOOD_NAME,QUANTITY_TYPE,UNIT_PRICE from FOOD WHERE CATEGORY='COFFEE'"); //SQL stetment
                 while(rs.next()){
@@ -234,18 +233,19 @@ public class MainPage extends javax.swing.JFrame {
         }
     }
     
+    //first set table if update order or from confirm page
     public void getFood(String[] foodID,int[] Qyt) throws Exception{
         Connect obj = new Connect();
         Food obj2=new Food();
-        Connection c = obj.getConnection();  //getConnection();//Establish the connection
+        Connection c = obj.getConnection();//Establish the connection
         jTabbedPane1.setSelectedIndex(3);
-        try{ //int q=1;System.out.println(q++); <- tester
-            
+        try{
+                //1st table
                 Statement stmt = c.createStatement();//Prepare statement
                 ResultSet rs = stmt.executeQuery("select FOOD_NAME,QUANTITY_TYPE,UNIT_PRICE from FOOD WHERE CATEGORY='COFFEE'"); //SQL stetment
                 while(rs.next()){
                     String foodName=rs.getString("FOOD_NAME");
-                    String qty=rs.getString("QUANTITY_TYPE");//get the value to variable "fname"
+                    String qty=rs.getString("QUANTITY_TYPE");
                     String price=rs.getString("UNIT_PRICE");
                     int x=0;
                     for(int i=0;i<foodID.length;i++){
@@ -663,7 +663,7 @@ public class MainPage extends javax.swing.JFrame {
                 dispose();
             }            
         }
-        else{
+        else{//if this is a new order
             LandingPage obj =new LandingPage(empmode,cid,tp);
             obj.show();
             dispose();
@@ -671,10 +671,10 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_backActionPerformed
 
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
-        int lines= (jTextArea_bill.getLineCount())-1;
+        int lines= (jTextArea_bill.getLineCount())-1;//get selected item count
         if(lines>0){
-            String foodid[]=new String[lines];
-            int qty[]=new int[lines];
+            String foodid[]=new String[lines];//to store food ids
+            int qty[]=new int[lines];//to store qty of this items
         int count=0;
         for(int j=0;j<jTable_menu3.getRowCount();j++){//check coffee table
             if(Integer.parseInt((String) jTable_menu3.getValueAt(j, 2))!=0){
@@ -697,8 +697,7 @@ public class MainPage extends javax.swing.JFrame {
                 count++;
             }  
         }
-        if(editmode){
-            //if this is a update of a order
+        if(editmode){//if this is a update of a order
             //convert food names to food ids
             for(int q=0;q<lines;q++){
                 Food obj1=new Food();
@@ -727,8 +726,7 @@ public class MainPage extends javax.swing.JFrame {
             dispose();
         }
         else{//If this is a new order
-            //copy the bill
-            StringBuffer sb = new StringBuffer(jTextArea_bill.getText());
+            StringBuffer sb = new StringBuffer(jTextArea_bill.getText());//copy the bill
             for(int q=0;q<lines;q++){//convert food names to food ids
                 Food obj1=new Food();
                 try {
@@ -895,7 +893,6 @@ public class MainPage extends javax.swing.JFrame {
         
     }
     private void jComboBox_categoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_categoryActionPerformed
-        
         switch(jComboBox_category.getSelectedIndex()){
             case 0:
                 jTabbedPane1.setSelectedIndex(3);

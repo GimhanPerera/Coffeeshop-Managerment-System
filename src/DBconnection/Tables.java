@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class Tables extends Connect{
     
-    public String[] checkAvailability(int pax) throws Exception{
+    public String[] checkAvailability(int pax) throws Exception{//check table availability(from landing page)
         System.out.println("Full pax : "+pax);
         Connection c= getConnection();//get the connection using inheritance
         boolean can=true;

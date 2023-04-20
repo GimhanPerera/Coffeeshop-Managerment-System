@@ -24,7 +24,7 @@ public class Order extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select ORDER_NUMBER from ORDER_T ORDER BY ORDER_NUMBER DESC LIMIT 1"); //SQL stetment
             while(rs.next()){
-                lID=rs.getString("ORDER_NUMBER");//get the value to variable "fname"
+                lID=rs.getString("ORDER_NUMBER");
             }
             lID=lID.substring(2);
             String zeros="";

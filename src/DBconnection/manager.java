@@ -66,7 +66,7 @@ public class manager extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select PWD from EMPLOYEE where EMP_TYPE='MANAGER'"); //SQL stetment
             while(rs.next()){
-                real_pwd=rs.getString("PWD");//get the value to variable "fname"
+                real_pwd=rs.getString("PWD");
             } 
         }
         finally{

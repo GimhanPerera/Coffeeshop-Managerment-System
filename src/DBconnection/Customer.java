@@ -25,11 +25,12 @@ public class Customer extends Connect{
         
     }
     
+    //
     public Customer(String order_id) throws Exception{
         getDetails(order_id);
     }
     
-    private void getDetails(String order_id) throws Exception{   
+    private void getDetails(String order_id) throws Exception{//get details from order id   
         Connection c= getConnection();//get the connection using inheritance
         try{ System.out.println("EEAAAA2 ");
             Statement stmt = c.createStatement();
@@ -64,7 +65,7 @@ public class Customer extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select CUSTOMER_ID from CUSTOMER where MOBILE_NUMBER='"+tp+"'"); //SQL stetment
             while(rs.next()){
-                cid=rs.getString("CUSTOMER_ID");//get the value to variable "fname"
+                cid=rs.getString("CUSTOMER_ID");
             }
             if("".equals(cid)){
                 cid="0";
@@ -83,7 +84,7 @@ public class Customer extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select F_name from CUSTOMER where customer_ID='"+c_ID+"'"); //SQL stetment
             while(rs.next()){
-                fname=rs.getString("F_name");//get the value to variable "fname"
+                fname=rs.getString("F_name");
             } 
         }
         finally{
@@ -99,7 +100,7 @@ public class Customer extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select L_name from CUSTOMER where customer_ID='"+c_ID+"'"); //SQL stetment
             while(rs.next()){
-                lname=rs.getString("L_name");//get the value to variable "fname"
+                lname=rs.getString("L_name");
             } 
         }
         finally{
@@ -114,7 +115,7 @@ public class Customer extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select EMAIL from CUSTOMER where customer_ID='"+c_ID+"'"); //SQL stetment
             while(rs.next()){
-                email=rs.getString("EMAIL");//get the value to variable "fname"
+                email=rs.getString("EMAIL");
             } 
         }
         finally{
@@ -130,7 +131,7 @@ public class Customer extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select MOBILE_NUMBER from CUSTOMER where customer_ID='"+c_ID+"'"); //SQL stetment
             while(rs.next()){
-                tp=rs.getString("MOBILE_NUMBER");//get the value to variable "fname"
+                tp=rs.getString("MOBILE_NUMBER");
             } 
         }
         finally{
@@ -147,7 +148,7 @@ public class Customer extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select CARD_ID from LOYALTY_CARD where customer_ID='"+c_ID+"'"); //SQL stetment
             while(rs.next()){
-                id=rs.getString("CARD_ID");//get the value to variable "fname"
+                id=rs.getString("CARD_ID");
             } 
         }
         finally{
@@ -162,7 +163,7 @@ public class Customer extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select POINTS from CUSTOMER where customer_ID='"+c_ID+"'"); //SQL stetment
             while(rs.next()){
-                points=rs.getInt("POINTS");//get the value to variable "fname"
+                points=rs.getInt("POINTS");
             } 
         }
         finally{

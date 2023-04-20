@@ -5,6 +5,9 @@
 package Manager;
 import DBconnection.Connect;
 import DBconnection.Food;
+import DBconnection.LoyaltyCard;
+import java.awt.Component;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,15 +29,29 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
      */
     public FoodDetailsPanel() {
         initComponents();
+        jTable_food.getTableHeader().setFont(new Font("SansSerif", Font.PLAIN, 15));
         lbl_Error.setVisible(false);
         jPanel_foodAddEdit.setVisible(false);
         jPanel_main.setVisible(true);
+        lbl_empty.setVisible(false);
+        lbl_Error1.setVisible(false);
+    }
+    
+    private void setEditRemovebtn(){
+        if(jTable_food.getRowCount()!=0){
+            btn_delete.setEnabled(true);
+            btn_edit.setEnabled(true);
+        }
+        else{
+            btn_edit.setEnabled(false);
+            btn_delete.setEnabled(false);
+        }
     }
     
     public void getFood() throws Exception{
         Connect obj = new Connect();
         Connection c = obj.getConnection();  //getConnection();//Establish the connection
-        
+        lbl_empty.setVisible(false);
         try{ //int q=1;System.out.println(q++); <- tester
             
                 Statement stmt = c.createStatement();//Prepare statement
@@ -50,6 +67,11 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
                     DefaultTableModel tblModel =(DefaultTableModel)jTable_food.getModel(); 
                     tblModel.addRow(tbData);
                 }
+                if(jTable_food.getRowCount()!=0)
+                    jTable_food.setRowSelectionInterval(0, 0);
+                else
+                    lbl_empty.setVisible(true);
+                setEditRemovebtn();
         }
         catch(SQLException ex)//Is database has a problem, this catch stetment catch it
         {
@@ -63,7 +85,8 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
     public void getFoodFromCatogorywise(int i) throws Exception{
         Connect obj = new Connect();
         Connection c = obj.getConnection();  //getConnection();//Establish the connection
-        
+        clearTable();
+        lbl_empty.setVisible(false);
         try{ //int q=1;System.out.println(q++); <- tester
             
                 Statement stmt = c.createStatement();//Prepare statement
@@ -125,9 +148,8 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
     public void getFoodFromSearch(int i,String txt) throws Exception{
         Connect obj = new Connect();
         Connection c = obj.getConnection();  //getConnection();//Establish the connection
-        
+        lbl_empty.setVisible(false);
         try{ //int q=1;System.out.println(q++); <- tester
-            
                 Statement stmt = c.createStatement();//Prepare statement
                 ResultSet rs;
             switch (i) {
@@ -160,6 +182,10 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
                 default:
                     break;
             }
+            if(jTable_food.getRowCount()!=0)
+                    jTable_food.setRowSelectionInterval(0, 0);
+                else
+                    lbl_empty.setVisible(true);
         }
         catch(SQLException ex)//Is database has a problem, this catch stetment catch it
         {
@@ -196,6 +222,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
         lbl_Error = new javax.swing.JLabel();
         txt_search = new javax.swing.JTextField();
         btn_search = new javax.swing.JButton();
+        lbl_empty = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_food = new javax.swing.JTable();
         btn_viewall = new javax.swing.JButton();
@@ -219,6 +246,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
         txt_maxQty = new javax.swing.JTextField();
         btn_cancel = new javax.swing.JButton();
         btn_add1 = new javax.swing.JButton();
+        lbl_Error1 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -232,11 +260,12 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Food Details");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, -1, -1));
 
         jPanel_main.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jRadioButton1.setSelected(true);
         jRadioButton1.setText("Filter Food");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -244,36 +273,41 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
                 jRadioButton1ActionPerformed(evt);
             }
         });
-        jPanel_main.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
+        jPanel_main.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
 
         buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jRadioButton2.setText("Search Food");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton2ActionPerformed(evt);
             }
         });
-        jPanel_main.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
+        jPanel_main.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
 
+        lbl_foodtype.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbl_foodtype.setText("Food Type");
-        jPanel_main.add(lbl_foodtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
+        jPanel_main.add(lbl_foodtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
 
+        jComboBox_foodtype.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jComboBox_foodtype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "COFFEE", "CAKE", "BUN" }));
         jComboBox_foodtype.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_foodtypeActionPerformed(evt);
             }
         });
-        jPanel_main.add(jComboBox_foodtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 240, -1));
+        jPanel_main.add(jComboBox_foodtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 240, -1));
 
+        btn_searchByType.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_searchByType.setText("Search");
         btn_searchByType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_searchByTypeActionPerformed(evt);
             }
         });
-        jPanel_main.add(btn_searchByType, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, 100, -1));
+        jPanel_main.add(btn_searchByType, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, 100, -1));
 
+        jComboBox_searchby.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jComboBox_searchby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Food ID", "Food Name" }));
         jComboBox_searchby.setEnabled(false);
         jComboBox_searchby.addActionListener(new java.awt.event.ActionListener() {
@@ -281,19 +315,22 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
                 jComboBox_searchbyActionPerformed(evt);
             }
         });
-        jPanel_main.add(jComboBox_searchby, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 150, -1));
+        jPanel_main.add(jComboBox_searchby, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 150, -1));
 
+        lbl_searchby.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbl_searchby.setText("Search by");
         lbl_searchby.setEnabled(false);
-        jPanel_main.add(lbl_searchby, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, -1, -1));
+        jPanel_main.add(lbl_searchby, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, -1, -1));
 
         lbl_Error.setForeground(new java.awt.Color(255, 0, 0));
         lbl_Error.setText("Error msg");
-        jPanel_main.add(lbl_Error, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, 330, -1));
+        jPanel_main.add(lbl_Error, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 120, 330, -1));
 
+        txt_search.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txt_search.setEnabled(false);
-        jPanel_main.add(txt_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 220, -1));
+        jPanel_main.add(txt_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 220, -1));
 
+        btn_search.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_search.setText("Search");
         btn_search.setEnabled(false);
         btn_search.addActionListener(new java.awt.event.ActionListener() {
@@ -301,7 +338,12 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
                 btn_searchActionPerformed(evt);
             }
         });
-        jPanel_main.add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 60, 100, -1));
+        jPanel_main.add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, 100, -1));
+
+        lbl_empty.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbl_empty.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_empty.setText("No results");
+        jPanel_main.add(lbl_empty, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 350, 310, 30));
 
         jTable_food.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTable_food.setModel(new javax.swing.table.DefaultTableModel(
@@ -323,7 +365,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
         jTable_food.setRowHeight(30);
         jScrollPane1.setViewportView(jTable_food);
 
-        jPanel_main.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 970, 420));
+        jPanel_main.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 970, 420));
 
         btn_viewall.setText("View All");
         btn_viewall.addActionListener(new java.awt.event.ActionListener() {
@@ -331,7 +373,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
                 btn_viewallActionPerformed(evt);
             }
         });
-        jPanel_main.add(btn_viewall, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 190, 110, 40));
+        jPanel_main.add(btn_viewall, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 210, 110, 40));
 
         btn_clear.setText("Clear");
         btn_clear.addActionListener(new java.awt.event.ActionListener() {
@@ -339,7 +381,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
                 btn_clearActionPerformed(evt);
             }
         });
-        jPanel_main.add(btn_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 250, 100, -1));
+        jPanel_main.add(btn_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(1016, 270, 100, -1));
 
         btn_add.setText("Add");
         btn_add.addActionListener(new java.awt.event.ActionListener() {
@@ -347,7 +389,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
                 btn_addActionPerformed(evt);
             }
         });
-        jPanel_main.add(btn_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 330, 100, 40));
+        jPanel_main.add(btn_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(1014, 350, 100, 40));
 
         btn_edit.setText("Edit");
         btn_edit.addActionListener(new java.awt.event.ActionListener() {
@@ -355,7 +397,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
                 btn_editActionPerformed(evt);
             }
         });
-        jPanel_main.add(btn_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 390, 100, 40));
+        jPanel_main.add(btn_edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1014, 410, 100, 40));
 
         btn_delete.setText("Delete");
         btn_delete.addActionListener(new java.awt.event.ActionListener() {
@@ -363,9 +405,9 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
                 btn_deleteActionPerformed(evt);
             }
         });
-        jPanel_main.add(btn_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 450, 100, -1));
+        jPanel_main.add(btn_delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1014, 470, 100, -1));
 
-        add(jPanel_main, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 1130, 580));
+        add(jPanel_main, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 1130, 600));
 
         jPanel_foodAddEdit.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -416,7 +458,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
         jPanel_foodAddEdit.add(txt_price, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, 170, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel5.setText("Daily maximum Quentify");
+        jLabel5.setText("Daily maximum Quentity");
         jPanel_foodAddEdit.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, -1, -1));
 
         txt_maxQty.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -438,7 +480,12 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
         });
         jPanel_foodAddEdit.add(btn_add1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 490, 130, 50));
 
-        add(jPanel_foodAddEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 740, 610));
+        lbl_Error1.setForeground(new java.awt.Color(255, 0, 0));
+        lbl_Error1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_Error1.setText("Error msg");
+        jPanel_foodAddEdit.add(lbl_Error1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 101, 660, 20));
+
+        add(jPanel_foodAddEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 740, 610));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
@@ -452,6 +499,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
             AddEdit(a);
             jPanel_foodAddEdit.setVisible(true);
             jPanel_main.setVisible(false);
+            jLabel1.setVisible(false);
         }
     }//GEN-LAST:event_btn_editActionPerformed
 
@@ -460,9 +508,12 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
         AddEdit();
         jPanel_foodAddEdit.setVisible(true);
         jPanel_main.setVisible(false);
+        jLabel1.setVisible(false);
+        txt_foodname.requestFocus();
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        txt_search.setText("");
         lbl_Error.setVisible(false);
         jComboBox_foodtype.setEnabled(true);
         lbl_foodtype.setEnabled(true);
@@ -485,29 +536,59 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
 
     private void btn_viewallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_viewallActionPerformed
         try {
+            txt_search.setText("");
             lbl_Error.setVisible(false);
+            lbl_empty.setVisible(false);
             clearTable();
             getFood();
+            setEditRemovebtn();
+            
         } catch (Exception ex) {
             Logger.getLogger(FoodDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_viewallActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
+        txt_search.setText("");
         lbl_Error.setVisible(false);
         clearTable();
+        lbl_empty.setVisible(true);
         jComboBox_foodtype.setSelectedIndex(0);
+        setEditRemovebtn();
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         try {
-            clearTable();
-            getFoodFromSearch(jComboBox_searchby.getSelectedIndex(),txt_search.getText());
-            jTable_food.setRowSelectionInterval(0, 0);
+            if("".equals(txt_search.getText())){//empty
+                lbl_Error.setVisible(true);
+                lbl_Error.setText("Please enter "+jComboBox_searchby.getSelectedItem());
+            }
+            else if(jComboBox_searchby.getSelectedIndex()==0 && txt_search.getText().length()!=5){//invalide width
+                lbl_Error.setVisible(true);
+                lbl_Error.setText("Wrong food id");
+            }
+            else if(jComboBox_searchby.getSelectedIndex()==0 && !txt_search.getText().substring(2).matches("^[0-9]*$")){//wrong food id format 
+                lbl_Error.setVisible(true);
+                lbl_Error.setText("Wrong food id format");
+            }
+            else if(jComboBox_searchby.getSelectedIndex()==0 &&  !txt_search.getText().substring(0, 2).matches("^[a-zA-Z]*$")){//
+                lbl_Error.setVisible(true);
+                lbl_Error.setText("Wrong food id format");
+            }
+            else{
+                clearTable();
+                getFoodFromSearch(jComboBox_searchby.getSelectedIndex(),txt_search.getText());
+                if(jTable_food.getRowCount()!=0)
+                    jTable_food.setRowSelectionInterval(0, 0);
+                else
+                    lbl_empty.setVisible(true);
+                setEditRemovebtn();
+            }
         } catch (Exception ex) {
             Logger.getLogger(FoodDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
             lbl_Error.setVisible(true);
             lbl_Error.setText("No result. Please check entered "+jComboBox_searchby.getSelectedItem());
+            setEditRemovebtn();
         }
     }//GEN-LAST:event_btn_searchActionPerformed
 
@@ -518,10 +599,12 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
     private void btn_searchByTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchByTypeActionPerformed
         try {
             if(jComboBox_foodtype.getSelectedIndex()!=0){
-                clearTable();
                 getFoodFromCatogorywise(jComboBox_foodtype.getSelectedIndex());
                 if(jTable_food.getRowCount()!=0)
                     jTable_food.setRowSelectionInterval(0, 0);
+                else
+                    lbl_empty.setVisible(true);
+                setEditRemovebtn();
             }          
         } catch (Exception ex) {
             Logger.getLogger(FoodDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -530,22 +613,50 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         lbl_Error.setVisible(false);
-
+        lbl_empty.setVisible(false);
+        txt_search.setText("");
         if(jTable_food.getRowCount()==0){//validations
             JOptionPane.showMessageDialog(new JFrame(), "Please select a item",
                "Imformation", JOptionPane.ERROR_MESSAGE);
-        }else{
+        }
+        else{
             try {
                 int row=jTable_food.getSelectedRow();
                 String a=(String) jTable_food.getValueAt(row, 0);
                 Food obj=new Food();
-                obj.deleteFood(a);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(new JFrame(), "Can't delete the food item",
-               "Imformation", JOptionPane.ERROR_MESSAGE);
+                int result = JOptionPane.showConfirmDialog((Component) null, "Are you sure?",
+                                                                    "alert", JOptionPane.YES_NO_OPTION);
+                System.out.println(result);
+                if(result==0){
+                    try {
+                        if(obj.deleteFood(a)){//delete the food
+                            if(jComboBox_foodtype.getSelectedIndex()==0){
+                            clearTable();
+                            getFood();
+                            setEditRemovebtn();
+                        }else{
+                            getFoodFromCatogorywise(jComboBox_foodtype.getSelectedIndex());
+                        }
+                        if(jTable_food.getRowCount()!=0)
+                            jTable_food.setRowSelectionInterval(0, 0);
+                        else
+                            lbl_empty.setVisible(true);
+                        setEditRemovebtn();
+                        }
+                        else{//delete unsuccessful
+                            JOptionPane.showMessageDialog(new JFrame(), "Can't delete the food item. Because the item has in a pending order",
+                                "Imformation", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (Exception ex) {
+                                Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } 
+            } 
+            catch (Exception ex) {
+                JOptionPane.showMessageDialog(new JFrame(), "Can't delete the food item. Because the item has in a pending order",
+                    "Imformation", JOptionPane.ERROR_MESSAGE);
             }
         }
-        
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void jComboBox_searchbyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_searchbyActionPerformed
@@ -562,43 +673,128 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
     private void btn_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelActionPerformed
         jPanel_foodAddEdit.setVisible(false);
         jPanel_main.setVisible(true);
+        lbl_Error1.setVisible(false);
+        jLabel1.setVisible(true);
         setFoodFormEmpty();
     }//GEN-LAST:event_btn_cancelActionPerformed
 
     private void btn_add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add1ActionPerformed
-        if(false){//validation need to add
-
+        Food obj=new Food();
+        if(txt_foodname.getText().isEmpty()){//check is it empty
+            lbl_Error1.setText("Food name cannot be empty");
+            lbl_Error1.setVisible(true);
+            txt_foodname.requestFocus();
+        }
+        else if(!txt_foodname.getText().matches( "^[a-zA-Z]+(\\s[a-zA-Z]+)*$")){//check is any alphabetic character
+            lbl_Error1.setText("Invalid food name format");
+            lbl_Error1.setVisible(true);
+            txt_foodname.requestFocus();
+        }
+        else if(txt_foodname.getText().length()<=2 || txt_foodname.getText().length()>=20){//not allow 2>=length>=15
+            lbl_Error1.setText("food name length should between 2 to 15");
+            lbl_Error1.setVisible(true);
+            txt_foodname.requestFocus();
+        }
+        else if(!txt_qtyType.getText().isEmpty() && !txt_qtyType.getText().matches( "[A-Z]*[a-z]*" )){//check is any alphabetic character
+            lbl_Error1.setText("Invalid Qty type format");
+            lbl_Error1.setVisible(true);
+            txt_qtyType.requestFocus();
+        }
+        else if(!txt_qtyType.getText().isEmpty() && (txt_qtyType.getText().length()<=2 || txt_qtyType.getText().length()>=15)){//not allow 2>=length>=15
+            lbl_Error1.setText("Qty type length should between 2 to 15");
+            lbl_Error1.setVisible(true);
+            txt_qtyType.requestFocus();
+        }
+        else if(txt_price.getText().isEmpty()){//check is it empty
+            lbl_Error1.setText("Price cannot be empty");
+            lbl_Error1.setVisible(true);
+            txt_price.requestFocus();
+        }
+        else if(!txt_price.getText().matches("^[0-9]*$")){
+            lbl_Error1.setText("Invalid Price");
+            lbl_Error1.setVisible(true);
+            txt_price.requestFocus();
+        }
+        else if(Integer.parseInt(txt_price.getText())>10000){
+            lbl_Error1.setText("Invalid Price");
+            lbl_Error1.setVisible(true);
+            txt_price.requestFocus();
+        }
+        else if(txt_maxQty.getText().isEmpty()){//check is it empty
+            lbl_Error1.setText("Daily maximum Quentity cannot be empty");
+            lbl_Error1.setVisible(true);
+            txt_maxQty.requestFocus();
+        }
+        else if(!txt_maxQty.getText().matches("^[0-9]*$")){
+            lbl_Error1.setText("Invalid Daily maximum Quentity");
+            lbl_Error1.setVisible(true);
+            txt_maxQty.requestFocus();
+        }
+        else if(Integer.parseInt(txt_maxQty.getText())>10000){
+            txt_maxQty.setText("Invalid Price");
+            txt_maxQty.setVisible(true);
+            txt_maxQty.requestFocus();
         }
         else if(btn_add1.getText().equals("Save")){//edit existing food item
             try {
-                Food obj=new Food();
-                obj.updateFood(txt_foodID.getText(),txt_foodname.getText(),txt_price.getText(),txt_maxQty.getText(),txt_qtyType.getText());
+                String temp="";
+                switch(jComboBox_ftype.getSelectedIndex()){
+                    case 0:
+                        temp="COFFEE";
+                        break;
+                    case 1:
+                        temp="CAKE";
+                        break;
+                    case 2:
+                        temp="BUN";
+                        break;
+                }
+                lbl_Error1.setVisible(false);
+                
+                obj.updateFood(txt_foodID.getText(),txt_foodname.getText(),temp,txt_price.getText(),txt_maxQty.getText(),txt_qtyType.getText());
+                JOptionPane.showMessageDialog(new JFrame(), "Food updated",
+               "Imformation", JOptionPane.INFORMATION_MESSAGE);
                 setFoodFormEmpty();
+                System.out.println(txt_foodID.getText()+" Food updated");
+                lbl_Error.setVisible(false);
+                clearTable();
+                getFood();
+                jPanel_foodAddEdit.setVisible(false);
+                jPanel_main.setVisible(true);
+                jLabel1.setVisible(true);
             } catch (Exception ex) {
-                Logger.getLogger(FoodAddEdit.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FoodDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else{//add new food item
             try {
-                Food obj=new Food();
-                obj.addNewFood(txt_foodID.getText(),txt_foodname.getText(),String.valueOf(jComboBox_ftype.getSelectedItem()),txt_price.getText(),txt_maxQty.getText(),txt_qtyType.getText());
-                setFoodFormEmpty();
+                if(obj.isFoodAlreadyExist(txt_foodname.getText())){//check food is already exist
+                    lbl_Error1.setText("Food is already exist");
+                    lbl_Error1.setVisible(true);
+                    txt_foodname.requestFocus();
+                }
+                else{
+                    obj.addNewFood(txt_foodID.getText(),txt_foodname.getText(),String.valueOf(jComboBox_ftype.getSelectedItem()),txt_price.getText(),txt_maxQty.getText(),txt_qtyType.getText());
+                    System.out.println(txt_foodID.getText()+" Food added");
+                    lbl_Error1.setVisible(false);
+                    lbl_Error.setVisible(false);
+                    JOptionPane.showMessageDialog(new JFrame(), "New food added",
+                    "Imformation", JOptionPane.INFORMATION_MESSAGE);
+                    setFoodFormEmpty();
+                    clearTable();
+                    getFood();
+                    jPanel_foodAddEdit.setVisible(false);
+                    jPanel_main.setVisible(true);
+                    jLabel1.setVisible(true);
+                }
             } catch (Exception ex) {
-                Logger.getLogger(FoodAddEdit.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FoodDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
-        try {
-            lbl_Error.setVisible(false);
-            clearTable();
-            getFood();
-        } catch (Exception ex) {
-            Logger.getLogger(FoodDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        jPanel_foodAddEdit.setVisible(false);
-        jPanel_main.setVisible(true);
+        
     }//GEN-LAST:event_btn_add1ActionPerformed
-    public void clearTable(){
+    private void clearTable(){
         DefaultTableModel tblModel =(DefaultTableModel)jTable_food.getModel(); 
         int rowCount = tblModel.getRowCount();
         //Remove rows one by one from the end of the table
@@ -622,7 +818,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
             txt_price.setText(obj1.getPrice());
             txt_qtyType.setText(obj1.getQtyType());
         } catch (Exception ex) {
-            Logger.getLogger(FoodAddEdit.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FoodDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -643,7 +839,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
                         break;
                 }
         } catch (Exception ex) {
-            Logger.getLogger(FoodAddEdit.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FoodDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -684,6 +880,8 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_food;
     private javax.swing.JLabel lbl_Error;
+    private javax.swing.JLabel lbl_Error1;
+    private javax.swing.JLabel lbl_empty;
     private javax.swing.JLabel lbl_foodtype;
     private javax.swing.JLabel lbl_searchby;
     private javax.swing.JLabel lbl_title;

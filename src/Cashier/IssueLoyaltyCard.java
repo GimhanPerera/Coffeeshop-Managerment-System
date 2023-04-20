@@ -11,6 +11,7 @@ import DBconnection.LoyaltyCard;
 import Manager.LoyaltyCardPanel;
 import com.fazecast.jSerialComm.SerialPort;
 import java.awt.Component;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,6 +43,7 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
             if(row==0){
                 btn_reject.setEnabled(false);
             btn_issueCard.setEnabled(false);
+            jTable.getTableHeader().setFont(new Font("SansSerif", Font.PLAIN, 15));
             }
             else{
                jTable.setRowSelectionInterval(0, 0); 
@@ -105,7 +107,7 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
         try{ //int q=1;System.out.println(q++); <- tester
             
                 Statement stmt = c.createStatement();//Prepare statement
-                ResultSet rs = stmt.executeQuery("select MOBILE_NUMBER,POINTS from CUSTOMER WHERE REQUEST='2'"); //SQL stetment
+                ResultSet rs = stmt.executeQuery("select MOBILE_NUMBER,POINTS from CUSTOMER WHERE REQUEST='2' AND MOBILE_NUMBER!=0100000001"); //SQL stetment
                 while(rs.next()){
                     String tp=rs.getString("MOBILE_NUMBER");
                     String points=rs.getString("POINTS");
@@ -222,9 +224,9 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
                 btn_rejectActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_reject, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 140, 30));
+        jPanel3.add(btn_reject, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 180, 140, 30));
 
-        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 460, 190, 220));
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 400, 190, 220));
 
         jPanel_loyaltycard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

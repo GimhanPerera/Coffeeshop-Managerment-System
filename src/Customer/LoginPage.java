@@ -8,6 +8,7 @@ import java.awt.Color;
 import DBconnection.Customer;
 import DBconnection.Emp;
 import Cashier.CashierMain;
+import Chef.chefMain;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Manager.TestJFrame1;
@@ -159,6 +160,9 @@ public class LoginPage extends javax.swing.JFrame {
                         dispose();
                     }else if(ch.equals("CHEF")){
                         System.out.println("CHEF");
+                        chefMain obj3 = new chefMain();
+                        obj3.show();
+                        dispose();
                     }else{//cashier
                         System.out.println(ch+" cashier");
                         CashierMain obj3 = new CashierMain();

@@ -105,7 +105,7 @@ public class Emp extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select PWD from EMPLOYEE where EMP_ID='"+empID+"'"); //SQL stetment
             while(rs.next()){
-                real_pwd=rs.getString("PWD");//get the value to variable "fname"
+                real_pwd=rs.getString("PWD");
             } 
         }
         finally{
@@ -223,5 +223,24 @@ public class Emp extends Connect{
         finally{
             c.close(); 
         }
+    }
+    
+    public boolean isEmailAlreadyExist(String email) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        byte count=0;
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select COUNT(*) AS c from EMPLOYEE where EMP_ID='"+email+"'"); //SQL stetment
+            while(rs.next()){
+                count=rs.getByte("c");
+            } 
+        }
+        finally{
+            c.close(); 
+        }
+        if(count==0)
+            return false; 
+        else
+            return true;
     }
 }

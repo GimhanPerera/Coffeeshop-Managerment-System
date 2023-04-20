@@ -9,6 +9,7 @@ import DBconnection.Connect;
 import DBconnection.LoyaltyCard;
 import com.fazecast.jSerialComm.SerialPort;
 import java.awt.Component;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,6 +42,8 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
             lbl_ok.setVisible(false);
             jPanel_loyaltycard.setVisible(false);
             setBlockbtn();
+            lbl_empty.setVisible(false);
+            jTable.getTableHeader().setFont(new Font("SansSerif", Font.PLAIN, 15));
         } catch (Exception ex) {
             Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -68,6 +71,10 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
                     DefaultTableModel tblModel =(DefaultTableModel)jTable.getModel(); 
                     tblModel.addRow(tbData);
                 }
+                btn_block.setEnabled(false);
+                btn_remove.setEnabled(false);
+                if(jTable.getRowCount()==0)
+                    lbl_empty.setVisible(true);
         }
         catch(SQLException ex)//Is database has a problem, this catch stetment catch it
         {
@@ -92,6 +99,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         btn_search = new javax.swing.JButton();
+        lbl_empty = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         btn_remove = new javax.swing.JButton();
@@ -127,13 +135,19 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btn_search.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_search.setText("Search");
         btn_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_searchActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 40, -1, -1));
+        jPanel3.add(btn_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 40, 110, -1));
+
+        lbl_empty.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbl_empty.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_empty.setText("No results");
+        jPanel3.add(lbl_empty, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, 310, 30));
 
         jTable.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -162,14 +176,16 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 930, 400));
 
+        btn_remove.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_remove.setText("Remove");
         btn_remove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_removeActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 510, -1, -1));
+        jPanel3.add(btn_remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 510, 100, -1));
 
+        btn_viewAll.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_viewAll.setText("View All");
         btn_viewAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,14 +194,16 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
         });
         jPanel3.add(btn_viewAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 200, 100, 30));
 
+        btn_add.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_add.setText("Add");
         btn_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_addActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 390, 90, 40));
+        jPanel3.add(btn_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 390, 100, 40));
 
+        jComboBox_search.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jComboBox_search.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer Telephone Number", "Loyalty Card ID" }));
         jComboBox_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,6 +212,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
         });
         jPanel3.add(jComboBox_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 240, -1));
 
+        txt_search.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txt_search.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txt_searchMouseClicked(evt);
@@ -201,10 +220,12 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
         });
         jPanel3.add(txt_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 160, -1));
 
+        jComboBox_filtertype.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jComboBox_filtertype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Blocked", "Free" }));
         jComboBox_filtertype.setEnabled(false);
         jPanel3.add(jComboBox_filtertype, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 120, -1));
 
+        btn_filter.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_filter.setText("Filter");
         btn_filter.setEnabled(false);
         btn_filter.addActionListener(new java.awt.event.ActionListener() {
@@ -215,6 +236,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
         jPanel3.add(btn_filter, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, 100, -1));
 
         buttonGroup1.add(jRadioButton_search);
+        jRadioButton_search.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jRadioButton_search.setSelected(true);
         jRadioButton_search.setText("Search by");
         jRadioButton_search.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -225,6 +247,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
         jPanel3.add(jRadioButton_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
 
         buttonGroup1.add(jRadioButton_filter);
+        jRadioButton_filter.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jRadioButton_filter.setText("Filter by");
         jRadioButton_filter.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -233,6 +256,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
         });
         jPanel3.add(jRadioButton_filter, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, -1));
 
+        btn_clear.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_clear.setText("Clear");
         btn_clear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,14 +265,16 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
         });
         jPanel3.add(btn_clear, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 250, 100, -1));
 
+        btn_block.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_block.setText("Block/Unblock");
         btn_block.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_blockActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_block, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 450, 140, 40));
+        jPanel3.add(btn_block, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 450, 100, 40));
 
+        lbl_Error.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbl_Error.setForeground(new java.awt.Color(255, 0, 0));
         lbl_Error.setText("Error msg");
         jPanel3.add(lbl_Error, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 90, 330, -1));
@@ -305,6 +331,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
 
     private void btn_removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removeActionPerformed
         lbl_Error.setVisible(false);
+        lbl_empty.setVisible(false);
         int result = JOptionPane.showConfirmDialog((Component) null, "Your order will cancel and you need to order again",
         "alert", JOptionPane.YES_NO_OPTION);
         System.out.println(result);
@@ -315,6 +342,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
                 LoyaltyCard obj=new LoyaltyCard();
                 int check=obj.removeCard(a);
                 getAllCards();
+                
             } catch (Exception ex) {
                 Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -323,6 +351,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         lbl_Error.setVisible(false);
+        lbl_empty.setVisible(true);
         clearTable();
         setBlockbtn();
         //jComboBox_foodtype.setSelectedIndex(0);
@@ -330,11 +359,13 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
 
     private void btn_viewAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_viewAllActionPerformed
         try {
+            lbl_empty.setVisible(false);
             lbl_Error.setVisible(false);
-            
             getAllCards();
             if(jTable.getRowCount()!=0)
                 jTable.setRowSelectionInterval(0, 0);
+            else
+                lbl_empty.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -357,6 +388,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
     }//GEN-LAST:event_jRadioButton_filterMouseClicked
 
     private void btn_blockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_blockActionPerformed
+        lbl_empty.setVisible(false);
         lbl_Error.setVisible(false);
         if(jTable.getRowCount()==0){//validations
             JOptionPane.showMessageDialog(new JFrame(), "Please select a card",
@@ -367,12 +399,16 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
                 String a=(String) jTable.getValueAt(row, 0);
                 String status=(String) jTable.getValueAt(row, 2);
                 LoyaltyCard obj=new LoyaltyCard();
-                if("Blocked".equals(status))
+                if("Blocked".equals(status)){
                     obj.blockUnblockCard(a, "Active");
-                else if("Active".equals(status))
+                    jTable.setValueAt("Active", row, 2);
+                }  
+                else if("Active".equals(status)){
                     obj.blockUnblockCard(a, "Blocked");
-                getAllCards();
+                    jTable.setValueAt("Blocked", row, 2);
+                }
                 jTable.setRowSelectionInterval(row, row);//set selection
+                
             } catch (Exception ex) {
                 Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -414,21 +450,44 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
      }
  }
     private void btn_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_filterActionPerformed
-        try {   
+        try {
+            
             searchByFilter();
+            if(jTable.getRowCount()!=0)
+                jTable.setRowSelectionInterval(0, 0);
+            else
+                lbl_empty.setVisible(true);
+            setBlockbtn();
         } catch (Exception ex) {
             Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_filterActionPerformed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+        lbl_Error.setVisible(false);
+        lbl_empty.setVisible(false);
         if("".equals(txt_search.getText())){
             lbl_Error.setText("Please enter "+jComboBox_search.getSelectedItem());
+            lbl_Error.setVisible(true);
+        }
+        else if(jComboBox_search.getSelectedIndex()==1 && txt_search.getText().length()!=8){
+            lbl_Error.setText("Wrong Loyalty card format");
+            lbl_Error.setVisible(true);
+        }
+        else if(jComboBox_search.getSelectedIndex()==1 && (txt_search.getText().length()!=8 || !txt_search.getText().matches("^[a-zA-Z0-9]*$"))){
+            lbl_Error.setText("Wrong Loyalty card format");
+            lbl_Error.setVisible(true);
+        }
+        else if(jComboBox_search.getSelectedIndex()==0 && !txt_search.getText().matches("^[0-9]*$")){
+            lbl_Error.setText("Wrong number format");
             lbl_Error.setVisible(true);
         }
         else{
             try {
                 searchBy();
+                setBlockbtn();
+                if(jTable.getRowCount()==0)
+                    lbl_empty.setVisible(true);
             } catch (Exception ex) {
                 Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -461,20 +520,20 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
                 lbl_scanstatus.setText("Scanning unsuccessful!!");
                 btn_scanmanage.setText("Cancel");
             }
-            else if(obj1.checkExistence(t1.getPin())==1){//check is it a existing
+            else if(obj1.checkExistence(t1.getPin())){//check is it a existing
                 lbl_waiting.setVisible(false);System.out.println(" TEST 2 ");
                 lbl_notOk.setVisible(true);
                 lbl_ok.setVisible(false);
                 btn_scanmanage.setText("Cancel");
                 lbl_scanstatus.setVisible(true);
                 lbl_scanstatus.setText("This card alrready exist in the system");
-            }else{//Add card to the sustem
+            }else{//Add card to the system
                 lbl_waiting.setVisible(false);
                 lbl_notOk.setVisible(false);
                 lbl_ok.setVisible(true);
                 btn_scanmanage.setText("Done");
                 lbl_scanstatus.setVisible(true);
-                lbl_scanstatus.setText("New loyalty card added");
+                lbl_scanstatus.setText(t1.getPin()+" loyalty card added");
                 int i=obj1.addNewCard(t1.getPin());
                 System.out.println("RETURN : "+i);
             }
@@ -544,10 +603,10 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
                 ResultSet rs;
                 if(jComboBox_search.getSelectedIndex()==0)
                     rs = stmt.executeQuery("select L.CARD_ID ,C.MOBILE_NUMBER ,L.STATUS ,CONCAT(E.F_NAME,' ',E.L_NAME) as issued_by\n" +
-"from LOYALTY_CARD L LEFT JOIN EMPLOYEE E ON L.EMP_ID=E.EMP_ID LEFT JOIN CUSTOMER C ON L.CUSTOMER_ID=C.CUSTOMER_ID WHERE C.MOBILE_NUMBER='"+txt_search.getText()+"'; "); //SQL stetment
+                        "from LOYALTY_CARD L LEFT JOIN EMPLOYEE E ON L.EMP_ID=E.EMP_ID LEFT JOIN CUSTOMER C ON L.CUSTOMER_ID=C.CUSTOMER_ID WHERE C.MOBILE_NUMBER='"+txt_search.getText()+"'; "); //SQL stetment
                 else
                     rs = stmt.executeQuery("select L.CARD_ID ,C.MOBILE_NUMBER ,L.STATUS ,CONCAT(E.F_NAME,' ',E.L_NAME) as issued_by\n" +
-"from LOYALTY_CARD L LEFT JOIN EMPLOYEE E ON L.EMP_ID=E.EMP_ID LEFT JOIN CUSTOMER C ON L.CUSTOMER_ID=C.CUSTOMER_ID WHERE L.CARD_ID='"+txt_search.getText()+"'; "); //SQL stetment
+                        "from LOYALTY_CARD L LEFT JOIN EMPLOYEE E ON L.EMP_ID=E.EMP_ID LEFT JOIN CUSTOMER C ON L.CUSTOMER_ID=C.CUSTOMER_ID WHERE L.CARD_ID='"+txt_search.getText()+"'; "); //SQL stetment
                 
                 while(rs.next()){
                     cardID=rs.getString("CARD_ID");
@@ -558,7 +617,10 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
                     String tbData[]={cardID,tp,status,issuedBy};
                     DefaultTableModel tblModel =(DefaultTableModel)jTable.getModel(); 
                     tblModel.addRow(tbData);
-                }        
+                }  
+                if(jTable.getRowCount()!=0)
+                    jTable.setRowSelectionInterval(0, 0);
+                setBlockbtn();
         }
         catch(SQLException ex)//Is database has a problem, this catch stetment catch it
         {
@@ -571,6 +633,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
     
     public void searchByFilter() throws Exception{
         clearTable();
+        lbl_empty.setVisible(false);
         Connect obj = new Connect();
         Connection c = obj.getConnection();  //getConnection();//Establish the connection
         
@@ -591,7 +654,12 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
                     String tbData[]={cardID,tp,status,issuedBy};
                     DefaultTableModel tblModel =(DefaultTableModel)jTable.getModel(); 
                     tblModel.addRow(tbData);
-                }        
+                }
+                if(jTable.getRowCount()!=0)
+                    jTable.setRowSelectionInterval(0, 0);
+                else
+                    lbl_empty.setVisible(true);
+                setBlockbtn();
         }
         catch(SQLException ex)//Is database has a problem, this catch stetment catch it
         {
@@ -633,6 +701,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
     private javax.swing.JTable jTable;
     private javax.swing.JLabel lbl_Error;
     private javax.swing.JLabel lbl_background;
+    private javax.swing.JLabel lbl_empty;
     private javax.swing.JLabel lbl_loyaltycardTitle;
     private javax.swing.JLabel lbl_notOk;
     private javax.swing.JLabel lbl_ok;

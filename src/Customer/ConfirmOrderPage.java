@@ -403,8 +403,8 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
             lbl_fnameerror.setText("First name cannot be empty");
             lbl_fnameerror.setVisible(true);
         }
-        else if(!txt_fname.getText().matches( "[A-Z]*[a-z]*" )){//check is any alphabetic character
-            lbl_fnameerror.setText("Invalid name format");
+        else if(!txt_fname.getText().matches( "[A-Z]*[a-z]*" )){//check is any non-alphabetic character
+            lbl_fnameerror.setText("Invalid format");
             lbl_fnameerror.setVisible(true);
         }
         else if(txt_fname.getText().length()<=2 || txt_fname.getText().length()>=15){//not allow 2>=length>=15
@@ -416,7 +416,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
             lbl_lnameerror.setVisible(true);
         }
         else if(!txt_lname.getText().matches( "[A-Z]*[a-z]*" )){
-            lbl_lnameerror.setText("Invalid name format");
+            lbl_lnameerror.setText("Invalid format");
             lbl_lnameerror.setVisible(true);
         }
         else if(txt_lname.getText().length()<=2 || txt_lname.getText().length()>=15){
@@ -425,17 +425,17 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         }
         if(!txt_email.getText().isEmpty()){
             if(!txt_email.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
-                lbl_emailerror.setText("Invalid email format");
+                lbl_emailerror.setText("Invalid format");
                 lbl_emailerror.setVisible(true);
             }
             else if(txt_email.getText().length()<=2 || txt_email.getText().length() > 50){
-                lbl_emailerror.setText("Invalid email length Please enter a valid email address.");
+                lbl_emailerror.setText("Invalid length. Please enter a valid email address.");
                 lbl_emailerror.setVisible(true);
             }
-        }System.out.println("NICE"+lbl_fnameerror.isVisible());
-        if(!(lbl_fnameerror.isVisible() || lbl_lnameerror.isVisible() || lbl_emailerror.isVisible())){
+        }
+        if(!(lbl_fnameerror.isVisible() || lbl_lnameerror.isVisible() || lbl_emailerror.isVisible())){//if validations are ok
             System.out.println("Validations are OK!!");
-            if("Pay".equals(btn_next.getText())){
+            if("Pay".equals(btn_next.getText())){//for card payments of takeaway customers
                 jPanel_payment.setVisible(true);
                 jPanel_customerInfo.setVisible(false);
                 jPanel1.setVisible(false);
@@ -451,30 +451,29 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                     paymetn_method="Card";
                 else if(rdo_cash.isSelected())
                     paymetn_method="Cash";
-                System.out.println("Validated");
                 Customer obj1=new Customer();
-                if(discount==0)
-                    points=(int) (points+total*0.01);//WORNING: we got total as int. not double
+                if(discount==0)//calculating points
+                    points=(int) (points+total*0.01);
                 cid=obj1.saveCustomerDetails(cid, txt_fname.getText(), txt_lname.getText(),txt_email.getText(), txt_tp.getText(), points);
                 System.out.println("Customer details saved");
                 Order obj2 = new Order();
                 obj2.placeOrder(o_type, cid, foodID, Qyt, paymetn_method, total, discount, "Pending",tables);
                 //foodID,qty,paymentstatus
-                System.out.println("Done");
+                System.out.println("Order placed");
                 try {
-                    jTextArea_bill.print();
+                    jTextArea_bill.print();//print the bill
                 } catch (PrinterException ex) {
                     Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                if("0".equals(empmode)){
+                if("0".equals(empmode)){//if this is customer
                     ThankyouPage obj =new ThankyouPage();
                     obj.show();
                     dispose();
                 }
-                else{
+                else{//if this is a cashier
                     JOptionPane.showMessageDialog(new JFrame(), "Order placed",
                     "Imformation", JOptionPane.INFORMATION_MESSAGE);
-                    CashierMain obj =new CashierMain(empmode);
+                    CashierMain obj =new CashierMain(empmode);//open cashier dashboard
                     obj.show();
                     dispose();
                 }
@@ -520,20 +519,19 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
     }//GEN-LAST:event_txt_emailMouseClicked
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
-        if(txt_loyaltycard.getText().equals("")){
+        if(txt_loyaltycard.getText().equals("")){//if not applied the loyalty card
             MainPage obj =new MainPage(empmode,"",o_type,tp,total,foodID,Qyt,tables,cid);
             obj.show();
             dispose();
         }
-        else{
+        else{//if applied the loyalty card
             int result = JOptionPane.showConfirmDialog((Component) null, "Your discount will remove",
-        "alert", JOptionPane.OK_CANCEL_OPTION);
-        System.out.println(result);
-        if(result==0){
+                            "alert", JOptionPane.OK_CANCEL_OPTION);
+        if(result==0){//if click ok
             MainPage obj =new MainPage(empmode,"",o_type,tp,total,foodID,Qyt,tables,cid);
             obj.show();
             dispose();
-            }//String cid,String o_type,int tp,//int tot,String[] foodID,int[] Qyt,int lines
+            }
         }
     }//GEN-LAST:event_btn_backActionPerformed
 
@@ -571,9 +569,13 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                     txt_loyaltycard.setText(t1.getPin());
                     //calculate and set the discount
                     this.discount=obj.getMaxDiscount(cid);//points count
-                    if(this.discount>this.total){
-                        this.discount=this.total;
+                    if(discount>500)
+                        discount=500;
+                    if(this.total<1000){
+                        this.discount=this.total/2;
                     }
+                    
+                    
                     
                     
                     //
@@ -591,8 +593,8 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                     btn_scanmanage.setText("Cancel");
                     txt_loyaltycard.setText("");
                     lbl_discount.setVisible(true);
-                    lbl_discount.setText("Wrong card or Scan unsuccessful");
-                    if("".equals(t1.getPin())){
+                    lbl_discount.setText("Wrong card. Please scan your loyalty card again.");
+                    if(!t1.getReadsuccess()){//not read
                         lbl_discount.setText("Scan unsuccessful");
                     }
                 }
@@ -659,7 +661,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                 System.out.println("Validated");
                 Customer obj1=new Customer();
                 if(discount==0)
-                    points=(int) (points+total*0.01);//WORNING: we got total as int. not double
+                    points=(int) (points+total*0.01);
                 cid=obj1.saveCustomerDetails(cid, txt_fname.getText(), txt_lname.getText(),txt_email.getText(), txt_tp.getText(), points);
                 System.out.println("Customer details saved");
                 Order obj2 = new Order();

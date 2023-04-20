@@ -66,25 +66,26 @@ public class chefMenu extends javax.swing.JPanel {
         jTable3 = new javax.swing.JTable();
         lbl_foodType = new javax.swing.JLabel();
         jComboBox_category = new javax.swing.JComboBox<>();
+        btn_refresh = new javax.swing.JButton();
         lbl_background = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl_topfoods.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lbl_topfoods.setText("Treanding Items of this month");
-        add(lbl_topfoods, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+        add(lbl_topfoods, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         lbl_topfoods1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lbl_topfoods1.setText("1. Food item");
-        add(lbl_topfoods1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 190, -1));
+        lbl_topfoods1.setText("1. --");
+        add(lbl_topfoods1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 190, -1));
 
         lbl_topfoods2.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lbl_topfoods2.setText("2. Food item");
-        add(lbl_topfoods2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 190, -1));
+        lbl_topfoods2.setText("2. --");
+        add(lbl_topfoods2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 190, -1));
 
         lbl_topfoods3.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lbl_topfoods3.setText("3. Food item");
-        add(lbl_topfoods3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 190, -1));
+        lbl_topfoods3.setText("3. --");
+        add(lbl_topfoods3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 190, -1));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -97,7 +98,7 @@ public class chefMenu extends javax.swing.JPanel {
             .addGap(0, 70, Short.MAX_VALUE)
         );
 
-        add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 720, 70));
+        add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 720, 70));
 
         jPanel1.setName(""); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -122,7 +123,7 @@ public class chefMenu extends javax.swing.JPanel {
         jTable0.setRowHeight(35);
         jScrollPane1.setViewportView(jTable0);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 15, 710, 475));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 15, 710, 410));
 
         jTabbedPane1.addTab("tab1", jPanel1);
 
@@ -161,16 +162,9 @@ public class chefMenu extends javax.swing.JPanel {
                 "Product", "Today Available Qty", "Price"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -193,16 +187,9 @@ public class chefMenu extends javax.swing.JPanel {
                 "Product", "Today Available Qty", "Price"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -215,11 +202,11 @@ public class chefMenu extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("coffee", jPanel4);
 
-        add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 710, 530));
+        add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, 710, 530));
 
         lbl_foodType.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lbl_foodType.setText("Food type");
-        add(lbl_foodType, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 110, -1, -1));
+        add(lbl_foodType, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 70, -1, -1));
 
         jComboBox_category.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jComboBox_category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Coffees", "Cakes", "Buns" }));
@@ -228,7 +215,15 @@ public class chefMenu extends javax.swing.JPanel {
                 jComboBox_categoryActionPerformed(evt);
             }
         });
-        add(jComboBox_category, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 110, 140, -1));
+        add(jComboBox_category, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 70, 140, -1));
+
+        btn_refresh.setText("Refresh");
+        btn_refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_refreshActionPerformed(evt);
+            }
+        });
+        add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 70, -1, -1));
         add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 740));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -245,8 +240,49 @@ public class chefMenu extends javax.swing.JPanel {
                 break;    
         }
     }//GEN-LAST:event_jComboBox_categoryActionPerformed
+
+    private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
+        try {
+            clearTable();
+            getFood();
+            bestThreeFoodsLastMonth();
+            switch(jComboBox_category.getSelectedIndex()){
+                case 0:
+                jTabbedPane1.setSelectedIndex(3);
+                break;
+                case 1:
+                jTabbedPane1.setSelectedIndex(1);
+                break;
+                case 2:
+                jTabbedPane1.setSelectedIndex(2);
+                break;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(chefMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_refreshActionPerformed
+    private void clearTable(){
+        DefaultTableModel tblModel =(DefaultTableModel)jTable1.getModel(); 
+        int rowCount = tblModel.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            tblModel.removeRow(i);
+        }
+        tblModel =(DefaultTableModel)jTable2.getModel(); 
+        rowCount = tblModel.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            tblModel.removeRow(i);
+        }
+        tblModel =(DefaultTableModel)jTable3.getModel(); 
+        rowCount = tblModel.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            tblModel.removeRow(i);
+        }
+    }
     
-    public void getFood() throws Exception{
+    private void getFood() throws Exception{
         try{
             Connect obj = new Connect();
         Food obj2=new Food();
@@ -314,6 +350,7 @@ public class chefMenu extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_refresh;
     private javax.swing.JComboBox<String> jComboBox_category;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

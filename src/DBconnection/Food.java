@@ -63,7 +63,7 @@ public class Food extends Connect{
         return this.qtyType;
     }
     
-    public void updateFood(String foodID,String foodname,String price,String dailyQty,String qtyType) throws Exception{   
+    public void updateFood(String foodID,String foodname,String category,String price,String dailyQty,String qtyType) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         
         try{ 
@@ -98,7 +98,7 @@ public class Food extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select FOOD_ID from FOOD where FOOD_NAME='"+food_name+"'"); //SQL stetment
             while(rs.next()){
-                fid=rs.getString("FOOD_ID");//get the value to variable "fname"
+                fid=rs.getString("FOOD_ID");
             } 
         }
         finally{
@@ -114,7 +114,7 @@ public class Food extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select FOOD_NAME from FOOD where FOOD_ID='"+fid+"'"); //SQL stetment
             while(rs.next()){
-                fname=rs.getString("FOOD_NAME");//get the value to variable "fname"
+                fname=rs.getString("FOOD_NAME");
             } 
         }
         finally{
@@ -130,7 +130,7 @@ public class Food extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("Select QUANTITY FROM ORDER_FOOD t INNER JOIN FOOD f ON t.FOOD_ID=f.FOOD_ID WHERE t.ORDER_NUMBER='"+orderID+"' AND f.FOOD_NAME='"+food_name+"';"); //SQL stetment
             while(rs.next()){
-                qty=rs.getInt("QUANTITY");//get the value to variable "fname"
+                qty=rs.getInt("QUANTITY");
             } 
         }
         finally{
@@ -173,7 +173,7 @@ public class Food extends Connect{
         return x;  
     }
     
-    //NEED TO CODE
+    
     public int FoodAvailableCount(String food_name) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         int avalable=0; System.out.println("Available checking ");
@@ -211,7 +211,7 @@ public class Food extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select FOOD_ID from FOOD WHERE FOOD_ID LIKE '"+id+"%' ORDER BY FOOD_ID DESC LIMIT 1"); //SQL stetment
             while(rs.next()){
-                FID=rs.getString("FOOD_ID");//get the value to variable "fname"
+                FID=rs.getString("FOOD_ID");
             }
             FID=FID.substring(2);
             String temp=Integer.toString((Integer.parseInt(FID))+1);
@@ -227,16 +227,47 @@ public class Food extends Connect{
         return FID;    
     }
     
-    public void deleteFood(String fID) throws Exception{//NOT COMPLETE
-        //Need to check order table and order_food table
+    public boolean deleteFood(String fID) throws Exception{
         Connection c= getConnection();//get the connection using inheritance
+        boolean success=false;
         try{ 
-            Statement stmt = c.createStatement();//Prepare statement
+            int count=0;
+            Statement stmt = c.createStatement();//Prepare statement                        
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM order_food WHERE ORDER_NUMBER IN (" +
+                                    "SELECT order_number FROM order_t WHERE status!='Completed') " +
+                                            "AND FOOD_ID='"+fID+"';"); //SQL stetment
+            while(rs.next()){
+                count=rs.getInt("COUNT(*)");
+            } 
+            if(count==0){
                 String sql="DELETE FROM FOOD WHERE FOOD_ID='"+fID+"';";
                 stmt.executeUpdate(sql);
+                success=true;
+            }
+                
+        }
+        finally{
+            c.close(); 
+            return success;
+        }
+    }
+    
+    public boolean isFoodAlreadyExist(String food_name) throws Exception{   
+        Connection c= getConnection();//get the connection using inheritance
+        byte count=0;
+        try{ 
+            Statement stmt = c.createStatement();//Prepare statement
+            ResultSet rs = stmt.executeQuery("select COUNT(*) AS c from FOOD where FOOD_NAME='"+food_name+"'"); //SQL stetment
+            while(rs.next()){
+                count=rs.getByte("c");
+            } 
         }
         finally{
             c.close(); 
         }
-    }
+        if(count==0)
+            return false; 
+        else
+            return true;
+    } 
 }

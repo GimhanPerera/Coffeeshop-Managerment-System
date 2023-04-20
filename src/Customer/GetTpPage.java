@@ -44,7 +44,6 @@ public class GetTpPage extends javax.swing.JFrame {
         btn_next = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lbl_error = new javax.swing.JLabel();
-        lbl_changetp = new javax.swing.JLabel();
         lbl_welcomepage = new javax.swing.JLabel();
         lbl_background = new javax.swing.JLabel();
 
@@ -91,16 +90,6 @@ public class GetTpPage extends javax.swing.JFrame {
         });
         jPanel_customer.add(lbl_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 490, 710, -1));
 
-        lbl_changetp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_changetp.setText("Change your mobile number");
-        lbl_changetp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbl_changetp.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_changetpMouseClicked(evt);
-            }
-        });
-        jPanel_customer.add(lbl_changetp, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 460, -1, -1));
-
         lbl_welcomepage.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_welcomepage.setText("Back to welcome page");
         lbl_welcomepage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -129,17 +118,17 @@ public class GetTpPage extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_tpActionPerformed
 
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
-        if(txt_tp.getText().length()==0)
+        if(txt_tp.getText().isEmpty())//if empty
         {
             lbl_error.setText("Please enter your moblie number");
             lbl_error.setVisible(true);
         }
-        else if(txt_tp.getText().matches("[0-9]+")==false)
+        else if(txt_tp.getText().matches("[0-9]+")==false)//if not only numbers
         {
             lbl_error.setText("Please enter a correct moblie number");
             lbl_error.setVisible(true);
         }
-        else if(txt_tp.getText().length()!=10)
+        else if(txt_tp.getText().length()!=10)//if more than 10 digits
         {
             lbl_error.setText("Please enter a correct moblie number");
             lbl_error.setVisible(true);
@@ -167,8 +156,7 @@ public class GetTpPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_nextActionPerformed
 
     private void lbl_errorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_errorMouseClicked
-        // TODO add your handling code here:
-
+        
     }//GEN-LAST:event_lbl_errorMouseClicked
 
     private void lbl_welcomepageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_welcomepageMouseClicked
@@ -182,11 +170,6 @@ public class GetTpPage extends javax.swing.JFrame {
         }
         dispose();
     }//GEN-LAST:event_lbl_welcomepageMouseClicked
-
-    private void lbl_changetpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_changetpMouseClicked
-        JOptionPane.showConfirmDialog((Component) null, "Please meet the manager, To change your telephone number",
-        "alert", JOptionPane.PLAIN_MESSAGE);
-    }//GEN-LAST:event_lbl_changetpMouseClicked
 
     /**
      * @param args the command line arguments
@@ -228,7 +211,6 @@ public class GetTpPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel_customer;
     private javax.swing.JLabel lbl_background;
-    private javax.swing.JLabel lbl_changetp;
     private javax.swing.JLabel lbl_error;
     private javax.swing.JLabel lbl_welcomepage;
     private javax.swing.JTextField txt_tp;

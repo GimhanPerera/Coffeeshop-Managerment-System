@@ -23,7 +23,7 @@ public class LoyaltyCard extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select POINTS from CUSTOMER where CUSTOMER_ID='"+CID+"'"); //SQL stetment
             while(rs.next()){
-                Points=rs.getInt("POINTS");//get the value to variable "fname"
+                Points=rs.getInt("POINTS");
             } 
         }
         finally{
@@ -61,7 +61,7 @@ public class LoyaltyCard extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select CUSTOMER_ID from CUSTOMER where MOBILE_NUMBER='"+customerTp+"'"); //SQL stetment
             while(rs.next()){
-                cusID=rs.getString("CUSTOMER_ID");//get the value to variable "fname"
+                cusID=rs.getString("CUSTOMER_ID");
             }
             getDate obj =new getDate();
             String sql="update LOYALTY_CARD set STATUS='Active', CUSTOMER_ID='"+cusID+"', ISSUE_DATE='"+obj.dateOnly()+"', "
@@ -75,6 +75,7 @@ public class LoyaltyCard extends Connect{
         }
     }
     
+    //check customer loyalty card status. return 0->not request ,1->requested ,2->has a card
     public int checkRequseted(String CID) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         int req=0;
@@ -82,7 +83,7 @@ public class LoyaltyCard extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select REQUEST from CUSTOMER where CUSTOMER_ID='"+CID+"'"); //SQL stetment
             while(rs.next()){
-                req=rs.getInt("REQUEST");//get the value to variable "fname"
+                req=rs.getInt("REQUEST");
             } 
         }
         finally{
@@ -91,16 +92,16 @@ public class LoyaltyCard extends Connect{
         return req;  
     }
     
-    public int checkExistence(String CID) throws Exception{ //check the card is existing(return 1) or not(return 0)  
+    public boolean checkExistence(String cardid) throws Exception{ //check the card is existing(return 1) or not(return 0)  
         Connection c= getConnection();//get the connection using inheritance
-        int exist=0;
+        boolean exist=true;
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("select STATUS from LOYALTY_CARD where CARD_ID='"+CID+"'"); //SQL stetment
+            ResultSet rs = stmt.executeQuery("select STATUS from LOYALTY_CARD where CARD_ID='"+cardid+"'"); //SQL stetment
             while(rs.next()){
                 String temp=rs.getString("STATUS");
-                if(!("".equals(temp))){
-                    exist=1;
+                if(("".equals(temp))){
+                    exist=false;
                 }
             } 
         }
@@ -183,7 +184,7 @@ public class LoyaltyCard extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select CARD_ID from LOYALTY_CARD where CUSTOMER_ID='"+CID+"'"); //SQL stetment
             while(rs.next()){
-                id=rs.getString("CARD_ID");//get the value to variable "fname"
+                id=rs.getString("CARD_ID");
             } 
         }
         finally{

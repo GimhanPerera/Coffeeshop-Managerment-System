@@ -63,6 +63,7 @@ public class Menu extends javax.swing.JPanel {
         jTable3 = new javax.swing.JTable();
         lbl_foodType = new javax.swing.JLabel();
         jComboBox_category = new javax.swing.JComboBox<>();
+        btn_refresh = new javax.swing.JButton();
         lbl_background = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -212,6 +213,14 @@ public class Menu extends javax.swing.JPanel {
             }
         });
         add(jComboBox_category, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 110, 140, -1));
+
+        btn_refresh.setText("Refresh");
+        btn_refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_refreshActionPerformed(evt);
+            }
+        });
+        add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 50, -1, -1));
         add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 740));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -229,6 +238,48 @@ public class Menu extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jComboBox_categoryActionPerformed
 
+    private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
+        try {
+            clearTable();
+            getFood();
+            bestThreeFoodsLastMonth();
+            switch(jComboBox_category.getSelectedIndex()){
+            case 0:
+            jTabbedPane1.setSelectedIndex(3);
+            break;
+            case 1:
+            jTabbedPane1.setSelectedIndex(1);
+            break;
+            case 2:
+            jTabbedPane1.setSelectedIndex(2);
+            break;
+        }
+        } catch (Exception ex) {
+            Logger.getLogger(chefMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_refreshActionPerformed
+    
+    private void clearTable(){
+        DefaultTableModel tblModel =(DefaultTableModel)jTable1.getModel(); 
+        int rowCount = tblModel.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            tblModel.removeRow(i);
+        }
+        tblModel =(DefaultTableModel)jTable2.getModel(); 
+        rowCount = tblModel.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            tblModel.removeRow(i);
+        }
+        tblModel =(DefaultTableModel)jTable3.getModel(); 
+        rowCount = tblModel.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            tblModel.removeRow(i);
+        }
+    }
+    
     public void getFood() throws Exception{
         try{
             Connect obj = new Connect();
@@ -300,6 +351,7 @@ public class Menu extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_refresh;
     private javax.swing.JComboBox<String> jComboBox_category;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

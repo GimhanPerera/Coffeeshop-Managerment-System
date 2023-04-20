@@ -75,7 +75,7 @@ public class mgrDashboard  extends Connect{
             Statement stmt = c.createStatement();//Prepare statement
             ResultSet rs = stmt.executeQuery("select count(CARD_ID) as Count from LOYALTY_CARD where STATUS='ACTIVE'"); //SQL stetment
             while(rs.next()){
-                count=rs.getInt("Count");//get the value to variable "fname"
+                count=rs.getInt("Count");
             } 
         }
         finally{
@@ -113,6 +113,6 @@ public class mgrDashboard  extends Connect{
         finally{
             c.close(); 
         }
-        return food;//Return First name    
+        return food;//Return Food name    
     }
 }

@@ -11,6 +11,7 @@ import DBconnection.LoyaltyCard;
 import DBconnection.cashier;
 import DBconnection.getDate;
 import java.awt.Component;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -41,6 +42,8 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         lbl_error.setVisible(false);
         lbl_errorpwd.setVisible(false);
         viewALL();
+        jTable1.getTableHeader().setFont(new Font("SansSerif", Font.PLAIN, 15));
+        jComboBox_stufftype.setFont(new Font("SansSerif", Font.PLAIN, 15));
     }
 
     /**
@@ -88,8 +91,6 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         txt_newpwd_c = new javax.swing.JPasswordField();
         checkbox_pwd_change = new javax.swing.JCheckBox();
         btn_change_pwd = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
-        txt_oldpwd = new javax.swing.JPasswordField();
         txt_newpwd = new javax.swing.JPasswordField();
         lbl_errorpwd = new javax.swing.JLabel();
         btn_reset = new javax.swing.JButton();
@@ -115,11 +116,12 @@ public class SDDetailsPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Customer/Stuff Details");
-        panel_main.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
+        panel_main.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(382, 10, -1, -1));
 
         lbl_searchtitle.setText("Search by Customer Telephone Number");
         panel_main.add(lbl_searchtitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 300, -1));
 
+        btn_search.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         btn_search.setText("Search");
         btn_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,8 +139,9 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         panel_main.add(txt_search, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 220, 40));
 
         lbl_Error.setForeground(new java.awt.Color(255, 0, 0));
+        lbl_Error.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Error.setText("Error msg");
-        panel_main.add(lbl_Error, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, 330, -1));
+        panel_main.add(lbl_Error, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 710, -1));
 
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -241,7 +244,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Last Name");
-        Panel_AddEditStuff.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, -1, 20));
+        Panel_AddEditStuff.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 336, -1, 20));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Email");
@@ -249,43 +252,43 @@ public class SDDetailsPanel extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("NIC");
-        Panel_AddEditStuff.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, -1, 20));
+        Panel_AddEditStuff.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 450, -1, 20));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Mobile Number");
-        Panel_AddEditStuff.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, -1, 20));
+        Panel_AddEditStuff.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 510, -1, 20));
 
         txt_tp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Panel_AddEditStuff.add(txt_tp, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 500, 170, 30));
+        Panel_AddEditStuff.add(txt_tp, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 500, 170, 33));
 
         txt_nic.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Panel_AddEditStuff.add(txt_nic, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 170, 30));
+        Panel_AddEditStuff.add(txt_nic, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 170, 33));
 
         txt_email.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Panel_AddEditStuff.add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 290, 30));
+        Panel_AddEditStuff.add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 383, 310, 35));
 
         txt_lname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Panel_AddEditStuff.add(txt_lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 170, 30));
+        Panel_AddEditStuff.add(txt_lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 170, 33));
 
         txt_fname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Panel_AddEditStuff.add(txt_fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 170, 30));
+        Panel_AddEditStuff.add(txt_fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 170, 35));
 
         lbl_error.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbl_error.setForeground(new java.awt.Color(255, 51, 51));
         lbl_error.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_error.setText("lbl_error");
-        Panel_AddEditStuff.add(lbl_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 560, 460, -1));
+        Panel_AddEditStuff.add(lbl_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 700, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setText("New Password");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel9.setText("Confirm New Password");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         txt_newpwd_c.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txt_newpwd_c.setEnabled(false);
@@ -294,7 +297,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                 txt_newpwd_cMouseClicked(evt);
             }
         });
-        jPanel3.add(txt_newpwd_c, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 130, -1));
+        jPanel3.add(txt_newpwd_c, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 130, -1));
 
         checkbox_pwd_change.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         checkbox_pwd_change.setText("Change Password");
@@ -303,7 +306,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                 checkbox_pwd_changeActionPerformed(evt);
             }
         });
-        jPanel3.add(checkbox_pwd_change, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        jPanel3.add(checkbox_pwd_change, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         btn_change_pwd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_change_pwd.setText("Change");
@@ -313,25 +316,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                 btn_change_pwdActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_change_pwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 130, 40));
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel11.setText("Old Password");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-
-        txt_oldpwd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txt_oldpwd.setEnabled(false);
-        txt_oldpwd.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txt_oldpwdMouseClicked(evt);
-            }
-        });
-        txt_oldpwd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_oldpwdActionPerformed(evt);
-            }
-        });
-        jPanel3.add(txt_oldpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 130, -1));
+        jPanel3.add(btn_change_pwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, 130, 40));
 
         txt_newpwd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txt_newpwd.setEnabled(false);
@@ -340,15 +325,15 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                 txt_newpwdMouseClicked(evt);
             }
         });
-        jPanel3.add(txt_newpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 130, -1));
+        jPanel3.add(txt_newpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 130, -1));
 
-        Panel_AddEditStuff.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, 380, 280));
+        Panel_AddEditStuff.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, 380, 220));
 
         lbl_errorpwd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbl_errorpwd.setForeground(new java.awt.Color(255, 51, 51));
         lbl_errorpwd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_errorpwd.setText("lbl_errorpwd");
-        Panel_AddEditStuff.add(lbl_errorpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 460, 460, -1));
+        Panel_AddEditStuff.add(lbl_errorpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, 460, -1));
 
         btn_reset.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_reset.setText("Reset");
@@ -357,7 +342,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                 btn_resetActionPerformed(evt);
             }
         });
-        Panel_AddEditStuff.add(btn_reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 580, 110, 40));
+        Panel_AddEditStuff.add(btn_reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 540, 110, 40));
 
         btn_changeSave.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_changeSave.setText("Save Changes");
@@ -366,7 +351,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                 btn_changeSaveActionPerformed(evt);
             }
         });
-        Panel_AddEditStuff.add(btn_changeSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 530, 150, 40));
+        Panel_AddEditStuff.add(btn_changeSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 490, 150, 40));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -379,7 +364,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
 
         txt_empID.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txt_empID.setEnabled(false);
-        Panel_AddEditStuff.add(txt_empID, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 170, -1));
+        Panel_AddEditStuff.add(txt_empID, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 170, 33));
 
         btn_close.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_close.setText("Close");
@@ -388,7 +373,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                 btn_closeActionPerformed(evt);
             }
         });
-        Panel_AddEditStuff.add(btn_close, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 580, 150, 40));
+        Panel_AddEditStuff.add(btn_close, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 540, 150, 40));
 
         jComboBox_stufftype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cashier", "Chef" }));
         jComboBox_stufftype.addActionListener(new java.awt.event.ActionListener() {
@@ -400,7 +385,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel13.setText("First Name");
-        Panel_AddEditStuff.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, -1, 20));
+        Panel_AddEditStuff.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 275, -1, 20));
 
         add(Panel_AddEditStuff, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1130, 680));
     }// </editor-fold>//GEN-END:initComponents
@@ -523,6 +508,8 @@ public class SDDetailsPanel extends javax.swing.JPanel {
             try {
                 jLabel2.setText("Add New Stuff Member");
                 btn_changeSave.setText("Add");
+                jLabel8.setText("Password");
+                jLabel9.setText("Confirm Password");
                 clearform();
                 panel_main.setVisible(false);
                 Panel_AddEditStuff.setVisible(true);
@@ -530,8 +517,6 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                 Emp obj=new Emp();
                 txt_empID.setText(obj.newCID());
                 checkbox_pwd_change.setSelected(true);
-                jLabel11.setVisible(false);
-                txt_oldpwd.setVisible(false);
                 btn_change_pwd.setVisible(false);
                 checkbox_pwd_change.setVisible(false);
                 btn_reset.setVisible(false);
@@ -560,12 +545,24 @@ public class SDDetailsPanel extends javax.swing.JPanel {
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         lbl_Error.setVisible(false);
-        if("0100000001".equals(txt_search.getText())){//validation need to handle 
+        if("0100000001".equals(txt_search.getText())){
             clearTable();
             lbl_Error.setVisible(true);
             lbl_Error.setText("No results");
             btn_remove.setEnabled(false);
-            
+        }
+//validation need to handle
+        else if (rdo_customer.isSelected() && txt_search.getText().isEmpty()) {
+                lbl_Error.setVisible(true);
+                lbl_Error.setText("Please enter a Customer telephone number");
+        }
+        else if (rdo_stuff.isSelected() && txt_search.getText().isEmpty()) {
+                lbl_Error.setVisible(true);
+                lbl_Error.setText("Please enter a Employee ID");
+        }
+        else if (rdo_stuff.isSelected() && !txt_search.getText().matches("^(?i)EM\\d{3}$")) {
+                lbl_Error.setVisible(true);
+                lbl_Error.setText("Wrong Employee ID format");
         }
         else{
             try{
@@ -741,6 +738,8 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         try {
             jLabel2.setText("Edit Stuff details");
             btn_changeSave.setText("Save Changes");
+            jLabel8.setText("New Password");
+            jLabel9.setText("Confirm New Password");
             panel_main.setVisible(false);
             Panel_AddEditStuff.setVisible(true);
             lbl_Error.setVisible(false);
@@ -749,8 +748,6 @@ public class SDDetailsPanel extends javax.swing.JPanel {
             setForm(a);
             checkbox_pwd_change.setSelected(false);
             changePwdsection();
-            jLabel11.setVisible(true);
-            txt_oldpwd.setVisible(true);
             btn_change_pwd.setVisible(true);
             checkbox_pwd_change.setVisible(true);
             btn_reset.setVisible(true);
@@ -770,7 +767,6 @@ public class SDDetailsPanel extends javax.swing.JPanel {
             txt_nic.setText("");
             txt_email.setText("");
             txt_tp.setText("");
-            txt_oldpwd.setText("");
             txt_newpwd.setText("");
             txt_newpwd_c.setText("");
             lbl_errorpwd.setVisible(false);
@@ -782,7 +778,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         txt_lname.setText(obj.getLname());
         txt_nic.setText(obj.getNIC());
         txt_email.setText(obj.getEmail());
-        txt_tp.setText(Integer.toString(obj.getTp()));
+        txt_tp.setText("0"+Integer.toString(obj.getTp()));
         int item=0;System.out.println("aaaaaa "+obj.getEtype());
         if("CASHIER".equals(obj.getEtype()))
         {item=0;System.out.println("aaaaaa");}
@@ -796,14 +792,12 @@ public class SDDetailsPanel extends javax.swing.JPanel {
 
     private void checkbox_pwd_changeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkbox_pwd_changeActionPerformed
         boolean check = checkbox_pwd_change.getModel().isSelected();
-        txt_oldpwd.setEnabled(check);
         txt_newpwd_c.setEnabled(check);
         txt_newpwd.setEnabled(check);
         btn_change_pwd.setEnabled(check);
     }//GEN-LAST:event_checkbox_pwd_changeActionPerformed
     private void changePwdsection(){
         boolean check = checkbox_pwd_change.getModel().isSelected();
-        txt_oldpwd.setEnabled(check);
         txt_newpwd_c.setEnabled(check);
         txt_newpwd.setEnabled(check);
         btn_change_pwd.setEnabled(check);
@@ -812,12 +806,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         try {
             lbl_errorpwd.setVisible(false);
             Emp obj1=new Emp();
-            if(txt_oldpwd.getText().equals("")){
-                lbl_errorpwd.setText("Please enter the old password");
-                lbl_errorpwd.setVisible(true);
-                txt_oldpwd.requestFocus();
-            }
-            else if(txt_newpwd.getText().equals("")){
+            if(txt_newpwd.getText().equals("")){
                 lbl_errorpwd.setText("Please enter the new password");
                 lbl_errorpwd.setVisible(true);
                 txt_newpwd.requestFocus();
@@ -838,20 +827,13 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                 txt_newpwd_c.requestFocus();
                 txt_newpwd_c.setText("");
             }
-            else if(!obj1.checkOldPwd(txt_empID.getText(),txt_oldpwd.getText())){
-                lbl_errorpwd.setText("Old passward is incorrect");
-                lbl_errorpwd.setVisible(true);
-                txt_oldpwd.requestFocus();
-            }
             else{
                 obj1.setPwd(txt_empID.getText(),txt_newpwd.getText());
                 checkbox_pwd_change.setSelected(false);
                 boolean check = checkbox_pwd_change.getModel().isSelected();
-                txt_oldpwd.setEnabled(check);
                 txt_newpwd_c.setEnabled(check);
                 txt_newpwd.setEnabled(check);
                 btn_change_pwd.setEnabled(check);
-                txt_oldpwd.setText("");
                 txt_newpwd.setText("");
                 txt_newpwd_c.setText("");
                 JOptionPane.showMessageDialog(new JFrame(), "Passward changed",
@@ -863,14 +845,6 @@ public class SDDetailsPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btn_change_pwdActionPerformed
     
-    private void txt_oldpwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_oldpwdMouseClicked
-        lbl_errorpwd.setText("");
-    }//GEN-LAST:event_txt_oldpwdMouseClicked
-
-    private void txt_oldpwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_oldpwdActionPerformed
-
-    }//GEN-LAST:event_txt_oldpwdActionPerformed
-
     private void txt_newpwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_newpwdMouseClicked
         lbl_errorpwd.setText("");
     }//GEN-LAST:event_txt_newpwdMouseClicked
@@ -888,71 +862,95 @@ public class SDDetailsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_resetActionPerformed
 
     private void btn_changeSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changeSaveActionPerformed
-        lbl_errorpwd.setVisible(false);
-        if(txt_fname.getText().length()==0){
-            lbl_error.setText("Please enter the first name");
-            lbl_error.setVisible(true);
-        }
-        else if(txt_fname.getText().length()<2){
-            lbl_error.setText("Please enter a valid first name");
-            lbl_error.setVisible(true);
-        }
-        else if(!txt_fname.getText().matches("[a-zA-Z]+")){//need to do validations
-            lbl_error.setText("First name can have only english letters");
-            lbl_error.setVisible(true);
-        }
-        else if(txt_lname.getText().length()==0){
-            lbl_error.setText("Please enter the last name");
-            lbl_error.setVisible(true);
-        }
-        else if(txt_lname.getText().length()<2){
-            lbl_error.setText("Please enter a valid last name");
-            lbl_error.setVisible(true);
-        }
-        else if(!txt_lname.getText().matches("[a-zA-Z]+")){
-            lbl_error.setText("Last name can have only english letters");
-            lbl_error.setVisible(true);
-        }
-        //need to do validations
-        else{
+        try {
+            lbl_errorpwd.setVisible(false);
             Emp obj2=new Emp();
-            if("Save Changes".equals(btn_changeSave.getText())){
-                try {
-                String emp_type="";
-                if(jComboBox_stufftype.getSelectedIndex()==0)
-                    emp_type="CASHIER";
-                else
-                    emp_type="CHEF";
-                obj2.setEmpDetails(txt_empID.getText(),txt_fname.getText(),txt_lname.getText(),txt_email.getText(),txt_tp.getText(),txt_nic.getText(),emp_type);
-                JOptionPane.showMessageDialog(new JFrame(), "Details successfully changed",
-                    "Imformation", JOptionPane.INFORMATION_MESSAGE);
-                clearform();
-                panel_main.setVisible(true);
-                Panel_AddEditStuff.setVisible(false);
-                lbl_Error.setVisible(false);
-                viewALL();
-                } catch (Exception ex) {
-                    Logger.getLogger(ProfilePanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            if(txt_fname.getText().length()==0){
+                lbl_error.setText("Please enter the first name");
+                lbl_error.setVisible(true);
             }
-            else if("Add".equals(btn_changeSave.getText())){
-                String emp_type="";
-                if(jComboBox_stufftype.getSelectedIndex()==0)
-                    emp_type="CASHIER";
-                else
-                    emp_type="CHEF";
-                try {
-                    obj2.addStaff(txt_empID.getText(),txt_fname.getText(),txt_lname.getText(),txt_tp.getText(),txt_email.getText(),txt_nic.getText(),emp_type,txt_nic.getText());
-                    clearform();
-                    panel_main.setVisible(true);
-                    Panel_AddEditStuff.setVisible(false);
-                    lbl_Error.setVisible(false);
-                    viewALL();
-                } catch (Exception ex) {
-                    Logger.getLogger(SDDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            else if(txt_fname.getText().length()<=2 || txt_fname.getText().length()>=15){//not allow 2>=length>=15
+                lbl_error.setText("First name length should between 2 to 15");
+                lbl_error.setVisible(true);
             }
-            
+            else if(!txt_fname.getText().matches("[a-zA-Z]+")){
+                lbl_error.setText("First name can have only english letters");
+                lbl_error.setVisible(true);
+            }
+            else if(txt_lname.getText().length()==0){
+                lbl_error.setText("Please enter the last name");
+                lbl_error.setVisible(true);
+            }
+            else if(txt_lname.getText().length()<=2 || txt_fname.getText().length()>=15){//not allow 2>=length>=15
+                lbl_error.setText("Last name length should between 2 to 15");
+                lbl_error.setVisible(true);
+            }
+            else if(!txt_lname.getText().matches("[a-zA-Z]+")){
+                lbl_error.setText("Last name can have only english letters");
+                lbl_error.setVisible(true);
+            }
+            else if (txt_nic.getText().length() != 10 && txt_nic.getText().length() != 12) {
+                lbl_error.setText("Wrong NIC format");
+                lbl_error.setVisible(true);
+            }
+            else if (txt_nic.getText().matches("^\\d{9}[vVxX]|[12]\\d{11}$")) {
+                lbl_error.setText("Wrong NIC format");
+                lbl_error.setVisible(true);
+            }
+            else if(txt_email.getText().isEmpty()){//not allow 2>=length>=50
+                lbl_error.setText("Please enter a email");
+                lbl_error.setVisible(true);
+            }
+            else if(txt_email.getText().length()>=50){//not allow 2>=length>=50
+                lbl_error.setText("Last name length should between 2 to 15");
+                lbl_error.setVisible(true);
+            }
+            else if("Add".equals(btn_changeSave.getText()) && obj2.isEmailAlreadyExist(txt_email.getText())){//
+                lbl_error.setText("Last name length should between 2 to 15");
+                lbl_error.setVisible(true);
+            }
+            //need to do validations
+            else{
+                if("Save Changes".equals(btn_changeSave.getText())){
+                    try {
+                        String emp_type="";
+                        if(jComboBox_stufftype.getSelectedIndex()==0)
+                            emp_type="CASHIER";
+                        else
+                            emp_type="CHEF";
+                        obj2.setEmpDetails(txt_empID.getText(),txt_fname.getText(),txt_lname.getText(),txt_email.getText(),txt_tp.getText(),txt_nic.getText(),emp_type);
+                        JOptionPane.showMessageDialog(new JFrame(), "Details successfully changed",
+                                "Imformation", JOptionPane.INFORMATION_MESSAGE);
+                        clearform();
+                        panel_main.setVisible(true);
+                        Panel_AddEditStuff.setVisible(false);
+                        lbl_Error.setVisible(false);
+                        viewALL();
+                    } catch (Exception ex) {
+                        Logger.getLogger(ProfilePanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else if("Add".equals(btn_changeSave.getText())){
+                    String emp_type="";
+                    if(jComboBox_stufftype.getSelectedIndex()==0)
+                        emp_type="CASHIER";
+                    else
+                        emp_type="CHEF";
+                    try {
+                        obj2.addStaff(txt_empID.getText(),txt_fname.getText(),txt_lname.getText(),txt_tp.getText(),txt_email.getText(),txt_nic.getText(),emp_type,txt_nic.getText());
+                        clearform();
+                        panel_main.setVisible(true);
+                        Panel_AddEditStuff.setVisible(false);
+                        lbl_Error.setVisible(false);
+                        viewALL();
+                    } catch (Exception ex) {
+                        Logger.getLogger(SDDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                
+            }
+        } catch (Exception ex) {            
+            Logger.getLogger(SDDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_changeSaveActionPerformed
 
@@ -993,7 +991,6 @@ public class SDDetailsPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox_stufftype;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -1022,7 +1019,6 @@ public class SDDetailsPanel extends javax.swing.JPanel {
     private javax.swing.JPasswordField txt_newpwd;
     private javax.swing.JPasswordField txt_newpwd_c;
     private javax.swing.JTextField txt_nic;
-    private javax.swing.JPasswordField txt_oldpwd;
     private javax.swing.JTextField txt_search;
     private javax.swing.JTextField txt_tp;
     // End of variables declaration//GEN-END:variables
