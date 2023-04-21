@@ -8,7 +8,6 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class Connect{   
     public Connection getConnection() throws Exception{//Connect with DB
         Class.forName("com.mysql.cj.jdbc.Driver");//Load and relocalhost:3306gister the JDBC driver

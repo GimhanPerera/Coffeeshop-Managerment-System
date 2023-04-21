@@ -94,6 +94,8 @@ public class mgrDashboard  extends Connect{
             while(rs.next()){
             food=rs.getString("FOOD_NAME");    
             }
+            if(food.isEmpty())
+                food="--";
         }
         finally{
             c.close(); 
@@ -109,7 +111,9 @@ public class mgrDashboard  extends Connect{
             ResultSet rs = stmt.executeQuery("SELECT FOOD_NAME FROM FOOD WHERE FOOD_ID = (SELECT FOOD_ID AS SUM FROM ORDER_FOOD WHERE FOOD_ID NOT LIKE 'CF%' AND ORDER_NUMBER IN (SELECT ORDER_NUMBER FROM ORDER_T WHERE DATE(ORDER_DATETIME)>DATE(NOW() - INTERVAL 30 DAY)) GROUP BY FOOD_ID order by SUM DESC LIMIT 1);"); //SQL stetment
             while(rs.next()){
             food=rs.getString("FOOD_NAME");    
-            }              
+            }
+            if(food.isEmpty())
+                food="--";
         }
         finally{
             c.close(); 

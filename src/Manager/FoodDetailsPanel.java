@@ -696,7 +696,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
             lbl_Error1.setVisible(true);
             txt_foodname.requestFocus();
         }
-        else if(!txt_foodname.getText().matches( "^[a-zA-Z]+(\\s[a-zA-Z]+)*$")){//check is any alphabetic character
+        else if(!txt_foodname.getText().matches( "^[a-zA-Z]+(\\s[a-zA-Z]+)*$")){//check is any alphabetic characters and space
             lbl_Error1.setText("Invalid food name format");
             lbl_Error1.setVisible(true);
             txt_foodname.requestFocus();
@@ -706,7 +706,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
             lbl_Error1.setVisible(true);
             txt_foodname.requestFocus();
         }
-        else if(!txt_qtyType.getText().isEmpty() && !txt_qtyType.getText().matches( "[A-Z]*[a-z]*" )){//check is any alphabetic character
+        else if(!txt_qtyType.getText().isEmpty() && !txt_qtyType.getText().matches( "^[a-zA-Z]+(\\s[a-zA-Z]+)*$")){//check is any alphabetic character and space
             lbl_Error1.setText("Invalid Qty type format");
             lbl_Error1.setVisible(true);
             txt_qtyType.requestFocus();

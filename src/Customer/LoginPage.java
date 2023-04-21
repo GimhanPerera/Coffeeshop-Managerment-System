@@ -38,8 +38,6 @@ public class LoginPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel_stuff = new javax.swing.JPanel();
         btn_login = new javax.swing.JButton();
         lbl_welcomepage = new javax.swing.JLabel();
         lbl_forgotpwd = new javax.swing.JLabel();
@@ -54,10 +52,6 @@ public class LoginPage extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel_stuff.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         btn_login.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btn_login.setText("Log in");
         btn_login.addActionListener(new java.awt.event.ActionListener() {
@@ -65,7 +59,7 @@ public class LoginPage extends javax.swing.JFrame {
                 btn_loginActionPerformed(evt);
             }
         });
-        jPanel_stuff.add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, 230, 50));
+        getContentPane().add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, 230, 50));
 
         lbl_welcomepage.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_welcomepage.setText("Back to welcome page");
@@ -74,7 +68,7 @@ public class LoginPage extends javax.swing.JFrame {
                 lbl_welcomepageMouseClicked(evt);
             }
         });
-        jPanel_stuff.add(lbl_welcomepage, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 620, 140, -1));
+        getContentPane().add(lbl_welcomepage, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 620, 140, -1));
 
         lbl_forgotpwd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbl_forgotpwd.setText("Forget Passward");
@@ -83,7 +77,7 @@ public class LoginPage extends javax.swing.JFrame {
                 lbl_forgotpwdMouseClicked(evt);
             }
         });
-        jPanel_stuff.add(lbl_forgotpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 450, 110, -1));
+        getContentPane().add(lbl_forgotpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 450, 110, -1));
 
         txt_email.setFont(new java.awt.Font("Segoe UI", 0, 19)); // NOI18N
         txt_email.addActionListener(new java.awt.event.ActionListener() {
@@ -91,15 +85,15 @@ public class LoginPage extends javax.swing.JFrame {
                 txt_emailActionPerformed(evt);
             }
         });
-        jPanel_stuff.add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 310, 40));
+        getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 310, 40));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Password");
-        jPanel_stuff.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 304, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 304, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel7.setText("Email");
-        jPanel_stuff.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, -1, -1));
 
         txt_pwd.setFont(new java.awt.Font("Segoe UI", 0, 19)); // NOI18N
         txt_pwd.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -107,17 +101,13 @@ public class LoginPage extends javax.swing.JFrame {
                 txt_pwdMouseClicked(evt);
             }
         });
-        jPanel_stuff.add(txt_pwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, 220, 40));
+        getContentPane().add(txt_pwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, 220, 40));
 
         lbl_emperror.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lbl_emperror.setForeground(new java.awt.Color(255, 0, 0));
         lbl_emperror.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_emperror.setText("Error massage");
-        jPanel_stuff.add(lbl_emperror, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 490, 1070, -1));
-
-        jTabbedPane1.addTab("tab2", jPanel_stuff);
-
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -50, 1350, 710));
+        getContentPane().add(lbl_emperror, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 490, 1070, -1));
         getContentPane().add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1350, 740));
 
         pack();
@@ -234,8 +224,6 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JButton btn_login;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel_stuff;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbl_background;
     private javax.swing.JLabel lbl_emperror;
     private javax.swing.JLabel lbl_forgotpwd;

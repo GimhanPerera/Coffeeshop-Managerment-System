@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.fazecast.jSerialComm.*;
+import com.sun.glass.events.KeyEvent;
 import java.awt.Component;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -72,20 +73,20 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                 txt_fname.setText(obj1.getFname(cid));
                 txt_lname.setText(obj1.getLname(cid));
                 txt_email.setText(obj1.getEmail(cid));
-                txt_tp.setText(obj1.getTp(cid));
+                txt_tp.setText("0"+obj1.getTp(cid));
                 //
                 LoyaltyCard obj2=new LoyaltyCard();
-        try {
-            int req = obj2.checkRequseted(cid);
-            if(req==1){
-                //If customer not request a card
-            }
-            else if(req==2){//customer has a card
-                btn_scan.setVisible(true);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                try {
+                    int req = obj2.checkRequseted(cid);
+                    if(req==1){
+                        //If customer not request a card
+                    }
+                    else if(req==2){//customer has a card
+                        btn_scan.setVisible(true);
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 //
             } catch (Exception ex) {
                 Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
@@ -181,9 +182,16 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         lbl_notOk = new javax.swing.JLabel();
         lbl_discount = new javax.swing.JLabel();
         jPanel_payment = new javax.swing.JPanel();
+        txt_carddate = new javax.swing.JTextField();
+        txt_cardno = new javax.swing.JTextField();
+        txt_cardname = new javax.swing.JTextField();
+        txt_cardcode = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         btn_back1 = new javax.swing.JLabel();
+        lbl_background1 = new javax.swing.JLabel();
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -365,6 +373,36 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
 
         jPanel_payment.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txt_carddate.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        txt_carddate.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txt_carddate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_carddateKeyPressed(evt);
+            }
+        });
+        jPanel_payment.add(txt_carddate, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 444, 190, 40));
+
+        txt_cardno.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        txt_cardno.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txt_cardno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_cardnoKeyPressed(evt);
+            }
+        });
+        jPanel_payment.add(txt_cardno, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 239, 430, 40));
+
+        txt_cardname.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        txt_cardname.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txt_cardname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_cardnameKeyPressed(evt);
+            }
+        });
+        jPanel_payment.add(txt_cardname, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 341, 430, 40));
+
+        txt_cardcode.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        jPanel_payment.add(txt_cardcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 443, 110, 40));
+
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2.setOpaque(false);
         jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -375,8 +413,15 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         jPanel_payment.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 530, 450, 60));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/payment final 2.png"))); // NOI18N
-        jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel_payment.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 90, 480, 520));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jPanel_payment.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 70, 480, 60));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         btn_back1.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
         btn_back1.setText("Back");
@@ -386,7 +431,12 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                 btn_back1MouseClicked(evt);
             }
         });
-        jPanel_payment.add(btn_back1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 630, -1, -1));
+        jPanel3.add(btn_back1);
+
+        jPanel_payment.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 600, 480, 60));
+
+        lbl_background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bg3 dark resiqed.png"))); // NOI18N
+        jPanel_payment.add(lbl_background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 730));
 
         getContentPane().add(jPanel_payment, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 730));
         getContentPane().add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 730));
@@ -572,12 +622,9 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                     if(discount>500)
                         discount=500;
                     if(this.total<1000){
-                        this.discount=this.total/2;
+                        if(this.discount>=this.total/2)
+                            discount=this.total/2;
                     }
-                    
-                    
-                    
-                    
                     //
                     setbill(this.sb1,this.total,this.discount);
                     lbl_discount.setVisible(true);
@@ -652,7 +699,24 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
     }//GEN-LAST:event_rdo_CardActionPerformed
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
-        try {
+        if(txt_cardno.getText().isEmpty()){
+            txt_cardno.requestFocus();
+        }
+        else if(txt_cardname.getText().isEmpty()){
+            txt_cardname.requestFocus();
+        }
+        else if(txt_carddate.getText().isEmpty()){
+            txt_carddate.requestFocus();
+        }
+        else if(txt_cardcode.getText().isEmpty()){
+            txt_cardcode.requestFocus();
+        }
+        else if(!txt_cardno.getText().equals("1234-5678-1234-5678") || !txt_carddate.getText().equals("24/12") || !txt_cardcode.getText().equals("123")){
+            JOptionPane.showMessageDialog(new JFrame(), "Wrong card details",
+               "Imformation", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            try {
                 String paymetn_method="";
                 if(rdo_Card.isSelected())
                     paymetn_method="Card";
@@ -682,6 +746,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         "alert", JOptionPane.PLAIN_MESSAGE);
                 jPanel_loyaltycard.setVisible(false);
             }
+        }
         
     }//GEN-LAST:event_jPanel2MouseClicked
 
@@ -693,6 +758,20 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         btn_back.setVisible(true);
         btn_next.setVisible(true);
     }//GEN-LAST:event_btn_back1MouseClicked
+
+    private void txt_cardnoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cardnoKeyPressed
+        if((txt_cardno.getText().length()==4 ||txt_cardno.getText().length()==9 ||txt_cardno.getText().length()==14) && evt.getKeyCode() != KeyEvent.VK_BACKSPACE){
+            txt_cardno.setText(txt_cardno.getText()+"-");
+        }
+    }//GEN-LAST:event_txt_cardnoKeyPressed
+
+    private void txt_carddateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_carddateKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_carddateKeyPressed
+
+    private void txt_cardnameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cardnameKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_cardnameKeyPressed
 
     /**
      * @param args the command line arguments
@@ -746,12 +825,15 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel_customerInfo;
     private javax.swing.JPanel jPanel_loyaltycard;
     private javax.swing.JPanel jPanel_payment;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextArea jTextArea_bill;
     private javax.swing.JLabel lbl_background;
+    private javax.swing.JLabel lbl_background1;
     private javax.swing.JLabel lbl_discount;
     private javax.swing.JLabel lbl_emailerror;
     private javax.swing.JLabel lbl_fnameerror;
@@ -762,6 +844,10 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
     private javax.swing.JLabel lbl_waiting;
     private javax.swing.JRadioButton rdo_Card;
     private javax.swing.JRadioButton rdo_cash;
+    private javax.swing.JPasswordField txt_cardcode;
+    private javax.swing.JTextField txt_carddate;
+    private javax.swing.JTextField txt_cardname;
+    private javax.swing.JTextField txt_cardno;
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_fname;
     private javax.swing.JTextField txt_lname;

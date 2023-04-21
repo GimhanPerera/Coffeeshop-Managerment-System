@@ -99,9 +99,9 @@ public class GetTpPage extends javax.swing.JFrame {
             }
         });
         jPanel_customer.add(lbl_welcomepage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 140, -1));
+        jPanel_customer.add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1350, 740));
 
         getContentPane().add(jPanel_customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1350, 740));
-        getContentPane().add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1350, 740));
 
         pack();
         setLocationRelativeTo(null);
@@ -113,8 +113,7 @@ public class GetTpPage extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_tpMouseClicked
 
     private void txt_tpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_tpActionPerformed
-        // TODO add your handling code here:
-
+        
     }//GEN-LAST:event_txt_tpActionPerformed
 
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
@@ -127,7 +126,7 @@ public class GetTpPage extends javax.swing.JFrame {
             lbl_error.setVisible(true);
             lbl_error.setText("Please enter a correct moblie number");
         }
-         else if (String.valueOf(txt_tp.getText()).charAt(0) != '0') {//need to start with 0
+        else if (String.valueOf(txt_tp.getText()).charAt(0) != '0') {//need to start with 0
             lbl_error.setText("Phone number must 07XXXXXXXX");
             lbl_error.setVisible(true);
         }

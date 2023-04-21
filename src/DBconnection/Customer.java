@@ -116,7 +116,9 @@ public class Customer extends Connect{
             ResultSet rs = stmt.executeQuery("select EMAIL from CUSTOMER where customer_ID='"+c_ID+"'"); //SQL stetment
             while(rs.next()){
                 email=rs.getString("EMAIL");
-            } 
+            }
+            if(email.equals("NULL"))
+                email="";
         }
         finally{
             c.close(); 
@@ -177,13 +179,17 @@ public class Customer extends Connect{
         
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            if("".equals(email))
-                email="NULL";
             //Update customer table
             if("0".equals(cid)){
                 cid=newCID();
-                String sql="INSERT INTO CUSTOMER (CUSTOMER_ID, F_NAME, L_NAME, EMAIL, MOBILE_NUMBER,POINTS,REQUEST) " +
-                    "VALUES ('"+cid+"', '"+fname+"', '"+lname+"','"+email+"','"+tp+"','"+points+"','0')";
+                String sql="";
+                if("".equals(email))
+                    sql="INSERT INTO CUSTOMER (CUSTOMER_ID, F_NAME, L_NAME, MOBILE_NUMBER,POINTS,REQUEST) " +
+                                        "VALUES ('"+cid+"', '"+fname+"', '"+lname+"','"+tp+"','"+points+"','0')";
+                else
+                    sql="INSERT INTO CUSTOMER (CUSTOMER_ID, F_NAME, L_NAME, EMAIL, MOBILE_NUMBER,POINTS,REQUEST) " +
+                                "VALUES ('"+cid+"', '"+fname+"', '"+lname+"','"+email+"','"+tp+"','"+points+"','0')";
+                
                 stmt.executeUpdate(sql);
             }else{
                 String sql="UPDATE CUSTOMER SET F_NAME='"+fname+"', L_NAME='"+lname+"', EMAIL='"+email+"', MOBILE_NUMBER='"+tp+"',POINTS='"+points+"'" +

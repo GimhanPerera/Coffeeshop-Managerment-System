@@ -53,12 +53,6 @@ public class DashboardPanel extends javax.swing.JPanel {
         lbl_best_beverage = new javax.swing.JLabel();
         lbl_actCardCount = new javax.swing.JLabel();
         lbl_ocount = new javax.swing.JLabel();
-        lbl_background1 = new javax.swing.JLabel();
-        lbl_background3 = new javax.swing.JLabel();
-        lbl_background2 = new javax.swing.JLabel();
-        lbl_background4 = new javax.swing.JLabel();
-        lbl_background5 = new javax.swing.JLabel();
-        lbl_background6 = new javax.swing.JLabel();
         lbl_background = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1170, 740));
@@ -74,89 +68,69 @@ public class DashboardPanel extends javax.swing.JPanel {
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel15.setText("Dashboard");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, -1, -1));
+        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
         jLabel1.setText("Active Loyalty Cards");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 480, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 510, -1, -1));
 
         lbl_todayIncome.setFont(new java.awt.Font("Segoe UI Semibold", 1, 40)); // NOI18N
         lbl_todayIncome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_todayIncome.setText("6380");
-        add(lbl_todayIncome, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 250, 120, 60));
+        add(lbl_todayIncome, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 240, 120, 60));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
         jLabel3.setText("Today Income");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
         jLabel4.setText("Monthly Income");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 330, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 320, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
         jLabel5.setText("of This Month"); // NOI18N
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 500, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 530, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
         jLabel7.setText("Best non-Beverage item"); // NOI18N
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 470, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 500, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
         jLabel6.setText(" of This Month");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 500, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 530, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
         jLabel8.setText("Best Beverage item");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 470, -1, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, -1, -1));
 
         lbl_monthlyincome.setFont(new java.awt.Font("Segoe UI Semibold", 1, 40)); // NOI18N
         lbl_monthlyincome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_monthlyincome.setText("45380");
-        add(lbl_monthlyincome, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 250, 120, 60));
+        add(lbl_monthlyincome, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 240, 120, 60));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Emoji", 1, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Today Order Count");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, -1, -1));
 
         lbl_best_nonbeverage.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         lbl_best_nonbeverage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_best_nonbeverage.setText("Chicken Sandwith");
-        add(lbl_best_nonbeverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, 290, 60));
+        add(lbl_best_nonbeverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 290, 60));
 
         lbl_best_beverage.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         lbl_best_beverage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_best_beverage.setText("Espresso");
-        add(lbl_best_beverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 410, 240, 60));
+        add(lbl_best_beverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, 240, 60));
 
         lbl_actCardCount.setFont(new java.awt.Font("Segoe UI Semibold", 1, 40)); // NOI18N
         lbl_actCardCount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_actCardCount.setText("4");
-        add(lbl_actCardCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 420, 120, 60));
+        add(lbl_actCardCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 430, 120, 60));
 
-        lbl_ocount.setFont(new java.awt.Font("Segoe UI Semibold", 1, 48)); // NOI18N
-        lbl_ocount.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_ocount.setFont(new java.awt.Font("Segoe UI Semibold", 1, 40)); // NOI18N
         lbl_ocount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_ocount.setText("4");
-        add(lbl_ocount, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 120, 60));
-
-        lbl_background1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bashboard.jpg"))); // NOI18N
-        add(lbl_background1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 410, 290, 120));
-
-        lbl_background3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bashboard.jpg"))); // NOI18N
-        add(lbl_background3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 290, 120));
-
-        lbl_background2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bashboard.jpg"))); // NOI18N
-        add(lbl_background2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 240, 290, 120));
-
-        lbl_background4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bashboard.jpg"))); // NOI18N
-        add(lbl_background4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 290, 120));
-
-        lbl_background5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bashboard.jpg"))); // NOI18N
-        add(lbl_background5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 290, 120));
-
-        lbl_background6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bashboard.jpg"))); // NOI18N
-        add(lbl_background6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 410, 290, 120));
+        add(lbl_ocount, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 120, 60));
 
         lbl_background.setBackground(new java.awt.Color(255, 255, 255));
         lbl_background.setOpaque(true);
@@ -179,12 +153,6 @@ public class DashboardPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel_up;
     private javax.swing.JLabel lbl_actCardCount;
     private javax.swing.JLabel lbl_background;
-    private javax.swing.JLabel lbl_background1;
-    private javax.swing.JLabel lbl_background2;
-    private javax.swing.JLabel lbl_background3;
-    private javax.swing.JLabel lbl_background4;
-    private javax.swing.JLabel lbl_background5;
-    private javax.swing.JLabel lbl_background6;
     private javax.swing.JLabel lbl_best_beverage;
     private javax.swing.JLabel lbl_best_nonbeverage;
     private javax.swing.JLabel lbl_monthlyincome;

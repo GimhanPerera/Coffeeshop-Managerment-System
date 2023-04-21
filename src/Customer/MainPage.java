@@ -338,10 +338,7 @@ public class MainPage extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable_menu3 = new javax.swing.JTable();
-        title = new javax.swing.JPanel();
-        lbl_title = new javax.swing.JLabel();
         lbl_loyaltyPoints = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         btn_request = new javax.swing.JButton();
         lbl_request = new javax.swing.JLabel();
         bill = new javax.swing.JPanel();
@@ -493,20 +490,10 @@ public class MainPage extends javax.swing.JFrame {
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 880, 530));
 
-        title.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        title.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl_title.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbl_title.setText("Title");
-        title.add(lbl_title, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
-
         lbl_loyaltyPoints.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbl_loyaltyPoints.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_loyaltyPoints.setText("0");
-        title.add(lbl_loyaltyPoints, new org.netbeans.lib.awtextra.AbsoluteConstraints(1209, 20, 90, -1));
-
-        jButton3.setText("jButton1");
-        title.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 560, -1, -1));
+        getContentPane().add(lbl_loyaltyPoints, new org.netbeans.lib.awtextra.AbsoluteConstraints(1209, 20, 90, -1));
 
         btn_request.setText("Request Loyalty Card");
         btn_request.addActionListener(new java.awt.event.ActionListener() {
@@ -514,12 +501,10 @@ public class MainPage extends javax.swing.JFrame {
                 btn_requestActionPerformed(evt);
             }
         });
-        title.add(btn_request, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 20, -1, -1));
+        getContentPane().add(btn_request, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 20, -1, -1));
 
         lbl_request.setText("Request send");
-        title.add(lbl_request, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 30, -1, -1));
-
-        getContentPane().add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 80));
+        getContentPane().add(lbl_request, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 30, -1, -1));
 
         bill.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -965,7 +950,6 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JButton btn_next;
     private javax.swing.JButton btn_plus;
     private javax.swing.JButton btn_request;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox_category;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -991,9 +975,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_background;
     private javax.swing.JLabel lbl_loyaltyPoints;
     private javax.swing.JLabel lbl_request;
-    private javax.swing.JLabel lbl_title;
     private javax.swing.JLabel lbl_total;
     private javax.swing.JLabel lbl_tottxt;
-    private javax.swing.JPanel title;
     // End of variables declaration//GEN-END:variables
 }
