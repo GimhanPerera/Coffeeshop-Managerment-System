@@ -402,10 +402,12 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
                 if("Blocked".equals(status)){
                     obj.blockUnblockCard(a, "Active");
                     jTable.setValueAt("Active", row, 2);
+                    btn_block.setText("Block");
                 }  
                 else if("Active".equals(status)){
                     obj.blockUnblockCard(a, "Blocked");
                     jTable.setValueAt("Blocked", row, 2);
+                    btn_block.setText("Unblock");
                 }
                 jTable.setRowSelectionInterval(row, row);//set selection
                 

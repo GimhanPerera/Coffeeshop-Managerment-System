@@ -51,7 +51,7 @@ public class WelcomePage extends javax.swing.JFrame {
                 btn_loginActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 60, 50));
+        getContentPane().add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 60, 50));
 
         btn_next.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btn_next.setText("Next");
@@ -66,7 +66,7 @@ public class WelcomePage extends javax.swing.JFrame {
                 btn_nextActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 570, 450, 100));
+        getContentPane().add(btn_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 570, 450, 100));
 
         lbl_background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Welcome pg.png"))); // NOI18N
         getContentPane().add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1350, 740));
