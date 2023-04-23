@@ -49,6 +49,7 @@ public class TestJFrame1 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane.addTab("tab2", dashboardPanel1);
@@ -129,7 +130,7 @@ public class TestJFrame1 extends javax.swing.JFrame {
         btn_sd_details.setBackground(new java.awt.Color(173, 85, 2));
         btn_sd_details.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_sd_details.setForeground(new java.awt.Color(255, 255, 255));
-        btn_sd_details.setText("Stuff/Customer Details");
+        btn_sd_details.setText("Staff/Customer Details");
         btn_sd_details.setBorderPainted(false);
         btn_sd_details.setContentAreaFilled(false);
         btn_sd_details.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

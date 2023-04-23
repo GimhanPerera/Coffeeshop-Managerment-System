@@ -351,7 +351,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Food ID", "Name", "catogery", "Unit Type", "Price", "Daily Quantity"
+                "Food ID", "Name", "category", "Unit Type", "Price", "Daily Quantity"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -444,7 +444,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
         jPanel_foodAddEdit.add(jComboBox_ftype, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 170, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel7.setText("Quentity Type");
+        jLabel7.setText("Quantity Type");
         jPanel_foodAddEdit.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, -1, -1));
 
         txt_qtyType.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -458,7 +458,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
         jPanel_foodAddEdit.add(txt_price, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, 170, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel5.setText("Daily maximum Quentity");
+        jLabel5.setText("Daily maximum Quantity");
         jPanel_foodAddEdit.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, -1, -1));
 
         txt_maxQty.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -490,6 +490,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         lbl_Error.setVisible(false);
+        txt_search.setText("");
         if(jTable_food.getRowCount()==0){//validations
             JOptionPane.showMessageDialog(new JFrame(), "Please select a item",
                "Imformation", JOptionPane.ERROR_MESSAGE);
@@ -504,12 +505,14 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+        txt_search.setText("");
         lbl_Error.setVisible(false);
         AddEdit();
         jPanel_foodAddEdit.setVisible(true);
         jPanel_main.setVisible(false);
         jLabel1.setVisible(false);
         txt_foodname.requestFocus();
+        jComboBox_ftype.setEnabled(true);
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -558,17 +561,19 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+        lbl_Error.setVisible(false);
         try {
             if(txt_search.getText().isEmpty()){//empty
                 lbl_Error.setVisible(true);
                 lbl_Error.setText("Please enter "+jComboBox_searchby.getSelectedItem());
             }
             //search by food ID
-            else if(jComboBox_searchby.getSelectedIndex()==0 && txt_search.getText().length()!=5){//invalide width
+            else if(jComboBox_searchby.getSelectedIndex()==0 && txt_search.getText().length()!=5){//food ID width need to 5
                 lbl_Error.setVisible(true);
                 lbl_Error.setText("Wrong food id");
             }
-            else if(jComboBox_searchby.getSelectedIndex()==0 && !txt_search.getText().substring(2).matches("^[0-9]*$")){//wrong food id format 
+            else if(jComboBox_searchby.getSelectedIndex()==0 && !txt_search.getText().substring(2).matches("^[0-9]*$")){
+                //last 3 characters of food id need to be numbers
                 lbl_Error.setVisible(true);
                 lbl_Error.setText("Wrong food id format");
             }
@@ -584,6 +589,10 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
             else if (jComboBox_searchby.getSelectedIndex()==1 && !txt_search.getText().matches("^[a-zA-Z]+(\\s[a-zA-Z]+)*$")) {//alphabetical letters and single spaces only
                 lbl_Error.setVisible(true);
                 lbl_Error.setText("Wrong food name format");
+            }
+            else if(jComboBox_searchby.getSelectedIndex()==1 && txt_search.getText().length()<20){//numbers in name
+                lbl_Error.setVisible(true);
+                lbl_Error.setText("Wrong food name");
             }
             else{
                 clearTable();
@@ -622,6 +631,7 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_searchByTypeActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+        txt_search.setText("");
         lbl_Error.setVisible(false);
         lbl_empty.setVisible(false);
         txt_search.setText("");
@@ -701,8 +711,8 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
             lbl_Error1.setVisible(true);
             txt_foodname.requestFocus();
         }
-        else if(txt_foodname.getText().length()<=2 || txt_foodname.getText().length()>=20){//not allow 2>=length>=15
-            lbl_Error1.setText("food name length should between 2 to 15");
+        else if(txt_foodname.getText().length()<=2 || txt_foodname.getText().length()>=20){//not allow 2>=length>=20
+            lbl_Error1.setText("Food name length should between 2 to 20");
             lbl_Error1.setVisible(true);
             txt_foodname.requestFocus();
         }
@@ -825,9 +835,21 @@ public class FoodDetailsPanel extends javax.swing.JPanel {
             Food obj1=new Food(id);
             txt_foodID.setText(obj1.getfoodID());
             txt_foodname.setText(obj1.getfoodName());
+            switch(obj1.getCategory()){
+                case "COFFEE":
+                    jComboBox_ftype.setSelectedIndex(0);
+                    break;
+                case "CAKE":
+                    jComboBox_ftype.setSelectedIndex(1);
+                    break;
+                case "BUN":
+                    jComboBox_ftype.setSelectedIndex(2);
+                    break;
+            }
             txt_maxQty.setText(obj1.getDailyQty());
             txt_price.setText(obj1.getPrice());
             txt_qtyType.setText(obj1.getQtyType());
+            jComboBox_ftype.setEnabled(false);
         } catch (Exception ex) {
             Logger.getLogger(FoodDetailsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }

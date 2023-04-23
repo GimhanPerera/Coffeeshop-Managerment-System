@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Manager;
+import DBconnection.Emp;
 import DBconnection.manager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -327,74 +328,93 @@ public class ProfilePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_newpwd_cMouseClicked
 
     private void btn_changeprofiledataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_changeprofiledataActionPerformed
-        lbl_error.setVisible(false);
-        if(txt_fname.getText().isEmpty()){
-            lbl_error.setText("Please enter the first name");
-            txt_fname.requestFocus();
-        }
-        else if(txt_fname.getText().length()<=2 || txt_fname.getText().length()>=15){
-            lbl_error.setText("First name length should between 2 to 15");
-            txt_fname.requestFocus();
-        }
-        else if(!txt_fname.getText().matches("[a-zA-Z]+")){//need to do validations
-            lbl_error.setText("First name can have only english letters");
-            txt_fname.requestFocus();
-        }
-        else if(txt_lname.getText().isEmpty()){
-            lbl_error.setText("Please enter the last name");
-            txt_lname.requestFocus();
-        }
-        else if(txt_lname.getText().length()<=2 || txt_fname.getText().length()>=15){
-            lbl_error.setText("Please enter a valid last name");
-            txt_lname.requestFocus();
-        }
-        else if(!txt_lname.getText().matches("[a-zA-Z]+")){
-            lbl_error.setText("Last name can have only english letters");
-            txt_lname.requestFocus();
-        }
-        else if(!txt_email.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
-            lbl_error.setText("Invalid email format");
-            lbl_error.setVisible(true);
-            txt_email.requestFocus();
-        }
-        else if(txt_email.getText().length()<=2 || txt_email.getText().length() > 50){
-            lbl_error.setText("Invalid email length Please enter a valid email address.");
-            lbl_error.setVisible(true);
-            txt_email.requestFocus();
-        }
-        else if (txt_nic.getText().length() != 10 && txt_nic.getText().length() != 12) {
-            lbl_error.setText("Invalid NIC length Please enter a valid email address.");
-            lbl_error.setVisible(true);
-            txt_nic.requestFocus();
-        }
-        else if (!txt_nic.getText().matches("^\\d{9}[vVxX]|[12]\\d{11}$")) {
-            lbl_error.setText("Sri Lankan NIC numbers should follow ...");
-            lbl_error.setVisible(true);
-            txt_nic.requestFocus();
-        }
-        else if (String.valueOf(txt_tp.getText()).charAt(0) != '0') {//need to start with 0
-            lbl_error.setText("Phone number must 07XXXXXXXX");
-            lbl_error.setVisible(true);
-        }
-        else if(txt_tp.getText().matches("[0-9]+")==false)//if not only numbers
-        {
-            lbl_error.setText("Please enter a correct moblie number");
-            lbl_error.setVisible(true);
-        }
-        else if(txt_tp.getText().length()!=10)//if more than 10 digits
-        {
-            lbl_error.setText("Please enter a correct moblie number");
-            lbl_error.setVisible(true);
-        }
-        else{
-            try {
-                manager obj2=new manager();
-                obj2.setManagerDetails(txt_fname.getText(),txt_lname.getText(),txt_email.getText(),txt_tp.getText(),txt_nic.getText());
-                JOptionPane.showMessageDialog(new JFrame(), "Details successfully changed",
-                    "Imformation", JOptionPane.INFORMATION_MESSAGE);
-            } catch (Exception ex) {
-                Logger.getLogger(ProfilePanel.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            lbl_error.setVisible(false);
+            Emp obj1=new Emp();
+            if(txt_fname.getText().isEmpty()){
+                lbl_error.setText("Please enter the first name");
+                txt_fname.requestFocus();
             }
+            else if(txt_fname.getText().length()<=2 || txt_fname.getText().length()>=15){
+                lbl_error.setText("First name length should between 2 to 15");
+                txt_fname.requestFocus();
+            }
+            else if(!txt_fname.getText().matches("[a-zA-Z]+")){
+                lbl_error.setText("First name can have only english letters");
+                txt_fname.requestFocus();
+            }
+            else if(txt_lname.getText().isEmpty()){
+                lbl_error.setText("Please enter the last name");
+                txt_lname.requestFocus();
+            }
+            else if(txt_lname.getText().length()<=2 || txt_fname.getText().length()>=15){
+                lbl_error.setText("Please enter a valid last name");
+                txt_lname.requestFocus();
+            }
+            else if(!txt_lname.getText().matches("[a-zA-Z]+")){
+                lbl_error.setText("Last name can have only english letters");
+                txt_lname.requestFocus();
+            }
+            else if(txt_email.getText().isEmpty()){
+                lbl_error.setText("Please enter your email");
+                txt_fname.requestFocus();
+            }
+            else if(!txt_email.getText().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
+                lbl_error.setText("Invalid email format");
+                lbl_error.setVisible(true);
+                txt_email.requestFocus();
+            }
+            else if(txt_email.getText().length()<=2 || txt_email.getText().length() > 50){
+                lbl_error.setText("Invalid email length Please enter a valid email address.");
+                lbl_error.setVisible(true);
+                txt_email.requestFocus();
+            }
+            else if(obj1.isEmailAlreadyExist(txt_email.getText(),"EM001")){
+                lbl_error.setText("This email already use by a employee");
+                lbl_error.setVisible(true);
+                txt_email.requestFocus();
+            }
+            else if (txt_nic.getText().length() != 10 && txt_nic.getText().length() != 12) {
+                lbl_error.setText("Invalid NIC length Please enter a valid email address.");
+                lbl_error.setVisible(true);
+                txt_nic.requestFocus();
+            }
+            else if (!txt_nic.getText().matches("^\\d{9}[vVxX]|[12]\\d{11}$")) {
+                lbl_error.setText("Invalid NIC number format");
+                lbl_error.setVisible(true);
+                txt_nic.requestFocus();
+            }
+            else if (String.valueOf(txt_tp.getText()).charAt(0) != '0') {//need to start with 0
+                lbl_error.setText("Phone number must 07XXXXXXXX");
+                lbl_error.setVisible(true);
+            }
+            else if("0100000001".equals(txt_tp.getText())){
+                lbl_error.setVisible(true);
+                lbl_error.setText("Please enter a correct moblie number");
+            }
+            else if(txt_tp.getText().matches("[0-9]+")==false)//if not only numbers
+            {
+                lbl_error.setText("Please enter a correct moblie number");
+                lbl_error.setVisible(true);
+            }
+            else if(txt_tp.getText().length()!=10)//if more than 10 digits
+            {
+                lbl_error.setText("Please enter a correct moblie number");
+                lbl_error.setVisible(true);
+            }
+            
+            else{
+                try {
+                    manager obj2=new manager();
+                    obj2.setManagerDetails(txt_fname.getText(),txt_lname.getText(),txt_email.getText(),txt_tp.getText(),txt_nic.getText());
+                    JOptionPane.showMessageDialog(new JFrame(), "Details successfully changed",
+                            "Imformation", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    Logger.getLogger(ProfilePanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ProfilePanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_changeprofiledataActionPerformed
 

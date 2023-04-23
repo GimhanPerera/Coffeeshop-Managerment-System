@@ -23,6 +23,7 @@ import DBconnection.LoyaltyCard;
 import DBconnection.Connect;
 import DBconnection.Customer;
 import DBconnection.Order;
+import java.awt.Font;
 /**
  *
  * @author Gimhan
@@ -45,11 +46,13 @@ public class MainPage extends javax.swing.JFrame {
         initComponents();
         firstDataGet();
         btn_request.setVisible(false);
+        
     }
     
     //normal customer order
     public MainPage(String empmode,String cid,String o_type,int tp,String tables[]) {
         initComponents();
+        setBackground();
         this.empmode=empmode;
         this.cid=cid;
         this.o_type=o_type;
@@ -83,6 +86,7 @@ public class MainPage extends javax.swing.JFrame {
     //If come from ConfirmOrderPage
     public MainPage(String empmode,String orderID,String o_type,int tp,int tot,String[] foodID,int[] Qyt,String tables[],String cid) {
         initComponents();
+        setBackground();
         this.empmode=empmode;
         this.o_type=o_type;
         this.tp=tp;
@@ -123,7 +127,9 @@ public class MainPage extends javax.swing.JFrame {
     //If this is update of an existing order
     public MainPage(boolean editmode,String empmode,String orderID,String o_type,int tp,int tot,String[] foodID,int[] Qyt) {
         initComponents();
+        setBackground();
         btn_next.setText("Place order");
+        btn_next.setFont(new Font("SansSerif", Font.BOLD, 20));
         this.editmode=editmode;
         this.empmode=empmode;
         try {
@@ -132,7 +138,6 @@ public class MainPage extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         this.o_type=o_type;
         this.tp=tp;
         this.tp=tp;
@@ -160,6 +165,30 @@ public class MainPage extends javax.swing.JFrame {
             System.out.println("Database error: Cant get loyalty point");
             btn_request.setVisible(false);
         }
+    }
+    
+    private void setBackground(){
+        //newly added
+        jTable_menu1.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 15));
+        jTable_menu2.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 15));
+        jTable_menu3.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 15));
+        //Set next btn invisible
+        btn_next.setOpaque(false);
+        btn_next.setContentAreaFilled(false);
+        btn_next.setBorderPainted(false);
+        //Set back btn invisible
+        btn_back.setOpaque(false);
+        btn_back.setContentAreaFilled(false);
+        btn_back.setBorderPainted(false);
+        //Set plus btn invisible
+        btn_plus.setOpaque(false);
+        btn_plus.setContentAreaFilled(false);
+        btn_plus.setBorderPainted(false);
+        //Set mins btn invisible
+        btn_back1.setOpaque(false);
+        btn_back1.setContentAreaFilled(false);
+        btn_back1.setBorderPainted(false);
+        //
     }
     
     public void firstDataGet(){
@@ -325,6 +354,7 @@ public class MainPage extends javax.swing.JFrame {
 
         jPanel5 = new javax.swing.JPanel();
         jComboBox_category = new javax.swing.JComboBox<>();
+        lbl_barBackground = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -351,6 +381,7 @@ public class MainPage extends javax.swing.JFrame {
         lbl_BILL1 = new javax.swing.JLabel();
         lbl_BILL2 = new javax.swing.JLabel();
         lbl_BILL3 = new javax.swing.JLabel();
+        lbl_backgroundBill = new javax.swing.JLabel();
         btn_back = new javax.swing.JButton();
         btn_next = new javax.swing.JButton();
         btn_back1 = new javax.swing.JButton();
@@ -358,8 +389,12 @@ public class MainPage extends javax.swing.JFrame {
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jComboBox_category.setBackground(new java.awt.Color(192, 124, 124));
         jComboBox_category.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jComboBox_category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Coffees", "Cakes", "Buns" }));
         jComboBox_category.addActionListener(new java.awt.event.ActionListener() {
@@ -367,22 +402,10 @@ public class MainPage extends javax.swing.JFrame {
                 jComboBox_categoryActionPerformed(evt);
             }
         });
+        jPanel5.add(jComboBox_category, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 0, 190, -1));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(325, 325, 325)
-                .addComponent(jComboBox_category, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(385, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jComboBox_category, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 5, Short.MAX_VALUE))
-        );
+        lbl_barBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Menue pg bar.png"))); // NOI18N
+        jPanel5.add(lbl_barBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, -1, 905, 47));
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 900, 40));
 
@@ -491,22 +514,28 @@ public class MainPage extends javax.swing.JFrame {
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 880, 530));
 
         lbl_loyaltyPoints.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbl_loyaltyPoints.setForeground(new java.awt.Color(255, 255, 255));
         lbl_loyaltyPoints.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_loyaltyPoints.setText("0");
-        getContentPane().add(lbl_loyaltyPoints, new org.netbeans.lib.awtextra.AbsoluteConstraints(1209, 20, 90, -1));
+        getContentPane().add(lbl_loyaltyPoints, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 20, 90, -1));
 
+        btn_request.setBackground(new java.awt.Color(153, 153, 153));
+        btn_request.setForeground(new java.awt.Color(255, 255, 255));
         btn_request.setText("Request Loyalty Card");
+        btn_request.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_request.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_requestActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_request, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 20, -1, -1));
+        getContentPane().add(btn_request, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 20, -1, -1));
 
+        lbl_request.setForeground(new java.awt.Color(255, 255, 255));
         lbl_request.setText("Request send");
-        getContentPane().add(lbl_request, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 30, -1, -1));
+        getContentPane().add(lbl_request, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 30, -1, -1));
 
         bill.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bill.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane5.setHorizontalScrollBar(null);
 
@@ -516,87 +545,52 @@ public class MainPage extends javax.swing.JFrame {
         jTextArea_bill.setRows(5);
         jScrollPane5.setViewportView(jTextArea_bill);
 
+        bill.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 107, 366, 349));
+
         lbl_total.setFont(new java.awt.Font("Segoe UI", 0, 25)); // NOI18N
         lbl_total.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_total.setText("0");
+        bill.add(lbl_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 464, 156, -1));
 
         lbl_00.setFont(new java.awt.Font("Segoe UI", 0, 25)); // NOI18N
         lbl_00.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbl_00.setText(".00");
+        bill.add(lbl_00, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 462, 39, 39));
 
         lbl_tottxt.setFont(new java.awt.Font("Segoe UI", 0, 25)); // NOI18N
         lbl_tottxt.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbl_tottxt.setText("Total");
+        bill.add(lbl_tottxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 462, 71, 39));
 
         lbl_BILL.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lbl_BILL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_BILL.setText("BILL");
+        bill.add(lbl_BILL, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 7, 71, 45));
 
         lbl_BILL1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbl_BILL1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_BILL1.setText("Price");
+        bill.add(lbl_BILL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(281, 70, 71, -1));
 
         lbl_BILL2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbl_BILL2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_BILL2.setText("Qty");
+        bill.add(lbl_BILL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 71, -1));
 
         lbl_BILL3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbl_BILL3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_BILL3.setText("Items");
+        bill.add(lbl_BILL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 70, 71, -1));
 
-        javax.swing.GroupLayout billLayout = new javax.swing.GroupLayout(bill);
-        bill.setLayout(billLayout);
-        billLayout.setHorizontalGroup(
-            billLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(billLayout.createSequentialGroup()
-                .addGap(147, 147, 147)
-                .addComponent(lbl_BILL, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(billLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(billLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, billLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(lbl_tottxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_total, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_00, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8))
-                    .addGroup(billLayout.createSequentialGroup()
-                        .addComponent(lbl_BILL3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
-                        .addComponent(lbl_BILL2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_BILL1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)))
-                .addContainerGap())
-        );
-        billLayout.setVerticalGroup(
-            billLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(billLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_BILL, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(billLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_BILL3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(billLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lbl_BILL1)
-                        .addComponent(lbl_BILL2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(billLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_total, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbl_00, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(lbl_tottxt, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
-                .addGap(18, 18, 18))
-        );
+        lbl_backgroundBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Menue pg bill 1.png"))); // NOI18N
+        bill.add(lbl_backgroundBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 380, 520));
 
         getContentPane().add(bill, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 100, 380, 520));
 
+        btn_back.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btn_back.setForeground(new java.awt.Color(255, 255, 255));
         btn_back.setText("Back");
+        btn_back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_backActionPerformed(evt);
@@ -604,31 +598,40 @@ public class MainPage extends javax.swing.JFrame {
         });
         getContentPane().add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 640, 180, 60));
 
+        btn_next.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        btn_next.setForeground(new java.awt.Color(255, 255, 255));
         btn_next.setText("Next");
+        btn_next.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_nextActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 640, 180, 60));
+        getContentPane().add(btn_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 640, 190, 60));
 
-        btn_back1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btn_back1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        btn_back1.setForeground(new java.awt.Color(255, 255, 255));
         btn_back1.setText("-");
+        btn_back1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_back1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_back1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_back1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 640, 80, 60));
+        getContentPane().add(btn_back1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 635, 80, 60));
 
-        btn_plus.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btn_plus.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        btn_plus.setForeground(new java.awt.Color(255, 255, 255));
         btn_plus.setText("+");
+        btn_plus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_plus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_plusActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_plus, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 640, 80, 60));
+        getContentPane().add(btn_plus, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 635, 80, 60));
+
+        lbl_background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Menue pg updated.png"))); // NOI18N
         getContentPane().add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 730));
 
         pack();
@@ -903,7 +906,7 @@ public class MainPage extends javax.swing.JFrame {
                 System.out.println("Request Failed");
             }
         }else{
-            JOptionPane.showMessageDialog(new JFrame(), "You need more than 100 loyalty points to request loyalty card",
+            JOptionPane.showMessageDialog(new JFrame(), "You need more than 100 a loyalty points to request loyalty card",
                "Imformation", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_requestActionPerformed
@@ -973,6 +976,8 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_BILL2;
     private javax.swing.JLabel lbl_BILL3;
     private javax.swing.JLabel lbl_background;
+    private javax.swing.JLabel lbl_backgroundBill;
+    private javax.swing.JLabel lbl_barBackground;
     private javax.swing.JLabel lbl_loyaltyPoints;
     private javax.swing.JLabel lbl_request;
     private javax.swing.JLabel lbl_total;

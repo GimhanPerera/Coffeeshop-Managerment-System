@@ -36,12 +36,11 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
             lbl_scanstatus.setVisible(false);
             clearTable();
             getAllCards();
-            jTable.setRowSelectionInterval(0, 0);
+            //jTable.setRowSelectionInterval(0, 0);
             lbl_waiting.setVisible(true);
             lbl_notOk.setVisible(false);
             lbl_ok.setVisible(false);
             jPanel_loyaltycard.setVisible(false);
-            setBlockbtn();
             lbl_empty.setVisible(false);
             jTable.getTableHeader().setFont(new Font("SansSerif", Font.PLAIN, 15));
         } catch (Exception ex) {
@@ -73,8 +72,12 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
                 }
                 btn_block.setEnabled(false);
                 btn_remove.setEnabled(false);
-                if(jTable.getRowCount()==0)
+                if(jTable.getRowCount()!=0){
+                    jTable.setRowSelectionInterval(0, 0);
+                }
+                else
                     lbl_empty.setVisible(true);
+                setBlockbtn();
         }
         catch(SQLException ex)//Is database has a problem, this catch stetment catch it
         {
@@ -332,7 +335,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
     private void btn_removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removeActionPerformed
         lbl_Error.setVisible(false);
         lbl_empty.setVisible(false);
-        int result = JOptionPane.showConfirmDialog((Component) null, "Your order will cancel and you need to order again",
+        int result = JOptionPane.showConfirmDialog((Component) null, "Are you sure?",
         "alert", JOptionPane.YES_NO_OPTION);
         System.out.println(result);
         if(result==0){
@@ -362,10 +365,6 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
             lbl_empty.setVisible(false);
             lbl_Error.setVisible(false);
             getAllCards();
-            if(jTable.getRowCount()!=0)
-                jTable.setRowSelectionInterval(0, 0);
-            else
-                lbl_empty.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -380,6 +379,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
     }//GEN-LAST:event_jRadioButton_searchMouseClicked
 
     private void jRadioButton_filterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton_filterMouseClicked
+        lbl_Error.setVisible(false);
         jComboBox_search.setEnabled(false);
         txt_search.setEnabled(false);
         btn_search.setEnabled(false);
@@ -473,6 +473,10 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
             lbl_Error.setVisible(true);
         }
         //telephone number
+        else if(jComboBox_search.getSelectedIndex()==0 && "0100000001".equals(txt_search.getText())){
+            lbl_Error.setVisible(true);
+            lbl_Error.setText("Please enter a correct moblie number");
+        }
         else if (jComboBox_search.getSelectedIndex()==0 && String.valueOf(txt_search.getText()).charAt(0) != '0') {//need to start with 0
             lbl_Error.setText("Phone number must 07XXXXXXXX");
             lbl_Error.setVisible(true);
@@ -566,10 +570,12 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
             jPanel_loyaltycard.setVisible(false);
             btn_scanmanage.setText("Scan");
             lbl_scanstatus.setVisible(false);
+            lbl_loyaltycardTitle.setVisible(true);
             lbl_loyaltycardTitle.setText("Loyalty Card Details");
             jPanel3.setVisible(true);
             try {
             clearTable();
+            lbl_empty.setVisible(false);
             getAllCards();
             jTable.setRowSelectionInterval(0, 0);
             } catch (Exception ex) {
@@ -583,10 +589,12 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
             jPanel_loyaltycard.setVisible(false);
             btn_scanmanage.setText("Scan");
             lbl_scanstatus.setVisible(false);
+            lbl_loyaltycardTitle.setVisible(true);
             lbl_loyaltycardTitle.setText("Loyalty Card Details");
             jPanel3.setVisible(true);
             try {
             clearTable();
+            lbl_empty.setVisible(false);
             getAllCards();
             jTable.setRowSelectionInterval(0, 0);
             } catch (Exception ex) {
@@ -598,6 +606,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
             lbl_ok.setVisible(false);
             btn_scanmanage.setText("Cancel");
             lbl_scanstatus.setVisible(false);
+            lbl_loyaltycardTitle.setVisible(true);
             lbl_loyaltycardTitle.setText("Loyalty Card Details");
             jPanel3.setVisible(true);
         }

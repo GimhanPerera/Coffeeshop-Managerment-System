@@ -41,14 +41,13 @@ public class cashierDashboard extends javax.swing.JPanel {
     }
     
     private void refresh(){
-       try { 
-           
+       try {
            jScrollPane1.setEnabled(true);
            mgrDashboard obj1=new mgrDashboard();
            cashier obj2=new cashier();
-           lbl_income.setText(Integer.toString(obj1.monthlyIncome())+".00");
+           lbl_income.setText(Integer.toString(obj1.todayIncome())+".00");
            lbl_delivered.setText(Integer.toString(obj1.orderCount()));
-           lbl_pendingOdr.setText(Integer.toString(obj2.getPendingOrderCount()));
+           lbl_pendingOdr.setText(Integer.toString(obj2.getPendingOrderCount()));//status pending or hold
            getData();
            if(jTable_dBoard.getRowCount()!=0){
             btn_hold.setEnabled(false);
@@ -86,7 +85,7 @@ public class cashierDashboard extends javax.swing.JPanel {
                 //pending orders
                 //Statting order date eka wenas karanna ona ada dawasata
                 rs = stmt.executeQuery("select o.ORDER_NUMBER, o.ORDER_TYPE, o.ORDER_DATETIME,o.STATUS as o_sts,i.STATUS as i_sts from CUSTOMER c INNER JOIN ORDER_T o ON o.CUSTOMER_ID=c.CUSTOMER_ID " +
-                    "INNER JOIN INVOICE i ON i.ORDERID=o.ORDER_NUMBER WHERE (ORDER_DATETIME > '2023-02-01 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND o.STATUS='Pending' ORDER BY o.ORDER_DATETIME DESC"); //Tables need to join
+                    "INNER JOIN INVOICE i ON i.ORDERID=o.ORDER_NUMBER WHERE (ORDER_DATETIME > '2023-04-01 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND o.STATUS='Pending' ORDER BY o.ORDER_DATETIME DESC"); //Tables need to join
                 while(rs.next()){
                     String oID=rs.getString("ORDER_NUMBER");
                     String otype=rs.getString("ORDER_TYPE");
@@ -100,7 +99,7 @@ public class cashierDashboard extends javax.swing.JPanel {
                 }
                 //hold orders
                 rs = stmt.executeQuery("select o.ORDER_NUMBER, o.ORDER_TYPE, o.ORDER_DATETIME,o.STATUS as o_sts,i.STATUS as i_sts from CUSTOMER c INNER JOIN ORDER_T o ON o.CUSTOMER_ID=c.CUSTOMER_ID " +
-                    "INNER JOIN INVOICE i ON i.ORDERID=o.ORDER_NUMBER WHERE (ORDER_DATETIME > '2023-02-01 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND o.STATUS='Hold' ORDER BY o.ORDER_DATETIME DESC"); //Tables need to join
+                    "INNER JOIN INVOICE i ON i.ORDERID=o.ORDER_NUMBER WHERE (ORDER_DATETIME > '2023-04-01 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND o.STATUS='Hold' ORDER BY o.ORDER_DATETIME DESC"); //Tables need to join
                 while(rs.next()){
                     String oID=rs.getString("ORDER_NUMBER");
                     String otype=rs.getString("ORDER_TYPE");
@@ -114,7 +113,7 @@ public class cashierDashboard extends javax.swing.JPanel {
                 }
                 //Finish orders
                 rs = stmt.executeQuery("select o.ORDER_NUMBER, o.ORDER_TYPE, o.ORDER_DATETIME,o.STATUS as o_sts,i.STATUS as i_sts from CUSTOMER c INNER JOIN ORDER_T o ON o.CUSTOMER_ID=c.CUSTOMER_ID " +
-                    "INNER JOIN INVOICE i ON i.ORDERID=o.ORDER_NUMBER WHERE (ORDER_DATETIME > '2023-02-01 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND o.STATUS='Finish' ORDER BY o.ORDER_DATETIME DESC"); //Tables need to join
+                    "INNER JOIN INVOICE i ON i.ORDERID=o.ORDER_NUMBER WHERE (ORDER_DATETIME > '2023-04-01 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND o.STATUS='Finish' ORDER BY o.ORDER_DATETIME DESC"); //Tables need to join
                 while(rs.next()){
                     String oID=rs.getString("ORDER_NUMBER");
                     String otype=rs.getString("ORDER_TYPE");
@@ -128,7 +127,7 @@ public class cashierDashboard extends javax.swing.JPanel {
                 }
                 //Completed orders
                 rs = stmt.executeQuery("select o.ORDER_NUMBER, o.ORDER_TYPE, o.ORDER_DATETIME,o.STATUS as o_sts,i.STATUS as i_sts from CUSTOMER c INNER JOIN ORDER_T o ON o.CUSTOMER_ID=c.CUSTOMER_ID " +
-                    "INNER JOIN INVOICE i ON i.ORDERID=o.ORDER_NUMBER WHERE (ORDER_DATETIME > '2023-02-01 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND o.STATUS='Completed' ORDER BY o.ORDER_DATETIME DESC"); //Tables need to join
+                    "INNER JOIN INVOICE i ON i.ORDERID=o.ORDER_NUMBER WHERE (ORDER_DATETIME > '2023-04-01 00:00:00' AND ORDER_DATETIME <'"+date+" 23:59:59') AND o.STATUS='Completed' ORDER BY o.ORDER_DATETIME DESC"); //Tables need to join
                 while(rs.next()){
                     String oID=rs.getString("ORDER_NUMBER");
                     String otype=rs.getString("ORDER_TYPE");
@@ -247,7 +246,7 @@ public class cashierDashboard extends javax.swing.JPanel {
         lbl_income.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         lbl_income.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbl_income.setText("0.00");
-        jPanel_dashboard.add(lbl_income, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+        jPanel_dashboard.add(lbl_income, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 90, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jLabel1.setText("Today Imcome");
@@ -255,21 +254,21 @@ public class cashierDashboard extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         jLabel2.setText("Pending Order count");
-        jPanel_dashboard.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
+        jPanel_dashboard.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
 
         lbl_pendingOdr.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         lbl_pendingOdr.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_pendingOdr.setText("0");
-        jPanel_dashboard.add(lbl_pendingOdr, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 30, -1));
+        jPanel_dashboard.add(lbl_pendingOdr, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 30, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        jLabel5.setText("Delivered orders");
-        jPanel_dashboard.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, -1, -1));
+        jLabel5.setText("Today completed order count");
+        jPanel_dashboard.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, -1, -1));
 
         lbl_delivered.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         lbl_delivered.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_delivered.setText("0");
-        jPanel_dashboard.add(lbl_delivered, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, 30, -1));
+        jPanel_dashboard.add(lbl_delivered, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 20, 30, -1));
 
         btn_refresh.setText("Refresh");
         btn_refresh.addActionListener(new java.awt.event.ActionListener() {
@@ -744,7 +743,7 @@ public class cashierDashboard extends javax.swing.JPanel {
             Order obj2=new Order();
             lbl_c_id.setText(obj1.getC_id());
             lbl_name.setText(obj1.getName());
-            lbl_tp.setText(Integer.toString(obj1.getTp()));
+            lbl_tp.setText("0"+Integer.toString(obj1.getTp()));
             lbl_tables.setText(obj2.getTablelist(a));
             if(lbl_tables.getText().equals("")){
                 lbl_tableheader.setVisible(false);

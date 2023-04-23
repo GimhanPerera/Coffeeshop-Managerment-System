@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class Connect{   
     public Connection getConnection() throws Exception{//Connect with DB
         Class.forName("com.mysql.cj.jdbc.Driver");//Load and relocalhost:3306gister the JDBC driver
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/COFFESHOP","root","root");//Establish the connection
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/COFFEESHOP","root","root");//Establish the connection
         //System.out.println("Database connection is success\n");
         return con;
     }

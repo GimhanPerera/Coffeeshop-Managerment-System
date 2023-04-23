@@ -114,7 +114,7 @@ public class DashboardPanel extends javax.swing.JPanel {
 
         lbl_best_nonbeverage.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         lbl_best_nonbeverage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_best_nonbeverage.setText("Chicken Sandwith");
+        lbl_best_nonbeverage.setText("Chicken Sandwich");
         add(lbl_best_nonbeverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 290, 60));
 
         lbl_best_beverage.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N

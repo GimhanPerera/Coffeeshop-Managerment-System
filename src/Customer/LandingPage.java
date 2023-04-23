@@ -68,6 +68,7 @@ public class LandingPage extends javax.swing.JFrame {
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonGroup1.add(rdo_dinein);
@@ -168,7 +169,7 @@ public class LandingPage extends javax.swing.JFrame {
         }
         else{//if order is dinein
             if(txt_pax.getText().length()==0){//if pax txtbox empty
-                lbl_error.setText("Please enter Number of people");
+                lbl_error.setText("Please enter the number of people");
                 lbl_error.setVisible(true);
             }
             else if(txt_pax.getText().matches("[0-9]+")==false){//if include non-digit

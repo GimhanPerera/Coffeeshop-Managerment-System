@@ -22,6 +22,19 @@
     <Property name="useNullLayout" type="boolean" value="false"/>
   </Layout>
   <SubComponents>
+    <Component class="javax.swing.JLabel" name="lbl_noReqeset">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="No Loyalty card Requests"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="300" y="410" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -183,7 +196,7 @@
         <Component class="javax.swing.JLabel" name="lbl_notOk">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Images/Not_final.png"/>
+              <Image iconType="3" name="/Images/Not_final updated.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -195,7 +208,7 @@
         <Component class="javax.swing.JLabel" name="lbl_waiting">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Images/tapping image.png"/>
+              <Image iconType="3" name="/Images/tapping image updated.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -207,7 +220,7 @@
         <Component class="javax.swing.JLabel" name="lbl_ok">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Images/ok_final.png"/>
+              <Image iconType="3" name="/Images/ok_final updated.png"/>
             </Property>
           </Properties>
           <Constraints>

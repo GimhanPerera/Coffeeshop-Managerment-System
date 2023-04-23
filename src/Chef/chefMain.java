@@ -41,6 +41,7 @@ public class chefMain extends javax.swing.JFrame {
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Nav_panel.setBackground(new java.awt.Color(173, 85, 2));

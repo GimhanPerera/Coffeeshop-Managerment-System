@@ -69,7 +69,7 @@ public class Menu extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl_topfoods.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        lbl_topfoods.setText("Treanding Items of this month");
+        lbl_topfoods.setText("Trending Items of this month");
         add(lbl_topfoods, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         lbl_topfoods1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -320,8 +320,8 @@ public class Menu extends javax.swing.JPanel {
                     tblModel.addRow(tbData);
                 }
         }catch (Exception ex) {
-                    Logger.getLogger(chefMenu.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            Logger.getLogger(chefMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void bestThreeFoodsLastMonth() throws Exception{ 

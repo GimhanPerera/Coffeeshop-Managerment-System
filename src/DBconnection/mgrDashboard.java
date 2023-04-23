@@ -31,7 +31,7 @@ public class mgrDashboard  extends Connect{
         finally{
             c.close(); 
         }
-        return count;//Return First name    
+        return count;
     }
     public int todayIncome() throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
@@ -48,7 +48,7 @@ public class mgrDashboard  extends Connect{
         finally{
             c.close(); 
         }
-        return total;//Return First name    
+        return total;   
     }
     
     public int monthlyIncome() throws Exception{   
@@ -67,7 +67,7 @@ public class mgrDashboard  extends Connect{
         finally{
             c.close(); 
         }
-        return total;//Return First name    
+        return total;   
     }
     public int getActiveLoyaltycardCount() throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
@@ -100,7 +100,7 @@ public class mgrDashboard  extends Connect{
         finally{
             c.close(); 
         }
-        return food;//Return First name    
+        return food;    
     }
     
     public String bestNonBevLastMonth() throws Exception{   
@@ -118,6 +118,6 @@ public class mgrDashboard  extends Connect{
         finally{
             c.close(); 
         }
-        return food;//Return Food name    
+        return food;   
     }
 }

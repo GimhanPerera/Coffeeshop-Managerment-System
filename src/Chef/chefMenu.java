@@ -72,7 +72,7 @@ public class chefMenu extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl_topfoods.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        lbl_topfoods.setText("Treanding Items of this month");
+        lbl_topfoods.setText("Trending Items of this month");
         add(lbl_topfoods, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         lbl_topfoods1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N

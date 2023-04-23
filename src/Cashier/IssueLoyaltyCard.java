@@ -33,42 +33,31 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
     String cashierID="";
     public IssueLoyaltyCard() {
         try {
-            initComponents();        
-            getAllRequest();
+            initComponents();
+            jTable.getTableHeader().setFont(new Font("SansSerif", Font.PLAIN, 15));
             lbl_ok.setVisible(false);
             lbl_notOk.setVisible(false);
             lbl_waiting.setVisible(false);
             lbl_scanstatus.setVisible(false);
-            int row=jTable.getSelectedRow();
-            if(row==0){
-                btn_reject.setEnabled(false);
-            btn_issueCard.setEnabled(false);
-            jTable.getTableHeader().setFont(new Font("SansSerif", Font.PLAIN, 15));
-            }
-            else{
-               jTable.setRowSelectionInterval(0, 0); 
-            }
-        } catch (Exception ex) {
+            lbl_noReqeset.setVisible(false);        
+            getAllRequest();
+        } 
+        catch (Exception ex) {
             Logger.getLogger(IssueLoyaltyCard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public IssueLoyaltyCard(String cashierID) {
         try {
             this.cashierID=cashierID;
-            initComponents();        
-            getAllRequest();
+            initComponents();
+            jTable.getTableHeader().setFont(new Font("SansSerif", Font.PLAIN, 15));
             lbl_ok.setVisible(false);
             lbl_notOk.setVisible(false);
             lbl_waiting.setVisible(false);
             lbl_scanstatus.setVisible(false);
-            int row=jTable.getSelectedRow();
-            if(row==0){
-                btn_reject.setEnabled(false);
-            btn_issueCard.setEnabled(false);
-            }
-            else{
-               jTable.setRowSelectionInterval(0, 0); 
-            }
+            lbl_noReqeset.setVisible(false);        
+            getAllRequest();
+            
         } catch (Exception ex) {
             Logger.getLogger(IssueLoyaltyCard.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -79,8 +68,7 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
         Connect obj = new Connect();
         Connection c = obj.getConnection();  //getConnection();//Establish the connection
         clearTable();
-        try{ //int q=1;System.out.println(q++); <- tester
-            
+        try{
                 Statement stmt = c.createStatement();//Prepare statement
                 ResultSet rs = stmt.executeQuery("select MOBILE_NUMBER,POINTS from CUSTOMER WHERE REQUEST='1'"); //SQL stetment
                 while(rs.next()){
@@ -89,6 +77,17 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
                     String tbData[]={tp,points};
                     DefaultTableModel tblModel =(DefaultTableModel)jTable.getModel(); 
                     tblModel.addRow(tbData);
+                }
+                if(jTable.getRowCount()==0){
+                    btn_reject.setEnabled(false);
+                    btn_issueCard.setEnabled(false);
+                    lbl_noReqeset.setVisible(true);
+                }
+                else{
+                    jTable.setRowSelectionInterval(0, 0); 
+                    btn_reject.setEnabled(true);
+                    btn_issueCard.setEnabled(true);
+                    lbl_noReqeset.setVisible(false);
                 }
         }
         catch(SQLException ex)//Is database has a problem, this catch stetment catch it
@@ -135,6 +134,7 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        lbl_noReqeset = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -152,6 +152,10 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
         lbl_background = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_noReqeset.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbl_noReqeset.setText("No Loyalty card Requests");
+        add(lbl_noReqeset, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 410, -1, -1));
 
         jTable.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -244,13 +248,13 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
         });
         jPanel_loyaltycard.add(btn_scanmanage, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 150, 60));
 
-        lbl_notOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Not_final.png"))); // NOI18N
+        lbl_notOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Not_final updated.png"))); // NOI18N
         jPanel_loyaltycard.add(lbl_notOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, -1, -1));
 
-        lbl_waiting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/tapping image.png"))); // NOI18N
+        lbl_waiting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/tapping image updated.png"))); // NOI18N
         jPanel_loyaltycard.add(lbl_waiting, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 330, 320));
 
-        lbl_ok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ok_final.png"))); // NOI18N
+        lbl_ok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ok_final updated.png"))); // NOI18N
         jPanel_loyaltycard.add(lbl_ok, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 340, 330));
 
         add(jPanel_loyaltycard, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 750, 570));
@@ -350,6 +354,7 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
                 LoyaltyCard obj=new LoyaltyCard();
                 obj.rejectRequest(a);
                 getAllRequest();
+                
             } catch (Exception ex) {
                 Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -360,23 +365,17 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
         try {
             btn_reject.setEnabled(true);
             btn_issueCard.setEnabled(true);
-            
             getAllRequest();
-            int row=jTable.getSelectedRow();
-            if(row==0){
-                btn_reject.setEnabled(false);
-            btn_issueCard.setEnabled(false);
-            }
-            else{
-               jTable.setRowSelectionInterval(0, 0); 
-            }
-        } catch (Exception ex) {
+        } 
+        catch (Exception ex) {
             Logger.getLogger(IssueLoyaltyCard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_rdo_requestsActionPerformed
 
     private void rdo_issuedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_issuedActionPerformed
         try {
+            
+            lbl_noReqeset.setVisible(false);
             btn_reject.setEnabled(false);
             btn_issueCard.setEnabled(false);
             clearTable();
@@ -440,7 +439,6 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
             jPanel_loyaltycard.setVisible(false);    
             try {
                 getAllRequest();
-                jTable.setRowSelectionInterval(0, 0);
             } catch (Exception ex) {
                 Logger.getLogger(IssueLoyaltyCard.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -458,7 +456,6 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
             jPanel_loyaltycard.setVisible(false);           
             try {
                 getAllRequest();
-                jTable.setRowSelectionInterval(0, 0);
             } catch (Exception ex) {
                 Logger.getLogger(IssueLoyaltyCard.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -496,6 +493,7 @@ public class IssueLoyaltyCard extends javax.swing.JPanel{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;
     private javax.swing.JLabel lbl_background;
+    private javax.swing.JLabel lbl_noReqeset;
     private javax.swing.JLabel lbl_notOk;
     private javax.swing.JLabel lbl_ok;
     private javax.swing.JLabel lbl_scanstatus;

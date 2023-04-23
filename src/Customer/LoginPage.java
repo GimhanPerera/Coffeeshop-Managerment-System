@@ -50,6 +50,7 @@ public class LoginPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_login.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -128,7 +129,7 @@ public class LoginPage extends javax.swing.JFrame {
             lbl_emperror.setText("Please enter your password");
             lbl_emperror.setVisible(true);
         }else if(txt_pwd.getText().length()<6 || txt_pwd.getText().length() > 15){
-                lbl_emperror.setText("Wrong passward");
+                lbl_emperror.setText("Wrong password");
                 lbl_emperror.setVisible(true);
         }else{
             try {

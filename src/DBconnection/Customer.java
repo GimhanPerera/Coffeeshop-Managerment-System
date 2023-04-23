@@ -117,8 +117,6 @@ public class Customer extends Connect{
             while(rs.next()){
                 email=rs.getString("EMAIL");
             }
-            if(email.equals("NULL"))
-                email="";
         }
         finally{
             c.close(); 

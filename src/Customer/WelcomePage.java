@@ -36,6 +36,7 @@ public class WelcomePage extends javax.swing.JFrame {
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_login.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N

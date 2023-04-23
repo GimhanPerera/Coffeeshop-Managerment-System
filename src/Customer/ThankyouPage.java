@@ -12,7 +12,7 @@ import java.util.TimerTask;
 public class ThankyouPage extends javax.swing.JFrame {
     
     //TIMEER
-    class MyTimer implements Runnable{
+    private class MyTimer implements Runnable{
         @Override
         public void run() {
             this.runTimer();
@@ -68,6 +68,7 @@ public class ThankyouPage extends javax.swing.JFrame {
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_main.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N

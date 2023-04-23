@@ -225,12 +225,12 @@ public class Emp extends Connect{
         }
     }
     
-    public boolean isEmailAlreadyExist(String email) throws Exception{   
+    public boolean isEmailAlreadyExist(String email,String eid) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         byte count=0;
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("select COUNT(*) AS c from EMPLOYEE where EMP_ID='"+email+"'"); //SQL stetment
+            ResultSet rs = stmt.executeQuery("select COUNT(*) AS c from EMPLOYEE where EMAIL='"+email+"' AND EMP_ID!='"+eid+"'"); //SQL stetment
             while(rs.next()){
                 count=rs.getByte("c");
             } 
