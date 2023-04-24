@@ -6,13 +6,16 @@ package Manager;
 import DBconnection.Connect;
 import DBconnection.getDate;
 import java.awt.Font;
+import java.awt.print.PrinterException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.MessageFormat;
 import java.time.Year;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -52,7 +55,6 @@ public class ReportPanel extends javax.swing.JPanel {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        lbl_timeHeader = new javax.swing.JLabel();
         lbl_time = new javax.swing.JLabel();
         lbl_report = new javax.swing.JLabel();
         combox_reportType = new javax.swing.JComboBox<>();
@@ -81,11 +83,6 @@ public class ReportPanel extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(173, 85, 2));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 30));
-
-        lbl_timeHeader.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        lbl_timeHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_timeHeader.setText("Months");
-        add(lbl_timeHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 357, 200, 20));
 
         lbl_time.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         lbl_time.setText("Time frame");
@@ -128,6 +125,12 @@ public class ReportPanel extends javax.swing.JPanel {
         add(btn_generate, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 280, 100, 40));
 
         btn_print.setText("Print");
+        btn_print.setEnabled(false);
+        btn_print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_printActionPerformed(evt);
+            }
+        });
         add(btn_print, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 300, 120, 30));
 
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -136,7 +139,7 @@ public class ReportPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "", "Amount without discounts", "Discount", "Income"
+                "Months", "Amount without discounts", "Discount", "Income"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -168,9 +171,16 @@ public class ReportPanel extends javax.swing.JPanel {
                 "Item", "Qty type", "Qty", "Income"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -271,6 +281,7 @@ public class ReportPanel extends javax.swing.JPanel {
                 int month=1;
                 date_from=(String)jComboBox_years.getSelectedItem()+"-01-01";
                 date_to=(String)jComboBox_years.getSelectedItem()+"-12-31";
+                jTable1.getColumnModel().getColumn(0).setHeaderValue("Months");
                 try{ //int q=1;System.out.println(q++); <- tester
                     Statement stmt = c.createStatement();//Prepare statement
                     ResultSet rs = stmt.executeQuery("select MONTH(ORDER_DATETIME),SUM(AMOUNT),SUM(DISCOUNT) from ORDER_T Inner Join INVOICE ON INVOICE.ORDERID=ORDER_T.ORDER_NUMBER " +
@@ -287,11 +298,10 @@ public class ReportPanel extends javax.swing.JPanel {
                             String tbData[]={Integer.toString(month),Integer.toString(amount)+".00",Integer.toString(discounts)+".00",Integer.toString(amount-discounts)+".00"};
                             DefaultTableModel tblMode1 =(DefaultTableModel)jTable1.getModel();
                             tblMode1.addRow(tbData);
-                            System.out.println("qqqqaaaa1 "+count);
                             count++;
                         }
                         else{
-                            do{System.out.println("qqqqaaaa2 "+count);
+                            do{
                                 String tbData[]={Integer.toString(count),"0.00","0.00","0.00"};
                                 DefaultTableModel tblMode1 =(DefaultTableModel)jTable1.getModel();
                                 tblMode1.addRow(tbData);
@@ -299,7 +309,7 @@ public class ReportPanel extends javax.swing.JPanel {
                             }while(count!=month);
                             if(count>=13)
                                 break;
-                            else{System.out.println("qqqqaaaa3 "+count);
+                            else{
                                 String tbData[]={Integer.toString(month),Integer.toString(amount)+".00",Integer.toString(discounts)+".00",Integer.toString(amount-discounts)+".00"};
                                 DefaultTableModel tblMode1 =(DefaultTableModel)jTable1.getModel();
                                 tblMode1.addRow(tbData);
@@ -332,6 +342,7 @@ public class ReportPanel extends javax.swing.JPanel {
                 int Ldate=obj2.lastdayofmonth(year, month);
                 count=1;
                 //
+                jTable1.getColumnModel().getColumn(0).setHeaderValue("Dates of Month");
                 date_from=(String)jComboBox_years.getSelectedItem()+"-"+month+"-01";
                 date_to=(String)jComboBox_years.getSelectedItem()+"-"+month+"-"+Ldate;
                 try{ //int q=1;System.out.println(q++); <- tester
@@ -386,6 +397,12 @@ public class ReportPanel extends javax.swing.JPanel {
                 break;
         }
         lbl_income.setText(tot+".00");
+        if(tot==0){
+            btn_print.setEnabled(false);
+         }
+        else{
+            btn_print.setEnabled(true);
+        }
           
     }
     
@@ -407,21 +424,17 @@ public class ReportPanel extends javax.swing.JPanel {
                 date_from=(String)jComboBox_years.getSelectedItem()+"-01-01";
                 date_to=(String)jComboBox_years.getSelectedItem()+"-12-31";
                 //int q=1;System.out.println(q++); <- tester
-                    rs = stmt.executeQuery("select food_NAME,CATEGORY,SUM(QUANTITY) from ORDER_T o Inner Join ORDER_FOOD OandF ON OandF.ORDER_NUMBER=o.ORDER_NUMBER INNER JOIN " +
-                                            " FOOD f ON f.FOOD_ID=OandF.FOOD_ID  " +
-                                                    " where o.ORDER_NUMBER IN ( " +
-                                                        " select ORDER_NUMBER from ORDER_T Inner Join INVOICE ON INVOICE.ORDERID=ORDER_T.ORDER_NUMBER where ORDER_DATETIME > '"+date_from+" 00:00:00' " +
-                                    " AND ORDER_DATETIME <'"+date_to+" 23:59:59'  AND INVOICE.STATUS='Paid') " +
-                                        "GROUP BY CATEGORY,food_NAME " +
-                                                    "ORDER BY SUM(quantity) DESC"); //SQL stetment
+                    rs = stmt.executeQuery("select l.FOOD_ID ,FOOD_NAME,CATEGORY,SUM(l.QUANTITY),(SUM(l.QUANTITY)*UNIT_PRICE) from  ORDER_FOOD l INNER JOIN food f ON l.food_id=f.FOOD_ID" +
+                                    " where ORDER_NUMBER IN (" +
+                                            " select ORDER_NUMBER from ORDER_T Inner Join INVOICE ON INVOICE.ORDERID=ORDER_T.ORDER_NUMBER where ORDER_DATETIME > '"+date_from+" 00:00:00'" +
+                                                " AND ORDER_DATETIME <'"+date_to+" 23:59:59'  AND INVOICE.STATUS='Paid')" +
+                                                    " GROUP BY l.FOOD_ID " +
+                                                        " ORDER BY SUM(l.quantity) DESC"); //SQL stetment
                     while(rs.next()){
                         food=rs.getString("food_NAME");
                         category=rs.getString("CATEGORY");
-                        qty=rs.getInt("SUM(QUANTITY)");
-                        ResultSet rs1 = stmt2.executeQuery("select UNIT_PRICE from FOOD where food_NAME='"+food+"'"); //SQL stetment
-                        while(rs1.next()){
-                            tot=rs1.getInt("UNIT_PRICE")*qty;
-                        }
+                        qty=rs.getInt("SUM(l.QUANTITY)");
+                        tot=rs.getInt("(SUM(l.QUANTITY)*UNIT_PRICE)");
                         String tbData[]={food,category,Integer.toString(qty),tot+".00"};
                         DefaultTableModel tblMode1 =(DefaultTableModel)jTable2.getModel();
                         tblMode1.addRow(tbData);
@@ -436,21 +449,17 @@ public class ReportPanel extends javax.swing.JPanel {
                 date_from=(String)jComboBox_years.getSelectedItem()+"-"+month+"-01";
                 date_to=(String)jComboBox_years.getSelectedItem()+"-"+month+"-"+Ldate;
                 //int q=1;System.out.println(q++); <- tester
-                    rs = stmt.executeQuery("select food_NAME,CATEGORY,SUM(QUANTITY) from ORDER_T o Inner Join ORDER_FOOD OandF ON OandF.ORDER_NUMBER=o.ORDER_NUMBER INNER JOIN " +
-                                            " FOOD f ON f.FOOD_ID=OandF.FOOD_ID  " +
-                                                    " where o.ORDER_NUMBER IN ( " +
-                                                        " select ORDER_NUMBER from ORDER_T Inner Join INVOICE ON INVOICE.ORDERID=ORDER_T.ORDER_NUMBER where ORDER_DATETIME > '"+date_from+" 00:00:00' " +
-                                    " AND ORDER_DATETIME <'"+date_to+" 23:59:59'  AND INVOICE.STATUS='Paid') " +
-                                        "GROUP BY CATEGORY,food_NAME " +
-                                                    "ORDER BY SUM(quantity) DESC"); //SQL stetment
+                    rs = stmt.executeQuery("select l.FOOD_ID ,FOOD_NAME,CATEGORY,SUM(l.QUANTITY),(SUM(l.QUANTITY)*UNIT_PRICE) from  ORDER_FOOD l INNER JOIN food f ON l.food_id=f.FOOD_ID" +
+                                    " where ORDER_NUMBER IN (" +
+                                            " select ORDER_NUMBER from ORDER_T Inner Join INVOICE ON INVOICE.ORDERID=ORDER_T.ORDER_NUMBER where ORDER_DATETIME > '"+date_from+" 00:00:00'" +
+                                                " AND ORDER_DATETIME <'"+date_to+" 23:59:59'  AND INVOICE.STATUS='Paid')" +
+                                                    " GROUP BY l.FOOD_ID " +
+                                                        " ORDER BY SUM(l.quantity) DESC"); //SQL stetment
                     while(rs.next()){
                         food=rs.getString("food_NAME");
                         category=rs.getString("CATEGORY");
-                        qty=rs.getInt("SUM(QUANTITY)");System.out.println("TTTT1");
-                        ResultSet rs1 = stmt2.executeQuery("select UNIT_PRICE from FOOD where food_NAME='"+food+"'"); //SQL stetment
-                        while(rs1.next()){System.out.println("TTTT2");
-                            tot=rs1.getInt("UNIT_PRICE")*qty;
-                        }System.out.println("TTTT3");
+                        qty=rs.getInt("SUM(l.QUANTITY)");
+                        tot=rs.getInt("(SUM(l.QUANTITY)*UNIT_PRICE)");
                         String tbData[]={food,category,Integer.toString(qty),tot+".00"};
                         DefaultTableModel tblMode1 =(DefaultTableModel)jTable2.getModel();
                         tblMode1.addRow(tbData);
@@ -464,35 +473,36 @@ public class ReportPanel extends javax.swing.JPanel {
                 //
                 date_from = year+"-"+month+"-"+Ldate;
                 date_to = date_from;
-                    rs = stmt.executeQuery("select food_NAME,CATEGORY,SUM(QUANTITY) from ORDER_T o Inner Join ORDER_FOOD OandF ON OandF.ORDER_NUMBER=o.ORDER_NUMBER INNER JOIN " +
-                                            " FOOD f ON f.FOOD_ID=OandF.FOOD_ID  " +
-                                                    " where o.ORDER_NUMBER IN ( " +
-                                                        " select ORDER_NUMBER from ORDER_T Inner Join INVOICE ON INVOICE.ORDERID=ORDER_T.ORDER_NUMBER where ORDER_DATETIME > '"+date_from+" 00:00:00' " +
-                                    " AND ORDER_DATETIME <'"+date_to+" 23:59:59'  AND INVOICE.STATUS='Paid') " +
-                                        "GROUP BY CATEGORY,food_NAME " +
-                                                    "ORDER BY SUM(quantity) DESC"); //SQL stetment
+                    rs = stmt.executeQuery("select l.FOOD_ID ,FOOD_NAME,CATEGORY,SUM(l.QUANTITY),(SUM(l.QUANTITY)*UNIT_PRICE) from  ORDER_FOOD l INNER JOIN food f ON l.food_id=f.FOOD_ID" +
+                                    " where ORDER_NUMBER IN (" +
+                                            " select ORDER_NUMBER from ORDER_T Inner Join INVOICE ON INVOICE.ORDERID=ORDER_T.ORDER_NUMBER where ORDER_DATETIME > '"+date_from+" 00:00:00'" +
+                                                " AND ORDER_DATETIME <'"+date_to+" 23:59:59'  AND INVOICE.STATUS='Paid')" +
+                                                    " GROUP BY l.FOOD_ID " +
+                                                        " ORDER BY SUM(l.quantity) DESC"); //SQL stetment
                     while(rs.next()){
                         food=rs.getString("food_NAME");
                         category=rs.getString("CATEGORY");
-                        qty=rs.getInt("SUM(QUANTITY)");
-                        ResultSet rs1 = stmt2.executeQuery("select UNIT_PRICE from FOOD where food_NAME='"+food+"'"); //SQL stetment
-                        while(rs1.next()){
-                            tot=rs1.getInt("UNIT_PRICE")*qty;
-                        }
+                        qty=rs.getInt("SUM(l.QUANTITY)");
+                        tot=rs.getInt("(SUM(l.QUANTITY)*UNIT_PRICE)");
                         String tbData[]={food,category,Integer.toString(qty),tot+".00"};
                         DefaultTableModel tblMode1 =(DefaultTableModel)jTable2.getModel();
                         tblMode1.addRow(tbData);
                     } 
                     break;           
                 }
-                
-                }
-                catch(SQLException ex){//Is database has a problem, this catch stetment catch it
-                    System.out.println(ex);
-                }
-                finally{
-                    c.close(); 
-                } 
+        if(jTable2.getRowCount()==0){
+            btn_print.setEnabled(false);
+         }
+        else{
+            btn_print.setEnabled(true);
+        }
+        }
+        catch(SQLException ex){//Is database has a problem, this catch stetment catch it
+            System.out.println(ex);
+        }
+        finally{
+            c.close(); 
+        } 
     }
     
     private void clearTables(){
@@ -529,11 +539,10 @@ public class ReportPanel extends javax.swing.JPanel {
                 txt_income.setVisible(true);
                 lbl_income.setVisible(true);
                 jScrollPane_income.setVisible(true);
-                lbl_timeHeader.setVisible(true);
                 if(combox_timeFrame.getSelectedIndex()==0)
-                    lbl_timeHeader.setText("Months");
+                    jTable1.getColumnModel().getColumn(0).setHeaderValue("Months");
                 else
-                    lbl_timeHeader.setText("Dates of Month");
+                    jTable1.getColumnModel().getColumn(0).setHeaderValue("Dates of Month");
             } catch (Exception ex) {
                 Logger.getLogger(ReportPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -544,12 +553,48 @@ public class ReportPanel extends javax.swing.JPanel {
                 txt_income.setVisible(false);
                 lbl_income.setVisible(false);
                 jScrollPane_income.setVisible(false);
-                lbl_timeHeader.setVisible(false);
             } catch (Exception ex) {
                 Logger.getLogger(ReportPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btn_generateActionPerformed
+
+    private void btn_printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_printActionPerformed
+        try {
+            if(lbl_income.isVisible()){//income report
+                String time="";
+                if(jComboBox_years.isVisible()){
+                    time=jComboBox_years.getSelectedItem().toString();
+                    if(jComboBox_months.isVisible()){
+                        time=time+"-"+jComboBox_months.getSelectedItem().toString();
+                        if(jComboBox_date.isVisible()){
+                            time=time+"-"+jComboBox_date.getSelectedItem().toString();
+                        }
+                    }
+                }
+                MessageFormat header =new MessageFormat("INCOME REPORT of "+time);
+                MessageFormat footer =new MessageFormat("Total income "+lbl_income.getText()+".00");
+                jTable1.print(JTable.PrintMode.FIT_WIDTH, header,footer);
+            }
+            else{
+                String time="";
+                if(jComboBox_years.isVisible()){
+                    time=jComboBox_years.getSelectedItem().toString();
+                    if(jComboBox_months.isVisible()){
+                        time=time+"-"+jComboBox_months.getSelectedItem().toString();
+                        if(jComboBox_date.isVisible()){
+                            time=time+"-"+jComboBox_date.getSelectedItem().toString();
+                        }
+                    }
+                }
+                MessageFormat header =new MessageFormat("INCOME REPORT of "+time);
+                MessageFormat footer =new MessageFormat("");
+                jTable2.print(JTable.PrintMode.FIT_WIDTH, header,footer);
+            }
+        } catch (PrinterException ex) {
+            Logger.getLogger(ReportPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_printActionPerformed
     public void setlastdate(){
         if(combox_timeFrame.getSelectedIndex()==2){
             int year=Integer.parseInt(jComboBox_years.getSelectedItem().toString());
@@ -584,7 +629,6 @@ public class ReportPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_report;
     private javax.swing.JLabel lbl_time;
     private javax.swing.JLabel lbl_time1;
-    private javax.swing.JLabel lbl_timeHeader;
     private javax.swing.JLabel txt_income;
     // End of variables declaration//GEN-END:variables
 }

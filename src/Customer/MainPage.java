@@ -519,7 +519,7 @@ public class MainPage extends javax.swing.JFrame {
         lbl_loyaltyPoints.setText("0");
         getContentPane().add(lbl_loyaltyPoints, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 20, 90, -1));
 
-        btn_request.setBackground(new java.awt.Color(153, 153, 153));
+        btn_request.setBackground(new java.awt.Color(205, 102, 102));
         btn_request.setForeground(new java.awt.Color(255, 255, 255));
         btn_request.setText("Request Loyalty Card");
         btn_request.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -563,21 +563,25 @@ public class MainPage extends javax.swing.JFrame {
         bill.add(lbl_tottxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 462, 71, 39));
 
         lbl_BILL.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lbl_BILL.setForeground(new java.awt.Color(255, 255, 255));
         lbl_BILL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_BILL.setText("BILL");
         bill.add(lbl_BILL, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 7, 71, 45));
 
         lbl_BILL1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbl_BILL1.setForeground(new java.awt.Color(255, 255, 255));
         lbl_BILL1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_BILL1.setText("Price");
         bill.add(lbl_BILL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(281, 70, 71, -1));
 
         lbl_BILL2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbl_BILL2.setForeground(new java.awt.Color(255, 255, 255));
         lbl_BILL2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_BILL2.setText("Qty");
         bill.add(lbl_BILL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 71, -1));
 
         lbl_BILL3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbl_BILL3.setForeground(new java.awt.Color(255, 255, 255));
         lbl_BILL3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_BILL3.setText("Items");
         bill.add(lbl_BILL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 70, 71, -1));

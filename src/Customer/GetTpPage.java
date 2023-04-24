@@ -23,11 +23,27 @@ public class GetTpPage extends javax.swing.JFrame {
     public GetTpPage() {
         initComponents();
         lbl_error.setVisible(false);
+        btn_welcomepage.setText("");
+        btn_welcomepage.setOpaque(false);
+        btn_welcomepage.setContentAreaFilled(false);
+        btn_welcomepage.setBorderPainted(false);
+        btn_next.setText("");
+        btn_next.setOpaque(false);
+        btn_next.setContentAreaFilled(false);
+        btn_next.setBorderPainted(false);
     }
     public GetTpPage(String empmode) {
         initComponents();
         lbl_error.setVisible(false);
         this.empmode=empmode;
+        btn_welcomepage.setText("");
+        btn_welcomepage.setOpaque(false);
+        btn_welcomepage.setContentAreaFilled(false);
+        btn_welcomepage.setBorderPainted(false);
+        btn_next.setText("");
+        btn_next.setOpaque(false);
+        btn_next.setContentAreaFilled(false);
+        btn_next.setBorderPainted(false);
     }
 
     /**
@@ -40,11 +56,10 @@ public class GetTpPage extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel_customer = new javax.swing.JPanel();
+        btn_welcomepage = new javax.swing.JButton();
         txt_tp = new javax.swing.JTextField();
         btn_next = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         lbl_error = new javax.swing.JLabel();
-        lbl_welcomepage = new javax.swing.JLabel();
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,6 +67,14 @@ public class GetTpPage extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel_customer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_welcomepage.setText("jButton1");
+        btn_welcomepage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_welcomepageMouseClicked(evt);
+            }
+        });
+        jPanel_customer.add(btn_welcomepage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 170, 20));
 
         txt_tp.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         txt_tp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -69,16 +92,13 @@ public class GetTpPage extends javax.swing.JFrame {
 
         btn_next.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btn_next.setText("Next");
+        btn_next.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_nextActionPerformed(evt);
             }
         });
-        jPanel_customer.add(btn_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 370, 220, 70));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel3.setText("Enter Mobile Number");
-        jPanel_customer.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, -1, -1));
+        jPanel_customer.add(btn_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 370, 230, 80));
 
         lbl_error.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbl_error.setForeground(new java.awt.Color(255, 0, 0));
@@ -91,15 +111,7 @@ public class GetTpPage extends javax.swing.JFrame {
         });
         jPanel_customer.add(lbl_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 490, 710, -1));
 
-        lbl_welcomepage.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbl_welcomepage.setText("Back to welcome page");
-        lbl_welcomepage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbl_welcomepage.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_welcomepageMouseClicked(evt);
-            }
-        });
-        jPanel_customer.add(lbl_welcomepage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 140, -1));
+        lbl_background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Enter mobile no pg 4.png"))); // NOI18N
         jPanel_customer.add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1350, 740));
 
         getContentPane().add(jPanel_customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1350, 740));
@@ -167,7 +179,7 @@ public class GetTpPage extends javax.swing.JFrame {
         
     }//GEN-LAST:event_lbl_errorMouseClicked
 
-    private void lbl_welcomepageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_welcomepageMouseClicked
+    private void btn_welcomepageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_welcomepageMouseClicked
         if("0".equals(empmode)){
             WelcomePage obj=new WelcomePage();
             obj.show();
@@ -177,7 +189,7 @@ public class GetTpPage extends javax.swing.JFrame {
             obj.show();
         }
         dispose();
-    }//GEN-LAST:event_lbl_welcomepageMouseClicked
+    }//GEN-LAST:event_btn_welcomepageMouseClicked
 
     /**
      * @param args the command line arguments
@@ -216,11 +228,10 @@ public class GetTpPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_next;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton btn_welcomepage;
     private javax.swing.JPanel jPanel_customer;
     private javax.swing.JLabel lbl_background;
     private javax.swing.JLabel lbl_error;
-    private javax.swing.JLabel lbl_welcomepage;
     private javax.swing.JTextField txt_tp;
     // End of variables declaration//GEN-END:variables
 }
