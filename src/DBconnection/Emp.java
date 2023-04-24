@@ -33,7 +33,7 @@ public class Emp extends Connect{
     
     private void getDetails(String eid) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
-        try{ System.out.println("EEAAAA2 ");
+        try{ 
             Statement stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("select * from EMPLOYEE WHERE EMP_ID='"+eid+"'");
             while(rs.next()){

@@ -278,7 +278,7 @@ public class ReportPanel extends javax.swing.JPanel {
                                     "AND INVOICE.STATUS='Paid' " +
                                         "GROUP BY MONTH(ORDER_DATETIME) " +
                                                 "ORDER BY MONTH(ORDER_DATETIME)"); //SQL stetment
-                    while(rs.next()){
+                    while(rs.next()){   
                         month=rs.getInt("MONTH(ORDER_DATETIME)");
                         amount=rs.getInt("sum(AMOUNT)");
                         discounts=rs.getInt("sum(DISCOUNT)");
@@ -287,25 +287,34 @@ public class ReportPanel extends javax.swing.JPanel {
                             String tbData[]={Integer.toString(month),Integer.toString(amount)+".00",Integer.toString(discounts)+".00",Integer.toString(amount-discounts)+".00"};
                             DefaultTableModel tblMode1 =(DefaultTableModel)jTable1.getModel();
                             tblMode1.addRow(tbData);
+                            System.out.println("qqqqaaaa1 "+count);
                             count++;
                         }
                         else{
-                            while(count!=month){
-                            String tbData[]={Integer.toString(count),"0.00","0.00","0.00"};
-                            DefaultTableModel tblMode1 =(DefaultTableModel)jTable1.getModel();
-                            tblMode1.addRow(tbData);
-                            count++;
-                            if(count==month){
-                                String tbData1[]={Integer.toString(month),Integer.toString(amount)+".00",Integer.toString(discounts)+".00",Integer.toString(amount-discounts)+".00"};
-                                DefaultTableModel tblMode2 =(DefaultTableModel)jTable1.getModel();
-                                tblMode1.addRow(tbData1);
+                            do{System.out.println("qqqqaaaa2 "+count);
+                                String tbData[]={Integer.toString(count),"0.00","0.00","0.00"};
+                                DefaultTableModel tblMode1 =(DefaultTableModel)jTable1.getModel();
+                                tblMode1.addRow(tbData);
+                                count++;
+                            }while(count!=month);
+                            if(count>=13)
+                                break;
+                            else{System.out.println("qqqqaaaa3 "+count);
+                                String tbData[]={Integer.toString(month),Integer.toString(amount)+".00",Integer.toString(discounts)+".00",Integer.toString(amount-discounts)+".00"};
+                                DefaultTableModel tblMode1 =(DefaultTableModel)jTable1.getModel();
+                                tblMode1.addRow(tbData);
                                 count++;
                             }
-                            if(count==13)
+                            if(count>=13)
                                 break;
-                            }
                         }
-                    }            
+                    }
+                    while(count<13){
+                        String tbData[]={Integer.toString(count),"0.00","0.00","0.00"};
+                        DefaultTableModel tblMode1 =(DefaultTableModel)jTable1.getModel();
+                        tblMode1.addRow(tbData);
+                        count++;
+                    }
                 }
                 catch(SQLException ex){//Is database has a problem, this catch stetment catch it
                     System.out.println(ex);
@@ -360,8 +369,9 @@ public class ReportPanel extends javax.swing.JPanel {
                                 break;
                             }
                         }
-                    } 
-                    while(count<(Ldate+1)){
+                    }
+                    
+                    while(count<=Ldate){
                             String tbData[]={Integer.toString(count++),"0.00","0.00","0.00"};
                             DefaultTableModel tblMode1 =(DefaultTableModel)jTable1.getModel();
                             tblMode1.addRow(tbData);
@@ -515,7 +525,7 @@ public class ReportPanel extends javax.swing.JPanel {
     private void btn_generateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generateActionPerformed
         if(combox_reportType.getSelectedIndex()==0){
             try {//if select income report
-                setIncomeTable();//Create table
+                setIncomeTable();//Create Income table
                 txt_income.setVisible(true);
                 lbl_income.setVisible(true);
                 jScrollPane_income.setVisible(true);
@@ -530,7 +540,7 @@ public class ReportPanel extends javax.swing.JPanel {
         }
         else{
             try {
-                setSalesTable();
+                setSalesTable();//Create sales table
                 txt_income.setVisible(false);
                 lbl_income.setVisible(false);
                 jScrollPane_income.setVisible(false);

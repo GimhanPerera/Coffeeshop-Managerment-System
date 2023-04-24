@@ -12,8 +12,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/DBconnection/LoyaltyCard.java</file>
-            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/Cashier/IssueLoyaltyCard.java</file>
+            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/Customer/LoginPage.java</file>
+            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/Customer/LandingPage.java</file>
+            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/Customer/GetTpPage.java</file>
+            <file>file:/D:/UoK/5.%20UoK%20Modules/1st%20year%20sem2/INTE%2012213%20-%20OOP/GROUP%20PROJECT/Testing%20app/JavaApplication10/src/Manager/ReportPanel.java</file>
         </group>
     </open-files>
 </project-private>

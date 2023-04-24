@@ -27,6 +27,18 @@ public class LoginPage extends javax.swing.JFrame {
     public LoginPage() {
         initComponents();
         lbl_emperror.setVisible(false);
+        btn_login.setText("");
+        btn_login.setOpaque(false);
+        btn_login.setContentAreaFilled(false);
+        btn_login.setBorderPainted(false);
+        btn_fogetPwd.setText("");
+        btn_fogetPwd.setOpaque(false);
+        btn_fogetPwd.setContentAreaFilled(false);
+        btn_fogetPwd.setBorderPainted(false);
+        btn_backToWelcome.setText("");
+        btn_backToWelcome.setOpaque(false);
+        btn_backToWelcome.setContentAreaFilled(false);
+        btn_backToWelcome.setBorderPainted(false);
     }
 
     /**
@@ -39,13 +51,11 @@ public class LoginPage extends javax.swing.JFrame {
     private void initComponents() {
 
         btn_login = new javax.swing.JButton();
-        lbl_welcomepage = new javax.swing.JLabel();
-        lbl_forgotpwd = new javax.swing.JLabel();
         txt_email = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         txt_pwd = new javax.swing.JPasswordField();
         lbl_emperror = new javax.swing.JLabel();
+        btn_fogetPwd = new javax.swing.JButton();
+        btn_backToWelcome = new javax.swing.JButton();
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,30 +65,13 @@ public class LoginPage extends javax.swing.JFrame {
 
         btn_login.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btn_login.setText("Log in");
+        btn_login.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_loginActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, 230, 50));
-
-        lbl_welcomepage.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbl_welcomepage.setText("Back to welcome page");
-        lbl_welcomepage.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_welcomepageMouseClicked(evt);
-            }
-        });
-        getContentPane().add(lbl_welcomepage, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 620, 140, -1));
-
-        lbl_forgotpwd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbl_forgotpwd.setText("Forget Passward");
-        lbl_forgotpwd.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_forgotpwdMouseClicked(evt);
-            }
-        });
-        getContentPane().add(lbl_forgotpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 450, 110, -1));
+        getContentPane().add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 420, 230, 50));
 
         txt_email.setFont(new java.awt.Font("Segoe UI", 0, 19)); // NOI18N
         txt_email.addActionListener(new java.awt.event.ActionListener() {
@@ -86,15 +79,7 @@ public class LoginPage extends javax.swing.JFrame {
                 txt_emailActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 310, 40));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setText("Password");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 304, -1, -1));
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel7.setText("Email");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, -1, -1));
+        getContentPane().add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, 310, 40));
 
         txt_pwd.setFont(new java.awt.Font("Segoe UI", 0, 19)); // NOI18N
         txt_pwd.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -102,13 +87,33 @@ public class LoginPage extends javax.swing.JFrame {
                 txt_pwdMouseClicked(evt);
             }
         });
-        getContentPane().add(txt_pwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, 220, 40));
+        getContentPane().add(txt_pwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 340, 220, 40));
 
         lbl_emperror.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lbl_emperror.setForeground(new java.awt.Color(255, 0, 0));
         lbl_emperror.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_emperror.setText("Error massage");
-        getContentPane().add(lbl_emperror, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 490, 1070, -1));
+        getContentPane().add(lbl_emperror, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 560, 1070, -1));
+
+        btn_fogetPwd.setText("jButton1");
+        btn_fogetPwd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_fogetPwd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_fogetPwdMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btn_fogetPwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 490, 180, 20));
+
+        btn_backToWelcome.setText("jButton1");
+        btn_backToWelcome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_backToWelcome.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_backToWelcomeMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btn_backToWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 630, 230, 30));
+
+        lbl_background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Log in pg 2.png"))); // NOI18N
         getContentPane().add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1350, 740));
 
         pack();
@@ -175,16 +180,16 @@ public class LoginPage extends javax.swing.JFrame {
         lbl_emperror.setVisible(false);
     }//GEN-LAST:event_txt_pwdMouseClicked
 
-    private void lbl_welcomepageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_welcomepageMouseClicked
+    private void btn_fogetPwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_fogetPwdMouseClicked
+        JOptionPane.showConfirmDialog((Component) null, "Please meet the manager, To change your password",
+            "alert", JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_btn_fogetPwdMouseClicked
+
+    private void btn_backToWelcomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_backToWelcomeMouseClicked
         WelcomePage obj=new WelcomePage();
         obj.show();
         dispose();
-    }//GEN-LAST:event_lbl_welcomepageMouseClicked
-
-    private void lbl_forgotpwdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_forgotpwdMouseClicked
-        JOptionPane.showConfirmDialog((Component) null, "Please meet the manager, To change your password",
-        "alert", JOptionPane.PLAIN_MESSAGE);
-    }//GEN-LAST:event_lbl_forgotpwdMouseClicked
+    }//GEN-LAST:event_btn_backToWelcomeMouseClicked
 
     /**
      * @param args the command line arguments
@@ -222,13 +227,11 @@ public class LoginPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_backToWelcome;
+    private javax.swing.JButton btn_fogetPwd;
     private javax.swing.JButton btn_login;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lbl_background;
     private javax.swing.JLabel lbl_emperror;
-    private javax.swing.JLabel lbl_forgotpwd;
-    private javax.swing.JLabel lbl_welcomepage;
     private javax.swing.JTextField txt_email;
     private javax.swing.JPasswordField txt_pwd;
     // End of variables declaration//GEN-END:variables
