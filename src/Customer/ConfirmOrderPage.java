@@ -658,21 +658,11 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
             try { 
                 lbl_discount.setVisible(true);
                 lbl_discount.setText("Scanning...");
-                //while(!lbl_discount.getText().equals("Scanning...") && !lbl_discount.isVisible()){}
-                //System.out.println("CHANGED! "+lbl_discount.isVisible()+" "+lbl_discount.getText());
                 while(jPanel_customerInfo.isVisible()==true){}
                 Conn t1=new Conn();
                 t1.start();
                 t1.setReadsuccess();
-                boolean t=true;
-                while(t1.isAlive()) {
-                    if(t1.isadu_connected() && t){//not need from
-                        //lbl_discount.setVisible(true);
-                        //lbl_discount.setText("Scanning...");
-                        //System.out.println("CHANGED!");
-                        t=false;
-                    }//to
-                }
+                while(t1.isAlive()) {}
                 System.out.println("READING END");
                 System.out.println("THE PIN IS(READ):: "+t1.getPin());
             
@@ -881,7 +871,6 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
     }//GEN-LAST:event_jPanel5KeyPressed
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        System.out.println("asd");
         MyTimer1 obj2=new MyTimer1();//
         Thread scanningLbl = new Thread(obj2);//
         scanningLbl.start();//

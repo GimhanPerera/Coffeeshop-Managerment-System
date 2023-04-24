@@ -43,6 +43,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
             jPanel_loyaltycard.setVisible(false);
             lbl_empty.setVisible(false);
             jTable.getTableHeader().setFont(new Font("SansSerif", Font.PLAIN, 15));
+            jPanel5.setOpaque(false);
         } catch (Exception ex) {
             Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -118,6 +119,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
         btn_block = new javax.swing.JButton();
         lbl_Error = new javax.swing.JLabel();
         jPanel_loyaltycard = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         btn_scanmanage = new javax.swing.JButton();
         lbl_notOk = new javax.swing.JLabel();
         lbl_waiting = new javax.swing.JLabel();
@@ -286,6 +288,20 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
 
         jPanel_loyaltycard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel5MouseClicked(evt);
+            }
+        });
+        jPanel5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel5KeyPressed(evt);
+            }
+        });
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel_loyaltycard.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, 120, 60));
+
         btn_scanmanage.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_scanmanage.setText("Scan");
         btn_scanmanage.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -300,13 +316,13 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
         });
         jPanel_loyaltycard.add(btn_scanmanage, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 150, 60));
 
-        lbl_notOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Not_final.png"))); // NOI18N
+        lbl_notOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Not_final updated.png"))); // NOI18N
         jPanel_loyaltycard.add(lbl_notOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, -1, -1));
 
-        lbl_waiting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/tapping image.png"))); // NOI18N
+        lbl_waiting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/tapping image updated.png"))); // NOI18N
         jPanel_loyaltycard.add(lbl_waiting, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 330, 320));
 
-        lbl_ok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ok_final.png"))); // NOI18N
+        lbl_ok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ok_final updated.png"))); // NOI18N
         jPanel_loyaltycard.add(lbl_ok, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 340, 330));
 
         add(jPanel_loyaltycard, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 750, 570));
@@ -319,7 +335,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
         lbl_scanstatus.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         lbl_scanstatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_scanstatus.setText("Scan New Loyalty Card");
-        add(lbl_scanstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 730, -1));
+        add(lbl_scanstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 740, -1));
         add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 770));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -330,6 +346,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
         lbl_scanstatus.setVisible(true);
         jPanel3.setVisible(false);
         jPanel_loyaltycard.setVisible(true);
+        jPanel5.setVisible(true);
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void btn_removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removeActionPerformed
@@ -527,37 +544,50 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
     private void btn_scanmanageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_scanmanageMouseClicked
         if(btn_scanmanage.getText().equals("Scan")){
             try {
+                lbl_scanstatus.setVisible(true);
+                lbl_scanstatus.setText("Scanning...");
                 //Start scannig
-            Conn t1=new Conn();
-            LoyaltyCard obj1=new LoyaltyCard();
-            t1.start();
-            t1.setReadsuccess();
-            while(t1.isAlive()) {}
-            System.out.println("THE PIN IS::"+t1.getPin());
-            if(!t1.getReadsuccess()){//not read
-                lbl_waiting.setVisible(false);
-                lbl_notOk.setVisible(true);
-                lbl_ok.setVisible(false);
-                lbl_scanstatus.setVisible(true);
-                lbl_scanstatus.setText("Scanning unsuccessful!!");
-                btn_scanmanage.setText("Cancel");
-            }
-            else if(obj1.checkExistence(t1.getPin())){//check is it a existing
-                lbl_waiting.setVisible(false);System.out.println(" TEST 2 ");
-                lbl_notOk.setVisible(true);
-                lbl_ok.setVisible(false);
-                btn_scanmanage.setText("Cancel");
-                lbl_scanstatus.setVisible(true);
-                lbl_scanstatus.setText("This card alrready exist in the system");
-            }else{//Add card to the system
-                lbl_waiting.setVisible(false);
-                lbl_notOk.setVisible(false);
-                lbl_ok.setVisible(true);
-                btn_scanmanage.setText("Done");
-                lbl_scanstatus.setVisible(true);
-                lbl_scanstatus.setText(t1.getPin()+" loyalty card added");
-                int i=obj1.addNewCard(t1.getPin());
-                System.out.println("RETURN : "+i);
+                Conn t1=new Conn();
+                LoyaltyCard obj1=new LoyaltyCard();
+                t1.start();
+                t1.setReadsuccess();
+                while(t1.isAlive()) {}
+                System.out.println("READING END");
+                System.out.println("THE PIN IS::"+t1.getPin());
+                
+                if(!t1.isadu_connected()){//if arduino not connected 
+                    lbl_waiting.setVisible(false);
+                    lbl_notOk.setVisible(true);
+                    lbl_ok.setVisible(false);
+                    btn_scanmanage.setText("Cancel");
+                    lbl_scanstatus.setVisible(true);
+                    lbl_scanstatus.setText("Scanner is not connected correctly");
+                }
+                else if(!t1.getReadsuccess()){//not read
+                    lbl_waiting.setVisible(false);
+                    lbl_notOk.setVisible(true);
+                    lbl_ok.setVisible(false);
+                    lbl_scanstatus.setVisible(true);
+                    lbl_scanstatus.setText("Scanning unsuccessful!!");
+                    btn_scanmanage.setText("Cancel");
+                }
+                else if(obj1.checkExistence(t1.getPin())){//check is it a existing
+                    lbl_waiting.setVisible(false);
+                    lbl_notOk.setVisible(true);
+                    lbl_ok.setVisible(false);
+                    btn_scanmanage.setText("Cancel");
+                    lbl_scanstatus.setVisible(true);
+                    lbl_scanstatus.setText("This card alrready exist in the system");
+                }
+                else{//Add card to the system
+                    lbl_waiting.setVisible(false);
+                    lbl_notOk.setVisible(false);
+                    lbl_ok.setVisible(true);
+                    btn_scanmanage.setText("Done");
+                    lbl_scanstatus.setVisible(true);
+                    lbl_scanstatus.setText(t1.getPin()+" loyalty card added");
+                    int i=obj1.addNewCard(t1.getPin());
+                    System.out.println("RETURN : "+i);
             }
             } catch (Exception ex) {
                 Logger.getLogger(LoyaltyCardPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -615,6 +645,16 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
     private void btn_scanmanageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_scanmanageActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_scanmanageActionPerformed
+
+    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+        lbl_scanstatus.setVisible(true);
+        lbl_scanstatus.setText("Scanning...");
+        jPanel5.setVisible(false);
+    }//GEN-LAST:event_jPanel5MouseClicked
+
+    private void jPanel5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel5KeyPressed
+
+    }//GEN-LAST:event_jPanel5KeyPressed
     
     public void searchBy() throws Exception{
         clearTable();
@@ -720,6 +760,7 @@ public class LoyaltyCardPanel extends javax.swing.JPanel{
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel_loyaltycard;
     private javax.swing.JRadioButton jRadioButton_filter;
     private javax.swing.JRadioButton jRadioButton_search;

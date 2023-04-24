@@ -97,12 +97,13 @@ public class LoyaltyCard extends Connect{
         boolean exist=true;
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("select STATUS from LOYALTY_CARD where CARD_ID='"+cardid+"'"); //SQL stetment
+            ResultSet rs = stmt.executeQuery("select COUNT(CARD_ID) from LOYALTY_CARD where CARD_ID='"+cardid+"'"); //SQL stetment
             while(rs.next()){
-                String temp=rs.getString("STATUS");
-                if(("".equals(temp))){
+                byte temp=rs.getByte("COUNT(CARD_ID)");
+                if(temp==0){
                     exist=false;
                 }
+                System.out.println("Existence: "+exist);
             } 
         }
         finally{
