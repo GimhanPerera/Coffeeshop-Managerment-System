@@ -134,16 +134,21 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         jPanel5.setOpaque(false);
     }
     public void setbill(StringBuffer sb,int tot){
+    try {
         getDate obj = new getDate();
         String date =obj.toString();
+        Order obj1=new Order();
         jTextArea_bill.setText("");
-        jTextArea_bill.append("========================\n         COFFEE CAFE\n ");
+        jTextArea_bill.append("========================\n                     COFFEE CAFE\n                 ");
         jTextArea_bill.append(obj.dateAndTime()+"\n");
-        jTextArea_bill.append("   Order Type: "+o_type+"\n");
+        jTextArea_bill.append("             Order Type: "+o_type+"\n                Order ID : "+obj1.newOrderID()+"\n");
         jTextArea_bill.append("========================\n");
         jTextArea_bill.append("Items\t   Qty\tPrice\n\n");
         jTextArea_bill.append(sb.toString());
         jTextArea_bill.append("\n\n\n========================\nTotal\t\t"+tot+".00\n========================\n\n\tThank You");
+    } catch (Exception ex) {
+        Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
     public void setbill(StringBuffer sb,int tot,int discount){
     try {
@@ -151,15 +156,15 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         Order obj1=new Order();
         String date =obj.toString();
         jTextArea_bill.setText("");
-        jTextArea_bill.append("========================\n         COFFEE CAFE\n ");
-        jTextArea_bill.append("    "+obj.dateAndTime()+"\n ");
-        jTextArea_bill.append("   Order Type: "+o_type+"\n    Order ID : "+obj1.newOrderID()+"\n");
+        jTextArea_bill.append("========================\n                     COFFEE CAFE\n                 ");
+        jTextArea_bill.append(obj.dateAndTime()+"\n ");
+        jTextArea_bill.append("             Order Type: "+o_type+"\n                Order ID : "+obj1.newOrderID()+"\n");
         jTextArea_bill.append("========================\n");
         jTextArea_bill.append("  Items\t   Qty\tPrice\n\n");
         jTextArea_bill.append(sb.toString());
         if(discount!=0)
-            jTextArea_bill.append("\n\nDiscount\t\t"+discount+"\n");
-        jTextArea_bill.append("\n\n========================\nTotal\t\t"+(tot-discount)+".00\n========================\n\n\tThank You");
+            jTextArea_bill.append("\n\n\nDiscount\t\t"+discount+".00");
+        jTextArea_bill.append("\n========================\nTotal\t\t"+(tot-discount)+".00\n========================\n\n\tThank You");
     } catch (Exception ex) {
         Logger.getLogger(ConfirmOrderPage.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -560,9 +565,9 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
             try {
                 String paymetn_method="";
                 if(rdo_Card.isSelected())
-                    paymetn_method="Card";
+                    paymetn_method="CARD";
                 else if(rdo_cash.isSelected())
-                    paymetn_method="Cash";
+                    paymetn_method="CASH";
                 Customer obj1=new Customer();
                 if(discount==0)//calculating points
                     points=(int) (points+total*0.01);
@@ -791,15 +796,23 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         if(txt_cardno.getText().isEmpty()){
             txt_cardno.requestFocus();
+            JOptionPane.showMessageDialog(new JFrame(), "Please enter the card details",
+               "Imformation", JOptionPane.ERROR_MESSAGE);
         }
         else if(txt_cardname.getText().isEmpty()){
             txt_cardname.requestFocus();
+            JOptionPane.showMessageDialog(new JFrame(), "Please enter the card details",
+               "Imformation", JOptionPane.ERROR_MESSAGE);
         }
         else if(txt_carddate.getText().isEmpty()){
             txt_carddate.requestFocus();
+            JOptionPane.showMessageDialog(new JFrame(), "Please enter the card details",
+               "Imformation", JOptionPane.ERROR_MESSAGE);
         }
         else if(txt_cardcode.getText().isEmpty()){
             txt_cardcode.requestFocus();
+            JOptionPane.showMessageDialog(new JFrame(), "Please enter the card details",
+               "Imformation", JOptionPane.ERROR_MESSAGE);
         }
         else if(!txt_cardno.getText().equals("1234-5678-1234-5678") || !txt_carddate.getText().equals("24/12") || !txt_cardcode.getText().equals("123")){
             JOptionPane.showMessageDialog(new JFrame(), "Wrong card details",
@@ -809,9 +822,9 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
             try {
                 String paymetn_method="";
                 if(rdo_Card.isSelected())
-                    paymetn_method="Card";
+                    paymetn_method="CARD";
                 else if(rdo_cash.isSelected())
-                    paymetn_method="Cash";
+                    paymetn_method="CASH";
                 System.out.println("Validated");
                 Customer obj1=new Customer();
                 if(discount==0)

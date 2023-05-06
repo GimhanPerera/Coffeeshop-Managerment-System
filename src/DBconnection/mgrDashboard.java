@@ -23,7 +23,7 @@ public class mgrDashboard  extends Connect{
         String date=obj.dateOnly();
         try{ 
             Statement stmt = c.createStatement();//Prepare statement
-            ResultSet rs = stmt.executeQuery("select CUSTOMER_ID from ORDER_T where ORDER_DATETIME BETWEEN '"+date+" 00:00' AND '"+date+" 23:59' AND STATUS='Completed'"); //SQL stetment
+            ResultSet rs = stmt.executeQuery("select CUSTOMER_ID from ORDER_T where ORDER_DATETIME BETWEEN '"+date+" 00:00' AND '"+date+" 23:59'"); //SQL stetment// AND STATUS='Completed'
             while(rs.next()){
                 count++;
             }                

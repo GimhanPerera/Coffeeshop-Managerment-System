@@ -573,7 +573,7 @@ public class ReportPanel extends javax.swing.JPanel {
                     }
                 }
                 MessageFormat header =new MessageFormat("INCOME REPORT of "+time);
-                MessageFormat footer =new MessageFormat("Total income "+lbl_income.getText()+".00");
+                MessageFormat footer =new MessageFormat("Total income "+lbl_income.getText());
                 jTable1.print(JTable.PrintMode.FIT_WIDTH, header,footer);
             }
             else{
@@ -587,7 +587,7 @@ public class ReportPanel extends javax.swing.JPanel {
                         }
                     }
                 }
-                MessageFormat header =new MessageFormat("INCOME REPORT of "+time);
+                MessageFormat header =new MessageFormat("SALES REPORT of "+time);
                 MessageFormat footer =new MessageFormat("");
                 jTable2.print(JTable.PrintMode.FIT_WIDTH, header,footer);
             }

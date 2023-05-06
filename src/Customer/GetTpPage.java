@@ -69,6 +69,7 @@ public class GetTpPage extends javax.swing.JFrame {
         jPanel_customer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_welcomepage.setText("jButton1");
+        btn_welcomepage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_welcomepage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_welcomepageMouseClicked(evt);

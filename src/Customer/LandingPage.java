@@ -209,6 +209,7 @@ public class LandingPage extends javax.swing.JFrame {
 
     private void rdo_takeawayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_takeawayActionPerformed
         txt_pax.setVisible(false);
+        txt_pax.setText("");
         lbl_text.setVisible(false);
         lbl_error.setVisible(false);
     }//GEN-LAST:event_rdo_takeawayActionPerformed
