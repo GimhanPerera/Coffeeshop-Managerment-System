@@ -540,7 +540,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_addActionPerformed
 
     private void rdo_stuffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_stuffActionPerformed
-        lbl_searchtitle.setText("Search by ctuff ID");
+        lbl_searchtitle.setText("Search by staff ID");
         btn_edit.setEnabled(true);
         viewALL();
     }//GEN-LAST:event_rdo_stuffActionPerformed
