@@ -142,6 +142,25 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         jTextArea_bill.append("========================\n                     COFFEE CAFE\n                 ");
         jTextArea_bill.append(obj.dateAndTime()+"\n");
         jTextArea_bill.append("             Order Type: "+o_type+"\n                Order ID : "+obj1.newOrderID()+"\n");
+        if("Dinein".equals(o_type))
+        {
+            jTextArea_bill.append("Table number(s) : ");
+            boolean a=false;
+            int i=1;
+            for(String z:tables){//For teseting
+                if(a){
+                    jTextArea_bill.append(",");
+                }
+                z=z.substring(2);
+                jTextArea_bill.append(z);
+                a=true;
+                i++;
+                if(i==6){
+                    jTextArea_bill.append("\n\t");
+                }
+            }
+            jTextArea_bill.append("\n");
+        }
         jTextArea_bill.append("========================\n");
         jTextArea_bill.append("Items\t   Qty\tPrice\n\n");
         jTextArea_bill.append(sb.toString());
@@ -159,6 +178,25 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         jTextArea_bill.append("========================\n                     COFFEE CAFE\n                 ");
         jTextArea_bill.append(obj.dateAndTime()+"\n ");
         jTextArea_bill.append("             Order Type: "+o_type+"\n                Order ID : "+obj1.newOrderID()+"\n");
+        if("Dinein".equals(o_type))
+        {
+            jTextArea_bill.append("Table number(s) : ");
+            boolean a=false;
+            int i=1;
+            for(String z:tables){//For teseting
+                if(a){
+                    jTextArea_bill.append(",");
+                }
+                z=z.substring(2);
+                jTextArea_bill.append(z);
+                a=true;
+                i++;
+                if(i==6){
+                    jTextArea_bill.append("\n\t");
+                }
+            }
+            jTextArea_bill.append("\n");
+        }
         jTextArea_bill.append("========================\n");
         jTextArea_bill.append("  Items\t   Qty\tPrice\n\n");
         jTextArea_bill.append(sb.toString());

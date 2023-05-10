@@ -65,7 +65,7 @@ public class TestJFrame1 extends javax.swing.JFrame {
 
         lbl_heading.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         lbl_heading.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_heading.setText("Coffe Shop");
+        lbl_heading.setText("Coffee Shop");
 
         Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo rounded resized.png"))); // NOI18N

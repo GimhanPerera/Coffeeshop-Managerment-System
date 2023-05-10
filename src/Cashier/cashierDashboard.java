@@ -56,10 +56,12 @@ public class cashierDashboard extends javax.swing.JPanel {
             if("Hold".equals(a)){
                 btn_hold.setText("Unhold");
                 btn_hold.setEnabled(true);
+                btn_viewOrd.setEnabled(true);
             }
             else if("Pending".equals(a)){
                 btn_hold.setText("Hold");
                 btn_hold.setEnabled(true);
+                btn_viewOrd.setEnabled(true);
             }       
         }else{
             btn_hold.setText("Hold");
@@ -579,6 +581,7 @@ public class cashierDashboard extends javax.swing.JPanel {
                 btn_cancel.setEnabled(false);
                 btn_completeOdr.setEnabled(false);
                 btn_hold.setEnabled(false);
+                btn_viewOrd.setEnabled(false);
                 
                 String OID=(String) jTable_dBoard.getValueAt(row, 0);
                 String Otype=(String) jTable_dBoard.getValueAt(row, 1);

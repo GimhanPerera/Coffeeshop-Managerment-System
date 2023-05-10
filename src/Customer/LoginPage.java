@@ -113,7 +113,7 @@ public class LoginPage extends javax.swing.JFrame {
         });
         getContentPane().add(btn_backToWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 630, 230, 30));
 
-        lbl_background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Log in pg 2.png"))); // NOI18N
+        lbl_background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Log in pg 5.jpg"))); // NOI18N
         getContentPane().add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1350, 740));
 
         pack();
