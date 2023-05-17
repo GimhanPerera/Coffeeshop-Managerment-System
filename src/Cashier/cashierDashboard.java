@@ -264,13 +264,13 @@ public class cashierDashboard extends javax.swing.JPanel {
         jPanel_dashboard.add(lbl_pendingOdr, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 30, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        jLabel5.setText("Today completed order count");
-        jPanel_dashboard.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, -1, -1));
+        jLabel5.setText("Today all orders");
+        jPanel_dashboard.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, -1, -1));
 
         lbl_delivered.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         lbl_delivered.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbl_delivered.setText("0");
-        jPanel_dashboard.add(lbl_delivered, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 20, 30, -1));
+        jPanel_dashboard.add(lbl_delivered, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, 30, -1));
 
         btn_refresh.setText("Refresh");
         btn_refresh.addActionListener(new java.awt.event.ActionListener() {

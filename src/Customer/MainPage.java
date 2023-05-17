@@ -583,7 +583,7 @@ public class MainPage extends javax.swing.JFrame {
         lbl_BILL3.setText("Items");
         bill.add(lbl_BILL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 70, 71, -1));
 
-        lbl_backgroundBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Menue pg bill 1.png"))); // NOI18N
+        lbl_backgroundBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Menue pg bill 2.png"))); // NOI18N
         bill.add(lbl_backgroundBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 520));
 
         getContentPane().add(bill, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 100, 380, 520));

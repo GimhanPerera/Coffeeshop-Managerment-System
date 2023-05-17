@@ -60,6 +60,7 @@ public class CashierMain extends javax.swing.JFrame {
         issueLoyaltyCard1 = new Cashier.IssueLoyaltyCard();
         jPanel1 = new javax.swing.JPanel();
         menu1 = new Cashier.Menu();
+        changeTables1 = new Cashier.ChangeTables();
         lbl_background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -294,6 +295,7 @@ public class CashierMain extends javax.swing.JFrame {
         jPanel1.add(menu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jTabbedPane1.addTab("tab1", jPanel1);
+        jTabbedPane1.addTab("tab4", changeTables1);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, -40, 1090, 760));
 
@@ -466,6 +468,7 @@ public class CashierMain extends javax.swing.JFrame {
         btn_loyaltyCards.setBackground(new java.awt.Color(173,85,2));
         btn_profile.setBackground(new java.awt.Color(252, 152, 3));
         btn_logout.setBackground(new java.awt.Color(173,85,2));
+        jTabbedPane1.setSelectedIndex(3);
     }//GEN-LAST:event_btn_profileMouseClicked
     
     public void closeCashier(){
@@ -517,6 +520,7 @@ public class CashierMain extends javax.swing.JFrame {
     private javax.swing.JButton btn_profile;
     private javax.swing.JButton btn_reports;
     private Cashier.cashierDashboard cashierDashboard1;
+    private Cashier.ChangeTables changeTables1;
     private Cashier.IssueLoyaltyCard issueLoyaltyCard1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTabbedPane jTabbedPane1;

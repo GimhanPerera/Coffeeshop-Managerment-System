@@ -53,6 +53,7 @@ public class Order extends Connect{
             if(o_type.equals("Takeaway")){
                 sql="INSERT INTO ORDER_T (ORDER_NUMBER, ORDER_TYPE, ORDER_DATETIME, END_TIME, CUSTOMER_ID,STATUS) " +
                     "VALUES ('"+newOID+"', '"+o_type+"', '"+obj.dateAndTime()+"','"+obj.dateAndTime()+"','"+cID+"','Pending')";
+                stmt.executeUpdate(sql);
             }else{
                 sql="INSERT INTO ORDER_T (ORDER_NUMBER, ORDER_TYPE, ORDER_DATETIME, CUSTOMER_ID,STATUS) " +
                     "VALUES ('"+newOID+"', '"+o_type+"', '"+obj.dateAndTime()+"','"+cID+"','Pending')";
@@ -60,10 +61,11 @@ public class Order extends Connect{
                 for(String q:tables){
                     sql="INSERT INTO ORDER_TABLE (ORDER_NUMBER, TABLE_NO) " +
                     "VALUES ('"+newOID+"', '"+q+"')";
+                    stmt.executeUpdate(sql);
                     System.out.println("Table reserved : "+q);
                 }
             }
-            stmt.executeUpdate(sql);
+            
             System.out.println("+ Order table updated");
             //Update food_order table
             for(int i=0;i<fID.length;i++)

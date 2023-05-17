@@ -543,12 +543,14 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         lbl_searchtitle.setText("Search by staff ID");
         btn_edit.setEnabled(true);
         viewALL();
+        txt_search.setText("");
     }//GEN-LAST:event_rdo_stuffActionPerformed
 
     private void rdo_customerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_customerActionPerformed
         lbl_searchtitle.setText("Search by Customer Telephone Number");
         btn_edit.setEnabled(false);
         viewALL();
+        txt_search.setText("");
     }//GEN-LAST:event_rdo_customerActionPerformed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
@@ -719,6 +721,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         lbl_empty.setVisible(true);
         btn_remove.setEnabled(false);
         btn_edit.setEnabled(false);
+        txt_search.setText("");
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void btn_removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removeActionPerformed
@@ -741,6 +744,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(new JFrame(), "Delete successfull",
                             "Imformation", JOptionPane.INFORMATION_MESSAGE);
                         viewALL();
+                        txt_search.setText("");
                     }
                 }
                 else{
@@ -956,7 +960,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                 txt_nic.requestFocus();
             }
             else if (!txt_nic.getText().matches("^\\d{9}[vVxX]|[12]\\d{11}$")) {
-                lbl_error.setText("Wrong NIC format1");
+                lbl_error.setText("Wrong NIC format");
                 lbl_error.setVisible(true);
                 txt_nic.requestFocus();
             }

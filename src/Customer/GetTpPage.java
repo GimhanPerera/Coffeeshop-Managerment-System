@@ -112,7 +112,7 @@ public class GetTpPage extends javax.swing.JFrame {
         });
         jPanel_customer.add(lbl_error, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 490, 710, -1));
 
-        lbl_background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Enter mobile no pg 4.png"))); // NOI18N
+        lbl_background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Enter mobile no pg (5).jpg"))); // NOI18N
         jPanel_customer.add(lbl_background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1350, 740));
 
         getContentPane().add(jPanel_customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1350, 740));
