@@ -60,7 +60,7 @@ public class MainPage extends javax.swing.JFrame {
             this.tables[i]=tables[i];
         } 
         //
-        firstDataGet();
+        firstDataGet();//fill the tables
         LoyaltyCard obj1=new LoyaltyCard();
         try {
             int req = obj1.checkRequseted(cid);//check customer has loyalty card? requested? not requested?
@@ -214,7 +214,7 @@ public class MainPage extends javax.swing.JFrame {
                 ResultSet rs = stmt.executeQuery("select FOOD_NAME,QUANTITY_TYPE,UNIT_PRICE from FOOD WHERE CATEGORY='COFFEE'"); //SQL stetment
                 while(rs.next()){
                     String foodName=rs.getString("FOOD_NAME");
-                    String qty=rs.getString("QUANTITY_TYPE");//get the value to variable "fname"
+                    String qty=rs.getString("QUANTITY_TYPE");
                     String price=rs.getString("UNIT_PRICE");
                     String tbData[]={foodName,qty,"0",price};
                     DefaultTableModel tblModel =(DefaultTableModel)jTable_menu0.getModel(); 
@@ -223,7 +223,7 @@ public class MainPage extends javax.swing.JFrame {
                 rs = stmt.executeQuery("select FOOD_NAME,QUANTITY_TYPE,UNIT_PRICE from FOOD WHERE CATEGORY='COFFEE'"); //SQL stetment
                 while(rs.next()){
                     String foodName=rs.getString("FOOD_NAME");
-                    String qty=rs.getString("QUANTITY_TYPE");//get the value to variable "fname"
+                    String qty=rs.getString("QUANTITY_TYPE");
                     String price=rs.getString("UNIT_PRICE");
                     String tbData[]={foodName,qty,"0",price};
                     DefaultTableModel tblModel =(DefaultTableModel)jTable_menu3.getModel();
@@ -233,7 +233,7 @@ public class MainPage extends javax.swing.JFrame {
                 rs = stmt.executeQuery("select FOOD_NAME,QUANTITY_TYPE,UNIT_PRICE from FOOD WHERE CATEGORY='CAKE'"); //SQL stetment
                 while(rs.next()){
                     String foodName=rs.getString("FOOD_NAME");
-                    String qty=rs.getString("QUANTITY_TYPE");//get the value to variable "fname"
+                    String qty=rs.getString("QUANTITY_TYPE");
                     String price=rs.getString("UNIT_PRICE");
                     String tbData[]={foodName,qty,"0",price};
                     DefaultTableModel tblModel =(DefaultTableModel)jTable_menu1.getModel(); 
@@ -243,7 +243,7 @@ public class MainPage extends javax.swing.JFrame {
                 rs = stmt.executeQuery("select FOOD_NAME,QUANTITY_TYPE,UNIT_PRICE from FOOD WHERE CATEGORY='BUN'"); //SQL stetment
                 while(rs.next()){
                     String foodName=rs.getString("FOOD_NAME");
-                    String qty=rs.getString("QUANTITY_TYPE");//get the value to variable "fname"
+                    String qty=rs.getString("QUANTITY_TYPE");
                     String price=rs.getString("UNIT_PRICE");
                     String tbData[]={foodName,qty,"0",price};
                     DefaultTableModel tblModel =(DefaultTableModel)jTable_menu2.getModel();
@@ -641,9 +641,6 @@ public class MainPage extends javax.swing.JFrame {
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
         if(!"0".equals(empmode)){//if this is a update of a order
-            //Because of can't close cashier window...
-            //CashierMain obj4=new CashierMain(empmode);//need to pass cashier id
-            //obj4.show();
             if(editmode)
                 this.dispose();
             else{
@@ -749,10 +746,10 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_plusActionPerformed
     public void btn_plusMin(boolean x){
         Food obj5=new Food();
-        int total=Integer.parseInt(lbl_total.getText());
+        int total=Integer.parseInt(lbl_total.getText());//Get the total value
         int i=jTabbedPane1.getSelectedIndex();//check selected food type       
         if(i==1){
-            int row=jTable_menu1.getSelectedRow();
+            int row=jTable_menu1.getSelectedRow();//get selected row
             String food_name=(String) jTable_menu1.getValueAt(row, 0);//get Food name for check availability
             String a=(String) jTable_menu1.getValueAt(row, 2);
             int b=Integer.parseInt(a);//get selected amount
@@ -760,7 +757,7 @@ public class MainPage extends javax.swing.JFrame {
                 try {
                     //CHECK FOOD AVALABILITY
                     //create a method called isAvailable(fID,Selected amount)->if available,return true.if not, return false.
-                    int temp=b;System.out.println("TEST 1");
+                    int temp=b;
                     if(editmode){//If this is a update of placed order
                         temp=temp-obj5.foodCountOfTheOrder(food_name,orderID);
                     }
@@ -848,6 +845,7 @@ public class MainPage extends javax.swing.JFrame {
         lbl_total.setText(Integer.toString(total));
         billUpdate();
     }
+    
     public void billUpdate(){
         jTextArea_bill.setText("");
         

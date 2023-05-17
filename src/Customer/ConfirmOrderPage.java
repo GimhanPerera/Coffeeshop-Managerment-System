@@ -719,7 +719,7 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                     lbl_discount.setVisible(true);
                     lbl_discount.setText("Scanner is not connected correctly");
                 }
-                else{
+                else{//if arduino connected 
                     if(obj.getCardID(cid).equals(t1.getPin())){//correct card
                         System.out.println("Carrect ID "+obj.getCardID(cid));
                         lbl_waiting.setVisible(false);
@@ -730,9 +730,9 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                         txt_loyaltycard.setText(t1.getPin());
                         //calculate and set the discount
                         this.discount=obj.getMaxDiscount(cid);//points count
-                        if(discount>500)
+                        if(discount>500)//if discount more than 500, Set it as 500(bcz max discount for any bill is 500/=)
                             discount=500;
-                        if(this.total<1000){
+                        if(this.total<1000){//if bill total is less than 1000, Max discount is half of the total
                             if(this.discount>=this.total/2)
                                 discount=this.total/2;
                         }

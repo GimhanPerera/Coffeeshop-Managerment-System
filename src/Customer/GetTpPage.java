@@ -163,7 +163,9 @@ public class GetTpPage extends javax.swing.JFrame {
                 obj.show();
                 dispose();
             } catch (SQLException ex) {
-                System.out.println("Can't connect with database");
+                //System.out.println("Can't connect with database");
+                lbl_error.setText("Can't connect with database");
+                lbl_error.setVisible(true);
                 Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
             }
             catch (Exception ex) {

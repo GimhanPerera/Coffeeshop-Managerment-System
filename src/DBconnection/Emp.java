@@ -76,7 +76,7 @@ public class Emp extends Connect{
         return this.pwd;
     }
     
-    public String newCID() throws Exception{   
+    public String newCID() throws Exception{//create new emp id
         Connection c= getConnection();//get the connection using inheritance
         String eID="";
         try{ 
@@ -117,7 +117,7 @@ public class Emp extends Connect{
             return false;
     }
     
-    public void setPwd(String empID,String newpwd) throws Exception{   
+    public void setPwd(String empID,String newpwd) throws Exception{   //set new pwd to a existing employee
         Connection c= getConnection();//get the connection using inheritance
         
         try{ 
@@ -132,6 +132,7 @@ public class Emp extends Connect{
         }
     }
     
+    //add new stuff
     public void addStaff(String empID,String fname,String lname,String tp,String email, String nic, String emp_type, String pwd) throws Exception{   
         Connection c= getConnection();//get the connection using inheritance
         

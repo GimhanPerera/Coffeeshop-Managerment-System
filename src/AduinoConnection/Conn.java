@@ -51,7 +51,6 @@ public class Conn extends Thread{
         MySerialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_BLOCKING,1000,0);
         MySerialPort.openPort(); //open the port
                                  //Arduino May get reset 
-        //Thread.sleep(2000);
         String S = "00";char[] c = new char[8];
         adu_connected=true;
         System.out.println("Connection with arduino successful");
@@ -68,8 +67,6 @@ public class Conn extends Thread{
                 System.out.println("Received -> "+ S);
                 for(int i=0;i<8;i++)
                     c[i]=S.charAt(i);
-                //for(int i=0;i<8;i++)
-                //   System.out.println("Re -> "+ c[i]);
                 if(exit || numRead==10){
                     exit=false;
                     if(numRead==10)
@@ -82,6 +79,7 @@ public class Conn extends Thread{
         catch (Exception e){
             System.out.println("ERROR 1");
             e.printStackTrace(); 
+            adu_connected=false;
         }finally{
             MySerialPort.closePort(); //Close the port
             String a = new String(c);

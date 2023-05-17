@@ -48,7 +48,7 @@ public class chefMain extends javax.swing.JFrame {
 
         lbl_heading.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         lbl_heading.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_heading.setText("Coffe Shop");
+        lbl_heading.setText("Coffee Shop");
 
         Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo rounded resized.png"))); // NOI18N
@@ -148,18 +148,19 @@ public class chefMain extends javax.swing.JFrame {
             .addGroup(Nav_panelLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_heading)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Nav_panelLayout.setVerticalGroup(
             Nav_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Nav_panelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
                 .addGroup(Nav_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(Nav_panelLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
+                        .addGap(36, 36, 36)
+                        .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Nav_panelLayout.createSequentialGroup()
+                        .addGap(55, 55, 55)
                         .addComponent(lbl_heading)))
                 .addGap(52, 52, 52)
                 .addComponent(btn_Dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)

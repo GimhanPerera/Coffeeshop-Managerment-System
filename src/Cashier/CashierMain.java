@@ -71,7 +71,7 @@ public class CashierMain extends javax.swing.JFrame {
 
         lbl_heading.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         lbl_heading.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_heading.setText("Coffe Shop");
+        lbl_heading.setText("Coffee Shop");
 
         Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Logo rounded resized.png"))); // NOI18N
@@ -192,7 +192,6 @@ public class CashierMain extends javax.swing.JFrame {
         btn_profile.setBackground(new java.awt.Color(173, 85, 2));
         btn_profile.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btn_profile.setForeground(new java.awt.Color(255, 255, 255));
-        btn_profile.setText("------");
         btn_profile.setBorderPainted(false);
         btn_profile.setContentAreaFilled(false);
         btn_profile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -260,7 +259,7 @@ public class CashierMain extends javax.swing.JFrame {
                 .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_heading)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         Nav_panelLayout.setVerticalGroup(
             Nav_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
