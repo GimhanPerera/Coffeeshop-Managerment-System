@@ -1,4 +1,3 @@
-# Java Test Progect v1
- This has basic level UIs and main purpose of this to give you a good experience on GitHub
-
-Run TestJFrame1.java
+First of all you need to instroll mysql-connector-j-8.0.32.jar and jSerialComm-2.9.3.jar
+set the database connection in DEconnection package -> Connect.java -> run it
+#Run the Welcomepage
