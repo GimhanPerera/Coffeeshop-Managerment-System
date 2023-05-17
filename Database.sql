@@ -1,0 +1,321 @@
+/*
+DROP DATABASE COFFEESHOP;
+CREATE DATABASE COFFEESHOP;
+Use COFFEESHOP;
+
+SELECT * FROM customer;
+SELECT * FROM food;
+SELECT * FROM employee;
+SELECT * FROM loyalty_card;
+SELECT * FROM order_t;
+SELECT * FROM INVOICE;
+SELECT * FROM order_food;
+SELECT * FROM table_t;
+SELECT * FROM order_table;
+*/
+
+CREATE TABLE CUSTOMER(
+	CUSTOMER_ID VARCHAR (10) UNIQUE, 
+	F_NAME VARCHAR (15) NOT NULL,
+	L_NAME VARCHAR (15) NOT NULL,
+	EMAIL VARCHAR (50),
+	MOBILE_NUMBER INT UNIQUE,
+	POINTS INT NOT NULL,
+	REQUEST INT,
+	PRIMARY KEY (CUSTOMER_ID));
+  /*0=no request, 1=requested, 2=has card*/ 
+INSERT INTO CUSTOMER (CUSTOMER_ID, F_NAME, L_NAME, EMAIL, MOBILE_NUMBER, POINTS,REQUEST)
+VALUES ('CS000','Dummy', 'Dummy',  'Dummy111@gmail.com', '0100000001', '0',2),
+('CS001','Sansala', 'Nanayakkara',  'sansalananayakkara006@gmail.com', '0770084004', '900',2),
+('CS002','Buddhika', 'Hasitha',  'buddhikahasitha016@gmail.com', '0703219890', '300',2),
+('CS003','Pramodya', 'Nethmini', 'pramodyanethmini038@gmail.com', '0784559681', '500',2),
+('CS004','Hasthika', 'Udathenna',  'hasthika054@gmail.com', '0707269870', '750',2),
+('CS005','Hasini', 'Rathnayaka',  'hasinirathnayaka076@gmail.com', '0782336139', '970',2),
+('CS006','Hiruni', 'Mathangaweera',  'hiruni074@gmail.com', '0771686587', '1250',1),
+('CS007','Thanusha', 'Withana', 'thanusha079@gmail.com', '0778787733', '2900',1),
+('CS008','Haneef', 'Ahamad',  'haneefa093@gmail.com', '0779942791', '900',1),
+('CS009','Pathum', 'Lakruwan',  'pathumlakru099@gmail.com', '0763364261', '510',0),
+('CS010','Charuni', 'Weerakoon',  'charuniwe112@gmail.com', '0722109118', '820',2),
+('CS011','Vidhuxen', 'Vijayakumar',  'vidhuxenvi13@gmail.com', '0778965434', '760',0);
+
+CREATE TABLE FOOD (
+	FOOD_ID VARCHAR (6) NOT NULL,
+	FOOD_NAME VARCHAR (20) NOT NULL,
+	CATEGORY VARCHAR (10) NOT NULL,
+	QUANTITY_TYPE VARCHAR(10) ,
+	UNIT_PRICE INT NOT NULL,
+	DAILY_QUANTITY INT NOT NULL,
+	PRIMARY KEY (FOOD_ID) );
+
+INSERT INTO FOOD ( FOOD_ID,FOOD_NAME,CATEGORY,QUANTITY_TYPE,UNIT_PRICE,DAILY_QUANTITY)
+VALUES 
+( 'CF001' , 'LATTE' , 'COFFEE' ,'CUP', 250 , 50),
+( 'CF002' , 'ESPRESSO' , 'COFFEE' , 'CUP', 150 , 40  ),
+( 'CF003' , 'DOPPIO' , 'COFFEE' , 'CUP' , 200 , 30 ),
+( 'CF004' , 'CAPPACHINO' , 'COFFEE' , 'CUP', 350 , 20  ),
+( 'CF005' , 'ICE COFFEE' , 'COFFEE' , 'CUP', 100 , 100  ),
+( 'CF006' , 'ROMANO' , 'COFFEE' , 'CUP', 250 , 80  ),
+( 'CF007' , 'MOCHA' , 'COFFEE' , 'CUP', 150 , 30  ),
+( 'CF008' , 'RISTRETTO' , 'COFFEE' , 'CUP', 200 , 50  ),
+( 'CF009' , 'LUNGO' , 'COFFEE' , 'CUP', 150 , 40  ),
+( 'CF010' , 'MACCHIATO' , 'COFFEE' , 'CUP', 180 , 30  ),
+( 'CF011' , 'CAPPUCCINO' , 'COFFEE' , 'CUP', 250 , 25  ),
+( 'CF012' , 'AMERICANO' , 'COFFEE' , 'CUP', 175 , 45  ),
+( 'CF013' , 'FLAT WHITE' , 'COFFEE' , 'CUP', 180 , 50  ),
+( 'CF014' , 'AFFOGATO' , 'COFFEE' , 'CUP', 200 , 15  ),
+( 'CF015' , 'RED EYE' , 'COFFEE' , 'CUP', 100 , 30  ),
+( 'CK001' , 'ANGLE CAKE' , 'CAKE' , 'PIECE', 350 , 100  ),
+( 'CK002' , 'AMANDINE' , 'CAKE' , 'PIECE', 150 , 50  ),
+( 'CK003' , 'RED VELVET' , 'CAKE' , 'PIECE' , 250 , 20 ),
+( 'CK004' , 'CHARLOTTE' , 'CAKE' , 'PIECE', 350 , 30  ),
+( 'CK005' , 'CHOCOTORTA' , 'CAKE' , 'PIECE', 200 , 20  ),
+( 'CK006' , 'CUP CAKE' , 'CAKE' , 'PIECE', 200 , 30  ),
+( 'CK007' , 'FRUIT CAKE' , 'CAKE' , 'PIECE', 150 , 30  ),
+( 'CK008' , 'WAFFLE' , 'CAKE' , 'PIECE', 150 , 40  ),
+( 'CK009' , 'BUNDT CAKE' , 'CAKE' , 'PIECE', 200 , 25  ),
+( 'CK010' , 'KING CAKE' , 'CAKE' , 'PIECE', 200 , 20  ),
+( 'CK011' , 'LAYER CAKE' , 'CAKE' , 'PIECE', 200 , 20  ),
+( 'CK012' , 'PLUM CAKE' , 'CAKE' , 'PIECE', 150 , 20  ),
+( 'BN001' , 'BURGER' , 'BUN' , NULL, 250 , 100 ),
+( 'BN002' , 'FISH BUN' , 'BUN' , NULL, 150 , 50 ),
+( 'BN003' , 'TUNA BUN' , 'BUN' , NULL, 150 , 50 ),
+( 'BN004' , 'TEA BUN' , 'BUN' , NULL, 50 , 150  ),
+( 'BN005' , 'EGG BUN' , 'BUN' , NULL, 150 , 50 ),
+( 'BN006' , 'BUN GIORNO' , 'BUN' , NULL, 150 , 20 ),
+( 'BN007' , 'CREAM BUN' , 'BUN' , NULL, 100 , 50 ),
+( 'BN008' , 'BOSTON BUN' , 'BUN' , NULL, 200 , 30 ),
+( 'BN009' , 'BREAD ROLL' , 'BUN' , NULL, 150 , 20 ),
+( 'BN010' , 'CROISSANT' , 'BUN' , NULL, 250 , 15 ),
+( 'BN011' , 'PIZZA BUN' , 'BUN' , NULL, 200 , 30 ),
+( 'BN012' , 'CHEESE BUN' , 'BUN' , NULL, 220 , 15 );
+
+
+CREATE TABLE EMPLOYEE(
+	EMP_ID VARCHAR(5) UNIQUE,
+    F_NAME VARCHAR (15) NOT NULL,
+	L_NAME VARCHAR (15) NOT NULL,
+    MOBILE_NUMBER VARCHAR (15) UNIQUE NOT NULL,
+	EMAIL VARCHAR (50) NOT NULL,
+    NIC VARCHAR(15) ,
+    EMP_TYPE VARCHAR(10) NOT NULL,
+    PWD VARCHAR(15) NOT NULL,
+    PRIMARY KEY (EMP_ID));
+    
+INSERT INTO EMPLOYEE (EMP_ID,F_NAME,L_NAME,MOBILE_NUMBER,EMAIL,NIC,EMP_TYPE,PWD)
+VALUES
+('EM001','Gimhan','Perera','0779074659','gimhan123@gmail.com','957890786v','MANAGER','GP@1234'),
+('EM002','Sahan','Wijesingha','0718769021','sahanweerasingha1@gmail.com','945678267v','CHEF','SW$2394'),
+('EM003','Mahesh','Rajapaksha','0762345980','mahesh78@gmail.com','964567899v','CHEF','MR@7894'),
+('EM004','Ravi','Silva','0789476890','ravisilva654@gmail.com','907649807v','CASHIER','RS@9874'),
+('EM005','Sidath','Perera','0706783567','sidathperera678@gmail.com','978654397v','CASHIER','SP&3544');
+
+CREATE TABLE TABLE_T (
+	TABLE_NO VARCHAR(5) UNIQUE,
+	CHAIRS INT NOT NULL,
+	PRIMARY KEY (TABLE_NO));
+
+INSERT INTO TABLE_T( TABLE_NO,CHAIRS) 
+VALUES
+('TA101','4'),
+('TA102','2'),
+('TA103','4'),
+('TA104','4'),
+('TA105','2'),
+('TA106','2'),
+('TA107','4'),
+('TA108','2'),
+('TA109','4'),
+('TA110','2');
+
+CREATE TABLE LOYALTY_CARD (
+	CARD_ID VARCHAR (10) NOT NULL,
+	STATUS VARCHAR (10) NOT NULL,
+    ISSUE_DATE DATE,
+    CUSTOMER_ID VARCHAR (10) ,
+    EMP_ID VARCHAR(5) ,
+	PRIMARY KEY (CARD_ID) ,
+    FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMER (CUSTOMER_ID),
+    FOREIGN KEY (EMP_ID) REFERENCES EMPLOYEE (EMP_ID));
+
+INSERT INTO LOYALTY_CARD ( CARD_ID , STATUS , ISSUE_DATE , CUSTOMER_ID , EMP_ID)
+VALUES 
+( '9B4D7422' , 'Active' , '2022-01-05' , 'CS004' , 'EM004'),
+( '4B9C29AD' , 'Active' , '2022-04-08' , 'CS002' ,'EM005'  ),
+( 'F94C1EC9' , 'Active' , '2023-01-08' ,'CS003' , 'EM005'),
+( 'C84D7422' , 'Active' , '2022-06-22' , 'CS001' ,'EM004' ),
+( 'L4D7422E' , 'Blocked' , '2023-01-01' ,'CS005' , 'EM005'),
+( 'L84D7422' , 'Blocked' , '2022-03-07' , 'CS008'  , 'EM004' ),
+( 'LC84D742' , 'Active' , '2022-11-05' ,'CS010' , 'EM005'),
+( '2456322B' , 'FREE' , NULL ,NULL , NULL ),
+( 'L4D7ED2E' , 'FREE' , NULL ,NULL , NULL );
+
+CREATE TABLE ORDER_T(
+	ORDER_NUMBER VARCHAR (7) UNIQUE,
+	ORDER_TYPE VARCHAR (10) NOT NULL,
+	ORDER_DATETIME DATETIME NOT NULL,
+	END_TIME TIME,
+    CUSTOMER_ID VARCHAR (10),
+	STATUS VARCHAR (10),
+	PRIMARY KEY (ORDER_NUMBER),
+    FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMER (CUSTOMER_ID));
+
+
+INSERT INTO ORDER_T (ORDER_NUMBER, ORDER_TYPE, ORDER_DATETIME, END_TIME, CUSTOMER_ID,STATUS)
+VALUES 
+('OR00001', 'Takeaway', '2023-03-31 08:32', '09:00', 'CS001', 'Completed'),
+('OR00002', 'Dinein', '2023-03-31 10:45','11:24', 'CS002' ,  'Completed'),
+('OR00003', 'Takeaway', '2023-04-05 11:51', '12:20', 'CS003' , 'Completed'),
+('OR00004', 'Dinein', '2023-04-06 16:10', '16:30', 'CS004' , 'Completed'),
+('OR00005', 'Takeaway', '2023-04-10 09:32', '09:55', 'CS005' , 'Completed'),
+('OR00006', 'Dinein', '2023-04-11 11:05', '11:42', 'CS006' , 'Completed'),
+('OR00007', 'Tackaway', '2023-04-15 13:00', '13:15',  'CS007' , 'Completed'),
+('OR00008', 'Takeaway', '2023-04-16 10:15', '10:33', 'CS008' , 'Completed'),
+('OR00009', 'Dinein', '2023-04-20 10:38', '11:00', 'CS009', 'Completed'),
+('OR00010', 'Takeaway', '2023-04-21 10:55', '11:35', 'CS010' , 'Completed'),
+('OR00011', 'Takeaway', '2023-04-21 13:45', '14:16', 'CS001' , 'Completed'),
+('OR00012', 'Takeaway', '2023-04-25 09:10', '09:35', 'CS002' , 'Completed'),
+('OR00013', 'Dinein', '2023-04-26 09:30', '10:15' , 'CS003' , 'Completed'),
+('OR00014', 'Dinein', '2023-04-27 10:55', '11:30', 'CS004' , 'Completed'),
+('OR00015', 'Takeaway', '2023-04-28 09:05', '09:30', 'CS005' , 'Completed'),
+('OR00016', 'Dinein', '2023-04-29 10:20', '10:50', 'CS011' , 'Completed'),
+('OR00017', 'Takeaway', '2023-04-30 09:10', '09:25', 'CS007' , 'Completed'),
+('OR00018', 'Takeaway', '2023-04-30 10:23', '10:34', 'CS002' , 'Completed'),
+('OR00019', 'Dinein', '2023-05-01 11:35', '12:10' , 'CS009' , 'Completed'),
+('OR00020', 'Dinein', '2023-05-02 09:52', '12:20', 'CS010' , 'Completed'),
+('OR00021', 'Takeaway', '2023-05-03 10:35', '11:00' , 'CS004' , 'Completed'),
+('OR00022', 'Takeaway', '2023-05-07 13:22', '13:40' , 'CS003' , 'Completed'),
+('OR00023', 'Dinein', '2023-05-08 11:23', '12:20' , 'CS001' , 'Completed'),
+('OR00024', 'Takeaway', '2023-05-09 09:05', '09:05' , 'CS003' , 'Completed'),
+('OR00025', 'Dinein', '2023-05-09 11:20', '12:10' , 'CS005' , 'Completed'),
+('OR00026', 'Dinein', '2023-05-17 09:12', '09:40', 'CS002' , 'Completed'),
+('OR00027', 'Takeaway', '2023-05-17 10:14', '10:14', 'CS011' , 'Hold'),
+('OR00028', 'Dinein', '2023-05-17 11:05', NULL, 'CS010' , 'Finish'),
+('OR00029', 'Takeaway', '2023-05-17 11:10', '11:10', 'CS005' , 'Pending'),
+('OR00030', 'Dinein', '2023-05-17 11:25', NULL, 'CS008' , 'Pending');
+
+CREATE TABLE INVOICE(
+	INVOICE_ID	int UNIQUE auto_increment,
+	PAYMENT_METHOD VARCHAR (10)NOT NULL,
+	AMOUNT	VARCHAR (6)NOT NULL,
+	DISCOUNT VARCHAR (6)NOT NULL,	
+	STATUS VARCHAR (10)NOT NULL,
+	ORDERID VARCHAR (7) NOT NULL UNIQUE,
+   	PRIMARY KEY (INVOICE_ID),
+	FOREIGN KEY (ORDERID) REFERENCES ORDER_T(ORDER_NUMBER));
+
+ /*INVOICE.status: pending,paid*/
+INSERT INTO INVOICE(INVOICE_ID,PAYMENT_METHOD,AMOUNT,DISCOUNT,STATUS,ORDERID)
+VALUES
+('21310','CASH','450','0','Paid','OR00009'),
+('21311','CASH','1200','150','Paid','OR00010'),
+('21312','CARD','300','0','Paid','OR00001'),
+('21313','CASH','500','0','Paid','OR00002'),
+('21314','CARD','700','0','Paid','OR00003'),
+('21315','CARD','150','0','Paid','OR00004'),
+('21316','CASH','450','0','paid','OR00005'),
+('21317','CASH','600','0','Paid','OR00006'),
+('21318','CARD','550','0','Paid','OR00007'),
+('21319','CASH','300','0','Paid','OR00008'),
+('21320','CARD','750','250','Paid','OR00011'),
+('21321','CARD','1200','0','Paid','OR00012'),
+('21322','CASH','300','0','Paid','OR00013'),
+('21323','CARD','6000','750','Paid','OR00014'),
+('21324','CARD','1450','0','Paid','OR00015'),
+('21325','CARD','700','0','Pending','OR00016'),
+('21326','CASH','350','0','Paid','OR00017'),
+('21327','CARD','1000','150','Paid','OR00018'),
+('21328','CASH','250','0','Paid','OR00019'),
+('21329','CARD','1250','250','Paid','OR00020'),
+('21330','CASH','650','300','Paid','OR00021'),
+('21331','CASH','200','0','Paid','OR00022'),
+('21332','CARD','1000','200','Paid','OR00023'),
+('21333','CARD','1500','500','Paid','OR00024'),
+('21334','CASH','525','0','Paid','OR00025'),
+('21335','CASH','800','0','Paid','OR00026'),
+('21336','CARD','750','0','Pending','OR00027'),
+('21337','CARD','900','400','Pending','OR00028'),
+('21338','CASH','250','0','Pending','OR00029'),
+('21339','CASH','400','0','Pending','OR00030');
+
+/*select * from INVOICE;*/
+CREATE TABLE ORDER_FOOD(
+	ORDER_NUMBER VARCHAR (7),
+    FOOD_ID VARCHAR(6),
+	QUANTITY INT NOT NULL,
+    PRIMARY KEY(FOOD_ID,ORDER_NUMBER),
+    FOREIGN KEY (FOOD_ID) REFERENCES FOOD (FOOD_ID),
+	FOREIGN KEY (ORDER_NUMBER) REFERENCES ORDER_T (ORDER_NUMBER));    
+
+INSERT INTO ORDER_FOOD(ORDER_NUMBER,FOOD_ID,QUANTITY)
+VALUES
+('OR00001','CF002','2'),
+('OR00002','CF002','1'), 
+('OR00002','CK004','1'), 
+('OR00003','CK004','2'),
+('OR00004','CF002','1'),
+('OR00005','CK001','1'),
+('OR00005','CF005','1'),
+('OR00006','CF003','3'),
+('OR00007','CK002','1'),
+('OR00007','CF003','2'),
+('OR00008','CF002','2'),
+('OR00009','CF002','3'),
+('OR00010','CF002','4'),
+('OR00010','BN011','3'),
+('OR00011','BN003','5'),
+('OR00012','CF002','4'),
+('OR00012','CK006','3'),
+('OR00013','CF007','2'),
+('OR00014','CK003','10'),
+('OR00014','CF004','10'),
+('OR00015','CF003','5'),
+('OR00015','BN009','3'),
+('OR00016','CK001','2'),
+('OR00017','CK001','1'),
+('OR00018','CF001','2'),
+('OR00018','BN001','2'),
+('OR00019','CF006','1'),
+('OR00020','CF002','5'),
+('OR00020','BN007','5'),
+('OR00021','CF001','2'),
+('OR00021','CF007','1'),
+('OR00022','CF008','1'),
+('OR00023','BN010','2'),
+('OR00023','CF011','2'),
+('OR00024','CK001','3'),
+('OR00024','CF002','3'),
+('OR00025','CF012','3'),
+('OR00026','CF002','2'),
+('OR00026','CK003','2'),
+('OR00027','CF006','3'),
+('OR00028','CF002','3'),
+('OR00028','CK002','3'),
+('OR00029','CF001','1'),
+('OR00030','CF008','1'),
+('OR00030','BN011','1');   
+
+CREATE TABLE ORDER_TABLE(
+	ORDER_NUMBER VARCHAR (7),
+    TABLE_NO VARCHAR(5),
+    PRIMARY KEY(TABLE_NO,ORDER_NUMBER),
+    FOREIGN KEY (TABLE_NO) REFERENCES TABLE_T(TABLE_NO),
+	FOREIGN KEY (ORDER_NUMBER) REFERENCES ORDER_T (ORDER_NUMBER));    
+
+INSERT INTO ORDER_TABLE(ORDER_NUMBER,TABLE_NO)
+VALUES
+('OR00002','TA102'),
+('OR00004','TA103'),
+('OR00006','TA101'),
+('OR00009','TA103'), 
+('OR00013','TA106'),
+('OR00014','TA101'),
+('OR00014','TA102'),
+('OR00014','TA103'),
+('OR00016','TA110'),
+('OR00019','TA105'),
+('OR00020','TA104'),
+('OR00023','TA106'),
+('OR00025','TA103'),
+('OR00026','TA102'),
+('OR00028','TA110'),
+('OR00030','TA106'); 

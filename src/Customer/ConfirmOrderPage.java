@@ -365,6 +365,11 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
                 txt_emailMouseClicked(evt);
             }
         });
+        txt_email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_emailActionPerformed(evt);
+            }
+        });
         jPanel_customerInfo.add(txt_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 260, 360, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -928,6 +933,10 @@ String cid="0";String o_type="";int points=0;String[] foodID;int[] Qyt;StringBuf
         while(scanningLbl.isAlive()) {}//
         jPanel5.setVisible(false);
     }//GEN-LAST:event_jPanel5MouseClicked
+
+    private void txt_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_emailActionPerformed
 
     /**
      * @param args the command line arguments

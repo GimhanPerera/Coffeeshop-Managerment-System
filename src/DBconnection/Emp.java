@@ -27,7 +27,7 @@ public class Emp extends Connect{
     }
     
     public Emp(String eid) throws Exception{
-        this.eid=eid;//System.out.println("EEAAAA1 ");
+        this.eid=eid;
         getDetails(eid);
     }
     

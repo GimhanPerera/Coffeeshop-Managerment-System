@@ -514,7 +514,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
         }
         else{
             try {
-                jLabel2.setText("Add New Stuff Member");
+                jLabel2.setText("Add New Staff Member");
                 btn_changeSave.setText("Add");
                 jLabel8.setText("Password");
                 jLabel9.setText("Confirm Password");
@@ -568,18 +568,18 @@ public class SDDetailsPanel extends javax.swing.JPanel {
             btn_remove.setEnabled(false);
         }
         else if (rdo_customer.isSelected() && String.valueOf(txt_search.getText()).charAt(0) != '0') {//need to start with 0
-            lbl_error.setText("Phone number must 07XXXXXXXX");
-            lbl_error.setVisible(true);
+            lbl_Error.setText("Phone number must 07XXXXXXXX");
+            lbl_Error.setVisible(true);
         }
         else if(rdo_customer.isSelected() && txt_search.getText().matches("[0-9]+")==false)//if not only numbers
         {
-            lbl_error.setText("Please enter a correct moblie number");
-            lbl_error.setVisible(true);
+            lbl_Error.setText("Please enter a correct moblie number");
+            lbl_Error.setVisible(true);
         }
         else if(rdo_customer.isSelected() && txt_search.getText().length()!=10)//if more than 10 digits
         {
-            lbl_error.setText("Please enter a correct moblie number");
-            lbl_error.setVisible(true);
+            lbl_Error.setText("Please enter a correct moblie number");
+            lbl_Error.setVisible(true);
         }
         //if stuff member
         else if (rdo_stuff.isSelected() && txt_search.getText().isEmpty()) {
@@ -769,7 +769,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         try {
-            jLabel2.setText("Edit Stuff details");
+            jLabel2.setText("Edit Staff details");
             btn_changeSave.setText("Save Changes");
             jLabel8.setText("New Password");
             jLabel9.setText("Confirm New Password");
@@ -1032,6 +1032,7 @@ public class SDDetailsPanel extends javax.swing.JPanel {
                         panel_main.setVisible(true);
                         Panel_AddEditStuff.setVisible(false);
                         lbl_Error.setVisible(false);
+                        lbl_error.setVisible(false);
                         viewALL();
                     } catch (Exception ex) {
                         Logger.getLogger(ProfilePanel.class.getName()).log(Level.SEVERE, null, ex);
